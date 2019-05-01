@@ -5,8 +5,9 @@ $config = ['settings' => [
     'addContentLengthHeader' => false,
 ]];
 
-
-require __DIR__ .'/vendor/autoload.php';
+require __DIR__ .'/vendor/Slim/MiddlewareAwareTrait.php';
+require __DIR__ .'/vendor/Slim/Container.php';
+require __DIR__ .'/vendor/Slim/App.php';
 include __DIR__ .'/../database/connect.php';
 
 

@@ -1,16 +1,15 @@
 <?php
 
-namespace Users  ;
+namespace User ;
 
 include __DIR__ .'/../Ip/Ip.php';
-include __DIR__.'/DB_CREATE_USER.php';
+include __DIR__ . "/../time/timestamp.php";
 
 use Ip\ip ;
-use CREATE_USER\Create ;
 
-use \Datetime;
+use formattimestamp\Ttime;
 
-class User {
+class Create {
   private $id ='';//int (11)
   private $email ='';//varchar(500)
   private $password ='';//varchar(500)
@@ -31,25 +30,25 @@ class User {
   private $newuser ;
 
   public function __construct(){
-    date_default_timezone_set('Europe/Istanbul');
-    $date = new DateTime(date("y-m-d H:i:s")) ;
+    
         $this->ip = ip::getIp();
         //demo
         $this->email_verified = '1';
-        $this->registration_date = $date->getTimestamp();
-        $this->newuser = new Create();
+        $this->registration_date = Ttime::gettime();
+        $this->newuser = new Add();
 
   }
 
   /*public method is variable add*/
-  public function add($email , $password , $firstname , $lastname , $phone , $adress){
-    $this->id = $this->createId(11);
-    $this->email = $this->emailControl($email) ;
-    $this->password =  $this->passwordCrypt($password);
-    $this->firstname = $this->textControl($firstname , 50);
-    $this->lastname = $this->textControl($lastname , 50);
-    $this->phone = $this->validatePhoneNumber($phone);
-    $this->adress = $this->textControl($adress , 100);
+  public function add($val = array() ){
+    $this->id = $this->createId();
+    $this->email = $this->emailControl($val["email"]) ;
+
+    $this->password =  $this->passwordCrypt($val["password"]);
+    $this->firstname = $this->textControl($val["firstname"] , 50);
+    $this->lastname = $this->textControl($val["lastname"] , 50);
+    $this->phone = $this->validatePhoneNumber($val["phone"]);
+    $this->adress = $this->textControl($val["adress"] , 100);
   }
 
     //data control return true or false
@@ -58,7 +57,7 @@ class User {
   }
 
     //new user add db return true or false
-  public function userCreate(){
+  public function run(){
     if($this->variableControl === false )
       return false ;
 
@@ -79,7 +78,7 @@ class User {
       if( $isCreatedUser === false )
        return false ;
       else{
-        $_SESION["user"] = array(
+        $_SESSION["user"] = array(
           "id"=>$this->id,
           "my_cart"=>array()
         );
@@ -88,9 +87,9 @@ class User {
 
     }
 
-
-  private function createId($digits = 11 ){
-    return str_pad(rand(0, (integer)pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT) ;
+  /*create default number = 11 id  */
+  private function createId(){
+    return rand(10000 , 100000);
   }
 
   /*basic email control*/
@@ -140,10 +139,6 @@ class User {
     }
   }
 
-  /*create Ip*/
-  private function getIp(){
-    return Ip::getIp();
-  }
 
 
   public function __destruct(){

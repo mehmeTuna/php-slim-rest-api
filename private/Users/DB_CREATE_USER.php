@@ -1,9 +1,12 @@
 <?php
-namespace CREATE_USER ;
+
+
+namespace User ;
 
 use DATABASE\Database ;
+use PDO ;
 
-class Create {
+class Add {
   /*sql query*/
   private $table_name = "users";
   private $values = "id,email,password,firstname,lastname,email_verified,registration_date,verification_code,ip,phone,adress,adress_2";
@@ -29,7 +32,7 @@ class Create {
       $statement->execute($this->data);
       return true ;
     }catch(PDOException $e){
-      return false ;
+      return $e ;
     }
   }
 
@@ -38,4 +41,4 @@ class Create {
   public function __destruct(){
 
   }
-}
+} 

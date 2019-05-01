@@ -1,15 +1,15 @@
 <?php
-namespace CREATE_PRODUCT ;
+namespace Admin\Product ;
 
 
 use DATABASE\Database ;
 use PDO ;
 
-class Create {
+class Add {
   /*sql query*/
   private $table_name = "products";
-  private $values = "id,name,price,discount,card_desc,short_desc,long_desc,image,image_list,category_id,update_date,stock,live,unlimited,location";
-  private $valuesParameters = ":id,:name,:price,:discount,:card_desc,:short_desc,:long_desc,:image,:image_list,:category_id,:update_date,:stock,:live,:unlimited,:location";
+  private $values = "id,price,name,date,numberOfProduct,categoryId,unlimited,live,card_text,img,other_img,stores,long_text";
+  private $valuesParameters = ":id,:price,:name,:date,:numberOfProduct,:categoryId,:unlimited,:live,:card_text,:img,:other_img,:stores,:long_text";
   private $data = array();
 
   private $conn ;
@@ -31,7 +31,7 @@ class Create {
       $statement->execute($this->data);
       return true ;
     }catch(PDOException $e){
-      return false ;
+      return "denied" ;
     }
   }
 

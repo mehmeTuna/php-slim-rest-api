@@ -2,31 +2,22 @@
 
 namespace Admin\Product ;
 
-include __DIR__. '/DB_CREATE_PRODUCT.php';
-
-use CREATE_PRODUCT\Create ;
 use \Datetime;
 
-class product {
-    private $connect ; 
+class Create {
     private $id ;
-    private $name ;
     private $price ;
-    private $discount ;
-    private $card_desc ;
-    private $short_desc ;
-    private $long_desc ;
-    private $image_logo ;
-    private $product_img ;
-    private $product_img_1 ;
-    private $product_img_2 ;
-    private $product_img_3 ;
-    private $category ;
+    private $name ;
     private $date ;
-    private $stok = 10;
-    private $live = 1 ;
+    private $numberOfProduct ;
+    private $categoryId ;
     private $unlimited ;
-    private $location = "Adana";
+    private $live = "1";
+    private $card_text ;
+    private $img = "null";
+    private $other_img ="null";
+    private $stores = "Adana";
+    private $long_text ;
 
 
     private $newProduct ;
@@ -39,48 +30,56 @@ class product {
       date_default_timezone_set('Europe/Istanbul');
       $date = new DateTime(date("y-m-d H:i:s")) ;
 
-      $this->id = $this->createId(11);
       $this->date = $date->getTimestamp() ;
       $this->unlimited = "1";
+      $this->live = "1" ;
+      $this->id = $this->createId() ;
 
 
-      $this->newProduct = new Create();
+      $this->newProduct = new Add();
    }
 
-   public function add($name , $discount , $card_desc , $short_desc , $long_desc , $image_logo , $product_img_1 , $product_img_2 , $product_img_3 , $category){
-        $this->name =  $this->textControl($name , 50 ) ;
-        $this->discount =  $this->textControl($discount , 50) ;
-        $this->card_desc =  $this->textControl($card_desc , 50) ;
-        $this->short_desc =  $this->textControl($short_desc , 500) ;
-        $this->long_desc =  $this->textControl($long_desc , 1024) ;
-        $this->image_logo = $image_logo ;
-        $this->product_img_1 = $product_img_1 ;
-        $this->product_img_2 = $product_img_2 ;
-        $this->product_img_3 = $product_img_3 ;
-        $this->category =  $this->textControl($category , 50) ;
+   public function add($val = array() ){
+
+    $this->price =  $this->textControl($val["price"] , 50 ) ; 
+    $this->name =  $this->textControl($val["name"] , 50 ) ; 
+    $this->numberOfProduct =  $this->textControl($val["numberOfProduct"] , 50 ) ; 
+    $this->categoryId =  $this->textControl($val["categoryId"] , 50 ) ; 
+    $this->card_text =  $this->textControl($val["card_text"] , 50 ) ; 
+    $this->long_text =  $this->textControl($val["long_text"] , 500 ) ; 
+    $this->img = (isset($_FILES["img"])) ? $this->imgUpload("img") : "";
+    $this->other_img = json_encode(
+      array(
+        1=>(isset($_FILES["img_1"])) ? $this->imgUpload("img_1") : "",
+        2=>(isset($_FILES["img_2"])) ? $this->imgUpload("img_2") : "",
+        3=>(isset($_FILES["img_3"])) ? $this->imgUpload("img_3") : "",
+      )
+      , JSON_UNESCAPED_UNICODE) ;
+
+
+    //img ler eklenmeli ve isimleri  db ye eklenmeli
    }
 
-   public function addDb(){
+   public function run(){
     $this->newProduct->add("id" , $this->id);
-    $this->newProduct->add("name" , $this->name);
     $this->newProduct->add("price" , $this->price);
-    $this->newProduct->add("discount" , "1");
-    $this->newProduct->add("card_desc" , $this->discount);
-    $this->newProduct->add("short_desc" , $this->short_desc);
-    $this->newProduct->add("long_desc" , $this->long_desc);
-    $this->newProduct->add("image" , $this->image_logo);
-    $this->newProduct->add("image_list" , 
-         json_encode( array(1=>$this->product_img_1,2=>$this->product_img_2,3=>$this->product_img_3), JSON_UNESCAPED_UNICODE) 
-     );
-     $this->newProduct->add("category_id" , "all");
-     $this->newProduct->add("update_date" , $this->date);
-     $this->newProduct->add("stock" , $this->stok);
-     $this->newProduct->add("live" , $this->live);
-     $this->newProduct->add("unlimited" , $this->unlimited);
-     $this->newProduct->add("location" , $this->location);
+    $this->newProduct->add("name" , $this->name);
+    $this->newProduct->add("date" , $this->date);
+    $this->newProduct->add("numberOfProduct" , $this->numberOfProduct);
 
-     return $this->newProduct->run();
+    $this->newProduct->add("categoryId" , $this->categoryId);
+    $this->newProduct->add("unlimited" , $this->unlimited);
+    $this->newProduct->add("live" , $this->live);
+    $this->newProduct->add("card_text" , $this->card_text);
 
+    $this->newProduct->add("img" , $this->img);
+    $this->newProduct->add("other_img" , $this->other_img );
+    $this->newProduct->add("stores" , $this->stores);
+    $this->newProduct->add("long_text" , $this->long_text);
+
+     if($this->variableControl)
+      return $this->newProduct->run();
+     else return false ; 
    }
 
    
@@ -99,14 +98,48 @@ class product {
     }
   }
 
-  private function createId($digits = 11 ){
-    return str_pad(rand(0, (integer)pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT) ;
-  }
-
-   public function __destruct(){
-     
+  private function createId(){
+    return rand(100000,999999);
    }
 
-}
+  public function __destruct(){
+    unset($this->id);
+  }
 
-$safda = new Product();
+
+  private function imgUpload($fileName){
+   //Check if the file is well uploaded
+	if($_FILES[$fileName]['error'] > 0) { return 'Error during uploading, try again'; }
+	
+	//We won't use $_FILES['file']['type'] to check the file extension for security purpose
+	
+	//Set up valid image extensions
+	$extsAllowed = array( 'jpg', 'jpeg', 'png', 'gif' );
+	
+	//Extract extention from uploaded file
+		//substr return ".jpg"
+		//Strrchr return "jpg"
+		
+	$extUpload = strtolower( substr( strrchr($_FILES[$fileName]['name'], '.') ,1) ) ;
+	//Check if the uploaded file extension is allowed
+	
+	if (in_array($extUpload, $extsAllowed) ) { 
+	
+  //Upload the file on the server
+  $randname =  md5(time() . $_FILES[$fileName]['name']) .".".pathinfo($_FILES[$fileName]['name'], PATHINFO_EXTENSION);
+	
+	$name = __DIR__ . "/../../../uploads/".$randname;
+  $result = move_uploaded_file($_FILES[$fileName]['tmp_name'], $name);
+ 	
+  if($result){
+    return $randname ;
+  }else{
+    $this->variableControl = false;
+  }
+		
+	} else { 
+    $this->variableControl = false;
+    return 'File is not valid. Please try again'; }
+  }
+
+}

@@ -2,6 +2,7 @@
 
 namespace Product ;
 
+
 use DATABASE\Database ;
 use PDO ;
 
@@ -14,6 +15,7 @@ class Category {
     private $column ="*" ;
     private $where_key ="" ;
     private $where_value ="" ;
+    private $page = 0;
 
 
 
@@ -58,7 +60,7 @@ class Category {
        if($this->name == "all")
         $where = "" ;
        else 
-        $where = " where category_id = '{$this->name}' " ;  
+        $where = " where categoryId = '{$this->name}' " ;  
     
        $limit = "Order By id ASC LIMIT ". $this->page*10 ." , 10";
 
