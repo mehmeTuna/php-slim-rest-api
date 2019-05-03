@@ -8,6 +8,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^api/product/([a-z0-9_-]+)$                                    ./public/product/product.php
 RewriteRule ^api/category/([a-z0-9_-]+)/([a-z0-9_-]+)$                     ./public/product/product.php
 
+RewriteRule ^order$                                                        ./private/orders/order.php
+
 
 RewriteRule ^emailregister$                                                ./private/email/email.php
 

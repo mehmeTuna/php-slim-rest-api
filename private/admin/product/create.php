@@ -55,9 +55,6 @@ class Create {
         3=>(isset($_FILES["img_3"])) ? $this->imgUpload("img_3") : "",
       )
       , JSON_UNESCAPED_UNICODE) ;
-
-
-    //img ler eklenmeli ve isimleri  db ye eklenmeli
    }
 
    public function run(){
@@ -102,10 +99,6 @@ class Create {
     return rand(100000,999999);
    }
 
-  public function __destruct(){
-    unset($this->id);
-  }
-
 
   private function imgUpload($fileName){
    //Check if the file is well uploaded
@@ -142,4 +135,9 @@ class Create {
     return 'File is not valid. Please try again'; }
   }
 
+
+  public function __destruct(){
+    unset($this->id);
+  }
+  
 }
