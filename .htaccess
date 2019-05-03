@@ -1,0 +1,26 @@
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^api/product/([a-z0-9_-]+)$                                    ./public/product/product.php
+RewriteRule ^api/category/([a-z0-9_-]+)/([a-z0-9_-]+)$                     ./public/product/product.php
+
+
+RewriteRule ^emailregister$                                                ./private/email/email.php
+
+
+RewriteRule ^user/login$                                                   ./private/Users/Login.php
+RewriteRule ^user/Logout$                                                  ./private/Users/Logout.php
+RewriteRule ^user/register$                                                ./private/Users/Add.php
+
+
+RewriteRule ^admin/login$                                                   ./private/Admin/Login.php
+RewriteRule ^admin/Logout$                                                  ./private/Admin/Logout.php
+RewriteRule ^admin/add/product$                                             ./private/Admin/product/product.php
+
+
+#dizinleri listelemesi engellenir
+Options -Indexes
