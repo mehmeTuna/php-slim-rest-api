@@ -13,6 +13,7 @@ use Ip\ip ;
 use formattimestamp\Ttime;
 
 class Create {
+
   private $id ='';//int (11)
   private $email ='';//varchar(500)
   private $password ='';//varchar(500)
