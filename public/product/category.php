@@ -46,13 +46,13 @@ class Category {
       return $this ;
    }
 
-   public function where($_where){
+   public function where($_name){
        $this->where_key = strip_tags( trim($_name) );
        return $this;
    }
 
    public function key($_value){
-       $this->where_value = strip_tags( trim($_key) ) ;
+       $this->where_value = strip_tags( trim($_value) ) ;
        return $this;
    }
 

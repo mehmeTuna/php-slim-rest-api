@@ -2,6 +2,9 @@
 
 namespace User ;
 
+if(!isset($_SESSION))
+ session_start();
+
 include __DIR__ .'/../Ip/Ip.php';
 include __DIR__ . "/../time/timestamp.php";
 
@@ -36,7 +39,6 @@ class Create {
         $this->email_verified = '1';
         $this->registration_date = Ttime::gettime();
         $this->newuser = new Add();
-
   }
 
   /*public method is variable add*/
@@ -79,7 +81,7 @@ class Create {
        return false ;
       else{
         $_SESSION["user"] = array(
-          "id"=>$this->id,
+          "username"=>$this->id,
           "my_cart"=>array()
         );
         return true ;

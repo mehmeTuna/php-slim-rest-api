@@ -18,9 +18,9 @@ class CreateOrder {
 
 
     public function item($val){
-     
-        if($this->add->IsLogin())
-          return false ;
+   
+        if(!$this->add->IsLogin())
+          return "login değil" ;
 
           $this->add->Add("orders",$val["orders"]);
           return $this->add->run();

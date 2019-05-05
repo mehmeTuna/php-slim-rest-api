@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 03 May 2019, 22:26:22
+-- Üretim Zamanı: 05 May 2019, 14:15:37
 -- Sunucu sürümü: 10.1.38-MariaDB
 -- PHP Sürümü: 7.3.4
 
@@ -58,11 +58,18 @@ CREATE TABLE `order_items` (
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `m_date` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
-  `orders` varchar(500) COLLATE utf8_turkish_ci NOT NULL,
+  `orders` text COLLATE utf8_turkish_ci NOT NULL,
   `m_status` varchar(10) COLLATE utf8_turkish_ci NOT NULL,
   `order_status` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
   `ip` varchar(20) COLLATE utf8_turkish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `order_items`
+--
+
+INSERT INTO `order_items` (`order_id`, `user_id`, `m_date`, `orders`, `m_status`, `order_status`, `ip`) VALUES
+(27009, 35747, '1557058289', 'asdasdasd', '0', '0', '::1');
 
 -- --------------------------------------------------------
 
@@ -107,6 +114,13 @@ CREATE TABLE `users` (
   `adress` varchar(100) COLLATE utf8_turkish_ci NOT NULL,
   `adress_2` varchar(100) COLLATE utf8_turkish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `password`, `firstname`, `lastname`, `email_verified`, `first_order`, `registration_date`, `verification_code`, `ip`, `phone`, `adress`, `adress_2`) VALUES
+(35747, 'mehmet_tuna_anadolu@hotmail.com', '$2y$10$PB8USNS58UOnesfhlHmuJu7FbOsCT2VC1SPy7V4GDoTTV1tFf9jTa', 'mehmet', 'tuna', 1, 1, '1557057734', '', '::1', '5307280376', 'ellek kasabası', '');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
