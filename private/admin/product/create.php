@@ -18,13 +18,11 @@ class Create {
     private $other_img ="null";
     private $stores = "Adana";
     private $long_text ;
-
+    private $dataControl = array("price"=>"", "name"=>"","numberOfProduct"=>"","categoryId"=>"","card_text"=>"","long_text"=>"");
 
     private $newProduct ;
 
     private $variableControl = true ;
-
-
 
    public function __construct(){
       date_default_timezone_set('Europe/Istanbul');
@@ -35,18 +33,17 @@ class Create {
       $this->live = "1" ;
       $this->id = $this->createId() ;
 
-
       $this->newProduct = new Add();
    }
 
    public function add($val = array() ){
 
-    $this->price =  $this->textControl($val["price"] , 50 ) ; 
-    $this->name =  $this->textControl($val["name"] , 50 ) ; 
-    $this->numberOfProduct =  $this->textControl($val["numberOfProduct"] , 50 ) ; 
-    $this->categoryId =  $this->textControl($val["categoryId"] , 50 ) ; 
-    $this->card_text =  $this->textControl($val["card_text"] , 50 ) ; 
-    $this->long_text =  $this->textControl($val["long_text"] , 500 ) ; 
+    $this->price =  $this->textControl(isset($val["price"]) ? $val["price"] : "" , 50 ) ; 
+    $this->name =  $this->textControl(isset($val["name"]) ? $val["name"] : "" , 50 ) ; 
+    $this->numberOfProduct =  $this->textControl(isset($val["numberOfProduct"] ) ? $val["numberOfProduct"]  : "", 50 ) ; 
+    $this->categoryId =  $this->textControl(isset($val["categoryId"]) ? $val["categoryId"] : "" , 50 ) ; 
+    $this->card_text =  $this->textControl(isset($val["card_text"]) ? $val["card_text"] : "" , 200 ) ; 
+    $this->long_text =  $this->textControl(isset($val["long_text"]) ? $val["long_text"] : "" , 500 ) ; 
     $this->img = (isset($_FILES["img"])) ? $this->imgUpload("img") : "";
     $this->other_img = json_encode(
       array(
@@ -76,7 +73,7 @@ class Create {
 
      if($this->variableControl)
       return $this->newProduct->run();
-     else return false ; 
+     else return "eksik parametre" ; 
    }
 
    
@@ -87,7 +84,7 @@ class Create {
   private function textControl($text = '' , $length = 50){
     $_length = strlen(trim( $text ));
 
-    if($_length >=1 && $_length <= $length){
+    if($_length <= $length){
       return strip_tags( trim($text) );
     }else{
       $this->variableControl = false;

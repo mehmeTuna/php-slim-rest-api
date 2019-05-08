@@ -1,6 +1,7 @@
 <?php
 
 
+
 namespace Admin\Product ;
 
 require __DIR__ ."/../../../database/connect.php";
@@ -10,7 +11,7 @@ require __DIR__ .'/DB_CREATE_PRODUCT.php';
 use Admin\Product\Create ;
 
 
-if(!isset($_REQUEST)){
+if($_SERVER['REQUEST_METHOD'] != "POST"){
     echo "access denied";
     exit;
 }

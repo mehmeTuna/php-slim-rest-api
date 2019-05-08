@@ -14,13 +14,13 @@ if ( isset( $_POST) ){
     $password = "";
 
     if(strlen( trim( $_POST["username"] ) ) > 1 && filter_var( trim($_POST["username"]), FILTER_VALIDATE_EMAIL)){
-        $username = strip_tags($_POST["username"]);
+        $username = strip_tags( trim($_POST["username"]) );
     }else{
         echo json_encode("hatalı veri" , JSON_UNESCAPED_UNICODE);
     }
 
     if(strlen( trim( $_POST["password"] ) ) > 1 ){
-        $password = $_POST["password"];
+        $password = strip_tags( trim($_POST["password"]) );
     }else{
         echo json_encode("hatalı veri" , JSON_UNESCAPED_UNICODE);
     }

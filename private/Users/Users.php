@@ -82,12 +82,15 @@ class Create {
        return false ;
       else{
         $_SESSION["user"] = array(
-          "username"=>$this->id,
-          "my_cart"=>array()
-        );
-        return true ;
+          "username" => $this->id ,
+          "firstname"=>$this->firstname,
+          "lastname"=>$this->lastname,
+          "email"=>$this->email ,
+          "adress"=>$this->adress,
+          "product"=> array()
+      );
+        return "ok" ;
       }
-
     }
 
   /*create default number = 11 id  */

@@ -45,7 +45,6 @@ class Add {
 
         return  $this->islogin  ;
 
-       
     }
 
     //data and value =orders,order_status

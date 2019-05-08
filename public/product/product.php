@@ -1,17 +1,21 @@
 <?php
 
+
 namespace Product ;
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
+
+
 require __DIR__ .'/../../database/connect.php';
 require __DIR__ .'/details.php';
 require __DIR__ . '/category.php';
+require __DIR__ ."/menu.php";
 
 use Product\details ;
 use Product\Category ;
+use Menu\menuproduct ;
 
-if(!isset($_REQUEST)){
-    echo "access denied";
-    exit;
-}
 
 
 if(isset($_GET["productName"]) && strlen(trim($_GET["productName"])) >=3){
@@ -33,5 +37,13 @@ if(isset($_GET["categoryName"]) && isset($_GET["page"]) ){
         exit ;
     }else {
         echo "page to 0-1024";
+        exit;
     }
 } 
+
+if( isset($_GET["menu"]) && $_GET["menu"] == "ok" ){
+    $details = new menuproduct();
+    $result = $details->run();
+    echo json_encode($result , JSON_UNESCAPED_UNICODE);
+    exit ;
+}

@@ -3,8 +3,8 @@
 require __DIR__ . "/NewOrder.php";
 
 use NewOrder\CreateOrder ;
-if(!isset($_SESSION))
- session_start();
+
+
 
 if(!isset($_REQUEST)){
     echo "access denied";

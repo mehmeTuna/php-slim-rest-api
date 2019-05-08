@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 05 May 2019, 14:15:37
+-- Üretim Zamanı: 08 May 2019, 03:18:42
 -- Sunucu sürümü: 10.1.38-MariaDB
 -- PHP Sürümü: 7.3.4
 
@@ -31,9 +31,40 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `username` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
-  `password` int(50) NOT NULL,
+  `password` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `ip` varchar(20) COLLATE utf8_turkish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`, `ip`) VALUES
+(1453, 'admin@hotmail.com', '$2y$10$YZlU6bOgSAc10XDwNqPth.D6hYuKjxwhKm2R/KChtr90VPRPweMNS', '::1');
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `category`
+--
+
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) COLLATE utf8_turkish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `category`
+--
+
+INSERT INTO `category` (`id`, `name`) VALUES
+(1, 'Kebaplar'),
+(2, 'Izgaralar'),
+(3, 'Fırın Ürünleri'),
+(4, 'Çiğ Köfteler'),
+(5, 'Dürümler'),
+(6, 'Tatlılar'),
+(7, 'İçecekler');
 
 -- --------------------------------------------------------
 
@@ -43,10 +74,20 @@ CREATE TABLE `admin` (
 
 CREATE TABLE `email_register` (
   `id` int(11) NOT NULL,
-  `email` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
   `ip` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
   `m_date` varchar(50) COLLATE utf8_turkish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `email_register`
+--
+
+INSERT INTO `email_register` (`id`, `email`, `ip`, `m_date`) VALUES
+(3977791, 'mehmet_tuna_anadolu@hotmail.com', '::1', '1557277528'),
+(4874871, 'mehmet_tuna_anadolu@hotmail.com', '::1', '1557277445'),
+(5781583, 'mehmet_tuna_anadolu@hotmail.com', '::1', '1557277454'),
+(7490335, 'mehmet_tuna_anadolu@hotmail.com', '::1', '1557277463');
 
 -- --------------------------------------------------------
 
@@ -69,7 +110,9 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`order_id`, `user_id`, `m_date`, `orders`, `m_status`, `order_status`, `ip`) VALUES
-(27009, 35747, '1557058289', 'asdasdasd', '0', '0', '::1');
+(27009, 35747, '1557058289', 'asdasdasd', '0', '0', '::1'),
+(41079, 35747, '1557168416', '{\"id\":\"1232414\",\"porsiyon\":\"1 porsiyon\"}', '1', '0', '::1'),
+(55414, 35747, '1557168478', '{\"id\":\"1232414\",\"porsiyon\":\"1.5 porsiyon\"}', '0', '0', '::1');
 
 -- --------------------------------------------------------
 
@@ -92,6 +135,87 @@ CREATE TABLE `products` (
   `stores` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
   `long_text` text COLLATE utf8_turkish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `products`
+--
+
+INSERT INTO `products` (`id`, `price`, `name`, `date`, `numberOfProduct`, `categoryId`, `unlimited`, `live`, `card_text`, `img`, `other_img`, `stores`, `long_text`) VALUES
+(130287, 12, 'Kaymaklı Künefe', '1557250006', 100, 6, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(136207, 4, 'Coca-Cola Şekersiz (33 cl.)', '1557250070', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(151929, 24, 'Adana Dürüm', '1557249832', 100, 5, '1', 1, 'Mevsim salatası, pişmiş domates ve biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Mevsim salatası, pişmiş domates ve biber, yeşillik, limon'),
+(205023, 4, 'Fuse Tea (33 cl.)', '1557250115', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(232635, 26, 'Kemikli Tavuk', '1557246058', 100, 2, '1', 1, 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon'),
+(237965, 24, 'Kaşarlı Pide', '1557248906', 100, 3, '1', 1, 'Mevsim salatası, söğüş domates, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Mevsim salatası, söğüş domates, yeşillik, limon'),
+(264977, 3, 'Şalgam Suyu (33 cl.)', '1557250169', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(276675, 40, 'Beyti (1,5 porsiyon)', '1557245495', 100, 1, '1', 1, 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon'),
+(303636, 26, 'Kuzu Kaburga', '1557246136', 100, 2, '1', 1, 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon'),
+(309440, 24, 'Kuşbaşı Dürüm', '1557249847', 100, 5, '1', 1, 'Mevsim salatası, pişmiş domates ve biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Mevsim salatası, pişmiş domates ve biber, yeşillik, limon'),
+(327652, 4, 'Cappy (33 cl.)', '1557250104', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(348995, 4, 'Coca-Cola Light (33 cl.)', '1557250063', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(365777, 24, 'Ciğer Dürüm', '1557249866', 100, 5, '1', 1, 'Mevsim salatası, pişmiş domates ve biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Mevsim salatası, pişmiş domates ve biber, yeşillik, limon'),
+(371670, 10, 'Künefe', '1557249991', 100, 6, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(372212, 26, 'Çöp Şiş', '1557245929', 100, 2, '1', 1, 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon'),
+(374382, 24, 'KEmiksiz Kaburga Dürüm', '1557249898', 100, 5, '1', 1, 'Mevsim salatası, pişmiş domates ve biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Mevsim salatası, pişmiş domates ve biber, yeşillik, limon'),
+(381622, 13, 'Fıstıklı Künefe', '1557250016', 100, 6, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(463701, 26, 'AntepLahmacun (3 Adet)', '1557246253', 100, 3, '1', 1, 'Mevsim salatası, söğüş domates, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Mevsim salatası, söğüş domates, yeşillik, limon'),
+(486555, 26, 'Tavuk Pirzola', '1557246090', 100, 2, '1', 1, 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon'),
+(490605, 4, 'Coca-Cola (33 cl.)', '1557250054', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(506901, 40, 'Külbastı', '1557246040', 100, 2, '1', 1, 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon'),
+(523399, 3, 'Ayran (30 cl.)', '1557250129', 100, 7, '1', 1, 'Kutu', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(548493, 26, 'Kemiksiz Tavuk', '1557246067', 100, 2, '1', 1, 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon'),
+(574976, 6, 'Coca-Cola Şekersiz (1 L.)', '1557250237', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(621520, 24, 'Beyti Dürüm', '1557249880', 100, 5, '1', 1, 'Mevsim salatası, pişmiş domates ve biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Mevsim salatası, pişmiş domates ve biber, yeşillik, limon'),
+(648308, 14, 'Fıstıklı Kaymaklı Künefe', '1557250026', 100, 6, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(671107, 3, 'Açık Ayran (33 cl.)', '1557250143', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(709151, 1.5, 'Su', '1557250202', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(716353, 1.5, 'Soda', '1557250189', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(765051, 26, 'Sucuklu Kaşarlı Pide', '1557248965', 100, 3, '1', 1, 'Mevsim salatası, söğüş domates, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Mevsim salatası, söğüş domates, yeşillik, limon'),
+(781750, 26, 'Kuşbaşı Kebap', '1557245471', 100, 1, '1', 1, 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon'),
+(793288, 4, 'Fanta (33 cl.)', '1557250082', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(794667, 6, 'Coca-Cola (1 L.)', '1557250218', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(802205, 27, 'Karışık Pide', '1557248934', 100, 3, '1', 1, 'Kuşbaşı et, kaşar peyniri ve yanında mevsim salatası, söğüş domates, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Kuşbaşı et, kaşar peyniri ve yanında mevsim salatası, söğüş domates, yeşillik, limon'),
+(806792, 4, 'Sprite (33 cl.)', '1557250091', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(809453, 40, 'Kazbaşı', '1557245977', 100, 2, '1', 1, 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon'),
+(818052, 26, 'Ciğer  Şiş', '1557245962', 100, 2, '1', 1, 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon'),
+(876332, 40, 'Et Pirzola (Kemikli)', '1557246025', 100, 2, '1', 1, 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon'),
+(894674, 15, 'Çiğ Köfte ( 12 Sıkım )', '1557249782', 100, 4, '1', 1, 'Marul, yeşillik, ekmek ile', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Marul, yeşillik, ekmek ile'),
+(895870, 4, 'Açık Ayran (50 cl.)', '1557250159', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(926243, 8, 'Açık Ayran (1 L.)', '1557250249', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(929658, 26, 'Kanat', '1557246075', 100, 2, '1', 1, 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon'),
+(930254, 24, 'Çöp Şiş Dürüm', '1557249858', 100, 5, '1', 1, 'Mevsim salatası, pişmiş domates ve biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Mevsim salatası, pişmiş domates ve biber, yeşillik, limon'),
+(936420, 2, 'Meyveli Soda', '1557250182', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(940352, 6, 'Coca-Cola Light (1 L.)', '1557250229', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
+(942504, 40, 'Patlıcan Kebap (1,5 porsiyon)', '1557245512', 100, 1, '1', 1, 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon'),
+(962937, 26, 'Kuşbaşı Pide', '1557248893', 100, 3, '1', 1, 'Mevsim salatası, söğüş domates, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Mevsim salatası, söğüş domates, yeşillik, limon'),
+(982211, 26, 'Adana Kebap', '1557245392', 100, 1, '1', 1, 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Soğan salatası, ezme salata, mevsim salatası, pişmiş soğan, pişmiş domates, biber, yeşillik, limon'),
+(992894, 24, 'Tavuk Dürüm', '1557249873', 100, 5, '1', 1, 'Mevsim salatası, pişmiş domates ve biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Mevsim salatası, pişmiş domates ve biber, yeşillik, limon'),
+(993298, 24, 'Adana Lahmacun (5 Adet)', '1557246212', 100, 3, '1', 1, 'Mevsim salatası, söğüş domates, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Mevsim salatası, söğüş domates, yeşillik, limon');
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `rezervasyon`
+--
+
+CREATE TABLE `rezervasyon` (
+  `id` int(11) NOT NULL,
+  `time` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
+  `e_mail` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
+  `kisi_sayisi` varchar(10) COLLATE utf8_turkish_ci NOT NULL,
+  `m_status` varchar(10) COLLATE utf8_turkish_ci NOT NULL,
+  `ip` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
+  `rez_date` varchar(20) COLLATE utf8_turkish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `rezervasyon`
+--
+
+INSERT INTO `rezervasyon` (`id`, `time`, `name`, `e_mail`, `phone`, `kisi_sayisi`, `m_status`, `ip`, `rez_date`) VALUES
+(18553, '1557277760', 'mehmet tuna', 'mehmet_tuna_anadolu@hotmail.com', '5302145201', '2', '0', '::1', '2019-05-09');
 
 -- --------------------------------------------------------
 
@@ -120,7 +244,22 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `firstname`, `lastname`, `email_verified`, `first_order`, `registration_date`, `verification_code`, `ip`, `phone`, `adress`, `adress_2`) VALUES
-(35747, 'mehmet_tuna_anadolu@hotmail.com', '$2y$10$PB8USNS58UOnesfhlHmuJu7FbOsCT2VC1SPy7V4GDoTTV1tFf9jTa', 'mehmet', 'tuna', 1, 1, '1557057734', '', '::1', '5307280376', 'ellek kasabası', '');
+(15883, 'enes@hotmail.com', '$2y$10$mvx/Mzc0jrT6f3cNB9pXoOSxwhlggbpP8IlOx3hJVRSQ6PXg/447a', 'enes', 'tuna', 1, 0, '1557070204', '', '::1', '5307280376', 'ellek kasabası', ''),
+(35747, 'mehmet_tuna_anadolu@hotmail.com', '$2y$10$PB8USNS58UOnesfhlHmuJu7FbOsCT2VC1SPy7V4GDoTTV1tFf9jTa', 'mehmet', 'tuna', 1, 1, '1557057734', '', '::1', '5307280376', 'ellek kasabası', ''),
+(45435, 'new@hotmail.com', '$2y$10$zMongk/LSiBCqTrljrR0UundTrc/sEwnkmZx1iQ63pD8/5Oljd4BW', 'enes', 'tuna', 1, 0, '1557167025', '', '::1', '5307280376', 'ellek kasabası', ''),
+(86541, 'admin@hotmail.com', '$2y$10$n4q9S5Gpiv.XIDZTFvoJk.NL2bIPMN944ucv6u4RVKPNX8Av/3ERa', 'enes', 'tuna', 1, 0, '1557076972', '', '::1', '5307280376', 'ellek kasabası', '');
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `user_statistics`
+--
+
+CREATE TABLE `user_statistics` (
+  `id` int(11) NOT NULL,
+  `m_date` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
+  `details` text COLLATE utf8_turkish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -132,6 +271,12 @@ INSERT INTO `users` (`id`, `email`, `password`, `firstname`, `lastname`, `email_
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`,`username`);
+
+--
+-- Tablo için indeksler `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Tablo için indeksler `email_register`
@@ -154,11 +299,23 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Tablo için indeksler `rezervasyon`
+--
+ALTER TABLE `rezervasyon`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Tablo için indeksler `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`,`email`);
+
+--
+-- Tablo için indeksler `user_statistics`
+--
+ALTER TABLE `user_statistics`
+  ADD PRIMARY KEY (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
