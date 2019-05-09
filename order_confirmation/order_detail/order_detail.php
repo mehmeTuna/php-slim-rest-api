@@ -14,9 +14,9 @@ use PDO ;
     $details = new Database();
    
     
-   $waiting= "SELECT count(*) from rezervasyon where m_status = '0'" ;
-   $red = "SELECT count(*) from rezervasyon where m_status = '2'" ;
-   $ok = "SELECT count(*) from rezervasyon where m_status = '1'" ;
+   $waiting= "SELECT count(*) from order_items where m_status = '0'" ;
+   $red = "SELECT count(*) from order_items where m_status = '2'" ;
+   $ok = "SELECT count(*) from order_items where m_status = '1'" ;
   
    try{
     $query = $details->conn->query( $waiting ,  PDO::FETCH_ASSOC);

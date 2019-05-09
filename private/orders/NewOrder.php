@@ -22,7 +22,10 @@ class CreateOrder {
         if(!$this->add->IsLogin())
           return "login değil" ;
 
-          $this->add->Add("orders",$val["orders"]);
+        if($val["orders"]) 
+            $val["orders"] = json_encode($val["orders"] , JSON_UNESCAPED_UNICODE ) ;
+
+          $this->add->Add("orders", $val["orders"]);
           return $this->add->run();
     }
 

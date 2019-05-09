@@ -49,6 +49,7 @@ class Add {
 
     //data and value =orders,order_status
     public function Add($data , $value){
+    
         $this->data[$data] = $value ;
       return $this ;
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 08 May 2019, 03:18:42
+-- Üretim Zamanı: 09 May 2019, 02:16:03
 -- Sunucu sürümü: 10.1.38-MariaDB
 -- PHP Sürümü: 7.3.4
 
@@ -110,7 +110,7 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`order_id`, `user_id`, `m_date`, `orders`, `m_status`, `order_status`, `ip`) VALUES
-(27009, 35747, '1557058289', 'asdasdasd', '0', '0', '::1'),
+(40512, 35747, '1557314382', '{\"id\":\"1232414\",\"porsiyon\":\"1.5 porsiyon adana kebap\"}', '0', '0', '::1'),
 (41079, 35747, '1557168416', '{\"id\":\"1232414\",\"porsiyon\":\"1 porsiyon\"}', '1', '0', '::1'),
 (55414, 35747, '1557168478', '{\"id\":\"1232414\",\"porsiyon\":\"1.5 porsiyon\"}', '0', '0', '::1');
 

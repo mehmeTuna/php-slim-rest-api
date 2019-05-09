@@ -12,10 +12,17 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^demo$                                                        ./private/demo.php
 
 
-RewriteRule ^rezervasyon$                                                ./private/rezervasyon/add.php
+RewriteRule ^rezervasyon$                                                  ./private/rezervasyon/add.php
 
 
-RewriteRule ^siparis-onay/siparis-detail$                                  ./order_confirmation/order_detail/detail.php
+RewriteRule ^siparis-onay/order-detail/order-gelen$                        ./order_confirmation/order_detail/order_user_detail.php?order=gelen
+RewriteRule ^siparis-onay/order-detail/order-onay$                         ./order_confirmation/order_detail/order_user_detail.php?order=onay
+RewriteRule ^siparis-onay/order-detail/order-iptal$                        ./order_confirmation/order_detail/order_user_detail.php?order=iptal
+RewriteRule ^siparis-onay/order-detail$                                    ./order_confirmation/order_detail/order_detail.php
+
+RewriteRule ^siparis-onay/rezervasyon-detail/rezervasyon-gelen$            ./order_confirmation/order_detail/rezervasyon_detail.php?ord=gelen
+RewriteRule ^siparis-onay/rezervasyon-detail/rezervasyon-onay$             ./order_confirmation/order_detail/rezervasyon_detail.php?ord=onay
+RewriteRule ^siparis-onay/rezervasyon-detail/rezervasyon-iptal$            ./order_confirmation/order_detail/rezervasyon_detail.php?ord=iptal
 RewriteRule ^siparis-onay/rezervasyon-detail$                              ./order_confirmation/order_detail/rezervasyon.php
 RewriteRule ^siparis-onay$                                                 ./order_confirmation/index.php
 

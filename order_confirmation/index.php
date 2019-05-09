@@ -41,7 +41,7 @@ if(!isset($_SESSION["operator"]))
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -64,7 +64,7 @@ if(!isset($_SESSION["operator"]))
      
        <!-- Nav Item - Pages Collapse Menu -->
        <li class="nav-item">
-        <a class="nav-link collapsed" href="siparis_onay/siparis" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" onclick="siparis()" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
           <span>Siparişler</span>
         </a>
@@ -182,13 +182,13 @@ if(!isset($_SESSION["operator"]))
           <div class="row">
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4">
+            <div class="col-xl-4 col-md-6 mb-4" onclick="control_gelen()">
               <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Gelen Siparişler</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="gelen_siparis">0</div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1" id="gelen_title">Gelen Siparişler</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="gelen_num">0</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -199,12 +199,12 @@ if(!isset($_SESSION["operator"]))
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4">
+            <div class="col-xl-4 col-md-6 mb-4" onclick="control_onay()">
               <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Onaylanan Siparişler </div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" id="onay_title">Onaylanan Siparişler </div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800" id="onaylanan">0</div>
                     </div>
                     <div class="col-auto">
@@ -216,15 +216,15 @@ if(!isset($_SESSION["operator"]))
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4">
+            <div class="col-xl-4 col-md-6 mb-4" onclick="control_iptal()">
               <div class="card border-left-danger shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">İptal Olan Siparişler</div>
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1" id="iptal_title">İptal Olan Siparişler</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="iptal_siparis">0</div>
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="iptal_edilen">0</div>
                         </div>
                         
                       </div>
@@ -241,101 +241,12 @@ if(!isset($_SESSION["operator"]))
 
           <!-- Content Row -->
 
-         
-
+    
+  <div id="data_container">
 
     
-   <!-- Collapsable Card Example -->
-   <div class="card shadow mb-4">
-      <!-- Card Header - Accordion -->
-      <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-        <h6 class="m-0 font-weight-bold text-primary">1 -Enes Budak 
+  </div>
 
-           
-        </h6>
-       
-      </a>
-      <!-- Card Content - Collapse -->
-      <div class="collapse show" id="collapseCardExample">
-        <div class="card-body">
-         1.5 Adana Kebap 2 Pide Adres : Seyhan Adana
-         <button class=" btn btn-info " style="margin-left:40rem;">Onayla</button>
-         <button class="btn btn-danger " >İptal Et</button>
-        </div>
-        <div>
-      
-        </div>
-      </div>
-    </div>
-     <!-- Collapsable Card Example -->
-   <div class="card shadow mb-4">
-      <!-- Card Header - Accordion -->
-      <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-        <h6 class="m-0 font-weight-bold text-primary">1 -Enes Budak</h6>
-      </a>
-      <!-- Card Content - Collapse -->
-      <div class="collapse show" id="collapseCardExample">
-        <div class="card-body">
-         1.5 Adana Kebap 2 Pide Adres : Seyhan Adana
-         <button class=" btn btn-info " style="margin-left:40rem;">Onayla</button>
-         <button class="btn btn-danger " >İptal Et</button>
-        </div>
-      </div>
-    </div>
-    
-     <!-- Collapsable Card Example -->
-   <div class="card shadow mb-4">
-      <!-- Card Header - Accordion -->
-      <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-        <h6 class="m-0 font-weight-bold text-primary">1 -Enes Budak</h6>
-      </a>
-      <!-- Card Content - Collapse -->
-      <div class="collapse show" id="collapseCardExample">
-        <div class="card-body">
-         1.5 Adana Kebap 2 Pide Adres : Seyhan Adana
-         <button class=" btn btn-info " style="margin-left:40rem;">Onayla</button>
-         <button class="btn btn-danger " >İptal Et</button>
-        </div>
-      </div>
-    </div>
-    
-     <!-- Collapsable Card Example -->
-   <div class="card shadow mb-4">
-      <!-- Card Header - Accordion -->
-      <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-        <h6 class="m-0 font-weight-bold text-primary">1 -Enes Budak</h6>
-      </a>
-      <!-- Card Content - Collapse -->
-      <div class="collapse show" id="collapseCardExample">
-        <div class="card-body">
-         1.5 Adana Kebap 2 Pide Adres : Seyhan Adana
-        </div>
-      </div>
-    </div>
-    
-     <!-- Collapsable Card Example -->
-   <div class="card shadow mb-4">
-      <!-- Card Header - Accordion -->
-      <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-        <h6 class="m-0 font-weight-bold text-primary">1 -Enes Budak</h6>
-      </a>
-      <!-- Card Content - Collapse -->
-      <div class="collapse show" id="collapseCardExample">
-        <div class="card-body">
-         1.5 Adana Kebap 2 Pide Adres : Seyhan Adana
-        </div>
-      </div>
-    </div>
-    
-    
-
-
-
-
-
-          
-
-         
 
         </div>
         <!-- /.container-fluid -->
@@ -377,7 +288,7 @@ if(!isset($_SESSION["operator"]))
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <a class="btn btn-primary" href="#">Logout</a>
         </div>
       </div>
     </div>
@@ -385,47 +296,140 @@ if(!isset($_SESSION["operator"]))
 
   <script>
   
-var order_detail  ;
-window.onload = function() {
-  
- $.ajax({ 
-        type: 'GET', 
-        url: 'http://localhost:81/siparis-onay/siparis-detail', 
-        success: function (data) { 
-          console.log(data)
-          order_detail =  JSON.parse ( data) ;
-          $("#gelen_siparis").html( order_detail.waiting  );
-          $("#onaylanan").html( order_detail.ok  );
-          $("#iptal_siparis").html( order_detail.red  );
-         
-        }
-    });
-    
+var durum = "siparis" ;//or rezervasyon
 
+window.onload = function() {
+  title_rename();
+  title_data_rename();
+  create_user_render("order-onay");
 };
 
 
-function rezervasyon() {
-      $("#page_title").html("Rezervasyon Onay");
 
+function title_rename(){
+   if(durum == "rezervasyon"){
+    $("#page_title").html("Rezervasyon Onay");
+      $("#gelen_title").html("Gelen Rezervasyonlar");
+      $("#onay_title").html("Onaylanan Rezervasyonlar");
+      $("#iptal_title").html("İptal Edilen Rezervasyonlar");
+   }else if(durum == "siparis"){
+    $("#page_title").html("Sipariş Onay");
+      $("#gelen_title").html("Gelen Siparişler");
+      $("#onay_title").html("Onaylanan Siparişler");
+      $("#iptal_title").html("İptal Edilen Siparişler");
+   }
+}
+
+function title_data_rename(){
+    if(durum == "siparis"){
       $.ajax({ 
         type: 'GET', 
-        url: 'http://localhost:81/siparis-onay/siparis-detail', 
+        url: 'http://localhost:81/siparis-onay/order-detail', 
         success: function (data) { 
-          console.log(data)
-          order_detail =  JSON.parse ( data) ;
-          $("#gelen_siparis").html( order_detail.waiting  );
+          let order_detail =  JSON.parse ( data) ;
+          $("#gelen_num").html( order_detail.waiting  );
           $("#onaylanan").html( order_detail.ok  );
-          $("#iptal_siparis").html( order_detail.red  );
+          $("#iptal_edilen").html( order_detail.red  );
+        }
+      });
+    }else if(durum == "rezervasyon"){
+      $.ajax({ 
+        type: 'GET', 
+        url: 'http://localhost:81/siparis-onay/rezervasyon-detail', 
+        success: function (data) { 
+          let order_detail =  JSON.parse ( data) ;
+          $("#gelen_num").html( order_detail.waiting  );
+          $("#onaylanan").html( order_detail.ok  );
+          $("#iptal_edilen").html( order_detail.red  );
          
         }
-    });
-
-    
+      });
     }
+}
+
+function create_user(obj ){
+    let order = JSON.parse( obj.orders  );
+    return '<div class="card shadow mb-4">' +
+          '<a href="#collapseCardExample'+obj.order_id+'" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">'+
+          '<h6 class="m-0 font-weight-bold text-primary">'+obj.username+ ' Tel: '+ obj.phone+'</h6></a>'+
+          '<div class="collapse show" id="collapseCardExample'+obj.order_id+'">'+
+          '<div class="card-body">adres: '+ obj.adres+' <br> Sipariş: '+order.porsiyon+ 
+          '<div> <button class=" btn btn-info " style="margin-right:10px">Onayla</button>'+
+          '<button class="btn btn-danger" style="margin-right:10px">İptal Et</button><div/></div><div></div></div></div>';
+}
 
 
 
+function rezervasyon() {
+  durum = "rezervasyon" ;
+    title_rename();
+    title_data_rename();
+}
+
+
+
+function siparis() {
+    durum = "siparis";
+      title_rename();
+      title_data_rename();
+      create_user_render("order-onay");
+}
+
+
+
+function create_user_render(option){
+  $.ajax({ 
+        type: 'GET', 
+        url: 'http://localhost:81/siparis-onay/order-detail/'+option, 
+        success: function (data) { 
+          if(data == ""){
+
+          }else {
+          let order_detail =  JSON.parse ( data) ;
+          let user = order_detail.map(
+          data => {
+            return create_user(data)
+          }
+          );
+          $('#data_container').html(user);
+          }
+        }
+  });
+}
+
+function create_rezervasyon_render(){
+console.log("qegfe");
+}
+
+
+function control_gelen(){
+  title_data_rename();
+  if(durum == "siparis")
+  create_user_render("order-gelen" );
+  else if(durum == "rezervasyon")
+   create_rezervasyon_render("rezervasyon-gelen");
+}
+
+
+function control_onay(){
+  title_data_rename();
+  if(durum == "siparis")
+  create_user_render("order-onay" );
+  else if(durum == "rezervasyon")
+   create_rezervasyon_render("rezervasyon-onay");
+}
+
+
+function control_iptal(){
+  title_data_rename();
+  if(durum == "siparis")
+  create_user_render("order-iptal" );
+  else if(durum == "rezervasyon")
+   create_rezervasyon_render("rezervasyon-iptal");
+}
+
+
+  
   </script>
 
   <!-- Bootstrap core JavaScript-->
@@ -436,7 +440,7 @@ function rezervasyon() {
   <script src="order_confirmation/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="order_confirmation/order_Comfirmation/js/sb-admin-2.min.js"></script>
+  <script src="order_confirmation/js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
   <script src="order_confirmation/vendor/chart.js/Chart.min.js"></script>
