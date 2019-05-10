@@ -23,7 +23,7 @@ if(isset($_GET["order"])  ){
      $tip = "2";
 
 
-    $waiting= "SELECT order_id,user_id,m_date,orders,order_status from order_items where m_status = '{$tip}' ORDER BY m_date ASC" ;
+    $waiting= "SELECT order_id,user_id,order_amount,m_date,orders,order_status from order_items where m_status = '{$tip}' ORDER BY m_date ASC" ;
     $order_wait = array();
    
     try{
@@ -41,7 +41,8 @@ if(isset($_GET["order"])  ){
                     array_push($order_wait , array(
                         "order_id"=>$value["order_id"],
                         "username"=>$user["firstname"] . " " .$user["lastname"],
-                        "email"=>$user["email"],
+                        "tutar"=>$value["order_amount"],
+                        "date"=>date('H:i', $value["m_date"]),
                         "orders"=>$value["orders"],
                         "adres"=>$user["adress"],
                         "phone"=>$user["phone"]

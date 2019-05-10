@@ -2,17 +2,19 @@
 //cors policy denied sorununu çözüyor
 //ayrı pcler arası iletişim sorununu çözüyor
 
-/*
+
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
-*/
+
 
 
 session_start();
 
+
 require __DIR__ .'/../../database/connect.php';
 
 use DATABASE\Database ;
+
 
 /*
 if(!isset($_REQUEST)){
@@ -30,7 +32,7 @@ if(!isset($_REQUEST)){
     $dbPassword = "" ;
 
       //using axios js post method data convert json to php array
-      //$_POST = json_decode(file_get_contents('php://input') , true);
+      $_POST = json_decode(file_get_contents('php://input') , true);
 
     if(isset($_POST["username"]) && strlen( trim( $_POST["username"] ) ) > 1 && filter_var( trim($_POST["username"]), FILTER_VALIDATE_EMAIL))
         $username = strip_tags( trim( $_POST["username"] ) ) ;
@@ -65,7 +67,7 @@ if(!isset($_REQUEST)){
         }
 
 
-        if( password_verify($password ,$db_password )){
+        if( password_verify($password , isset($db_password) ? $db_password : "" )){
             $_SESSION["user"] = array(
                 "username" => $val["id"] ,
                 "firstname"=>$name["firstname"],
@@ -74,7 +76,8 @@ if(!isset($_REQUEST)){
                 "adress"=>$name["adress"],
                 "product"=> array()
             );
-            echo json_encode($name , JSON_UNESCAPED_UNICODE);
+           
+            echo json_encode(array("firstname"=>$name["firstname"] , "lastname"=>$name["lastname"]) , JSON_UNESCAPED_UNICODE);
             exit;
         }else{
          $js_echo = "kullanıcı adı veya parola hatalı";

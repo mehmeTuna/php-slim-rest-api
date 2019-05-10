@@ -56,7 +56,7 @@ class menuproduct {
                      "id"=>$value["id"],
                      "name"=>$value["name"],
                      "position"=>"0",
-                     "categoryImage"=>array(),
+                     "categoryImage"=>$value["img"],
                      "menuItems"=>$menuItems
                  )
               );

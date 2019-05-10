@@ -1,12 +1,11 @@
 <?php
 session_start();
 
-$_SESSION["operator"]["id"] = "12345";
-$_SESSION["operator"]["name"] = "demo demo";
 
-if(!isset($_SESSION["operator"]))
-   exit ;
-
+if(!isset($_SESSION["operator"])){
+  header("location: ../calisan");
+  exit;
+}
 
 ?>
 
@@ -29,6 +28,8 @@ if(!isset($_SESSION["operator"]))
 
   <!-- Custom styles for this template-->
   <link href="order_confirmation/css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- Custom styles for this page -->
+    <link href="order_confirmation/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -243,7 +244,30 @@ if(!isset($_SESSION["operator"]))
 
     
   <div id="data_container">
-
+ <!-- DataTales Example -->
+ <div class="card shadow mb-4" id="table_display">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary" id="table_title">Siparişler</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr id="table_tr_name">
+                    </tr>
+                  </thead>
+                  <tfoot >
+                    <tr id="table_tr_foot">
+                     
+                    </tr>
+                  </tfoot>
+                  <tbody id="table_body_render">
+            
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
     
   </div>
 
@@ -280,15 +304,15 @@ if(!isset($_SESSION["operator"]))
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Çıkış Yap </h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">Çıkış Yapmak istediğine eminmisin ? </div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="#">Logout</a>
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Vazgeç</button>
+          <a class="btn btn-primary" href="calisan/cikis-yap">Çıkış Yap</a>
         </div>
       </div>
     </div>
@@ -296,27 +320,30 @@ if(!isset($_SESSION["operator"]))
 
   <script>
   
-var durum = "siparis" ;//or rezervasyon
+var durum = "siparis" ;//siparis or rezervasyon
 
 window.onload = function() {
-  title_rename();
-  title_data_rename();
-  create_user_render("order-onay");
+ title_rename();
+ title_data_rename();
+ titleTable();
+ create_user_render("order-gelen"); 
 };
 
 
 
 function title_rename(){
    if(durum == "rezervasyon"){
-    $("#page_title").html("Rezervasyon Onay");
+      $("#page_title").html("Rezervasyon Onay");
       $("#gelen_title").html("Gelen Rezervasyonlar");
       $("#onay_title").html("Onaylanan Rezervasyonlar");
       $("#iptal_title").html("İptal Edilen Rezervasyonlar");
+      $("#table_title").html("Rezervasyonlar");
    }else if(durum == "siparis"){
-    $("#page_title").html("Sipariş Onay");
+      $("#page_title").html("Sipariş Onay");
       $("#gelen_title").html("Gelen Siparişler");
       $("#onay_title").html("Onaylanan Siparişler");
       $("#iptal_title").html("İptal Edilen Siparişler");
+      $("#table_title").html("Siparişler");
    }
 }
 
@@ -349,30 +376,91 @@ function title_data_rename(){
 
 function create_user(obj ){
     let order = JSON.parse( obj.orders  );
-    return '<div class="card shadow mb-4">' +
-          '<a href="#collapseCardExample'+obj.order_id+'" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">'+
-          '<h6 class="m-0 font-weight-bold text-primary">'+obj.username+ ' Tel: '+ obj.phone+'</h6></a>'+
-          '<div class="collapse show" id="collapseCardExample'+obj.order_id+'">'+
-          '<div class="card-body">adres: '+ obj.adres+' <br> Sipariş: '+order.porsiyon+ 
-          '<div> <button class=" btn btn-info " style="margin-right:10px">Onayla</button>'+
-          '<button class="btn btn-danger" style="margin-right:10px">İptal Et</button><div/></div><div></div></div></div>';
+    obj.date = HMtime( obj.date );
+
+  return  '<tr id="'+obj.order_id+'" >'+
+          '<td>'+obj.username+ '</td>'+
+          '<td>'+ obj.tutar+'₺</td>'+
+          '<td>'+ obj.phone+'</td>'+
+          '<td>'+ obj.date+'</td>'+
+          '<td>'+obj.adres+'</td>'+
+          '<td>'+obj.order_id+'</td>'+
+          '</tr>';
+}
+
+
+function create_rezervasyon(obj ){
+    obj.date = HMtime( obj.date );
+
+    return '<tr id="'+obj.id+'" >'+
+          '<td>'+obj.name+ '</td>'+
+          '<td>'+ obj.phone+'</td>'+
+          '<td>'+ obj.kisi+'</td>'+
+          '<td>'+ obj.date+'</td>'+
+          '<td>'+obj.e_mail+'</td>'+
+          '</tr>';
 }
 
 
 
 function rezervasyon() {
   durum = "rezervasyon" ;
-    title_rename();
-    title_data_rename();
+  titleTable();
+  title_rename();
+  title_data_rename();
+  create_rezervasyon_render("rezervasyon-gelen");
 }
 
 
 
 function siparis() {
     durum = "siparis";
+      titleTable();
       title_rename();
       title_data_rename();
-      create_user_render("order-onay");
+      create_user_render("order-gelen");
+}
+
+function  titleTable(){
+  if(durum == "siparis"){
+    $('#table_tr_name').html(
+      '<th>Ad Soyad</th>'+
+       '<th>Tutar</th>'+
+       '<th>İletişim</th>'+
+       '<th>Tarih</th>'+
+       '<th>Adres</th>'+
+       '<th>Sipariş Numarası</th>'
+       );
+
+       $('#table_tr_foot').html(
+        '<th>Ad Soyad</th>'+
+        '<th>Tutar</th>'+
+        '<th>İletişim</th>'+
+        '<th>Tarih</th>'+
+        '<th>Adres</th>'+
+        '<th>Sipariş Numarası</th>'
+       );
+  }else {
+    $('#table_tr_name').html(
+      '<th>Ad Soyad</th>'+
+       '<th>Telefon</th>'+
+       '<th>Kişi Sayısı</th>'+
+       '<th>Tarih</th>'+
+       '<th>E_mail</th>'
+       );
+
+       $('#table_tr_foot').html(
+        '<th>Ad Soyad</th>'+
+        '<th>Telefon</th>'+
+        '<th>Kişi Sayısı</th>'+
+        '<th>Tarih</th>'+
+        '<th>E_mail</th>'
+       );
+  }
+}
+
+function HMtime(timestamp){
+  return timestamp ;
 }
 
 
@@ -383,7 +471,7 @@ function create_user_render(option){
         url: 'http://localhost:81/siparis-onay/order-detail/'+option, 
         success: function (data) { 
           if(data == ""){
-
+            $('#table_body_render').html('Gösterilecek Veri Yok');
           }else {
           let order_detail =  JSON.parse ( data) ;
           let user = order_detail.map(
@@ -391,14 +479,30 @@ function create_user_render(option){
             return create_user(data)
           }
           );
-          $('#data_container').html(user);
+          $('#table_body_render').html(user);
           }
         }
   });
 }
 
-function create_rezervasyon_render(){
-console.log("qegfe");
+function create_rezervasyon_render(option){
+  $.ajax({ 
+        type: 'GET', 
+        url: 'http://localhost:81/siparis-onay/rezervasyon-detail/'+option, 
+          success: function (data) { 
+          if(data == ""){
+            $('#table_body_render').html('Gösterilecek Veri Yok');
+          }else {
+          let rezervasyon_detail =  JSON.parse ( data) ;
+          let rezervasyon = rezervasyon_detail.map(
+          data => {
+            return create_rezervasyon(data)
+          }
+          );
+          $('#table_body_render').html(rezervasyon);
+          }
+        }
+  });
 }
 
 
@@ -448,7 +552,11 @@ function control_iptal(){
   <!-- Page level custom scripts -->
   <script src="order_confirmation/js/demo/chart-area-demo.js"></script>
   <script src="order_confirmation/js/demo/chart-pie-demo.js"></script>
+    <!-- Page level plugins -->
+    <script src="order_confirmation/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="order_confirmation/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
+  <script src="order_confirmation/js/demo/datatables-demo.js"></script>
 </body>
 
 </html>

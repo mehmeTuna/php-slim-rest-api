@@ -8,6 +8,10 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 
 
+RewriteRule ^product$                                                        ./index.html
+RewriteRule ^login$                                                          ./index.html
+RewriteRule ^about$                                                          ./index.html
+
 
 RewriteRule ^demo$                                                        ./private/demo.php
 
@@ -39,9 +43,15 @@ RewriteRule ^order$                                                        ./pri
 RewriteRule ^emailregister$                                                ./private/email/email.php
 
 
+RewriteRule ^user/sepet/item$                                              ./private/Users/sepet.php?item=ok
+RewriteRule ^user/sepet$                                                   ./private/Users/sepet.php
 RewriteRule ^user/login$                                                   ./private/Users/Login.php
 RewriteRule ^user/Logout$                                                  ./private/Users/Logout.php
 RewriteRule ^user/register$                                                ./private/Users/Add.php
+
+RewriteRule ^calisan/cikis-yap$                                            ./private/worker/logout.php
+RewriteRule ^calisan/giris$                                                ./private/worker/login.php
+RewriteRule ^calisan$                                                      ./private/worker/login.html
 
 
 

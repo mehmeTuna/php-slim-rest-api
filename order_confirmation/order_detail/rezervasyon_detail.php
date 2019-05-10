@@ -40,6 +40,7 @@ if(isset($_GET["ord"])  ){
                 "e_mail"=>$value["e_mail"],
                 "kisi"=>$value["kisi_sayisi"],
                 "date"=>$value["rez_date"],
+                "phone"=>$value["phone"]
             )
            ) ;
         }
