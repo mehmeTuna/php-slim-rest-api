@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 10 May 2019, 02:24:18
+-- Üretim Zamanı: 11 May 2019, 15:56:12
 -- Sunucu sürümü: 10.1.38-MariaDB
 -- PHP Sürümü: 7.3.4
 
@@ -100,6 +100,7 @@ CREATE TABLE `order_items` (
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `order_amount` float NOT NULL DEFAULT '0',
+  `icerik` varchar(100) COLLATE utf8_turkish_ci NOT NULL,
   `m_date` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
   `orders` text COLLATE utf8_turkish_ci NOT NULL,
   `m_status` varchar(10) COLLATE utf8_turkish_ci NOT NULL,
@@ -111,10 +112,10 @@ CREATE TABLE `order_items` (
 -- Tablo döküm verisi `order_items`
 --
 
-INSERT INTO `order_items` (`order_id`, `user_id`, `order_amount`, `m_date`, `orders`, `m_status`, `order_status`, `ip`) VALUES
-(40512, 35747, 35.75, '1557314382', '{\"porsiyon\":\"1.5 porsiyon adana kebap\"}', '0', '0', '::1'),
-(41079, 35747, 10, '1557168416', '{\"porsiyon\":\"1 porsiyon\"}', '1', '0', '::1'),
-(55414, 35747, 25, '1557168478', '{\"porsiyon\":\"1.5 porsiyon\"}', '0', '0', '::1');
+INSERT INTO `order_items` (`order_id`, `user_id`, `order_amount`, `icerik`, `m_date`, `orders`, `m_status`, `order_status`, `ip`) VALUES
+(40512, 35747, 35.75, '', '1557314382', '{\"porsiyon\":\"1.5 porsiyon adana kebap\"}', '0', '0', '::1'),
+(41079, 35747, 10, '', '1557168416', '{\"porsiyon\":\"1 porsiyon\"}', '1', '0', '::1'),
+(55414, 35747, 25, '', '1557168478', '{\"porsiyon\":\"1.5 porsiyon\"}', '0', '0', '::1');
 
 -- --------------------------------------------------------
 
@@ -218,7 +219,7 @@ CREATE TABLE `rezervasyon` (
 
 INSERT INTO `rezervasyon` (`id`, `time`, `name`, `e_mail`, `phone`, `kisi_sayisi`, `m_status`, `ip`, `rez_date`) VALUES
 (18553, '1557277760', 'mehmet tuna', 'mehmet_tuna_anadolu@hotmail.com', '5302145201', '2', '0', '::1', '2019-05-09'),
-(30328, '1557430747', 'Enes Budak', 'enesbudak.mdbf17@iste.edu.tr', '53899774', '5', '0', '172.20.10.3', '2019-05-17');
+(30328, '1557430747', 'Enes Budak', 'enesbudak.mdbf17@iste.edu.tr', '53899774', '5', '1', '172.20.10.3', '2019-05-17');
 
 -- --------------------------------------------------------
 

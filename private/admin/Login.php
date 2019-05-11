@@ -13,22 +13,24 @@ if ( isset( $_POST) ){
     $username = "";
     $password = "";
 
-    if(strlen( trim( $_POST["username"] ) ) > 1 && filter_var( trim($_POST["username"]), FILTER_VALIDATE_EMAIL)){
+    if(isset( $_POST["username"] ) && strlen( trim( $_POST["username"] ) ) > 1 && filter_var( trim($_POST["username"]), FILTER_VALIDATE_EMAIL)){
         $username = strip_tags( trim($_POST["username"]) );
     }else{
-        echo json_encode("hatalı veri" , JSON_UNESCAPED_UNICODE);
+        echo json_encode("hatalı veri kullanıcı adı" , JSON_UNESCAPED_UNICODE);
+        exit;
     }
 
-    if(strlen( trim( $_POST["password"] ) ) > 1 ){
+    if(isset( $_POST["password"] ) && strlen( trim( $_POST["password"] ) ) > 1 ){
         $password = strip_tags( trim($_POST["password"]) );
     }else{
         echo json_encode("hatalı veri" , JSON_UNESCAPED_UNICODE);
+        exit;
     }
    
     $login = new Database();
    
           try{
-            $query = $login->conn->query( "select id,password from admin  where email='{$username}'" ,  PDO::FETCH_ASSOC);
+            $query = $login->conn->query( "select id,password from admin  where username='{$username}'" ,  PDO::FETCH_ASSOC);
            
             if($query->rowCount()){
                 foreach($query as $val){
@@ -36,7 +38,7 @@ if ( isset( $_POST) ){
                        $_SESSION["admin"] = array(
                            "username" => $val["id"] ,
                        );
-                    echo json_encode("ok" , JSON_UNESCAPED_UNICODE);
+                    header("location: home");
                     exit ;
                    }
                 }

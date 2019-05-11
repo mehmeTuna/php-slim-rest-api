@@ -8,15 +8,23 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 
 
-RewriteRule ^product$                                                        ./index.html
-RewriteRule ^login$                                                          ./index.html
-RewriteRule ^about$                                                          ./index.html
+RewriteRule ^product$                                                     ./index.html
+RewriteRule ^login$                                                       ./index.html
+RewriteRule ^about$                                                       ./index.html
 
 
 RewriteRule ^demo$                                                        ./private/demo.php
 
 
 RewriteRule ^rezervasyon$                                                  ./private/rezervasyon/add.php
+
+
+
+RewriteRule ^siparis-onay/rezervasyon-onay/([a-z0-9_-]+)$                 ./order_confirmation/order_detail/rezervasyon_onay.php?id=$1&durum=ok
+RewriteRule ^siparis-onay/rezervasyon-red/([a-z0-9_-]+)$                  ./order_confirmation/order_detail/rezervasyon_onay.php?id=$1&durum=onaylanmadı
+
+
+RewriteRule ^siparis-onay/order-detay-ekle/([a-z0-9_-]+)$                  ./order_confirmation/order_detail/order_detail_add.php?id=$1
 
 
 RewriteRule ^siparis-onay/order-detail/order-gelen$                        ./order_confirmation/order_detail/order_user_detail.php?order=gelen
@@ -55,6 +63,8 @@ RewriteRule ^calisan$                                                      ./pri
 
 
 
+RewriteRule ^admin/home$                                                    ./private/Admin/index.php
+RewriteRule ^admin/giris$                                                   ./private/Admin/Login.html
 RewriteRule ^admin/login$                                                   ./private/Admin/Login.php
 RewriteRule ^admin/Logout$                                                  ./private/Admin/Logout.php
 RewriteRule ^admin/add/product$                                             ./private/Admin/product/product.php

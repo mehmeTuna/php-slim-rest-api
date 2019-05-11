@@ -33,12 +33,12 @@ use DATABASE\Database ;
 
 
     if($username == "" ||  $password == ""){
-        echo json_encode("uygun değerler giriniz" , JSON_UNESCAPED_UNICODE);
+        header("location: ../calisan");
         exit ;
     }
 
     $login = new Database();
-   
+   $db_password = "";
           try{
             $query = $login->conn->query( "select id,name,password from worker  where email='{$username}'" ,  PDO::FETCH_ASSOC);
           
@@ -64,7 +64,7 @@ use DATABASE\Database ;
             header("location: ../siparis-onay");
             exit;
         }else{
-         $js_echo = "kullanıcı adı veya parola hatalı";
+            header("location: ../calisan");
         }
 
 

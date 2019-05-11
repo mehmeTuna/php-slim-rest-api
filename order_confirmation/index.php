@@ -30,6 +30,7 @@ if(!isset($_SESSION["operator"])){
   <link href="order_confirmation/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
     <link href="order_confirmation/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 
@@ -379,6 +380,7 @@ function create_user(obj ){
     obj.date = HMtime( obj.date );
 
   return  '<tr id="'+obj.order_id+'" >'+
+          '<td onclick="edit_order_detay('+obj.order_id+',\''+obj.username+'\',\''+obj.tutar+'\',\''+obj.phone+'\',\''+obj.adres+'\')"><i class="fas fa-pencil-alt"></i></td>'+
           '<td>'+obj.username+ '</td>'+
           '<td>'+ obj.tutar+'₺</td>'+
           '<td>'+ obj.phone+'</td>'+
@@ -393,6 +395,7 @@ function create_rezervasyon(obj ){
     obj.date = HMtime( obj.date );
 
     return '<tr id="'+obj.id+'" >'+
+    '<td onclick="edit_rezervasyon_detay('+obj.id+')"><i class="fas fa-pencil-alt"></i></td>'+
           '<td>'+obj.name+ '</td>'+
           '<td>'+ obj.phone+'</td>'+
           '<td>'+ obj.kisi+'</td>'+
@@ -424,6 +427,7 @@ function siparis() {
 function  titleTable(){
   if(durum == "siparis"){
     $('#table_tr_name').html(
+      '<th>Onay</th>'+
       '<th>Ad Soyad</th>'+
        '<th>Tutar</th>'+
        '<th>İletişim</th>'+
@@ -433,6 +437,7 @@ function  titleTable(){
        );
 
        $('#table_tr_foot').html(
+        '<th>Onay</th>'+
         '<th>Ad Soyad</th>'+
         '<th>Tutar</th>'+
         '<th>İletişim</th>'+
@@ -442,6 +447,7 @@ function  titleTable(){
        );
   }else {
     $('#table_tr_name').html(
+      '<th>Onay</th>'+
       '<th>Ad Soyad</th>'+
        '<th>Telefon</th>'+
        '<th>Kişi Sayısı</th>'+
@@ -450,6 +456,7 @@ function  titleTable(){
        );
 
        $('#table_tr_foot').html(
+        '<th>Onay</th>'+
         '<th>Ad Soyad</th>'+
         '<th>Telefon</th>'+
         '<th>Kişi Sayısı</th>'+
@@ -503,6 +510,127 @@ function create_rezervasyon_render(option){
           }
         }
   });
+
+}
+
+
+
+
+
+function edit_rezervasyon_detay(id){
+ 
+  swal("Rezervasyon onaylama işlemi", {
+  buttons: {
+    cancel: "Onayla",
+    catch: {
+      text: "Onaylama",
+      value: "catch",
+    }
+  },
+})
+.then((value) => {
+  switch (value) {
+    case "catch":
+    $.ajax({ 
+        type: 'GET', 
+        url: `http://localhost:81/siparis-onay/rezervasyon-red/`+id, 
+          success: function (data) { 
+            let control = JSON.parse(data);
+
+           if(control.status == "red")
+              swal("Rezervasyon Onaylanmadı !");
+        }
+  }) ;
+      break;
+ 
+    default:
+
+    $.ajax({ 
+        type: 'GET', 
+        url: `http://localhost:81/siparis-onay/rezervasyon-onay/`+id, 
+          success: function (data) { 
+            let control = JSON.parse(data);
+         
+
+           if(control.status == "ok")
+              swal("Rezervasyon onaylandı !");
+        }
+  }) ;
+      break;
+  }
+});
+
+
+}
+
+function edit_order_detay(id,username,tutar,tel,adres){
+
+ let data = "Sipariş Numarası: "+id+"\nAd Soyad: "+username+"\nTutar: "+tutar+"₺\nTelefon: "+tel+"\nAdres: "+adres ; 
+  swal(data, {
+  buttons: {
+    onayla: {
+      text: "Siparişi Onayla",
+      value: "onayla",
+    },
+    catch: {
+      text: "Siparişe detay ekle",
+      value: "catch",
+    }
+  },
+})
+.then((value) => {
+  switch (value) {
+    case "catch":
+    swal({
+  text: 'Bu kısıma eklenen şeyler Mutfak bölümünde görülecektir',
+  content: "input",
+  button: {
+    text: "Search!",
+    closeModal: false,
+  },
+})
+.then(name => {
+  if (!name) throw null;
+
+  $.ajax({ 
+        type: 'POST', 
+        url: `http://localhost:81/siparis-onay/order-detay-ekle/`+id, 
+        data : {
+          content : name
+        },
+          success: function (data) { 
+            let control = JSON.parse(data);
+           swal.stopLoading();
+           if(control.status == "ok")
+              swal("İletiniz Eklenmiştir. Sipariş Onaylandı");
+        }
+  }) ;
+})
+.catch(err => {
+  if (err) {
+    swal("Bağlantı hatası");
+  } else {
+    swal.stopLoading();
+    swal.close();
+  }
+});
+      break;
+ 
+    case "onayla":
+    $.ajax({ 
+        type: 'GET', 
+        url: `http://localhost:81/siparis-onay/order-detay-ekle/`+id, 
+          success: function (data) { 
+            console.log(data);
+            let control = JSON.parse(data);
+
+           if(control.status == "ok")
+              swal("Sipariş Onaylandı");
+        }
+  }) ;
+      break;
+  }
+});
 }
 
 
@@ -556,7 +684,7 @@ function control_iptal(){
     <script src="order_confirmation/vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="order_confirmation/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-  <script src="order_confirmation/js/demo/datatables-demo.js"></script>
+ <!-- <script src="order_confirmation/js/demo/datatables-demo.js"></script> -->
 </body>
 
 </html>
