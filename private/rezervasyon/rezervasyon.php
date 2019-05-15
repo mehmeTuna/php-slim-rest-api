@@ -54,12 +54,12 @@ class Create {
 
   //data control return true or false
   public function control(){
-    return ($this->variableControl === true) ? true : false ;
+    return ($this->variableControl == true) ? true : false ;
   }
 
     //new user add db return true or false
   public function run(){
-    if($this->variableControl === false )
+    if($this->variableControl = false )
       return false ;
 
       $this->newRezervasyon->add("id" , $this->id);
@@ -91,16 +91,6 @@ class Create {
     }
   }
 
-  /* password hash*/
-  private function passwordCrypt($pass =''){
-    if( strlen(trim($pass)) > 0 ){
-      //control password hash password_verify(password , hash);
-      return password_hash(trim($pass) , PASSWORD_DEFAULT );
-    }else{
-      $this->variableControl = false ;
-      return false;
-    }
-  }
 
   /*
   *$text variable

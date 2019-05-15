@@ -11,12 +11,11 @@ include __DIR__ .'/rezervasyon.php';
 
 use Rezervasyon\Create ;
 
-if ( isset( $_POST) ){
    
     $create = new Create();
 
     $_POST = json_decode( file_get_contents("php://input") , true );
-    
+  
     $create->add( $_POST );
 
    if(!$create->control()){
@@ -26,7 +25,3 @@ if ( isset( $_POST) ){
      
     echo json_encode($create->run() , JSON_UNESCAPED_UNICODE);
     
-}else {
-    echo "only post method" ;
-    exit;
-} 

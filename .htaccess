@@ -11,7 +11,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^product$                                                     ./index.html
 RewriteRule ^login$                                                       ./index.html
 RewriteRule ^about$                                                       ./index.html
-
+RewriteRule ^booking$                                                     ./index.html
+    
 
 RewriteRule ^demo$                                                        ./private/demo.php
 
@@ -56,6 +57,7 @@ RewriteRule ^user/sepet$                                                   ./pri
 RewriteRule ^user/login$                                                   ./private/Users/Login.php
 RewriteRule ^user/Logout$                                                  ./private/Users/Logout.php
 RewriteRule ^user/register$                                                ./private/Users/Add.php
+RewriteRule ^user/data$                                                     ./private/Users/Data.php
 
 RewriteRule ^calisan/cikis-yap$                                            ./private/worker/logout.php
 RewriteRule ^calisan/giris$                                                ./private/worker/login.php
@@ -68,6 +70,11 @@ RewriteRule ^admin/giris$                                                   ./pr
 RewriteRule ^admin/login$                                                   ./private/Admin/Login.php
 RewriteRule ^admin/Logout$                                                  ./private/Admin/Logout.php
 RewriteRule ^admin/add/product$                                             ./private/Admin/product/product.php
+RewriteRule ^admin/siparisler$                                              ./private/Admin/pages/siparisler.php
+RewriteRule ^admin/rezervasyon$                                             ./private/Admin/pages/rezervasyon.php
+RewriteRule ^admin/ürünler$                                                 ./private/Admin/pages/ürünler.php
+RewriteRule ^admin/magaza-ayar$                                             ./private/Admin/pages/ayar.php
+
 
 
 #dizinleri listelemesi engellenir
