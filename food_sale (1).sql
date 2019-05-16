@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 11 May 2019, 15:56:12
+-- Üretim Zamanı: 16 May 2019, 03:11:04
 -- Sunucu sürümü: 10.1.38-MariaDB
 -- PHP Sürümü: 7.3.4
 
@@ -115,7 +115,7 @@ CREATE TABLE `order_items` (
 INSERT INTO `order_items` (`order_id`, `user_id`, `order_amount`, `icerik`, `m_date`, `orders`, `m_status`, `order_status`, `ip`) VALUES
 (40512, 35747, 35.75, '', '1557314382', '{\"porsiyon\":\"1.5 porsiyon adana kebap\"}', '0', '0', '::1'),
 (41079, 35747, 10, '', '1557168416', '{\"porsiyon\":\"1 porsiyon\"}', '1', '0', '::1'),
-(55414, 35747, 25, '', '1557168478', '{\"porsiyon\":\"1.5 porsiyon\"}', '0', '0', '::1');
+(55414, 35747, 25, '', '1557168478', '{\"porsiyon\":\"1.5 porsiyon\"}', '2', '0', '::1');
 
 -- --------------------------------------------------------
 
@@ -218,8 +218,14 @@ CREATE TABLE `rezervasyon` (
 --
 
 INSERT INTO `rezervasyon` (`id`, `time`, `name`, `e_mail`, `phone`, `kisi_sayisi`, `m_status`, `ip`, `rez_date`) VALUES
-(18553, '1557277760', 'mehmet tuna', 'mehmet_tuna_anadolu@hotmail.com', '5302145201', '2', '0', '::1', '2019-05-09'),
-(30328, '1557430747', 'Enes Budak', 'enesbudak.mdbf17@iste.edu.tr', '53899774', '5', '1', '172.20.10.3', '2019-05-17');
+(18553, '1557277760', 'mehmet tuna', 'mehmet_tuna_anadolu@hotmail.com', '5302145201', '2', '1', '::1', '2019-05-09'),
+(18683, '1557690369', 'mehmet tuna', 'tesasdasfdafawfwa@hotmail.com', '5302145201', '4', '0', '::1', '2019-05-02'),
+(30328, '1557430747', 'Enes Budak', 'enesbudak.mdbf17@iste.edu.tr', '53899774', '5', '0', '172.20.10.3', '2019-05-17'),
+(30393, '1557967454', 'mehmet tuna', 'mehmet_tuna_anadolu@hotmail.com', '5302145201', '2', '0', '::1', '2019-05-09'),
+(33576, '1557932407', 'wqrqr', 'mehmet_tuna_anadolu@hotmail.com', '5302145201', '5', '0', '::1', '2019-05-23'),
+(51563, '1557908766', 'deneme5', 'deneme@hotmail.com', '5302145201', '5', '0', '::1', '2019-05-09'),
+(56802, '1557690540', 'Muhammet yurdan', 'muhammetyurdan369@gmail.com', '05347384165', '5', '0', '::1', '2019-05-14'),
+(92826, '1557690343', 'mehmet tuna', 'sadi.anan.güzel@sadi.code', '5302145201', '4', '0', '::1', '2019-05-15');
 
 -- --------------------------------------------------------
 

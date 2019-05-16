@@ -25,7 +25,7 @@ class Order {
         $sql = "UPDATE {$this->table_name} SET m_status=? WHERE order_id=?";
   
       try{
-        $this->conn->prepare($sql)->execute([$opt , "1", $id]);
+        $this->conn->prepare($sql)->execute([$opt, $id]);
        
        return  json_encode(
             array(
@@ -53,9 +53,17 @@ class Order {
   if(!isset($_GET) && !$_GET["id"] && !is_numeric($_GET["id"]) && strlen($_GET["id"])<=15)
     exit;
 
-    $opt ="";
+    
 
-  
+    $opt ="0";
+
+    if( isset($_GET["opt"] ) ){
+      if($_GET["opt"] == "red")
+      $opt = "2";
+      if($_GET["opt"] == "onay")
+      $opt = "1";
+    }else
+    exit;
 
     $rez = new Order();
 

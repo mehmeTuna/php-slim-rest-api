@@ -3,7 +3,7 @@ session_start();
 
 
 if(!isset($_SESSION["operator"])){
-  header("location: ../calisan");
+  header("location: login.html");
   exit;
 }
 
@@ -313,7 +313,7 @@ if(!isset($_SESSION["operator"])){
         <div class="modal-body">Çıkış Yapmak istediğine eminmisin ? </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Vazgeç</button>
-          <a class="btn btn-primary" href="calisan/cikis-yap">Çıkış Yap</a>
+          <a class="btn btn-primary" href="../private/Users/logout.php">Çıkış Yap</a>
         </div>
       </div>
     </div>
@@ -327,7 +327,7 @@ window.onload = function() {
  title_rename();
  title_data_rename();
  titleTable();
- create_user_render("order-gelen"); 
+ create_user_render("gelen"); 
 };
 
 
@@ -352,7 +352,7 @@ function title_data_rename(){
     if(durum == "siparis"){
       $.ajax({ 
         type: 'GET', 
-        url: 'http://localhost:81/siparis-onay/order-detail', 
+        url: 'http://localhost:81/order_confirmation/order_detail/order_detail.php', 
         success: function (data) { 
           let order_detail =  JSON.parse ( data) ;
           $("#gelen_num").html( order_detail.waiting  );
@@ -363,7 +363,7 @@ function title_data_rename(){
     }else if(durum == "rezervasyon"){
       $.ajax({ 
         type: 'GET', 
-        url: 'http://localhost:81/siparis-onay/rezervasyon-detail', 
+        url: 'http://localhost:81/order_confirmation/order_detail/rezervasyon.php', 
         success: function (data) { 
           let order_detail =  JSON.parse ( data) ;
           $("#gelen_num").html( order_detail.waiting  );
@@ -411,7 +411,7 @@ function rezervasyon() {
   titleTable();
   title_rename();
   title_data_rename();
-  create_rezervasyon_render("rezervasyon-gelen");
+  create_rezervasyon_render("gelen");
 }
 
 
@@ -421,7 +421,7 @@ function siparis() {
       titleTable();
       title_rename();
       title_data_rename();
-      create_user_render("order-gelen");
+      create_user_render("gelen");
 }
 
 function  titleTable(){
@@ -473,10 +473,12 @@ function HMtime(timestamp){
 
 
 function create_user_render(option){
+  
   $.ajax({ 
         type: 'GET', 
-        url: 'http://localhost:81/siparis-onay/order-detail/'+option, 
+        url: 'http://localhost:81/order_confirmation/order_detail/order_user_detail.php?order='+option, 
         success: function (data) { 
+         
           if(data == ""){
             $('#table_body_render').html('Gösterilecek Veri Yok');
           }else {
@@ -495,7 +497,7 @@ function create_user_render(option){
 function create_rezervasyon_render(option){
   $.ajax({ 
         type: 'GET', 
-        url: 'http://localhost:81/siparis-onay/rezervasyon-detail/'+option, 
+        url: 'http://localhost:81/order_confirmation/order_detail/rezervasyon_detail.php?ord='+option, 
           success: function (data) { 
           if(data == ""){
             $('#table_body_render').html('Gösterilecek Veri Yok');
@@ -533,7 +535,7 @@ function edit_rezervasyon_detay(id){
     case "catch":
     $.ajax({ 
         type: 'GET', 
-        url: `http://localhost:81/siparis-onay/rezervasyon-red/`+id, 
+        url: "http://localhost:81/order_confirmation/order_detail/rezervasyon_onay.php?id=" +id+ "&durum=onaylanmadı", 
           success: function (data) { 
             let control = JSON.parse(data);
 
@@ -547,7 +549,7 @@ function edit_rezervasyon_detay(id){
 
     $.ajax({ 
         type: 'GET', 
-        url: `http://localhost:81/siparis-onay/rezervasyon-onay/`+id, 
+        url: "http://localhost:81/order_confirmation/order_detail/rezervasyon_onay.php?id=" +id+ "&durum=ok", 
           success: function (data) { 
             let control = JSON.parse(data);
          
@@ -568,6 +570,10 @@ function edit_order_detay(id,username,tutar,tel,adres){
  let data = "Sipariş Numarası: "+id+"\nAd Soyad: "+username+"\nTutar: "+tutar+"₺\nTelefon: "+tel+"\nAdres: "+adres ; 
   swal(data, {
   buttons: {
+    reddet: {
+      text: "İptal Et",
+      value: "reddet",
+    },
     onayla: {
       text: "Siparişi Onayla",
       value: "onayla",
@@ -594,7 +600,7 @@ function edit_order_detay(id,username,tutar,tel,adres){
 
   $.ajax({ 
         type: 'POST', 
-        url: `http://localhost:81/siparis-onay/order-detay-ekle/`+id, 
+        url: `http://localhost:81/order_confirmation/order_detail/order_detail_add.php?id=`+id+'&opt=onay', 
         data : {
           content : name
         },
@@ -619,13 +625,27 @@ function edit_order_detay(id,username,tutar,tel,adres){
     case "onayla":
     $.ajax({ 
         type: 'GET', 
-        url: `http://localhost:81/siparis-onay/order-detay-ekle/`+id, 
+        url: `http://localhost:81/order_confirmation/order_detail/order_detail_add.php?id=`+id+'&opt=onay', 
           success: function (data) { 
             console.log(data);
             let control = JSON.parse(data);
 
            if(control.status == "ok")
               swal("Sipariş Onaylandı");
+        }
+  }) ;
+      break;
+
+      case "reddet":
+    $.ajax({ 
+        type: 'GET', 
+        url: `http://localhost:81/order_confirmation/order_detail/order_detail_add.php?id=`+id+'&opt=red', 
+          success: function (data) { 
+            console.log(data);
+            let control = JSON.parse(data);
+
+           if(control.status == "ok")
+              swal("Sipariş İptal Edildi !");
         }
   }) ;
       break;
@@ -637,27 +657,27 @@ function edit_order_detay(id,username,tutar,tel,adres){
 function control_gelen(){
   title_data_rename();
   if(durum == "siparis")
-  create_user_render("order-gelen" );
+  create_user_render("gelen" );
   else if(durum == "rezervasyon")
-   create_rezervasyon_render("rezervasyon-gelen");
+   create_rezervasyon_render("gelen");
 }
 
 
 function control_onay(){
   title_data_rename();
   if(durum == "siparis")
-  create_user_render("order-onay" );
+  create_user_render("onay" );
   else if(durum == "rezervasyon")
-   create_rezervasyon_render("rezervasyon-onay");
+   create_rezervasyon_render("onay");
 }
 
 
 function control_iptal(){
   title_data_rename();
   if(durum == "siparis")
-  create_user_render("order-iptal" );
+  create_user_render("iptal" );
   else if(durum == "rezervasyon")
-   create_rezervasyon_render("rezervasyon-iptal");
+   create_rezervasyon_render("iptal");
 }
 
 
