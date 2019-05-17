@@ -25,7 +25,7 @@ if(!isset($_SESSION["user"]))
 
 
   if(isset($_GET) && isset($_GET["item"]) && $_GET["item"] == "ok"){
-    echo json_encode( print_r($_SESSION) , JSON_UNESCAPED_UNICODE);
+    echo json_encode( $_SESSION , JSON_UNESCAPED_UNICODE);
     exit;
   }
 

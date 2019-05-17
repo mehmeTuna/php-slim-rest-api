@@ -12,6 +12,7 @@ RewriteRule ^product$                                                     ./inde
 RewriteRule ^login$                                                       ./index.html
 RewriteRule ^about$                                                       ./index.html
 RewriteRule ^booking$                                                     ./index.html
+RewriteRule ^profile$                                                     ./index.html
     
 
 RewriteRule ^demo$                                                        ./private/demo.php
@@ -72,7 +73,7 @@ RewriteRule ^admin/Logout$                                                  ./pr
 RewriteRule ^admin/add/product$                                             ./private/Admin/product/product.php
 RewriteRule ^admin/siparisler$                                              ./private/Admin/pages/siparisler.php
 RewriteRule ^admin/rezervasyon$                                             ./private/Admin/pages/rezervasyon.php
-RewriteRule ^admin/ürünler$                                                 ./private/Admin/pages/ürünler.php
+RewriteRule ^admin/ürünler/([a-z0-9_-]+)/([0-9_-]+)$                        ./private/Admin/pages/ürünler.php?categoryId=$1&page=$2
 RewriteRule ^admin/magaza-ayar$                                             ./private/Admin/pages/ayar.php
 
 

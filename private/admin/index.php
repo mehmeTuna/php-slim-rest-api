@@ -26,6 +26,128 @@
     <!-- Custom styles for this page -->
     <link href="/../../../order_confirmation/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+    <script src="/../../../order_confirmation/vendor/jquery/jquery.min.js"></script>
+
+    <style>
+
+
+/*
+ * This is the table that shows default availability for doctors
+ */
+ 
+.availability-table
+{
+    width: 1px;
+    margin-left:auto;
+    margin-right:auto;
+    border: none;
+}
+
+.availability-table thead th:first-child {
+    pointer-events: none;
+    background: white;
+    border: none;
+}
+
+.availability-table td {
+    vertical-align: middle;
+    
+}
+
+.availability-table th
+{
+    text-align: center;
+}
+
+/*
+ * Custom checkbox CSS, below are three color classes, day, evening, and night
+ */
+.availability-checkbox {
+  min-height: 1rem;
+  padding-left: 0;
+  margin-right: 0;
+  cursor: pointer; 
+}
+
+.availability-checkbox .custom-control-indicator {
+    content: "";
+    display: inline-block;
+    position: relative;
+    width: 30px;
+    height: 10px;
+    background-color: #818181;
+    border-radius: 15px;
+    margin-right: 10px;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+    vertical-align: middle;
+    margin: 0 16px;
+    box-shadow: none; 
+}
+
+.availability-checkbox .custom-control-indicator:after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-color: #f1f1f1;
+    border-radius: 21px;
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
+    left: -2px;
+    top: -4px;
+    -webkit-transition: left .3s ease, background .3s ease, box-shadow .1s ease;
+    -moz-transition: left .3s ease, background .3s ease, box-shadow .1s ease;
+    -o-transition: left .3s ease, background .3s ease, box-shadow .1s ease;
+    transition: left .3s ease, background .3s ease, box-shadow .1s ease; 
+}
+
+.availability-checkbox .custom-control-input:focus ~ .custom-control-indicator {
+    box-shadow: none !important; 
+}
+
+/*
+ * Day color codes
+ */
+.checkbox-day .custom-control-input:checked ~ .custom-control-indicator {
+    background-color: #5cb85c;
+    background-image: none;
+    box-shadow: none !important; 
+}
+.checkbox-day .custom-control-input:checked ~ .custom-control-indicator:after {
+    background-color: #5cb85c;
+    left: 15px; 
+}
+
+/*
+ * Evening color codes
+ */
+.checkbox-evening .custom-control-input:checked ~ .custom-control-indicator {
+    background-color: #f0ad4e;
+    background-image: none;
+    box-shadow: none !important; 
+}
+
+.checkbox-evening .custom-control-input:checked ~ .custom-control-indicator:after {
+    background-color: #f0ad4e;
+    left: 15px; 
+}
+
+/*
+ * Night color codes
+ */
+.checkbox-night .custom-control-input:checked ~ .custom-control-indicator {
+    background-color: #428bca;
+    background-image: none;
+    box-shadow: none !important; 
+}
+.checkbox-night .custom-control-input:checked ~ .custom-control-indicator:after {
+    background-color: #428bca;
+    left: 15px; 
+}
+
+    </style>
+
 </head>
 
 <body id="page-top">
@@ -349,7 +471,7 @@ window.onload = function(){
        });
 
        $("#ürünler").click(function(){
-           $.post("http://localhost:81/admin/ürünler", {suggest: ""}, function(result){
+           $.post("http://localhost:81/admin/ürünler/all/0", {suggest: ""}, function(result){
            $("#"+container).html(result);
            });
        });
@@ -359,9 +481,7 @@ window.onload = function(){
            $("#"+container).html(result);
            });
        });
-
-
-
+      
 
     });
 
@@ -371,7 +491,7 @@ window.onload = function(){
 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="/../../../order_confirmation/vendor/jquery/jquery.min.js"></script>
+   
   <script src="/../../../order_confirmation/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->

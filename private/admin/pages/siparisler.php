@@ -1,5 +1,61 @@
 <?php
 
+namespace Ürünler ;
+
+require_once __DIR__ . "/../../../database/connect.php";
+
+use DATABASE\Database ;
+use PDO ;
+
+
+$allOrders = array();
+
+$db = new Database();
+$db = $db->conn ;
+
+
+/* Ürünler sorgu kısmı  */
+//TODO bir düzene sokulması lazım
+ $allOrderQuery = "SELECT * FROM order_items LIMIT 0,10" ;
+ 
+
+
+//db deki ürün sayısını öğrenme
+$productCount = $db->query("SELECT count(*) from order_items", PDO::FETCH_ASSOC) ;
+foreach($productCount as $result)
+   $OrderCount = $result["count(*)"];
+
+
+
+$resultAllOrder = $db->query($allOrderQuery , PDO::FETCH_ASSOC);
+if($resultAllOrder->rowCount()){
+     
+  foreach($resultAllOrder as $value){
+
+     $categoryName = $db->query("SELECT firstname,lastname from users WHERE id='{$value['user_id']}'", PDO::FETCH_ASSOC) ;
+     foreach($categoryName as $result)
+        $name = $result["firstname"] . " " . $result["lastname"];
+
+      array_push($allOrders , 
+        array(
+          "id"=>$value["order_id"],
+          "price"=>$value["order_amount"],
+          "name"=>$name,
+          "icerik"=>$value["icerik"],
+          "date"=>$value["m_date"],
+          "orders"=>$value["orders"],
+          "durum"=>$value["m_status"],
+         
+        )
+       );
+  }
+
+}else {
+  echo "<h1>HATA ÜRÜNLER</h1>" ;
+}
+
+
+
 
 ?>
 
@@ -48,15 +104,18 @@
                       <th>Durum</th>
                   </tfoot>
                   <tbody>
+                    <?php foreach($allOrders as $value){ ?>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td><?=$value["id"]?></td>
+                        <td><?=$value["name"]?></td>
+                        <td><?=$value["price"]?></td>
+                        <td><?=$value["icerik"]?></td>
+                        <td><?=$value["date"]?></td>
+                        <td><?=$value["orders"]?></td>
+                        <td><?=$value["durum"]?></td>
                     </tr>
+
+                    <?php } ?>
                   </tbody>
                 </table>
               </div>
