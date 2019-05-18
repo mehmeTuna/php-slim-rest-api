@@ -18,10 +18,12 @@ class Rezervasyon {
 
   
     public function run($id , $opt ){
-        if($opt == "ok")
+      $durum = "0";
+ 
+      if($opt == "ok")
         $durum = "1" ;
-        else 
-        $durum = "0" ;
+        else if($opt == "red")
+        $durum = "2" ;
 
         
         $sql = "UPDATE {$this->table_name} SET m_status=? WHERE id=?";

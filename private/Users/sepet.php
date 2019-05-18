@@ -14,16 +14,14 @@ if(!isset($_SESSION["user"]))
 
  $render = new sepetProduct();
 
+ $data = json_decode( file_get_contents("php://input"), true);
 
- if(isset($_POST)){
-     if(isset($_POST["data"])){
-       
-        $render->run($_POST["data"]);
-         exit;
-     }
- }
-
-
+        if($data != ""){
+          $render->run($data);
+          exit;
+        }
+     
+    
   if(isset($_GET) && isset($_GET["item"]) && $_GET["item"] == "ok"){
     echo json_encode( $_SESSION , JSON_UNESCAPED_UNICODE);
     exit;

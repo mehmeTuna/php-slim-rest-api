@@ -13,6 +13,9 @@ RewriteRule ^login$                                                       ./inde
 RewriteRule ^about$                                                       ./index.html
 RewriteRule ^booking$                                                     ./index.html
 RewriteRule ^profile$                                                     ./index.html
+RewriteRule ^home$                                                        ./index.html
+RewriteRule ^contact$                                                     ./index.html
+RewriteRule ^checkout$                                                    ./index.html
     
 
 RewriteRule ^demo$                                                        ./private/demo.php
@@ -56,7 +59,7 @@ RewriteRule ^emailregister$                                                ./pri
 RewriteRule ^user/sepet/item$                                              ./private/Users/sepet.php?item=ok
 RewriteRule ^user/sepet$                                                   ./private/Users/sepet.php
 RewriteRule ^user/login$                                                   ./private/Users/Login.php
-RewriteRule ^user/Logout$                                                  ./private/Users/Logout.php
+RewriteRule ^user/logout$                                                  ./private/Users/Logout.php
 RewriteRule ^user/register$                                                ./private/Users/Add.php
 RewriteRule ^user/data$                                                     ./private/Users/Data.php
 

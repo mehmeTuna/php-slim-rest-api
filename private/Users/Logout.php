@@ -8,9 +8,9 @@ if(!isset($_SESSION))
 
 
 
-if(isset($_SESSION["user"])){
-    unset($_SESSION["user"]);
-    echo "ok";
+if(isset($_SESSION)){
+    session_destroy() ;
+   header("location: ../home");
 }else{
     echo "err";
 }

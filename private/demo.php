@@ -1,4 +1,4 @@
 <?php
-session_start();
-
-print_r($_SESSION["user"]["product"]) ;
+$array = array("color" => array("blue", "red", "green"),
+               "size"  => array("small", "medium", "large"));
+print_r(array_keys($array));

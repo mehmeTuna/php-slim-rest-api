@@ -313,7 +313,7 @@ if(!isset($_SESSION["operator"])){
         <div class="modal-body">Çıkış Yapmak istediğine eminmisin ? </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Vazgeç</button>
-          <a class="btn btn-primary" href="../private/Users/logout.php">Çıkış Yap</a>
+          <a class="btn btn-primary" href="calisan/cikis-yap">Çıkış Yap</a>
         </div>
       </div>
     </div>
@@ -523,7 +523,10 @@ function edit_rezervasyon_detay(id){
  
   swal("Rezervasyon onaylama işlemi", {
   buttons: {
-    cancel: "Onayla",
+    onayla: {
+      text: "Onayla",
+      value: "onayla",
+    },
     catch: {
       text: "Onaylama",
       value: "catch",
@@ -535,7 +538,7 @@ function edit_rezervasyon_detay(id){
     case "catch":
     $.ajax({ 
         type: 'GET', 
-        url: "http://localhost:81/order_confirmation/order_detail/rezervasyon_onay.php?id=" +id+ "&durum=onaylanmadı", 
+        url: "http://localhost:81/order_confirmation/order_detail/rezervasyon_onay.php?id=" +id+ "&durum=red", 
           success: function (data) { 
             let control = JSON.parse(data);
 
@@ -545,7 +548,7 @@ function edit_rezervasyon_detay(id){
   }) ;
       break;
  
-    default:
+    case 'onayla' :
 
     $.ajax({ 
         type: 'GET', 

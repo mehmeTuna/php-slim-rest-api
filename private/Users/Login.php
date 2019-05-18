@@ -30,6 +30,7 @@ if(!isset($_REQUEST)){
     $password = "";
     $name = array();
     $dbPassword = "" ;
+    $phone = "";
 
       //using axios js post method data convert json to php array
       $_POST = json_decode(file_get_contents('php://input') , true);
@@ -42,14 +43,18 @@ if(!isset($_REQUEST)){
 
 
     if($username == "" ||  $password == ""){
-        echo json_encode("uygun değerler giriniz" , JSON_UNESCAPED_UNICODE);
+        echo json_encode(
+        array(
+            "status"=>"false"
+        )
+        , JSON_UNESCAPED_UNICODE);
         exit ;
     }
 
     $login = new Database();
    
           try{
-            $query = $login->conn->query( "select id,firstname,lastname,password,adress from users  where email='{$username}'" ,  PDO::FETCH_ASSOC);
+            $query = $login->conn->query( "select id,firstname,lastname,password,adress,phone from users  where email='{$username}'" ,  PDO::FETCH_ASSOC);
           
             if($query->rowCount()){
                 foreach($query as $val){
@@ -57,13 +62,18 @@ if(!isset($_REQUEST)){
                     $name["lastname"] = $val["lastname"] ;
                     $name["adress"] = $val["adress"] ;
                     $db_password = $val["password"];
+                    $phone = $val["phone"];
 
                 }
             }else {
-                $js_echo = "kullanıcı bulunamadı";
+                $js_echo = array(
+                    "status"=>"false"
+                );
             }
         }catch(PDOException $e){
-            $js_echo =   "denied" ;
+            $js_echo =   array(
+                "status"=>"false"
+            );
         }
 
 
@@ -74,13 +84,18 @@ if(!isset($_REQUEST)){
                 "lastname"=>$name["lastname"],
                 "email"=>$username ,
                 "adress"=>$name["adress"],
-                "product"=> array()
+                "phone"=>$phone,
+                "product"=> array(),
+                "cardTotal"=>0,
+                "orderCount"=>0
             );
            
             echo json_encode(array("firstname"=>$name["firstname"] , "lastname"=>$name["lastname"]) , JSON_UNESCAPED_UNICODE);
             exit;
         }else{
-         $js_echo = "kullanıcı adı veya parola hatalı";
+         $js_echo = array(
+             "status"=>"false"
+         );
         }
 
 
