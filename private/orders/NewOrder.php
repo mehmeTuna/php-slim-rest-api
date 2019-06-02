@@ -15,20 +15,11 @@ class CreateOrder {
          $this->add = new Add();
     }
 
-
-
     public function item($val){
-   
-        if(!$this->add->IsLogin())
-          return "login değil" ;
 
-        if($val["orders"]) 
-            $val["orders"] = json_encode($val["orders"] , JSON_UNESCAPED_UNICODE ) ;
-
-          $this->add->Add("orders", $val["orders"]);
+          $this->add->Add($val);
           return $this->add->run();
     }
-
 
 
     public function __destruct(){

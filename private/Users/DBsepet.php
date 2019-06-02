@@ -21,7 +21,11 @@ class sepetProduct {
 
       for($a = 0 ; $a < count( $_SESSION["user"]["product"]) ; $a++){
          if($_SESSION["user"]["product"][$a]["id"] == $id){
+
+             $price = $_SESSION["user"]["product"][$a]["price"] / $_SESSION["user"]["product"][$a]["count"] ; 
+
             $_SESSION["user"]["product"][$a]["count"]++ ; 
+            $_SESSION["user"]["product"][$a]["price"] +=  number_format((float)$price, 2, '.', ''); ;
             $this->oldItem = false ;
          }
       }

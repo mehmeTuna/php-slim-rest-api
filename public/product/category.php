@@ -7,6 +7,10 @@ use DATABASE\Database ;
 use PDO ;
 
 
+/**
+ * Class Category
+ * @package Product
+ */
 class Category {
     private $connect ; 
     private $tableName ="products";
@@ -35,7 +39,8 @@ class Category {
        return $this;
    }
 
-   public function page($_page){
+   
+    public function page($_page){
        $this->page = strip_tags( trim($_page) ) ;
        return $this; 
    }
@@ -51,7 +56,8 @@ class Category {
        return $this;
    }
 
-   public function key($_value){
+
+    public function key($_value){
        $this->where_value = strip_tags( trim($_value) ) ;
        return $this;
    }

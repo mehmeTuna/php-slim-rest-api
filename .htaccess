@@ -61,7 +61,8 @@ RewriteRule ^user/sepet$                                                   ./pri
 RewriteRule ^user/login$                                                   ./private/Users/Login.php
 RewriteRule ^user/logout$                                                  ./private/Users/Logout.php
 RewriteRule ^user/register$                                                ./private/Users/Add.php
-RewriteRule ^user/data$                                                     ./private/Users/Data.php
+RewriteRule ^user/data$                                                    ./private/Users/Data.php
+RewriteRule ^payment$                                                      ./private/payment/payment.php
 
 RewriteRule ^calisan/cikis-yap$                                            ./private/worker/logout.php
 RewriteRule ^calisan/giris$                                                ./private/worker/login.php

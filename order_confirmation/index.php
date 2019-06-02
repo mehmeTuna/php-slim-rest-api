@@ -3,7 +3,7 @@ session_start();
 
 
 if(!isset($_SESSION["operator"])){
-  header("location: login.html");
+  header("location: calisan");
   exit;
 }
 
@@ -542,6 +542,11 @@ function edit_rezervasyon_detay(id){
           success: function (data) { 
             let control = JSON.parse(data);
 
+              title_rename();
+              title_data_rename();
+              titleTable();
+
+
            if(control.status == "red")
               swal("Rezervasyon Onaylanmadı !");
         }
@@ -555,6 +560,9 @@ function edit_rezervasyon_detay(id){
         url: "http://localhost:81/order_confirmation/order_detail/rezervasyon_onay.php?id=" +id+ "&durum=ok", 
           success: function (data) { 
             let control = JSON.parse(data);
+              title_rename();
+              title_data_rename();
+              titleTable();
          
 
            if(control.status == "ok")
@@ -594,7 +602,7 @@ function edit_order_detay(id,username,tutar,tel,adres){
   text: 'Bu kısıma eklenen şeyler Mutfak bölümünde görülecektir',
   content: "input",
   button: {
-    text: "Search!",
+    text: "Ekle",
     closeModal: false,
   },
 })
@@ -603,12 +611,17 @@ function edit_order_detay(id,username,tutar,tel,adres){
 
   $.ajax({ 
         type: 'POST', 
-        url: `http://localhost:81/order_confirmation/order_detail/order_detail_add.php?id=`+id+'&opt=onay', 
+        url: 'http://localhost:81/order_confirmation/order_detail/order_detail_add.php?id='+id+'&opt=onay', 
         data : {
           content : name
         },
-          success: function (data) { 
+          success: function (data) {
+              title_rename();
+              title_data_rename();
+              titleTable();
+
             let control = JSON.parse(data);
+        
            swal.stopLoading();
            if(control.status == "ok")
               swal("İletiniz Eklenmiştir. Sipariş Onaylandı");
@@ -629,7 +642,11 @@ function edit_order_detay(id,username,tutar,tel,adres){
     $.ajax({ 
         type: 'GET', 
         url: `http://localhost:81/order_confirmation/order_detail/order_detail_add.php?id=`+id+'&opt=onay', 
-          success: function (data) { 
+          success: function (data) {
+              title_rename();
+              title_data_rename();
+              titleTable();
+
             console.log(data);
             let control = JSON.parse(data);
 
@@ -643,7 +660,11 @@ function edit_order_detay(id,username,tutar,tel,adres){
     $.ajax({ 
         type: 'GET', 
         url: `http://localhost:81/order_confirmation/order_detail/order_detail_add.php?id=`+id+'&opt=red', 
-          success: function (data) { 
+          success: function (data) {
+              title_rename();
+              title_data_rename();
+              titleTable();
+
             console.log(data);
             let control = JSON.parse(data);
 

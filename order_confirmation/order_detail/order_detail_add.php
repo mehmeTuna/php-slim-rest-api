@@ -20,13 +20,19 @@ class Order {
   
 
   
-    public function run($id , $opt ){
+    public function run($id , $opt , $orderDetail = ''){
       
-        $sql = "UPDATE {$this->table_name} SET m_status=? WHERE order_id=?";
+      if($orderDetail != '')
+        $sql = "UPDATE {$this->table_name} SET m_status=? , icerik=? WHERE order_id=?";
+        else 
+          $sql = "UPDATE {$this->table_name} SET m_status=? WHERE order_id=?"; 
   
       try{
-        $this->conn->prepare($sql)->execute([$opt, $id]);
-       
+        if($orderDetail == '')
+         $this->conn->prepare($sql)->execute([$opt, $id]);
+        else 
+         $this->conn->prepare($sql)->execute([$opt, $orderDetail,  $id ]);
+          
        return  json_encode(
             array(
                 "status"=>"ok"
@@ -43,7 +49,6 @@ class Order {
     }
   
   
-  
     public function __destruct(){
   
     }
@@ -54,18 +59,25 @@ class Order {
     exit;
 
     
-
+  $rez = new Order();
     $opt ="0";
 
     if( isset($_GET["opt"] ) ){
+
       if($_GET["opt"] == "red")
       $opt = "2";
       if($_GET["opt"] == "onay")
       $opt = "1";
+
+      if(isset($_POST['content']) && $_POST['content'] != ''){
+        $orderDetail = $_POST['content'];
+        $opt = 1 ; 
+        echo $rez->run($_GET["id"] , $opt , $orderDetail) ;
+        exit;
+      }
     }else
-    exit;
+      exit;
 
-    $rez = new Order();
 
-    echo $rez->run($_GET["id"] , $opt) ;
+    echo $rez->run($_GET["id"] , $opt ) ;
   
