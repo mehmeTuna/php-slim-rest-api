@@ -62,11 +62,15 @@ RewriteRule ^user/login$                                                   ./pri
 RewriteRule ^user/logout$                                                  ./private/Users/Logout.php
 RewriteRule ^user/register$                                                ./private/Users/Add.php
 RewriteRule ^user/data$                                                    ./private/Users/Data.php
+RewriteRule ^user/orders$                                                   ./private/Users/Orders.php
+RewriteRule ^user/sepetDel/([a-z0-9_-]+)$                                  ./private/Users/delete_sepet_item.php
 RewriteRule ^payment$                                                      ./private/payment/payment.php
 
 RewriteRule ^calisan/cikis-yap$                                            ./private/worker/logout.php
 RewriteRule ^calisan/giris$                                                ./private/worker/login.php
 RewriteRule ^calisan$                                                      ./private/worker/login.html
+
+RewriteRule ^kitchen/detail/count$                                         ./private/kitchen/data/orderData.php
 
 
 

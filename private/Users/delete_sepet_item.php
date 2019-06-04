@@ -26,6 +26,9 @@ if(!isset($_SESSION["user"]))
 
  array_splice( $_SESSION["user"]["product"], $count );
 
+
+ 
+
  echo json_encode( 
     array(
         "status"=>"ok"
