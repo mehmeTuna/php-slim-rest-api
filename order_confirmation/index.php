@@ -110,9 +110,9 @@ if(!isset($_SESSION["operator"])){
           <!-- Topbar Search -->
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <input type="text" class="form-control bg-light border-0 small" id='searchValue' placeholder="siparis, rezervasyon ara" aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-primary" type="button" onclick="mtSearch()">
                   <i class="fas fa-search fa-sm"></i>
                 </button>
               </div>
@@ -323,12 +323,114 @@ if(!isset($_SESSION["operator"])){
   
 var durum = "siparis" ;//siparis or rezervasyon
 
+
 window.onload = function() {
  title_rename();
  title_data_rename();
  titleTable();
  create_user_render("gelen"); 
 };
+
+ function mtSearch(){
+  const serachVal =  $('#searchValue').val();
+  if(durum == 'siparis'){
+    create_user_render(serachVal , 'search' );
+  }else if($durum = 'rezervasyon'){
+   create_rezervasyon_render(serachVal , 'search' );
+  }
+}
+
+
+
+
+function create_rezervasyon_render(option , yontem = ''){
+  if(yontem == 'search'){
+    $.ajax({ 
+          type: 'GET', 
+          url: 'http://localhost:81/order_confirmation/order_detail/rezervasyon_detail.php?search=ok&ord='+option, 
+            success: function (data) { 
+            if(data == ""){
+              $('#table_body_render').html('Gösterilecek Veri Yok');
+            }else {
+            let rezervasyon_detail =  JSON.parse ( data) ;
+            let rezervasyon = rezervasyon_detail.map(
+            data => {
+              return create_rezervasyon(data)
+            }
+            );
+            $('#table_body_render').html(rezervasyon);
+            }
+          }
+    });
+  }else{
+    $.ajax({ 
+          type: 'GET', 
+          url: 'http://localhost:81/order_confirmation/order_detail/rezervasyon_detail.php?ord='+option, 
+            success: function (data) { 
+           
+            if(data == ""){
+              $('#table_body_render').html('Gösterilecek Veri Yok');
+            }else {
+            let rezervasyon_detail =  JSON.parse ( data) ;
+            let rezervasyon = rezervasyon_detail.map(
+            data => {
+              return create_rezervasyon(data)
+            }
+            );
+            $('#table_body_render').html(rezervasyon);
+            }
+          }
+    });
+  }
+
+}
+
+
+
+
+function create_user_render(option , yontem = ''){
+  if(yontem == 'search'){
+       $.ajax({ 
+        type: 'GET', 
+        url: 'http://localhost:81/order_confirmation/order_detail/order_user_detail.php?search=ok&order='+option, 
+        success: function (data) { 
+        
+          if(data == ""){
+            $('#table_body_render').html('Gösterilecek Veri Yok');
+          }else {
+          let order_detail =  JSON.parse ( data) ;
+          let user = order_detail.map(
+          data => {
+            return create_user(data)
+          }
+          );
+          $('#table_body_render').html(user);
+          }
+        }
+  });
+  }else {
+  $.ajax({ 
+        type: 'GET', 
+        url: 'http://localhost:81/order_confirmation/order_detail/order_user_detail.php?order='+option, 
+        success: function (data) { 
+         
+          if(data == ""){
+            $('#table_body_render').html('Gösterilecek Veri Yok');
+          }else {
+          let order_detail =  JSON.parse ( data) ;
+          let user = order_detail.map(
+          data => {
+            return create_user(data)
+          }
+          );
+          $('#table_body_render').html(user);
+          }
+        }
+  });
+  }
+}
+
+
 
 
 
@@ -424,6 +526,9 @@ function siparis() {
       create_user_render("gelen");
 }
 
+
+
+
 function  titleTable(){
   if(durum == "siparis"){
     $('#table_tr_name').html(
@@ -471,49 +576,6 @@ function HMtime(timestamp){
 }
 
 
-
-function create_user_render(option){
-  
-  $.ajax({ 
-        type: 'GET', 
-        url: 'http://localhost:81/order_confirmation/order_detail/order_user_detail.php?order='+option, 
-        success: function (data) { 
-         
-          if(data == ""){
-            $('#table_body_render').html('Gösterilecek Veri Yok');
-          }else {
-          let order_detail =  JSON.parse ( data) ;
-          let user = order_detail.map(
-          data => {
-            return create_user(data)
-          }
-          );
-          $('#table_body_render').html(user);
-          }
-        }
-  });
-}
-
-function create_rezervasyon_render(option){
-  $.ajax({ 
-        type: 'GET', 
-        url: 'http://localhost:81/order_confirmation/order_detail/rezervasyon_detail.php?ord='+option, 
-          success: function (data) { 
-          if(data == ""){
-            $('#table_body_render').html('Gösterilecek Veri Yok');
-          }else {
-          let rezervasyon_detail =  JSON.parse ( data) ;
-          let rezervasyon = rezervasyon_detail.map(
-          data => {
-            return create_rezervasyon(data)
-          }
-          );
-          $('#table_body_render').html(rezervasyon);
-          }
-        }
-  });
-
-}
 
 
 

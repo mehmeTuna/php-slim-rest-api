@@ -28,7 +28,7 @@ class Payment{
         }
 
         if( count($_SESSION['user']['product']) > 0  ){
-            $this->product = json_encode( $_SESSION['user']['product'] );
+            $this->product = json_encode( $_SESSION['user']['product'] , JSON_UNESCAPED_UNICODE );
 
         }else {
             $this->control['cart'] = 'null' ;
@@ -72,7 +72,7 @@ class Payment{
         if( empty( $this->control) ){
             return $response->run();
           }else {
-            return json_decode($this->control , true );
+            return json_encode($this->control , JSON_UNESCAPED_UNICODE );
         }
     }
 
@@ -92,7 +92,3 @@ if($newpayment->control != true ){
 echo $newpayment->control();
 }
 $rez = $newpayment->run();
-
-print_r($rez);
-//ilk once kontrol et
-//daha sonra run ile calistir

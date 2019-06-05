@@ -267,7 +267,7 @@ $username = (isset($_SESSION['operator']['name'])) ? $_SESSION['operator']['name
    <!-- DataTales Example -->
  <div class="card shadow mb-4 "  >
             <div class="card-header py-3 " >
-              <h6 class="m-0 font-weight-bold text-primary d-inline " id="table_info"> 172547 'nolu Sipariş Detayı</h6> 
+              <h6 class="m-0 font-weight-bold text-primary d-inline " id="table_info">Siparis Detaylari</h6> 
               <i class="fa fa-pencil-alt  float-right" onclick='alert("demo")'></i>
             
             </div>
@@ -373,7 +373,7 @@ function title_data_rename(){
         function tableRender(val){
           $.ajax({ 
                 type: 'GET', 
-                url: 'http://localhost:81/private/kitchen/data/table.php?search=ok&id='+val, 
+                url: 'http://localhost:81/private/kitchen/data/table.php?id='+val, 
                 success: function (data) { 
                   $('#table_display').html(data);
                 }

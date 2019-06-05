@@ -1,7 +1,16 @@
 <?php
 
-
 namespace KitchenData ; 
+
+session_start();
+
+
+
+
+if( !isset($_SESSION['calisan']) )
+//exit ;
+
+
 
 require_once __DIR__ . '/../../../database/connect.php';
 
@@ -38,7 +47,49 @@ class Data {
 
     public function BringAllOrders($val){
         $result = array();
+        $val = strip_tags( $val ) ; 
+        if( ! is_numeric( $val ) )
+        return $result ;
         $sql = 'select orders,user_id,m_date,order_id from order_items where m_status=' . $val  . ' order by m_date asc';
+        $thisResult = array(); 
+        try{
+            $query = $this->db->query( $sql ,  PDO::FETCH_ASSOC);
+           
+                foreach($query as $val){
+                   
+                    $thisResult['content'] = $val['orders'];
+                    $thisResult['date']  = $val['m_date'] ; 
+                    $thisResult['orderId'] = $val['order_id']; 
+                    $thisResult['phone'] = $val['user_id'];
+
+                      $query = $this->db->query( 'select phone from users where id=' . $thisResult['phone'] ,  PDO::FETCH_ASSOC);
+
+                foreach($query as $val){
+
+                    $thisResult['phone'] = $val['phone'] ; 
+                }
+
+
+                    array_push($result , $thisResult);
+                }
+
+              
+
+                return $result ;
+        }catch(PDOException $e){
+            return array(
+                'status'=>$e
+            );
+        }
+    }
+
+
+    public function BringSearchAllOrders($val){
+        $result = array();
+        $val = strip_tags( $val ) ; 
+        if( ! is_numeric( $val ) )
+        return $result ;
+        $sql = 'select orders,user_id,m_date,order_id from order_items where order_id=' . $val  . ' order by m_date asc';
         $thisResult = array(); 
         try{
             $query = $this->db->query( $sql ,  PDO::FETCH_ASSOC);

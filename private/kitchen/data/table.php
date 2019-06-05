@@ -9,8 +9,10 @@ $data = new Data();
 
 $id = $_GET['id'] ;
 $result = array();
-$result = $data->BringAllOrders($id);
-
+if( isset($_GET['search']  ) && $_GET['search'] =='ok'  )
+    $result = $data->BringSearchAllOrders($id);
+else 
+   $result = $data->BringAllOrders($id) ; 
 /*
 
 hazirlanacak
@@ -72,7 +74,7 @@ Gosterilecek Veri bulunmamaktadir
              
 
               $phone = isset($result[$a]['phone']) ? $result[$a]['phone'] : 'hata' ;
-              $mDate = isset($result[$a]['date']) ? date ('H-m' , $result[$a]['date'] ): 'hata' ;
+              $mDate = isset($result[$a]['date']) ? date ('H:m' , $result[$a]['date'] ): 'hata' ;
 
 
              ?>
