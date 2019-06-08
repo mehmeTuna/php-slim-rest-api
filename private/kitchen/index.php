@@ -9,6 +9,14 @@ if(!isset($_SESSION["operator"])){
 } */
 $username = (isset($_SESSION['operator']['name'])) ? $_SESSION['operator']['name'] : '' ;
 
+
+
+
+if($_SESSION['operator']['authority'] == '0'){
+  echo 'Yetki Sahibi Degilsiniz' ;
+  exit ; 
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -338,9 +346,9 @@ $username = (isset($_SESSION['operator']['name'])) ? $_SESSION['operator']['name
 
   <script>
     window.onload = function() {
- title_data_rename();
-  tableRender(1);
-};
+      title_data_rename();
+      tableRender(1);
+    };
 
 
 function title_data_rename(){

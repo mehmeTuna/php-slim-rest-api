@@ -6,6 +6,12 @@ use KitchenData\Data;
 
 $data = new Data();
 
+
+ if($_SESSION['operator']['authority'] != 2 || $_SESSION['operator']['authority'] != 1){
+     echo json_encode(['status'=>'yetkisiz islem']);
+     exit;
+ }
+
 //hazirlanacak siparisler
 $data->Bringdata(1 , 'hazirlanacak');
 

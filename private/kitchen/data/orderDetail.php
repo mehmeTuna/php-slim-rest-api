@@ -5,6 +5,12 @@ require_once __DIR__ . '/DataClass.php';
 use KitchenData\Data ;
 
 
+ if($_SESSION['operator']['authority'] != 2 || $_SESSION['operator']['authority'] != 1){
+     echo json_encode(['status'=>'yetkisiz islem']);
+     exit;
+ }
+
+
 $id = strip_tags($_GET['id']) ;
 
 $data = new Data();

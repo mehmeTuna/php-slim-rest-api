@@ -3,8 +3,11 @@ RewriteEngine On
 RewriteBase /
 
 
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+
+
 
 
 
@@ -63,13 +66,15 @@ RewriteRule ^user/logout$                                                  ./pri
 RewriteRule ^user/register$                                                ./private/Users/Add.php
 RewriteRule ^user/data$                                                    ./private/Users/Data.php
 RewriteRule ^user/orders$                                                   ./private/Users/Orders.php
-RewriteRule ^user/sepetDel/([a-z0-9_-]+)$                                  ./private/Users/delete_sepet_item.php
+RewriteRule ^user/sepetDel/([a-z0-9_-]+)$                                  ./private/Users/delete_sepet_item.php?id=$1
 RewriteRule ^payment$                                                      ./private/payment/payment.php
 
 RewriteRule ^calisan/cikis-yap$                                            ./private/worker/logout.php
 RewriteRule ^calisan/giris$                                                ./private/worker/login.php
 RewriteRule ^calisan$                                                      ./private/worker/login.html
 
+
+RewriteRule ^mutfak$                                                       ./private/kitchen/index.php
 RewriteRule ^kitchen/detail/count$                                         ./private/kitchen/data/orderData.php
 
 
@@ -85,6 +90,18 @@ RewriteRule ^admin/ürünler/([a-z0-9_-]+)/([0-9_-]+)$                        ./
 RewriteRule ^admin/magaza-ayar$                                             ./private/Admin/pages/ayar.php
 
 
+RewriteRule ^admin/api$                                                     ./private/Admin/Data/index.php
+RewriteRule ^admin/api/thisdayorder$                                        ./private/Admin/Data/index.php?api=orderthisday
+RewriteRule ^admin/api/thismonthorder$                                      ./private/Admin/Data/index.php?api=thismonthorder
+RewriteRule ^admin/api/thisdaypayment$                                      ./private/Admin/Data/index.php?api=thisdaypayment
+RewriteRule ^admin/api/thismonthpayment$                                    ./private/Admin/Data/index.php?api=thismonthpayment  
+RewriteRule ^admin/api/iptalorder$                                          ./private/Admin/Data/index.php?api=iptalorder
+RewriteRule ^admin/api/iptalordermonth$                                     ./private/Admin/Data/index.php?api=iptalordermonth
+RewriteRule ^admin/api/thisdaymany$                                         ./private/Admin/Data/index.php?api=thisdaymany
+RewriteRule ^admin/api/thismonthmany$                                       ./private/Admin/Data/index.php?api=thismonthmany
+
+
 
 #dizinleri listelemesi engellenir
 Options -Indexes
+

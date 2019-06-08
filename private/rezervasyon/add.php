@@ -14,9 +14,9 @@ use Rezervasyon\Create ;
    
     $create = new Create();
 
-    $_POST = json_decode( file_get_contents("php://input") , true );
+    $data = json_decode( file_get_contents("php://input") , true );
   
-    $create->add( $_POST );
+    $create->add( $data );
 
    if(!$create->control()){
     echo json_encode("hatalı veri" , JSON_UNESCAPED_UNICODE);

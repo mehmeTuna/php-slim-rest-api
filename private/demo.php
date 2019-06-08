@@ -1,2 +1,7 @@
 <?php
-echo   $month = mktime(0,0,0,1,1,date('Y'));;
+
+session_start();
+
+//session_destroy();
+
+print_r($_SESSION);

@@ -2,7 +2,8 @@
 
 trait Config{
     private $UserTable = 'users';
-    private $RezervasyinTable = '';
+    private $RezervasyonTable = 'rezervasyon';
     private $category = 'category';
-    private $order = '';
+    private $order = 'order_items';
+    
 }

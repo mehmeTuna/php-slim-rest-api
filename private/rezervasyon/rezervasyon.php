@@ -2,8 +2,6 @@
 
 namespace Rezervasyon ;
 
-if(!isset($_SESSION))
- session_start();
 
 include __DIR__ .'/../Ip/Ip.php';
 include __DIR__ . "/../time/timestamp.php";

@@ -7,6 +7,12 @@ if(!isset($_SESSION["operator"])){
   exit;
 }
 
+if($_SESSION['operator']['authority'] == '0'){
+   echo 'Yetki sahibi degilsiniz';
+ exit ;
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -322,6 +328,7 @@ if(!isset($_SESSION["operator"])){
   <script>
   
 var durum = "siparis" ;//siparis or rezervasyon
+var siteUrl = 'http://localhost:81/';
 
 
 window.onload = function() {
@@ -347,7 +354,7 @@ function create_rezervasyon_render(option , yontem = ''){
   if(yontem == 'search'){
     $.ajax({ 
           type: 'GET', 
-          url: 'http://localhost:81/order_confirmation/order_detail/rezervasyon_detail.php?search=ok&ord='+option, 
+          url: siteUrl + 'order_confirmation/order_detail/rezervasyon_detail.php?search=ok&ord='+option, 
             success: function (data) { 
             if(data == ""){
               $('#table_body_render').html('Gösterilecek Veri Yok');
@@ -365,7 +372,7 @@ function create_rezervasyon_render(option , yontem = ''){
   }else{
     $.ajax({ 
           type: 'GET', 
-          url: 'http://localhost:81/order_confirmation/order_detail/rezervasyon_detail.php?ord='+option, 
+          url: siteUrl + 'order_confirmation/order_detail/rezervasyon_detail.php?ord='+option, 
             success: function (data) { 
            
             if(data == ""){
@@ -392,7 +399,7 @@ function create_user_render(option , yontem = ''){
   if(yontem == 'search'){
        $.ajax({ 
         type: 'GET', 
-        url: 'http://localhost:81/order_confirmation/order_detail/order_user_detail.php?search=ok&order='+option, 
+        url: siteUrl + 'order_confirmation/order_detail/order_user_detail.php?search=ok&order='+option, 
         success: function (data) { 
         
           if(data == ""){
@@ -411,12 +418,13 @@ function create_user_render(option , yontem = ''){
   }else {
   $.ajax({ 
         type: 'GET', 
-        url: 'http://localhost:81/order_confirmation/order_detail/order_user_detail.php?order='+option, 
+        url: siteUrl+ 'order_confirmation/order_detail/order_user_detail.php?order='+option, 
         success: function (data) { 
          
           if(data == ""){
             $('#table_body_render').html('Gösterilecek Veri Yok');
           }else {
+           
           let order_detail =  JSON.parse ( data) ;
           let user = order_detail.map(
           data => {
@@ -454,7 +462,7 @@ function title_data_rename(){
     if(durum == "siparis"){
       $.ajax({ 
         type: 'GET', 
-        url: 'http://localhost:81/order_confirmation/order_detail/order_detail.php', 
+        url: siteUrl + 'order_confirmation/order_detail/order_detail.php', 
         success: function (data) { 
           let order_detail =  JSON.parse ( data) ;
           $("#gelen_num").html( order_detail.waiting  );
@@ -465,7 +473,7 @@ function title_data_rename(){
     }else if(durum == "rezervasyon"){
       $.ajax({ 
         type: 'GET', 
-        url: 'http://localhost:81/order_confirmation/order_detail/rezervasyon.php', 
+        url: siteUrl + 'order_confirmation/order_detail/rezervasyon.php', 
         success: function (data) { 
           let order_detail =  JSON.parse ( data) ;
           $("#gelen_num").html( order_detail.waiting  );
@@ -600,7 +608,7 @@ function edit_rezervasyon_detay(id){
     case "catch":
     $.ajax({ 
         type: 'GET', 
-        url: "http://localhost:81/order_confirmation/order_detail/rezervasyon_onay.php?id=" +id+ "&durum=red", 
+        url: siteUrl + "order_confirmation/order_detail/rezervasyon_onay.php?id=" +id+ "&durum=red", 
           success: function (data) { 
             let control = JSON.parse(data);
 
@@ -611,6 +619,7 @@ function edit_rezervasyon_detay(id){
 
            if(control.status == "red")
               swal("Rezervasyon Onaylanmadı !");
+           else    swal(control.status);
         }
   }) ;
       break;
@@ -619,7 +628,7 @@ function edit_rezervasyon_detay(id){
 
     $.ajax({ 
         type: 'GET', 
-        url: "http://localhost:81/order_confirmation/order_detail/rezervasyon_onay.php?id=" +id+ "&durum=ok", 
+        url: siteUrl + "order_confirmation/order_detail/rezervasyon_onay.php?id=" +id+ "&durum=ok", 
           success: function (data) { 
             let control = JSON.parse(data);
               title_rename();
@@ -629,6 +638,7 @@ function edit_rezervasyon_detay(id){
 
            if(control.status == "ok")
               swal("Rezervasyon onaylandı !");
+           else      swal(control.status);
         }
   }) ;
       break;
@@ -673,7 +683,7 @@ function edit_order_detay(id,username,tutar,tel,adres){
 
   $.ajax({ 
         type: 'POST', 
-        url: 'http://localhost:81/order_confirmation/order_detail/order_detail_add.php?id='+id+'&opt=onay', 
+        url: siteUrl + 'order_confirmation/order_detail/order_detail_add.php?id='+id+'&opt=onay', 
         data : {
           content : name
         },
@@ -687,6 +697,8 @@ function edit_order_detay(id,username,tutar,tel,adres){
            swal.stopLoading();
            if(control.status == "ok")
               swal("İletiniz Eklenmiştir. Sipariş Onaylandı");
+           else 
+              swal(control.status);
         }
   }) ;
 })
@@ -703,7 +715,7 @@ function edit_order_detay(id,username,tutar,tel,adres){
     case "onayla":
     $.ajax({ 
         type: 'GET', 
-        url: `http://localhost:81/order_confirmation/order_detail/order_detail_add.php?id=`+id+'&opt=onay', 
+        url: siteUrl + `order_confirmation/order_detail/order_detail_add.php?id=`+id+'&opt=onay', 
           success: function (data) {
               title_rename();
               title_data_rename();
@@ -714,6 +726,8 @@ function edit_order_detay(id,username,tutar,tel,adres){
 
            if(control.status == "ok")
               swal("Sipariş Onaylandı");
+           else 
+                swal(control.status);
         }
   }) ;
       break;
@@ -721,7 +735,7 @@ function edit_order_detay(id,username,tutar,tel,adres){
       case "reddet":
     $.ajax({ 
         type: 'GET', 
-        url: `http://localhost:81/order_confirmation/order_detail/order_detail_add.php?id=`+id+'&opt=red', 
+        url: siteUrl + `order_confirmation/order_detail/order_detail_add.php?id=`+id+'&opt=red', 
           success: function (data) {
               title_rename();
               title_data_rename();
@@ -732,6 +746,8 @@ function edit_order_detay(id,username,tutar,tel,adres){
 
            if(control.status == "ok")
               swal("Sipariş İptal Edildi !");
+           else 
+                swal(control.status);
         }
   }) ;
       break;

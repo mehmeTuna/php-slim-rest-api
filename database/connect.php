@@ -11,6 +11,8 @@ class Database
     private $password = "";
     private $dbname = "food_sale";
     public  $conn;
+    public $online = 1 ; 
+    public $url = '';
 
     function __construct()
     {
@@ -21,8 +23,22 @@ class Database
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->conn->query("SET CHARACTER SET utf8");
         } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+            return '' ;
         }
+
+        try{
+          $query =  $this->conn->query('select site_online,site_url from site where id=1' ,  PDO::FETCH_ASSOC); 
+
+            if($query->rowCount()){
+                foreach ($query as $val) {
+                   $this->online = isset($val['site_online']) ? $val['site_online'] : '' ; 
+                   $this->url = isset($val['url']) ? $val['url'] : '' ; 
+                }
+            }
+        }catch(\PDOException $e){
+            echo 'err';
+        }
+                  
     }
 
 

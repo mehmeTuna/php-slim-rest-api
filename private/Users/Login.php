@@ -1,29 +1,15 @@
 <?php
 //cors policy denied sorununu çözüyor
 //ayrı pcler arası iletişim sorununu çözüyor
-
-
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 
 
-
 session_start();
-
 
 require __DIR__ .'/../../database/connect.php';
 
 use DATABASE\Database ;
-
-
-/*
-if(!isset($_REQUEST)){
-    echo "access denied";
-    exit;
-}
-*/
-
-    
 
     $js_echo = "bir hata oluştu";
     $username = "";

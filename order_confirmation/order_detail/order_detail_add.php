@@ -7,6 +7,12 @@
 require __DIR__ ."/../../database/connect.php";
 
 use DATABASE\Database ;
+session_start();
+
+if(!isset($_SESSION["operator"])){
+  header("location: calisan");
+  exit;
+}
 
 class Order {
     /*sql query*/
@@ -72,12 +78,14 @@ class Order {
       if(isset($_POST['content']) && $_POST['content'] != ''){
         $orderDetail = $_POST['content'];
         $opt = 1 ; 
-        echo $rez->run($_GET["id"] , $opt , $orderDetail) ;
+        if($_SESSION['operator']['authority'] == 2)
+             echo $rez->run($_GET["id"] , $opt , $orderDetail) ;
+        else echo json_encode(['status' => 'yetkisiz islem']);  
         exit;
       }
     }else
       exit;
 
-
+if($_SESSION['operator']['authority'] == 2)
     echo $rez->run($_GET["id"] , $opt ) ;
-  
+else echo json_encode(['status' => 'yetkisiz islem']);  

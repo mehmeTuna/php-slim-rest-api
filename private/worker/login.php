@@ -1,8 +1,6 @@
 <?php
 //cors policy denied sorununu çözüyor
 //ayrı pcler arası iletişim sorununu çözüyor
-
-
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 
@@ -14,13 +12,15 @@ require __DIR__ .'/../../database/connect.php';
 
 use DATABASE\Database ;
 
-
+   $login = new Database();
 
     $js_echo = "bir hata oluştu";
     $username = "";
     $password = "";
     $name = array();
     $dbPassword = "" ;
+    $uri = isset( $_GET['uri']) ? $login->url . '/' . $_GET['uri'] : $login->url . '/siparis-onay';
+    $uriBack = isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : '';
 
       //using axios js post method data convert json to php array
       //$_POST = json_decode(file_get_contents('php://input') , true);
@@ -33,20 +33,20 @@ use DATABASE\Database ;
 
 
     if($username == "" ||  $password == ""){
-        header("location: ../calisan");
+        header("location: " . $uriBack);
         exit ;
     }
 
-    $login = new Database();
+ 
    $db_password = "";
           try{
-            $query = $login->conn->query( "select id,name,password from worker  where email='{$username}'" ,  PDO::FETCH_ASSOC);
+            $query = $login->conn->query( "select id,name,password,authority from worker  where email='{$username}'" ,  PDO::FETCH_ASSOC);
           
             if($query->rowCount()){
                 foreach($query as $val){
                     $name["name"] = $val["name"] ;
                     $db_password = $val["password"];
-
+                    $name['authority'] = $val['authority'] ;
                 }
             }else {
                 $js_echo = "kullanıcı bulunamadı";
@@ -60,11 +60,12 @@ use DATABASE\Database ;
             $_SESSION["operator"] = array(
                 "id" => $val["id"] ,
                 "name"=>$name["name"],
+                'authority'=>$name['authority']
             );
-            header("location: ../siparis-onay");
+            header("location: " . $uri);
             exit;
         }else{
-            header("location: ../calisan");
+            header("location: ".$uriBack);
         }
 
 

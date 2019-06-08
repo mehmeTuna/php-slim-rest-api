@@ -4,6 +4,18 @@
 require __DIR__ ."/../../database/connect.php";
 
 use DATABASE\Database ;
+session_start();
+
+if(!isset($_SESSION["operator"])){
+  header("location: calisan");
+  exit;
+}
+
+
+ if($_SESSION['operator']['authority'] != 2 ){
+     echo json_encode(['status'=>'yetkisiz islem']);
+     exit;
+ }
 
 class Rezervasyon {
     /*sql query*/

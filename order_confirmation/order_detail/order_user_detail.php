@@ -7,9 +7,23 @@ header("Access-Control-Allow-Headers: *");
 
 
 require __DIR__ .'/../../database/connect.php';
+session_start();
 
 use DATABASE\Database ; 
 use PDO ;
+
+
+if(!isset($_SESSION["operator"])){
+  header("location: calisan");
+  exit;
+}
+
+ if($_SESSION['operator']['authority'] == 0){
+     echo json_encode(['status'=>'yetkisiz islem']);
+     exit;
+ }
+
+
 
     $details = new Database();
 
