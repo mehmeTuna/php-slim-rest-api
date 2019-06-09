@@ -74,10 +74,11 @@ RewriteRule ^calisan/giris$                                                ./pri
 RewriteRule ^calisan$                                                      ./private/worker/login.html
 
 
-RewriteRule ^mutfak$                                                       ./private/kitchen/index.php
+RewriteRule ^mutfak/cikis-yap$                                             ./private/kitchen/logout.php
+RewriteRule ^mutfak/giris$                                                 ./private/kitchen/login.php
+RewriteRule ^mutfak/home$                                                  ./private/kitchen/index.php
+RewriteRule ^mutfak$                                                       ./private/kitchen/login.html
 RewriteRule ^kitchen/detail/count$                                         ./private/kitchen/data/orderData.php
-
-
 
 RewriteRule ^admin/home$                                                    ./private/Admin/index.php
 RewriteRule ^admin/giris$                                                   ./private/Admin/Login.html

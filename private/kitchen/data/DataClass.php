@@ -4,11 +4,19 @@ namespace KitchenData ;
 
 session_start();
 
+if( !isset( $_SESSION['mutfak'] ))
+ exit;
+
+$yetki = ($_SESSION['mutfak']['authority'] == 1 ) ? true :  ($_SESSION['mutfak']['authority'] == 2) ? true : false   ;
 
 
 
-if( !isset($_SESSION['calisan']) )
-//exit ;
+if( !$yetki  ){
+      echo json_encode(['status'=>'yetkisiz islem']);
+     exit;
+}
+  
+
 
 
 

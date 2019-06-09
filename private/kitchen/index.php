@@ -1,18 +1,17 @@
 <?php
 
 session_start();
-/*
 
-if(!isset($_SESSION["operator"])){
-  header("location: calisan");
+if(!isset($_SESSION["mutfak"])){
+  header("location: ../mutfak");
   exit;
-} */
-$username = (isset($_SESSION['operator']['name'])) ? $_SESSION['operator']['name'] : '' ;
+} 
+$username = (isset($_SESSION['mutfak']['name'])) ? $_SESSION['mutfak']['name'] : '' ;
 
 
 
 
-if($_SESSION['operator']['authority'] == '0'){
+if($_SESSION['mutfak']['authority'] == '0'){
   echo 'Yetki Sahibi Degilsiniz' ;
   exit ; 
 }
@@ -338,7 +337,7 @@ if($_SESSION['operator']['authority'] == '0'){
         <div class="modal-body">Çıkış Yapmak istediğine eminmisin ? </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Vazgeç</button>
-          <a class="btn btn-primary" href="calisan/cikis-yap">Çıkış Yap</a>
+          <a class="btn btn-primary" href="cikis-yap">Çıkış Yap</a>
         </div>
       </div>
     </div>

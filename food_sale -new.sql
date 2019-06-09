@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 11 May 2019, 15:56:12
+-- Üretim Zamanı: 09 Haz 2019, 10:04:37
 -- Sunucu sürümü: 10.1.38-MariaDB
 -- PHP Sürümü: 7.3.4
 
@@ -113,9 +113,10 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`order_id`, `user_id`, `order_amount`, `icerik`, `m_date`, `orders`, `m_status`, `order_status`, `ip`) VALUES
-(40512, 35747, 35.75, '', '1557314382', '{\"porsiyon\":\"1.5 porsiyon adana kebap\"}', '0', '0', '::1'),
-(41079, 35747, 10, '', '1557168416', '{\"porsiyon\":\"1 porsiyon\"}', '1', '0', '::1'),
-(55414, 35747, 25, '', '1557168478', '{\"porsiyon\":\"1.5 porsiyon\"}', '0', '0', '::1');
+(20844, 35747, 40, '', '1560025176', '[{\"id\":\"276675\",\"count\":1,\"price\":\"40\",\"name\":\"Beyti (1,5 porsiyon)\"}]', '0', '0', '::1'),
+(34278, 35747, 4, '', '1560029048', '[{\"id\":\"136207\",\"count\":1,\"price\":\"4\",\"name\":\"Coca-Cola Şekersiz (33 cl.)\"}]', '0', '0', '::1'),
+(63282, 35747, 66, '', '1560025329', '[{\"id\":\"276675\",\"count\":1,\"price\":\"40\",\"name\":\"Beyti (1,5 porsiyon)\"},{\"id\":\"232635\",\"count\":1,\"price\":\"26\",\"name\":\"Kemikli Tavuk\"}]', '1', '2', '::1'),
+(97902, 35747, 4, '', '1560025789', '[{\"id\":\"136207\",\"count\":1,\"price\":\"4\",\"name\":\"Coca-Cola Şekersiz (33 cl.)\"}]', '0', '0', '::1');
 
 -- --------------------------------------------------------
 
@@ -218,8 +219,37 @@ CREATE TABLE `rezervasyon` (
 --
 
 INSERT INTO `rezervasyon` (`id`, `time`, `name`, `e_mail`, `phone`, `kisi_sayisi`, `m_status`, `ip`, `rez_date`) VALUES
-(18553, '1557277760', 'mehmet tuna', 'mehmet_tuna_anadolu@hotmail.com', '5302145201', '2', '0', '::1', '2019-05-09'),
-(30328, '1557430747', 'Enes Budak', 'enesbudak.mdbf17@iste.edu.tr', '53899774', '5', '1', '172.20.10.3', '2019-05-17');
+(18553, '1557277760', 'mehmet tuna', 'mehmet_tuna_anadolu@hotmail.com', '5302145201', '2', '1', '::1', '2019-05-09'),
+(18683, '1557690369', 'mehmet tuna', 'tesasdasfdafawfwa@hotmail.com', '5302145201', '4', '2', '::1', '2019-05-02'),
+(30328, '1557430747', 'Enes Budak', 'enesbudak.mdbf17@iste.edu.tr', '53899774', '5', '1', '172.20.10.3', '2019-05-17'),
+(30393, '1557967454', 'mehmet tuna', 'mehmet_tuna_anadolu@hotmail.com', '5302145201', '2', '0', '::1', '2019-05-09'),
+(33576, '1557932407', 'wqrqr', 'mehmet_tuna_anadolu@hotmail.com', '5302145201', '5', '0', '::1', '2019-05-23'),
+(51563, '1557908766', 'deneme5', 'deneme@hotmail.com', '5302145201', '5', '2', '::1', '2019-05-09'),
+(56802, '1557690540', 'Muhammet yurdan', 'muhammetyurdan369@gmail.com', '05347384165', '5', '2', '::1', '2019-05-14'),
+(92826, '1557690343', 'mehmet tuna', 'sadi.anan.güzel@sadi.code', '5302145201', '4', '1', '::1', '2019-05-15');
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `site`
+--
+
+CREATE TABLE `site` (
+  `id` int(11) NOT NULL DEFAULT '1',
+  `site_name` varchar(30) COLLATE utf8_turkish_ci NOT NULL,
+  `site_description` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `site_create_date` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
+  `site_url` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
+  `site_online` tinyint(1) NOT NULL DEFAULT '1',
+  `site_lisans` varchar(35) COLLATE utf8_turkish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `site`
+--
+
+INSERT INTO `site` (`id`, `site_name`, `site_description`, `site_create_date`, `site_url`, `site_online`, `site_lisans`) VALUES
+(1, 'localhost', 'site aciklama ksimi demo 2', '1559808638', 'http://localhost:81', 1, '1');
 
 -- --------------------------------------------------------
 
@@ -286,7 +316,7 @@ CREATE TABLE `worker` (
 --
 
 INSERT INTO `worker` (`id`, `email`, `password`, `name`, `m_date`, `ip`, `authority`) VALUES
-(235235, 'demo@hotmail.com', '12345', 'mehmet tuna', '325235', '::1', '3');
+(235235, 'demo@hotmail.com', '12345', 'mehmet tuna', '325235', '::1', '1');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -329,6 +359,12 @@ ALTER TABLE `products`
 -- Tablo için indeksler `rezervasyon`
 --
 ALTER TABLE `rezervasyon`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Tablo için indeksler `site`
+--
+ALTER TABLE `site`
   ADD PRIMARY KEY (`id`);
 
 --
