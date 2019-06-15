@@ -5,5 +5,6 @@ trait Config{
     private $RezervasyonTable = 'rezervasyon';
     private $category = 'category';
     private $order = 'order_items';
-    
+    private $product = 'products';
+    private $kurye = 'kurye';
 }

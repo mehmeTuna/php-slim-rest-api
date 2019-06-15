@@ -1,14 +1,16 @@
-<?php 
+<?php
 
 
 namespace Api ;
 
 require_once __DIR__ . '/DbAbout.php' ;
 
-use Admin\Data ; 
+use Admin\Data ;
 
 
 $api = new Data();
+
+$getData = file_get_contents('php://input' , true);
 
 //all user count
 //echo $api->getAllUser();
@@ -55,7 +57,7 @@ echo mktime(0,1,0 , ltrim(date('m') , 0 ) , ltrim(date('d') , 0 ) , 2019 );
 //echo $api->getThisDayOrder();
 
 if( !isset($_GET)){
-    echo json_encode( ['status' => 'only get method'], JSON_UNESCAPED_UNICODE) ; 
+    echo json_encode( ['status' => 'only get method'], JSON_UNESCAPED_UNICODE) ;
     exit ;
 } ;
 
@@ -68,40 +70,63 @@ switch($_GET['api']){
     break ;
 
     //bu aya ait siparis detayleri
-    case 'thismonthorder';
+    case 'thismonthorder':
     echo $api->getThisMonthOrder();
     break;
 
     //gunluk kredili ve nakit satislar sayisi
-    case 'thisdaypayment';
+    case 'thisdaypayment':
     echo $api->getThisDayPayment();
     break;
 
     //aylik kredili ve nakit satislar sayisi
-    case 'thismonthpayment';
+    case 'thismonthpayment':
     echo $api->getThisMonthPayment();
     break;
 
     //gunluk iptal olan siparisler
-    case 'iptalorder';
+    case 'iptalorder':
     echo $api->thisDayiptalOrder();
     break;
 
     //aylik iptal olan siparisler
-    case 'iptalordermonth';
+    case 'iptalordermonth':
     echo $api->thisMonthiptalOrder();
     break;
 
     //gunluk toplam satis miktari
-    case 'thisdaymany';
+    case 'thisdaymany':
     echo $api->thisDaymany();
     break;
 
     //aylik toplam satis miktari
-    case 'thismonthmany';
+    case 'thismonthmany':
     echo $api->thisMonthmany();
     break;
+
+    case 'allProduct':
+    echo $api->thisAllProduct();
+    break;
+
+    case 'allCateogry' :
+    echo $api->getAllCategory();
+    break ;
+
+    case 'newProduct' :
+    echo $api->newProduct($getData);
+    break ;
+
+    case 'allKurye':
+    echo $api->allKurye();
+    break ;
+
+    case 'newKurye' :
+    echo $api->newKurye($getData);
+    break ;
+
+
+
+    default :
+    echo json_encode( ['status'=>'tanimlanmayan parametre'], JSON_UNESCAPED_UNICODE);
+    break ;
 };
-
-
-

@@ -29,7 +29,7 @@ class Add {
     try{
       $statement = $this->conn->prepare($add);
       $statement->execute($this->data);
-      return true ;
+      return ['status'=>'ok'] ;
     }catch(PDOException $e){
       return "denied" ;
     }

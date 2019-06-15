@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 09 Haz 2019, 10:04:37
+-- Üretim Zamanı: 15 Haz 2019, 22:07:01
 -- Sunucu sürümü: 10.1.38-MariaDB
 -- PHP Sürümü: 7.3.4
 
@@ -89,6 +89,22 @@ INSERT INTO `email_register` (`id`, `email`, `ip`, `m_date`) VALUES
 (4874871, 'mehmet_tuna_anadolu@hotmail.com', '::1', '1557277445'),
 (5781583, 'mehmet_tuna_anadolu@hotmail.com', '::1', '1557277454'),
 (7490335, 'mehmet_tuna_anadolu@hotmail.com', '::1', '1557277463');
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `kurye`
+--
+
+CREATE TABLE `kurye` (
+  `surname` varchar(100) COLLATE utf8_turkish_ci NOT NULL,
+  `lastname` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
+  `date` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
+  `username` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
+  `password` text COLLATE utf8_turkish_ci NOT NULL,
+  `id` varchar(10) COLLATE utf8_turkish_ci NOT NULL,
+  `data` text COLLATE utf8_turkish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 -- --------------------------------------------------------
 
@@ -341,6 +357,12 @@ ALTER TABLE `category`
 ALTER TABLE `email_register`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`,`email`);
+
+--
+-- Tablo için indeksler `kurye`
+--
+ALTER TABLE `kurye`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Tablo için indeksler `order_items`

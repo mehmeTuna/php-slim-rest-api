@@ -19,7 +19,7 @@ RewriteRule ^profile$                                                     ./inde
 RewriteRule ^home$                                                        ./index.html
 RewriteRule ^contact$                                                     ./index.html
 RewriteRule ^checkout$                                                    ./index.html
-    
+
 
 RewriteRule ^demo$                                                        ./private/demo.php
 
@@ -95,14 +95,20 @@ RewriteRule ^admin/api$                                                     ./pr
 RewriteRule ^admin/api/thisdayorder$                                        ./private/Admin/Data/index.php?api=orderthisday
 RewriteRule ^admin/api/thismonthorder$                                      ./private/Admin/Data/index.php?api=thismonthorder
 RewriteRule ^admin/api/thisdaypayment$                                      ./private/Admin/Data/index.php?api=thisdaypayment
-RewriteRule ^admin/api/thismonthpayment$                                    ./private/Admin/Data/index.php?api=thismonthpayment  
+RewriteRule ^admin/api/thismonthpayment$                                    ./private/Admin/Data/index.php?api=thismonthpayment
 RewriteRule ^admin/api/iptalorder$                                          ./private/Admin/Data/index.php?api=iptalorder
 RewriteRule ^admin/api/iptalordermonth$                                     ./private/Admin/Data/index.php?api=iptalordermonth
 RewriteRule ^admin/api/thisdaymany$                                         ./private/Admin/Data/index.php?api=thisdaymany
 RewriteRule ^admin/api/thismonthmany$                                       ./private/Admin/Data/index.php?api=thismonthmany
+RewriteRule ^admin/api/allCateogry$                                         ./private/Admin/Data/index.php?api=allCateogry
+RewriteRule ^admin/api/newProduct$                                          ./private/Admin/Data/index.php?api=newProduct
+RewriteRule ^admin/api/allKurye$                                            ./private/Admin/Data/index.php?api=allKurye
+RewriteRule ^admin/api/newKurye$                                            ./private/Admin/Data/index.php?api=newKurye
+
+
+RewriteRule ^admin/api/allproduct$                                         ./private/Admin/Data/index.php?api=allProduct
 
 
 
 #dizinleri listelemesi engellenir
 Options -Indexes
-
