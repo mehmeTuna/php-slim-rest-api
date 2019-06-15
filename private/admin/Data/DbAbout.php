@@ -516,12 +516,6 @@ class Data{
     }
 
 
-    public function newKurye(){
-      
-    }
-
-
-
     public function __destruct()
     {
 
