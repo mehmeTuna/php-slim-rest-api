@@ -1,16 +1,17 @@
 <?php
-
-
 namespace Api ;
 
 require_once __DIR__ . '/DbAbout.php' ;
 
 use Admin\Data ;
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
+
 
 $api = new Data();
 
-$getData = file_get_contents('php://input' , true);
+$getData = json_decode( file_get_contents("php://input") , true );
 
 //all user count
 //echo $api->getAllUser();
@@ -123,6 +124,14 @@ switch($_GET['api']){
     case 'newKurye' :
     echo $api->newKurye($getData);
     break ;
+
+    case 'delkurye':
+    echo $api->delkurye($_GET['email']);
+    break;
+
+    case 'delproduct':
+    echo $api->delproduct($_GET['id']);
+    break;
 
 
 

@@ -5,7 +5,7 @@ session_start();
 if(!isset($_SESSION["mutfak"])){
   header("location: ../mutfak");
   exit;
-} 
+}
 $username = (isset($_SESSION['mutfak']['name'])) ? $_SESSION['mutfak']['name'] : '' ;
 
 
@@ -13,7 +13,7 @@ $username = (isset($_SESSION['mutfak']['name'])) ? $_SESSION['mutfak']['name'] :
 
 if($_SESSION['mutfak']['authority'] == '0'){
   echo 'Yetki Sahibi Degilsiniz' ;
-  exit ; 
+  exit ;
 }
 
 ?>
@@ -40,6 +40,7 @@ if($_SESSION['mutfak']['authority'] == '0'){
     <!-- Custom styles for this page -->
     <link href="/../../../order_confirmation/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
 </head>
 
@@ -63,25 +64,25 @@ if($_SESSION['mutfak']['authority'] == '0'){
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-    
+
       <!-- Divider -->
       <hr class="sidebar-divider">
 
-     
+
        <!-- Nav Item - Pages Collapse Menu -->
        <li class="nav-item active">
         <a class="nav-link collapsed" onclick="siparis()" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Siparişler</span>
         </a>
-     
+
       </li>
 
       <!-- Nav Item - Pages Collapse Menu -->
-    
 
-     
-     
+
+
+
 
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
@@ -132,7 +133,7 @@ if($_SESSION['mutfak']['authority'] == '0'){
                     <input type="text" class="form-control bg-light border-0 small" placeholder="Ara" aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                       <button class="btn btn-primary" type="button">
-                     
+
                         <i class="fas fa-search fa-sm"></i>
                       </button>
                     </div>
@@ -141,10 +142,10 @@ if($_SESSION['mutfak']['authority'] == '0'){
               </div>
             </li>
 
-            
+
 
             <!-- Nav Item - Messages -->
-           
+
 
             <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -156,8 +157,8 @@ if($_SESSION['mutfak']['authority'] == '0'){
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                
-                
+
+
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Çıkış Yap
@@ -176,7 +177,7 @@ if($_SESSION['mutfak']['authority'] == '0'){
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h1 mb-0 text-gray-800" id="page_title">Zeki Usta Mutfak</h1>
-          
+
           </div>
 
           <!-- Content Row -->
@@ -227,7 +228,7 @@ if($_SESSION['mutfak']['authority'] == '0'){
                         <div class="col-auto">
                           <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="iptal">0</div>
                         </div>
-                        
+
                       </div>
                     </div>
                     <div class="col-auto">
@@ -258,43 +259,36 @@ if($_SESSION['mutfak']['authority'] == '0'){
 
           <!-- Content Row -->
 
-    
+
   <div id="data_container">
-    <div class='row'>  
+    <div class='row'>
 
 <div class='col-md-8'>
    <!-- DataTales Example -->
  <div class="card shadow mb-4" id="table_display">
-          
+
     </div>
-          
-    
+
+
   </div>
   <div class='col-md-4'>
    <!-- DataTales Example -->
  <div class="card shadow mb-4 "  >
             <div class="card-header py-3 " >
-              <h6 class="m-0 font-weight-bold text-primary d-inline " id="table_info">Siparis Detaylari</h6> 
-              <i class="fa fa-pencil-alt  float-right" onclick='alert("demo")'></i>
-            
-            </div>
+              <h6 class="m-0 font-weight-bold text-primary d-inline " id="table_info">Siparis Detaylari</h6>
+              <i class="fa fa-pencil-alt  float-right"  onclick='getShowOrder()'></i>
 
-            
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table " id="orderdetail"  cellspacing="0">
-                  
-                </table>
-              </div>
             </div>
-          </div>
-          
-    
+            <div id="orderdetail"> </div>
+
+
+
+
   </div>
   </div>
 </div>
-  
-  
+
+
 
 
         </div>
@@ -344,17 +338,22 @@ if($_SESSION['mutfak']['authority'] == '0'){
   </div>
 
   <script>
+  var globalUrl='http://localhost:81/';
+  var orderId = '';
+  var kurye = '' ;
+  var kuryeId = '' ;
     window.onload = function() {
       title_data_rename();
       tableRender(1);
+      getkurye();
     };
 
 
 function title_data_rename(){
-      $.ajax({ 
-        type: 'GET', 
-        url: 'http://localhost:81/kitchen/detail/count', 
-        success: function (data) { 
+      $.ajax({
+        type: 'GET',
+        url: globalUrl +'kitchen/detail/count',
+        success: function (data) {
           let order_detail =  JSON.parse ( data) ;
           $("#hazirlanacak").html( order_detail.hazirlanacak  );
           $("#hazirlanan").html( order_detail.hazirlanan  );
@@ -364,42 +363,82 @@ function title_data_rename(){
       });
 };
 
-  
+
 
         function mtsearch(){
           const serachVal =  $('#searchValue').val();
-            $.ajax({ 
-                type: 'GET', 
-                url: 'http://localhost:81/private/kitchen/data/table.php?search=ok&id='+serachVal, 
-                success: function (data) { 
+            $.ajax({
+                type: 'GET',
+                url: globalUrl + 'private/kitchen/data/table.php?search=ok&id='+serachVal,
+                success: function (data) {
                   $('#table_display').html(data);
                 }
             });
         };
 
         function tableRender(val){
-          $.ajax({ 
-                type: 'GET', 
-                url: 'http://localhost:81/private/kitchen/data/table.php?id='+val, 
-                success: function (data) { 
+          $.ajax({
+                type: 'GET',
+                url: globalUrl + 'private/kitchen/data/table.php?id='+val,
+                success: function (data) {
                   $('#table_display').html(data);
                 }
             });
         }
 
         function orderDetayTable(val){
-          $('#table_info').html(val + ' \'olu Sipariş Detayı');
-          $.ajax({ 
-                type: 'GET', 
-                url: 'http://localhost:81/private/kitchen/data/orderDetail.php?id='+val, 
-                success: function (data) { 
+        orderId = val ;
+          $('#table_info').html(val + ' \'nolu Sipariş Detayı');
+          $.ajax({
+                type: 'GET',
+                url: globalUrl + 'private/kitchen/data/orderDetail.php?id='+val,
+                success: function (data) {
                   $('#orderdetail').html(data);
                 }
             });
         }
 
+        function getkurye(){
+          $.ajax({
+                type: 'GET',
+                url: globalUrl + 'kitchen/kurye',
+                success: function (data) {
+                  kurye = data;
+                }
+            });
+        }
 
-  
+        function getShowOrder(){
+          if(orderId == '' ){
+            alert('siparis seciniz') ;
+            return ;
+          }
+
+
+          let id = orderId ;
+        //  console.log(kurye);
+          Swal.fire({
+            title: ''+id.toString()+'\'li siparis icin Kurye Seciniz',
+            type: 'info',
+            html: kurye,
+            showCloseButton: true,
+            showCancelButton: true,
+            focusConfirm: false,
+            confirmButtonText:
+              '<i class="fa fa-thumbs-up"></i> Fis Al',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+            cancelButtonText:
+              '<i class="fa fa-thumbs-down"> Iptal Et</i>',
+            cancelButtonAriaLabel: 'Thumbs down',
+          })
+        }
+
+        function addkurye(id){
+          kuryeId = id ;
+        }
+
+
+
   </script>
   <!-- Bootstrap core JavaScript-->
   <script src="/../../../order_confirmation/vendor/jquery/jquery.min.js"></script>

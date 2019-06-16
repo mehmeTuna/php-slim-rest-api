@@ -6,6 +6,10 @@ require_once __DIR__ .'/../../../database/connect.php';
 
 require_once __DIR__ . '/../product/create.php';
 
+require_once __DIR__ . '/../../Ip/Ip.php' ;
+require_once __DIR__ .'/../../time/timestamp.php';
+use Ip ;
+use formattimestamp ;
 
 //trait
 require_once __DIR__ . '/Config.php';
@@ -431,7 +435,7 @@ class Data{
       if( !is_numeric($id) )
         return false ;
 
-        $sql = "select name from {$this->category}";
+        $sql = "select name from {$this->category} where id=".$id;
         $status = [] ;
 
          try{
@@ -459,6 +463,7 @@ class Data{
             foreach ($result as $key => $value) {
              array_push($status ,
              [
+               'id'=>$value['id'],
                'name'=>$value['name'],
                'price'=>$value['price'],
                'numberOfProduct'=>$value['numberOfProduct'],
@@ -501,7 +506,7 @@ class Data{
             foreach ($result as $key => $value) {
              array_push($status ,
              [
-               'surname'=>$value['surname'],
+               'firstname'=>$value['firstname'],
                'lastname'=>$value['lastname'],
                'date'=>$value['date'],
                'username'=>$value['username'] ,
@@ -516,8 +521,64 @@ class Data{
     }
 
 
-    public function newKurye(){
-      
+    public function newKurye($data){
+      $data['id'] = rand(1000 , 100000);
+      $data['username'] = strip_tags(trim($data['username']));
+      $data['firstname'] = strip_tags(trim($data['firstname']));
+      $data['lastname'] = strip_tags(trim($data['lastname']));
+
+         if( isset($data['password']) && strlen($data['password']) > 0)
+          $data['password'] = password_hash(trim($data['password']) , PASSWORD_DEFAULT );
+
+
+      $time = new Ttime();
+
+        $data['date'] =  $time->gettime();
+      $worker = 'insert into kurye (firstname,lastname,date,username,password,id) values (:firstname,:lastname,:date,:username,:password,:id)';
+
+      try{
+        $statement = $this->db->prepare($worker);
+        $statement->execute($this->data);
+        return json_encode( ['status' => 'ok'], JSON_UNESCAPED_UNICODE);
+
+      }catch(PDOException $e){
+          $this->dbErr = false;
+          return json_encode( ['status'=>'kaydetme sorunu'], JSON_UNESCAPED_UNICODE) ;
+      }
+
+    }
+
+    public function delkurye($email = ''){
+      if($email == '')
+        return json_encode( ['status'=>'gecerli email giriniz'], JSON_UNESCAPED_UNICODE);
+
+      $sql = 'delete from kurye where username="'.strip_tags(trim($mail)).'"';
+      try{
+        $statement = $this->db->prepare($sql);
+        $statement->execute();
+        return json_encode( ['status' => 'ok'], JSON_UNESCAPED_UNICODE);
+
+      }catch(PDOException $e){
+          $this->dbErr = false;
+          return json_encode( ['status'=>'kayit silinemedi'], JSON_UNESCAPED_UNICODE) ;
+      }
+    }
+
+    public function delproduct($id){
+      if($id == '')
+        return json_encode( ['status'=>'gecerli id giriniz'], JSON_UNESCAPED_UNICODE);
+
+      $sql = 'delete from products where id="'.strip_tags(trim($id)).'"';
+      try{
+        $statement = $this->db->prepare($sql);
+        $statement->execute();
+        return json_encode( ['status' => 'ok'], JSON_UNESCAPED_UNICODE);
+    
+      }catch(PDOException $e){
+          $this->dbErr = false;
+          return json_encode( ['status'=>'kayit silinemedi'], JSON_UNESCAPED_UNICODE) ;
+      }
+
     }
 
 

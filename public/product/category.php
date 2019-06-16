@@ -12,7 +12,7 @@ use PDO ;
  * @package Product
  */
 class Category {
-    private $connect ; 
+    private $connect ;
     private $tableName ="products";
     private $name ="" ;
     private $piece = "10" ;
@@ -28,10 +28,10 @@ class Category {
       $this->connect = $connect->conn ;
    }
 
-   
+
    public function name($_name){
     $this->name = strip_tags( trim($_name) ) ;
-    return $this; 
+    return $this;
    }
 
    public function piece($_piece){
@@ -39,10 +39,10 @@ class Category {
        return $this;
    }
 
-   
+
     public function page($_page){
        $this->page = strip_tags( trim($_page) ) ;
-       return $this; 
+       return $this;
    }
 
    public function column($_column){
@@ -65,17 +65,17 @@ class Category {
    public function run(){
        if($this->name == "all")
         $where = "" ;
-       else 
-        $where = " where categoryId = '{$this->name}' " ;  
-    
+       else
+        $where = " where categoryId = '{$this->name}' " ;
+
        $limit = "Order By id ASC LIMIT ". $this->page*10 ." , 10";
 
        $add= "select {$this->column} from {$this->tableName}  {$where} {$limit}" ;
        $item = array();
-      
+
        try{
         $query = $this->connect->query( $add ,  PDO::FETCH_ASSOC);
-        
+
         if($query->rowCount()){
             foreach ($query as $value) {
                 array_push($item , $value );
@@ -87,10 +87,10 @@ class Category {
      }
 
     }
- 
+
 
    public function __destruct(){
-     
+
    }
 
 }
