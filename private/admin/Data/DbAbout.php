@@ -8,6 +8,7 @@ require_once __DIR__ . '/../product/create.php';
 
 require_once __DIR__ . '/../../Ip/Ip.php' ;
 require_once __DIR__ .'/../../time/timestamp.php';
+
 use Ip\ip ;
 use formattimestamp\Ttime ;
 
@@ -539,7 +540,7 @@ class Data{
 
       try{
         $statement = $this->db->prepare($worker);
-        $statement->execute($this->data);
+        $statement->execute($data);
         return json_encode( ['status' => 'ok'], JSON_UNESCAPED_UNICODE);
 
       }catch(PDOException $e){
