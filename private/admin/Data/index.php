@@ -1,12 +1,15 @@
 <?php
+
 namespace Api ;
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
 
 require_once __DIR__ . '/DbAbout.php' ;
 
 use Admin\Data ;
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: *");
+
 
 
 $api = new Data();

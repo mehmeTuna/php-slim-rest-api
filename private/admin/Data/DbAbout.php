@@ -8,8 +8,8 @@ require_once __DIR__ . '/../product/create.php';
 
 require_once __DIR__ . '/../../Ip/Ip.php' ;
 require_once __DIR__ .'/../../time/timestamp.php';
-use Ip ;
-use formattimestamp ;
+use Ip\ip ;
+use formattimestamp\Ttime ;
 
 //trait
 require_once __DIR__ . '/Config.php';
@@ -17,7 +17,7 @@ require_once __DIR__ . '/Config.php';
 
 use DATABASE\Database ;
 use PDO;
-use Admin\Product ;
+use Admin\Product\Create ;
 
 class Data{
 

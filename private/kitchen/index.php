@@ -463,6 +463,7 @@ function title_data_rename(){
 
         function addkurye(id){
           kuryeId = id ;
+          alert(kuryeId);
         }
 
 
