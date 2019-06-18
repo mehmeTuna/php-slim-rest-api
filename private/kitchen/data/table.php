@@ -89,7 +89,7 @@ Gosterilecek Veri bulunmamaktadir
                 <td> <?=$orderId ?></td>
                
             </tr>
-                <?php }?>
+                <?php } ?>
             </tbody>
         </table>
     </div>

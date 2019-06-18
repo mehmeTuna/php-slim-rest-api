@@ -104,6 +104,10 @@ RewriteRule ^admin/api/allCateogry$                                         ./pr
 RewriteRule ^admin/api/newProduct$                                          ./private/Admin/Data/index.php?api=newProduct
 RewriteRule ^admin/api/allKurye$                                            ./private/Admin/Data/index.php?api=allKurye
 RewriteRule ^admin/api/newKurye$                                            ./private/Admin/Data/index.php?api=newKurye
+RewriteRule ^admin/api/kurye/del/([a-z0-9_-]+)$                             ./private/Admin/Data/index.php?api=delkurye&email=$1
+RewriteRule ^admin/api/product/del/([a-z0-9_-]+)$                           ./private/Admin/Data/index.php?api=delproduct&id=$1
+RewriteRule ^kitchen/kurye$                                                 ./private/kitchen/data/kurye.php
+
 
 
 RewriteRule ^admin/api/allproduct$                                         ./private/Admin/Data/index.php?api=allProduct

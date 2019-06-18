@@ -210,7 +210,7 @@ class Data{
 
         //gunluk satislar
     public function getThisDayOrder(){
-        $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) , ltrim(date('d') , 0 ) , 2019 );
+        $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) , ltrim(date('d') , 0 ) , date('Y') );
 
         $add= "select * from {$this->order} where m_date >=". $createMkTime  ;
         $result = array('orderAmount'=>0 , 'count'=>0,'status'=>array(0 => 0 , 1 => 0 , 2 => 0),'orderStatus'=>array());
@@ -240,7 +240,7 @@ class Data{
 
      //aylik satislar
     public function getThisMonthOrder(){
-        $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) , 1 , 2019 );
+        $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) , 1 , date('Y') );
 
         $add= "select * from {$this->order} where m_date >=". $createMkTime  ;
         $result = array('orderAmount'=>0 , 'count'=>0,'status'=>array(0 => 0 , 1 => 0 , 2 => 0),'orderStatus'=>array());
@@ -270,7 +270,7 @@ class Data{
 
          //gunluk kredili ve nakit satis miktarlari
     public function getThisDayPayment(){
-        $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  ltrim(date('d'))  , 2019 );
+        $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  ltrim(date('d') , 0)  , date('Y') );
 
         $add= "select * from {$this->order} where m_date >=". $createMkTime  ;
         $result = array('kapidaNakit'=>0 , 'kapidaKartla'=>0 , 'krediKarti'=>0);
@@ -304,7 +304,7 @@ class Data{
 
              //gunluk kredili ve nakit satis miktarlari
     public function getThisMonthPayment(){
-        $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  1 , 2019 );
+        $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  1 , date('Y') );
 
         $add= "select * from {$this->order} where m_date >=". $createMkTime  ;
         $result = array('kapidaNakit'=>0 , 'kapidaKartla'=>0 , 'krediKarti'=>0);
@@ -337,7 +337,8 @@ class Data{
 
         //gunluk iptal olan siparisler
     public function thisDayiptalOrder(){
-        $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  ltrim(date('d'))  , 2019 );
+
+        $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  ltrim(date('d') , 0)  , date('Y') );
 
         $add= "select count(*) from {$this->order} where m_date >=". $createMkTime  . ' and  m_status=2' ;
         $result = array('iptalCount'=>0 );
@@ -362,7 +363,7 @@ class Data{
 
             //aylik iptal olan siparisler
     public function thisMonthiptalOrder(){
-        $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  1  , 2019 );
+        $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  1  , date('Y') );
 
         $add= "select count(*) from {$this->order} where m_date >=". $createMkTime  . ' and  m_status=2' ;
         $result = array('iptalCount'=>0 );
@@ -386,7 +387,7 @@ class Data{
 
         //gunluk toplam satis
     public function thisDaymany(){
-        $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) , ltrim(date('d'))   , 2019 );
+        $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) , ltrim(date('d') , 0)   , date('Y') );
 
         $add= "select sum(order_amount) as toplam from {$this->order} where m_date >=". $createMkTime   ;
         $result = array('toplam'=>0 );
@@ -410,7 +411,7 @@ class Data{
 
     //aylik toplam satis miktari
     public function thisMonthmany(){
-        $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) , 1   , 2019 );
+        $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) , 1   , date('Y') );
 
         $add= "select sum(order_amount) as toplam from {$this->order} where m_date >=". $createMkTime   ;
         $result = array('toplam'=>0 );
@@ -552,7 +553,7 @@ class Data{
       if($email == '')
         return json_encode( ['status'=>'gecerli email giriniz'], JSON_UNESCAPED_UNICODE);
 
-      $sql = 'delete from kurye where username="'.strip_tags(trim($mail)).'"';
+      $sql = 'delete from kurye where username="'.strip_tags(trim($email)).'"';
       try{
         $statement = $this->db->prepare($sql);
         $statement->execute();

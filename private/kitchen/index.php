@@ -1,13 +1,15 @@
 <?php
 
 session_start();
+require_once  __DIR__ .'/../../Config.php';
 
 if(!isset($_SESSION["mutfak"])){
   header("location: ../mutfak");
   exit;
 }
 $username = (isset($_SESSION['mutfak']['name'])) ? $_SESSION['mutfak']['name'] : '' ;
-
+$siteName = (new WebRoot)->name();
+$siteUrl = (new WebRoot)->url();
 
 
 
@@ -29,7 +31,7 @@ if($_SESSION['mutfak']['authority'] == '0'){
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Zeki Usta Mutfak</title>
+  <title><?php echo $siteName ?> Mutfak</title>
 
   <!-- Custom fonts for this template-->
   <link href="/../../../order_confirmation/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -57,7 +59,7 @@ if($_SESSION['mutfak']['authority'] == '0'){
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Zeki Usta</div>
+        <div class="sidebar-brand-text mx-3"><?php echo $siteName ?></div>
       </a>
 
       <!-- Divider -->
@@ -153,7 +155,7 @@ if($_SESSION['mutfak']['authority'] == '0'){
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?=$username?></span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60" alt="tuna">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -176,7 +178,7 @@ if($_SESSION['mutfak']['authority'] == '0'){
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h1 mb-0 text-gray-800" id="page_title">Zeki Usta Mutfak</h1>
+            <h1 class="h1 mb-0 text-gray-800" id="page_title"><?php echo $siteName  ?> Mutfak</h1>
 
           </div>
 
@@ -185,11 +187,11 @@ if($_SESSION['mutfak']['authority'] == '0'){
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4" onclick="tableRender(1)" >
-              <div class="card border-left-success shadow h-100 py-2">
+              <div id="table1" class="card border-left-success text-success shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center" >
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1" >hHazirlanacak Siparisler</div>
+                      <div class="text-xs font-weight-bold  text-uppercase mb-1" >hHazirlanacak Siparisler</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800" id="hazirlanacak">0</div>
                     </div>
                     <div class="col-auto">
@@ -202,11 +204,11 @@ if($_SESSION['mutfak']['authority'] == '0'){
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4" onclick="tableRender(3)">
-              <div class="card border-left-primary shadow h-100 py-2">
+              <div id="table3" class="card border-left-primary text-primary shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" id="onay_title">Hazirlanan Siparişler </div>
+                      <div class="text-xs font-weight-bold  text-uppercase mb-1" id="onay_title">Hazirlanan Siparişler </div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800" id="hazirlanan">0</div>
                     </div>
                     <div class="col-auto">
@@ -219,11 +221,11 @@ if($_SESSION['mutfak']['authority'] == '0'){
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4" onclick="tableRender(4)">
-              <div class="card border-left-danger shadow h-100 py-2">
+              <div id="table4" class="card border-left-danger text-danger shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1" id="iptal_title">İptal Edilen Siparişler</div>
+                      <div class="text-xs font-weight-bold text-uppercase mb-1" id="iptal_title">İptal Edilen Siparişler</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
                           <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="iptal">0</div>
@@ -240,11 +242,11 @@ if($_SESSION['mutfak']['authority'] == '0'){
             </div>
                <!-- Earnings (Monthly) Card Example -->
                <div class="col-xl-3 col-md-6 mb-4" onclick="tableRender(5)">
-              <div class="card border-left-primary shadow h-100 py-2">
+              <div id='table5' class="card border-left-primary text-primary shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" id="kurye_title">Kuryeye Verilen Siparişler </div>
+                      <div class="text-xs font-weight-bold  text-uppercase mb-1" id="kurye_title">Kuryeye Verilen Siparişler </div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800" id="kurye">0</div>
                     </div>
                     <div class="col-auto">
@@ -338,7 +340,7 @@ if($_SESSION['mutfak']['authority'] == '0'){
   </div>
 
   <script>
-  var globalUrl='http://localhost:81/';
+  var globalUrl='<?php echo $siteUrl ?>/';
   var orderId = '';
   var kurye = '' ;
   var kuryeId = '' ;
@@ -346,6 +348,7 @@ if($_SESSION['mutfak']['authority'] == '0'){
       title_data_rename();
       tableRender(1);
       getkurye();
+      btnBackground(1);
     };
 
 
@@ -361,7 +364,7 @@ function title_data_rename(){
           $('#kurye').html(order_detail.kurye);
         }
       });
-};
+}
 
 
 
@@ -374,9 +377,34 @@ function title_data_rename(){
                   $('#table_display').html(data);
                 }
             });
-        };
+        }
+
+        function  btnBackground(opt){
+    if(opt == 1){
+        $('#table1').addClass('card bg-success text-light shadow h-100 py-2');
+        $('#table3').removeClass('card bg-primary text-light shadow h-100 py-2').addClass('card border-left-primary text-primary shadow h-100 py-2');
+        $('#table4').removeClass('card bg-danger text-light shadow h-100 py-2').addClass('card border-left-danger text-danger shadow h-100 py-2 ');
+        $('#table5').removeClass('card bg-primary text-light shadow h-100 py-2').addClass('card border-left-primary text-primary shadow h-100 py-2');
+    }else if(opt ==3){
+        $('#table1').removeClass('card bg-success text-light shadow h-100 py-2').addClass('card border-left-success text-success shadow h-100 py-2');
+        $('#table3').addClass('card bg-primary text-light shadow h-100 py-2');
+        $('#table4').removeClass('card bg-danger text-light shadow h-100 py-2').addClass('card border-left-danger text-danger shadow h-100 py-2 ');
+        $('#table5').removeClass('card bg-primary text-light shadow h-100 py-2').addClass('card border-left-primary text-primary shadow h-100 py-2');
+    }else if(opt == 4){
+        $('#table1').removeClass('card bg-success text-light shadow h-100 py-2').addClass('card border-left-success text-success shadow h-100 py-2');
+        $('#table3').removeClass('card bg-primary text-light shadow h-100 py-2').addClass('card border-left-primary text-primary shadow h-100 py-2');
+        $('#table4').addClass('card bg-danger text-light shadow h-100 py-2');
+        $('#table5').removeClass('card bg-primary text-light shadow h-100 py-2').addClass('card border-left-primary text-primary shadow h-100 py-2');
+    }else if(opt == 5){
+        $('#table1').removeClass('card bg-success text-light shadow h-100 py-2').addClass('card border-left-success text-success shadow h-100 py-2');
+        $('#table3').removeClass('card bg-primary text-light shadow h-100 py-2').addClass('card border-left-primary text-primary shadow h-100 py-2');
+        $('#table4').removeClass('card bg-danger text-light shadow h-100 py-2').addClass('card border-left-danger text-danger shadow h-100 py-2 ');
+        $('#table5').addClass('card bg-primary text-light shadow h-100 py-2');
+    }
+         }
 
         function tableRender(val){
+        btnBackground(val);
           $.ajax({
                 type: 'GET',
                 url: globalUrl + 'private/kitchen/data/table.php?id='+val,

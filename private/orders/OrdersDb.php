@@ -24,12 +24,12 @@ class Add {
     { 
         $this->db = new Database();
         $this->db = $this->db->conn ;  
-        $this->data = array(
+        $this->data = [
           "ip"=>ip::getIp(),
           "m_date"=>Ttime::gettime(),
           "order_id"=>rand(10000,99999),
           "m_status"=>"0",
-        );   
+        ];
     }
     
 

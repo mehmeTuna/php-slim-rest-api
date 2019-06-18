@@ -4,11 +4,8 @@ header("Access-Control-Allow-Headers: *");
 
  session_start();
 
-require_once __DIR__ . '/../../database/connect.php' ;
-use DATABASE\Database ; 
-
-$uri = new Database();
-$uri = $uri->url ;
+require_once  __DIR__ . '/../../Config.php' ;
+$uri = (new WebRoot)->url() ;
 
 if(isset($_SESSION)){
     session_destroy() ;

@@ -27,11 +27,11 @@ if(!isset($_SESSION["operator"])){
 
 
     $details = new Database();
-   
-    
-   $waiting= "SELECT count(*) from rezervasyon where m_status = '0'" ;
-   $red = "SELECT count(*) from rezervasyon where m_status = '2'" ;
-   $ok = "SELECT count(*) from rezervasyon where m_status = '1'" ;
+
+$thisDayTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  ltrim(date('d') , 0)  , ltrim(date('Y') , 0 )  );
+   $waiting= "SELECT count(*) from rezervasyon where m_status = '0' and time>='".$thisDayTime."'" ;
+   $red = "SELECT count(*) from rezervasyon where m_status = '2' and time>='".$thisDayTime."'" ;
+   $ok = "SELECT count(*) from rezervasyon where m_status = '1' and time>='".$thisDayTime."'" ;
   
    try{
     $query = $details->conn->query( $waiting ,  PDO::FETCH_ASSOC);
@@ -57,12 +57,6 @@ if(!isset($_SESSION["operator"])){
             $ok = $value["count(*)"] ;
         }
     }
-
-
-
-
-
-
 
     $waiting = array(
         "waiting"=>$waiting,

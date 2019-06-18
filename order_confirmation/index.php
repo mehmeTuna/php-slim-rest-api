@@ -12,6 +12,9 @@ if($_SESSION['operator']['authority'] == '0'){
  exit ;
 }
 
+require_once  __DIR__ . '/../Config.php';
+$siteName = (new WebRoot)->name();
+$siteUrl = (new WebRoot)->url();
 
 ?>
 
@@ -26,7 +29,7 @@ if($_SESSION['operator']['authority'] == '0'){
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>tel onay</title>
+  <title><?php echo $siteName ?> tel onay</title>
 
   <!-- Custom fonts for this template-->
   <link href="order_confirmation/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -53,7 +56,7 @@ if($_SESSION['operator']['authority'] == '0'){
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Zeki Usta</div>
+        <div class="sidebar-brand-text mx-3"><?php echo $siteName ?></div>
       </a>
 
       <!-- Divider -->
@@ -61,7 +64,7 @@ if($_SESSION['operator']['authority'] == '0'){
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" onclick="siparis()">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Siparişler</span></a>
       </li>
@@ -190,12 +193,12 @@ if($_SESSION['operator']['authority'] == '0'){
           <div class="row">
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4" onclick="control_gelen()">
-              <div class="card border-left-success shadow h-100 py-2">
+            <div class="col-xl-4 col-md-6 mb-4" onclick="control_gelen('gelenbtn')">
+              <div id="gelenbtn" class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1" id="gelen_title">Gelen Siparişler</div>
+                      <div class="text-xs font-weight-bold text-uppercase mb-1" id="gelen_title">Gelen Siparişler</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800" id="gelen_num">0</div>
                     </div>
                     <div class="col-auto">
@@ -207,12 +210,12 @@ if($_SESSION['operator']['authority'] == '0'){
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4" onclick="control_onay()">
-              <div class="card border-left-primary shadow h-100 py-2">
+            <div class="col-xl-4 col-md-6 mb-4" onclick="control_onay('onaybtn')">
+              <div id="onaybtn" class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" id="onay_title">Onaylanan Siparişler </div>
+                      <div class="text-xs font-weight-bold  text-uppercase mb-1" id="onay_title">Onaylanan Siparişler </div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800" id="onaylanan">0</div>
                     </div>
                     <div class="col-auto">
@@ -224,12 +227,12 @@ if($_SESSION['operator']['authority'] == '0'){
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4" onclick="control_iptal()">
-              <div class="card border-left-danger shadow h-100 py-2">
+            <div class="col-xl-4 col-md-6 mb-4" onclick="control_iptal('iptalbtn')">
+              <div id='iptalbtn' class="card border-left-danger shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1" id="iptal_title">İptal Olan Siparişler</div>
+                      <div class="text-xs font-weight-bold  text-uppercase mb-1" id="iptal_title">İptal Olan Siparişler</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
                           <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="iptal_edilen">0</div>
@@ -328,14 +331,16 @@ if($_SESSION['operator']['authority'] == '0'){
   <script>
   
 var durum = "siparis" ;//siparis or rezervasyon
-var siteUrl = 'http://localhost:81/';
+var siteUrl = '<?php echo $siteUrl ?>/';
 
 
 window.onload = function() {
+    var firstsession = 'gelen';
  title_rename();
  title_data_rename();
  titleTable();
- create_user_render("gelen"); 
+ create_user_render(firstsession);
+ btnBackground(firstsession);
 };
 
  function mtSearch(){
@@ -347,7 +352,21 @@ window.onload = function() {
   }
 }
 
-
+function btnBackground(opt){
+  if(opt == 'gelen'){
+      $('#onaybtn').removeClass('card bg-info text-light shadow h-100 py-2').addClass('card border-left-info text-info shadow h-100 py-2');
+      $('#iptalbtn').removeClass('card bg-danger text-light shadow h-100 py-2').addClass('card border-left-danger text-danger shadow h-100 py-2');
+      $('#gelenbtn').addClass('card bg-success text-light shadow h-100 py-2');
+  }else if(opt == 'onay'){
+      $('#onaybtn').addClass('card bg-info text-light shadow h-100 py-2');
+      $('#iptalbtn').removeClass('card bg-danger text-light shadow h-100 py-2').addClass('card border-left-danger text-danger shadow h-100 py-2');
+      $('#gelenbtn').removeClass('card bg-success text-light shadow h-100 py-2').addClass('card border-left-success text-success shadow h-100 py-2');
+  }else if(opt == 'iptal'){
+      $('#onaybtn').removeClass('card bg-info text-light shadow h-100 py-2').addClass('card border-left-info text-info shadow h-100 py-2');
+      $('#iptalbtn').addClass('card bg-danger text-light shadow h-100 py-2');
+      $('#gelenbtn').removeClass('card bg-success text-light shadow h-100 py-2').addClass('card border-left-success text-success shadow h-100 py-2');
+  }
+}
 
 
 function create_rezervasyon_render(option , yontem = ''){
@@ -392,9 +411,6 @@ function create_rezervasyon_render(option , yontem = ''){
 
 }
 
-
-
-
 function create_user_render(option , yontem = ''){
   if(yontem == 'search'){
        $.ajax({ 
@@ -437,9 +453,6 @@ function create_user_render(option , yontem = ''){
   });
   }
 }
-
-
-
 
 
 function title_rename(){
@@ -500,7 +513,6 @@ function create_user(obj ){
           '</tr>';
 }
 
-
 function create_rezervasyon(obj ){
     obj.date = HMtime( obj.date );
 
@@ -515,7 +527,6 @@ function create_rezervasyon(obj ){
 }
 
 
-
 function rezervasyon() {
   durum = "rezervasyon" ;
   titleTable();
@@ -525,7 +536,6 @@ function rezervasyon() {
 }
 
 
-
 function siparis() {
     durum = "siparis";
       titleTable();
@@ -533,8 +543,6 @@ function siparis() {
       title_data_rename();
       create_user_render("gelen");
 }
-
-
 
 
 function  titleTable(){
@@ -582,12 +590,6 @@ function  titleTable(){
 function HMtime(timestamp){
   return timestamp ;
 }
-
-
-
-
-
-
 
 function edit_rezervasyon_detay(id){
  
@@ -757,6 +759,8 @@ function edit_order_detay(id,username,tutar,tel,adres){
 
 
 function control_gelen(){
+    btnBackground('gelen');
+
   title_data_rename();
   if(durum == "siparis")
   create_user_render("gelen" );
@@ -766,6 +770,7 @@ function control_gelen(){
 
 
 function control_onay(){
+    btnBackground('onay');
   title_data_rename();
   if(durum == "siparis")
   create_user_render("onay" );
@@ -775,6 +780,7 @@ function control_onay(){
 
 
 function control_iptal(){
+    btnBackground('iptal');
   title_data_rename();
   if(durum == "siparis")
   create_user_render("iptal" );

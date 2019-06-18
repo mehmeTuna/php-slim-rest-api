@@ -30,17 +30,19 @@ use PDO;
 class Data {
     private $db ;
     public $orderCount = array();
+    private $thisDayTime = '';
 
     public function __construct()
     {
        $this->db = new Database();
        $this->db = $this->db->conn ;
+       $this->thisDayTime =  $thisDayTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  ltrim(date('d') , 0)  , ltrim(date('Y') , 0 )  );
     }
 
 
 
     public function Bringdata($val , $name){
-        $sql = 'select count(*) from order_items where m_status=' . $val;
+        $sql = 'select count(*) from order_items where m_status="' . $val . '" and m_date >="'.$this->thisDayTime.'"';
 
         try{
             $query = $this->db->query( $sql ,  PDO::FETCH_ASSOC);
@@ -58,7 +60,7 @@ class Data {
         $val = strip_tags( $val ) ;
         if( ! is_numeric( $val ) )
         return $result ;
-        $sql = 'select orders,user_id,m_date,order_id from order_items where m_status=' . $val  . ' order by m_date asc';
+        $sql = 'select orders,user_id,m_date,order_id from order_items where m_status="' . $val . '" and m_date >="'.$this->thisDayTime.'"'. ' order by m_date asc';
         $thisResult = array();
         try{
             $query = $this->db->query( $sql ,  PDO::FETCH_ASSOC);
