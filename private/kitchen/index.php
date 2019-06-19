@@ -521,8 +521,10 @@ if ( $_SESSION[ 'mutfak' ][ 'authority' ] == '0' ) {
                     if (res.status == 'ok') {
                         refreshData();
                         swal.fire("Siparis onaylandi ve fis ciktisi verilecek");
+                        refreshData();
                     } else {
                         swal.fire(res.status);
+                        refreshData();
                     }
                 }
             });
