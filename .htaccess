@@ -79,6 +79,8 @@ RewriteRule ^mutfak/giris$                                                 ./pri
 RewriteRule ^mutfak/home$                                                  ./private/kitchen/index.php
 RewriteRule ^mutfak$                                                       ./private/kitchen/login.html
 RewriteRule ^kitchen/detail/count$                                         ./private/kitchen/data/orderData.php
+RewriteRule ^kitchen/order/iptal/([a-z0-9_-]+)$                            ./private/kitchen/data/index.php?api=iptal&id=$1
+RewriteRule ^kitchen/order/onay/([a-z0-9_-]+)/([a-z0-9_-]+)$               ./private/kitchen/data/index.php?api=onay&id=$1&kuryeId=$2
 
 RewriteRule ^admin/home$                                                    ./private/Admin/index.php
 RewriteRule ^admin/giris$                                                   ./private/Admin/Login.html
