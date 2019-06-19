@@ -23,9 +23,14 @@ class Order {
         $db = new Database();
         $this->conn = $db->conn ;
     }
-  
 
-  
+
+    /**
+     * @param $id
+     * @param $opt
+     * @param string $orderDetail
+     * @return false|string
+     */
     public function run($id , $opt , $orderDetail = ''){
       
       if($orderDetail != '')

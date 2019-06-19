@@ -34,7 +34,7 @@ class Create {
         $this->ip = ip::getIp();
         //demo
         $this->m_status = '0';
-        $this->time = Ttime::gettime();
+        $this->time = (new Ttime)->gettime ();
 
         $this->newRezervasyon = new  Add();
    }

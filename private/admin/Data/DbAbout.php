@@ -9,7 +9,7 @@ require_once __DIR__ . '/../product/create.php';
 require_once __DIR__ . '/../../Ip/Ip.php' ;
 require_once __DIR__ .'/../../time/timestamp.php';
 
-use Ip\ip ;
+use Config;
 use formattimestamp\Ttime ;
 
 //trait
@@ -19,12 +19,17 @@ require_once __DIR__ . '/Config.php';
 use DATABASE\Database ;
 use PDO;
 use Admin\Product\Create ;
+use PDOException;
 
 class Data{
 
     use \Config;
 
     public $db ;
+    /**
+     * @var bool
+     */
+    prıvate $dbErr;
 
     public function __construct()
     {
@@ -49,7 +54,7 @@ class Data{
 
              return json_encode($data , JSON_UNESCAPED_UNICODE);
          }
-      }catch(PDOException $e){
+      }catch( PDOException $e){
           return array(
               'status'=>$e
           ) ;
@@ -113,6 +118,9 @@ class Data{
       }
     }
 
+
+
+
         //all rezervasyon count
     public function getAllRezervasyon(){
         $add= "select count(*) from {$this->RezervasyonTable}" ;
@@ -136,7 +144,7 @@ class Data{
 
     public function getThisMontRezervasyon($month){
         if(!(is_numeric($month) && $month >=1  &&  $month <=12))
-         return json_encode(['status'=>'erorr','type'=>'gecerli tarih giriniz'] , JSON_UNESCAPED_UNICODE);
+         return json_encode(['status'=>'error','type'=>'gecerli tarih giriniz'] , JSON_UNESCAPED_UNICODE);
 
         $thismonth = mktime(0,0,0,$month,1,date('Y'));
         $nowdate = time();
@@ -433,6 +441,96 @@ class Data{
       }
     }
 
+    //gunluk rezervasyon detaylari
+    public function rezervasyonThisDay(){
+        $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) , ltrim(date('d') , 0 ) , date('Y') );
+
+        $add= "select count(*) , m_status,kisi_sayisi  from {$this->RezervasyonTable} where time >=". $createMkTime   ;
+        $result = array('toplam'=>0 ,'wait'=>0,'ok'=>0,'red'=>0,'usercount'=>0);
+
+        try{
+            $query = $this->db->query( $add ,  PDO::FETCH_ASSOC);
+
+            if($query->rowCount()){
+                foreach ($query as $key => $value) {
+                    $result['toplam'] = $value['count(*)']  ;
+                     if($value['m_status'] == 0)
+                          $result['wait']++;
+                     else if($value['m_status'] ==1)
+                          $result['ok']++;
+                     else if($value['m_status'] == 2)
+                          $result['red']++;
+                     $result['usercount'] += $value['kisi_sayisi'];
+                }
+                return json_encode($result, JSON_UNESCAPED_UNICODE);
+            }else return json_encode(['status'=>'not found'] , JSON_UNESCAPED_UNICODE);
+        }catch(PDOException $e){
+            return array(
+                'status'=>$e
+            ) ;
+        }
+    }
+
+    //aylik rezervasyon detaylari
+    public function rezervasyonThisMonth(){
+        $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) , 1 ,  date('Y') );
+
+        $add= "select count(*) , m_status,kisi_sayisi  from {$this->RezervasyonTable} where time >=". $createMkTime   ;
+        $result = array('toplam'=>0 ,'wait'=>0,'ok'=>0,'red'=>0,'usercount'=>0);
+
+        try{
+            $query = $this->db->query( $add ,  PDO::FETCH_ASSOC);
+
+            if($query->rowCount()){
+                foreach ($query as $key => $value) {
+                    $result['toplam'] = $value['count(*)']  ;
+                    if($value['m_status'] == 0)
+                        $result['wait']++;
+                    else if($value['m_status'] ==1)
+                        $result['ok']++;
+                    else if($value['m_status'] == 2)
+                        $result['red']++;
+                    $result['usercount'] += $value['kisi_sayisi'];
+                }
+                return json_encode($result, JSON_UNESCAPED_UNICODE);
+            }else return json_encode(['status'=>'not found'] , JSON_UNESCAPED_UNICODE);
+        }catch(PDOException $e){
+            return array(
+                'status'=>$e
+            ) ;
+        }
+    }
+
+    //yillik rezervasyon detaylari
+    public function rezervasyonThisYear(){
+        $createMkTime = mktime(0,1,0 , 1, 1 ,  date('Y') );
+
+        $add= "select count(*) , m_status,kisi_sayisi  from {$this->RezervasyonTable} where time >=". $createMkTime   ;
+        $result = array('toplam'=>0 ,'wait'=>0,'ok'=>0,'red'=>0,'usercount'=>0);
+
+        try{
+            $query = $this->db->query( $add ,  PDO::FETCH_ASSOC);
+
+            if($query->rowCount()){
+                foreach ($query as $key => $value) {
+                    $result['toplam'] = $value['count(*)']  ;
+                    if($value['m_status'] == 0)
+                        $result['wait']++;
+                    else if($value['m_status'] ==1)
+                        $result['ok']++;
+                    else if($value['m_status'] == 2)
+                        $result['red']++;
+                    $result['usercount'] += $value['kisi_sayisi'];
+                }
+                return json_encode($result, JSON_UNESCAPED_UNICODE);
+            }else return json_encode(['status'=>'not found'] , JSON_UNESCAPED_UNICODE);
+        }catch(PDOException $e){
+            return array(
+                'status'=>$e
+            ) ;
+        }
+    }
+
     public function getCategory($id){
       if( !is_numeric($id) )
         return false ;
@@ -523,7 +621,11 @@ class Data{
     }
 
 
-    public function newKurye($data){
+    /**
+     * @param array $data
+     * @return false|string
+     */
+    public function newKurye($data ){
       $data['id'] = rand(1000 , 100000);
       $data['username'] = strip_tags(trim($data['username']));
       $data['firstname'] = strip_tags(trim($data['firstname']));

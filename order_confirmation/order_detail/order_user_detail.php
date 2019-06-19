@@ -11,6 +11,7 @@ session_start();
 
 use DATABASE\Database ; 
 use PDO ;
+use PDOException;
 
 
 if(!isset($_SESSION["operator"])){
@@ -33,7 +34,9 @@ if(!isset($_SESSION["operator"])){
             
             $tip = strip_tags($_GET['order']) ;
 
-                $waiting= "SELECT order_id,user_id,order_amount,m_date,orders,order_status from order_items where order_id = '{$tip}' ORDER BY m_date ASC" ;
+                $thisDayTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  ltrim(date('d') , 0)  , ltrim(date('Y') , 0 )  );
+
+                $waiting= "SELECT order_id,user_id,order_amount,m_date,orders,order_status from order_items where order_id = '{$tip}' and m_date>='{$thisDayTime}' ORDER BY m_date ASC" ;
                 $order_wait = array();
             
                 try{
@@ -92,8 +95,9 @@ if(isset($_GET["order"])  ){
     else if($_GET["order"] == "iptal" )
      $tip = "2";
 
+    $thisDayTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  ltrim(date('d') , 0)  , ltrim(date('Y') , 0 )  );
 
-    $waiting= "SELECT order_id,user_id,order_amount,m_date,orders,order_status from order_items where m_status = '{$tip}' ORDER BY m_date ASC" ;
+    $waiting= "SELECT order_id,user_id,order_amount,m_date,orders,order_status from order_items where m_status = '{$tip}' and m_date>='{$thisDayTime}' ORDER BY m_date ASC" ;
     $order_wait = array();
    
     try{
