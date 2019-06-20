@@ -24,6 +24,21 @@ foreach($result as $val){
 
    $response = array_map(
        function($val){
+           if(isset($val['m_status'])){
+               if($val['m_status']== 0 ){
+                   $val['m_status'] = 'Sipariş alındı' ;
+               }else if($val['m_status'] == 1 ){
+                   $val['m_status'] = 'Siparişiniz onaylandı';
+               }else if($val['m_status'] == 2){
+                   $val['m_status'] = 'Siparişiniz iptal edildi';
+               }else if ($val['m_status'] == 3){
+                   $val['m_status'] = 'Siparişiniz hazırlandı' ;
+               }else if ($val['m_status'] == 4){
+                   $val['m_status'] = 'Siparişiniz reddedildi' ;
+               }else if ($val['m_status'] == 5){
+                   $val['m_status'] = 'Siparişiniz kuryeye verildi' ;
+               }
+           }
            $val['orders'] = json_decode( $val['orders'] , true ) ; 
             return $val ;
        }, $response
@@ -31,6 +46,6 @@ foreach($result as $val){
 
 
 echo json_encode($response , JSON_UNESCAPED_UNICODE) ; 
-exit ; 
+exit ;
 
 
