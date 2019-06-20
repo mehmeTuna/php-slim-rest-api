@@ -1,9 +1,8 @@
 <?php
 
 namespace Api ;
+require_once __DIR__ .'/../../cors.php';
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: *");
 
 require_once __DIR__ . '/DbAbout.php' ;
 
