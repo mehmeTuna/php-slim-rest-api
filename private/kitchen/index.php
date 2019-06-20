@@ -41,6 +41,10 @@ $siteUrl = ( new WebRoot )->url ();
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
+     <!--pdf generator file -->
+    <script src="http://localhost:81/private/pdf/new/print.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="http://localhost:81/private/pdf/new/print.css">
+
 </head>
 
 <body id="page-top">
@@ -517,7 +521,29 @@ $siteUrl = ( new WebRoot )->url ();
                     }
                     if (res.status == 'ok') {
                         refreshData();
-                        swal.fire("Siparis onaylandi ve fis ciktisi verilecek");
+
+                        Swal.fire({
+                          title: 'Siparis onaylandi ve fis ciktisi verilecek',
+                          //type: 'warning',
+                          showCancelButton: false,
+                          confirmButtonColor: '#3085d6',
+                          cancelButtonColor: '#d33',
+                          confirmButtonText: 'Fisi al'
+                        }).then((result) => {
+                          if (result.value) {
+                            printJS({
+                            printable: 'orderdetail',//yazdiralacak html kismin idsi
+                            type: 'html', // html icin type:'html' olmali
+                            header: '<h3 class="custom-h3">'+orderId+' nolu siparis fisi</h3>', // header belirtir
+                            htmlStyle: '.custom-h3 { color: black;}' ,
+                            headerStyle: 'font-weight: 600;' ,//hedaer style icin kullanilir
+                            maxWidth : 50 ,//max sayfa genisligi
+                            targetStyles: ['*'] ,
+                            documentTitle: orderId+'_siparis_fis' , // kullanici dosya kaydetmek isterse bu isimle kaydedecektir
+                            })
+                          }
+                        })
+
                     } else {
                         swal.fire(res.status);
                     }
