@@ -13,6 +13,11 @@ if( !isset($_GET['api'])){
     exit ;
 } ;
 
+if ( !isset( $_SESSION[ "mutfak" ] ) || $_SESSION[ 'mutfak' ][ 'authority' ] != '2' ) {
+    echo json_encode (['status'=>'yetkisiz islem'] , JSON_UNESCAPED_UNICODE) ;
+    exit;
+}
+
 switch ($_GET['api']){
     case 'iptal':
         echo $api->orderRed ($_GET['id']);

@@ -6,6 +6,10 @@ use KitchenData\Data;
 
 $data = new Data();
 
+if ( !isset( $_SESSION[ "mutfak" ] ) || $_SESSION[ 'mutfak' ][ 'authority' ] == '0' ) {
+   echo 'yetki sahibi degilsiniz' ;
+    exit;
+}
 
 
 //hazirlanacak siparisler

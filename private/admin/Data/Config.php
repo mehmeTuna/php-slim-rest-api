@@ -7,4 +7,5 @@ trait Config{
     private $order = 'order_items';
     private $product = 'products';
     private $kurye = 'kurye';
+    private $kuryeTakip = 'kurye_takip';
 }

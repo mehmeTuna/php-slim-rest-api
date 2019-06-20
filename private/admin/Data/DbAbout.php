@@ -117,6 +117,44 @@ class Data{
     }
 
 
+    public function getmonthorder($month){
+        $thisyear = date('Y') ;
+        $thismonth = ltrim( date('m'),0);
+
+        if( !($month>=0 && $month<=12) )
+             return json_encode(['status'=>'gecerli parametre giriniz'] , JSON_UNESCAPED_UNICODE);
+
+        if($month > $thismonth)
+           $thisyear  = $thisyear-1;
+
+        $createMkTime = mktime(0,1,0 , $thismonth, 1 , $thisyear);
+
+        $add= "select * from {$this->order} where m_status=5 and m_date >=". $createMkTime  ;
+        $result = array('orderAmount'=>0 , 'count'=>0,'status'=>array(0 => 0 , 1 => 0 , 2 => 0),'orderStatus'=>array());
+
+        try{
+            $query = $this->db->query( $add ,  PDO::FETCH_ASSOC);
+
+            if($query->rowCount()){
+                foreach ($query as $key => $value) {
+                    $result['orderAmount'] += $value['order_amount'] ;
+                    $orderData = json_decode( $value['orders'] , true ) ;
+                    $result['status'][$value['order_status']] ++ ;
+
+                    for($a = 0 ; $a  < count($orderData) ; $a++){
+                        $result['count'] += $orderData[$a]['count'] ;
+                    }
+                }
+                return json_encode($result, JSON_UNESCAPED_UNICODE);
+            }else return json_encode(['status'=>'not found'] , JSON_UNESCAPED_UNICODE);
+        }catch(PDOException $e){
+            return array(
+                'status'=>$e
+            ) ;
+        }
+    }
+
+
 
 
         //all rezervasyon count
@@ -219,7 +257,7 @@ class Data{
     public function getThisDayOrder(){
         $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) , ltrim(date('d') , 0 ) , date('Y') );
 
-        $add= "select * from {$this->order} where m_date >=". $createMkTime  ;
+        $add= "select * from {$this->order} where m_status=5 and m_date >=". $createMkTime  ;
         $result = array('orderAmount'=>0 , 'count'=>0,'status'=>array(0 => 0 , 1 => 0 , 2 => 0),'orderStatus'=>array());
 
         try{
@@ -249,7 +287,7 @@ class Data{
     public function getThisMonthOrder(){
         $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) , 1 , date('Y') );
 
-        $add= "select * from {$this->order} where m_date >=". $createMkTime  ;
+        $add= "select * from {$this->order} where m_status=5 and m_date >=". $createMkTime  ;
         $result = array('orderAmount'=>0 , 'count'=>0,'status'=>array(0 => 0 , 1 => 0 , 2 => 0),'orderStatus'=>array());
 
         try{
@@ -279,7 +317,7 @@ class Data{
     public function getThisDayPayment(){
         $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  ltrim(date('d') , 0)  , date('Y') );
 
-        $add= "select * from {$this->order} where m_date >=". $createMkTime  ;
+        $add= "select * from {$this->order} where m_status=5 and m_date >=". $createMkTime  ;
         $result = array('kapidaNakit'=>0 , 'kapidaKartla'=>0 , 'krediKarti'=>0);
 
         try{
@@ -287,7 +325,7 @@ class Data{
 
          if($query->rowCount()){
              foreach ($query as $key => $value) {
-                 //0 = kapida odeme
+                //0 = kapida odeme
                 //1= kartla kapida odeme
                 //2 = kredi karti ile odeme
                 if($value['order_status'] == 0)
@@ -313,7 +351,7 @@ class Data{
     public function getThisMonthPayment(){
         $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  1 , date('Y') );
 
-        $add= "select * from {$this->order} where m_date >=". $createMkTime  ;
+        $add= "select * from {$this->order} where m_status=5 and m_date >=". $createMkTime  ;
         $result = array('kapidaNakit'=>0 , 'kapidaKartla'=>0 , 'krediKarti'=>0);
 
         try{
@@ -396,7 +434,7 @@ class Data{
     public function thisDaymany(){
         $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) , ltrim(date('d') , 0)   , date('Y') );
 
-        $add= "select sum(order_amount) as toplam from {$this->order} where m_date >=". $createMkTime   ;
+        $add= "select sum(order_amount) as toplam from {$this->order} where m_status=5 and m_date >=". $createMkTime   ;
         $result = array('toplam'=>0 );
 
         try{
@@ -420,7 +458,7 @@ class Data{
     public function thisMonthmany(){
         $createMkTime = mktime(0,1,0 , ltrim(date('m') , 0 ) , 1   , date('Y') );
 
-        $add= "select sum(order_amount) as toplam from {$this->order} where m_date >=". $createMkTime   ;
+        $add= "select sum(order_amount) as toplam from {$this->order} where m_status=5 and m_date >=". $createMkTime   ;
         $result = array('toplam'=>0 );
 
         try{
@@ -624,6 +662,23 @@ class Data{
 
     }
 
+    public function getKuryeCount($id){
+        $sql = "select count(*) as toplam from {$this->kuryeTakip} where  kurye_id='{$id}'";
+
+
+        try{
+            $result = $this->db->query( $sql , PDO::FETCH_ASSOC);
+            if( !$result->rowCount() )
+                return 'not found';
+
+            foreach ($result as $key => $value) {
+               return $value['toplam'] ;
+            }
+        }catch(PDOException $e){
+            return false ;
+        }
+    }
+
     public function allKurye(){
       $sql = "select * from {$this->kurye}";
       $status = [] ;
@@ -638,9 +693,10 @@ class Data{
              [
                'firstname'=>$value['firstname'],
                'lastname'=>$value['lastname'],
-               'date'=>$value['date'],
+               'date'=> date('Y-m-d H:i' , $value['date'] ) ,
                'username'=>$value['username'] ,
-               'id'=>$value['id']
+               'id'=>$value['id'],
+               'siparis'=>$this->getKuryeCount ($value['id'])
             ]
            );
            }

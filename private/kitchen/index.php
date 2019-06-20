@@ -3,19 +3,16 @@
 session_start ();
 require_once __DIR__ . '/../../Config.php';
 
-if ( !isset( $_SESSION[ "mutfak" ] ) ) {
+if ( !isset( $_SESSION[ "mutfak" ] ) || $_SESSION[ 'mutfak' ][ 'authority' ] == '0' ) {
+    session_destroy () ;
     header ( "location: ../mutfak" );
     exit;
 }
+
 $username = ( isset( $_SESSION[ 'mutfak' ][ 'name' ] ) ) ? $_SESSION[ 'mutfak' ][ 'name' ] : '';
 $siteName = ( new WebRoot )->name ();
 $siteUrl = ( new WebRoot )->url ();
 
-
-if ( $_SESSION[ 'mutfak' ][ 'authority' ] == '0' ) {
-    echo 'Yetki Sahibi Degilsiniz';
-    exit;
-}
 
 ?>
 
@@ -515,17 +512,16 @@ if ( $_SESSION[ 'mutfak' ][ 'authority' ] == '0' ) {
                 url: globalUrl + 'kitchen/order/onay/' + orderId + '/' + kuryeId,
                 success: function (data) {
                     let res = JSON.parse(data);
-                    if (res = false) {
+                    if (res == false) {
                         swal.fire('Ooops biseyler ters gitti.');
                     }
                     if (res.status == 'ok') {
                         refreshData();
                         swal.fire("Siparis onaylandi ve fis ciktisi verilecek");
-                        refreshData();
                     } else {
                         swal.fire(res.status);
-                        refreshData();
                     }
+                    refreshData();
                 }
             });
         }

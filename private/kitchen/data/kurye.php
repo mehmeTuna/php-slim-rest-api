@@ -4,6 +4,10 @@ require_once __DIR__ . '/DataClass.php';
 
 use KitchenData\Data ;
 
+if ( !isset( $_SESSION[ "mutfak" ] ) || $_SESSION[ 'mutfak' ][ 'authority' ] == '0' ) {
+    echo 'yetki sahibi degilsiniz' ;
+    exit;
+}
 
 $data = new Data();
 

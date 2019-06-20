@@ -168,6 +168,10 @@ switch ( $_GET[ 'api' ] ) {
         echo $api->getThisYearUser(date('Y'));
         break;
 
+    case 'monthproduct';
+       echo  $api->getmonthorder ($_GET['date']);
+       break;
+
 
     default :
         echo json_encode ( ['status' => 'tanimlanmayan parametre'], JSON_UNESCAPED_UNICODE );

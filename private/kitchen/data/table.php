@@ -5,7 +5,10 @@ require_once __DIR__ . '/DataClass.php';
 
 use KitchenData\Data ;
 
-
+if ( !isset( $_SESSION[ "mutfak" ] ) || $_SESSION[ 'mutfak' ][ 'authority' ] == '0' ) {
+    echo 'yetki sahibi degilsiniz';
+    exit;
+}
 
 $data = new Data();
 
@@ -40,7 +43,7 @@ Gosterilecek Veri bulunmamaktadir
 
 
 
-    <?php exit ; }?>
+    <?php exit ; } ?>
         <table class="table table-bordered" id="dataTable"  cellspacing="0">
             <thead>
                 <tr>
