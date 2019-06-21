@@ -88,16 +88,19 @@ if(!isset($_SESSION["operator"])){
 
 
 if(isset($_GET["order"])  ){
-    if($_GET["order"] == "gelen" )
-    $tip = "0";
-    else if($_GET["order"] == "onay" )
-    $tip = "1";
-    else if($_GET["order"] == "iptal" )
-     $tip = "2";
-
     $thisDayTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  ltrim(date('d') , 0)  , ltrim(date('Y') , 0 )  );
 
-    $waiting= "SELECT order_id,user_id,order_amount,m_date,orders,order_status from order_items where m_status = '{$tip}' and m_date>='{$thisDayTime}' ORDER BY m_date ASC" ;
+    if($_GET["order"] == "gelen" )
+        $waiting= "SELECT order_id,user_id,order_amount,m_date,orders,order_status from order_items where m_status = '0' and m_date>='{$thisDayTime}' ORDER BY m_date ASC" ;
+
+    else if($_GET["order"] == "onay" ){
+        $waiting= "SELECT order_id,user_id,order_amount,m_date,orders,order_status from order_items where m_status != '0' and m_status!='2' and m_date>='{$thisDayTime}' ORDER BY m_date ASC" ;
+    }
+    else if($_GET["order"] == "iptal" )
+        $waiting= "SELECT order_id,user_id,order_amount,m_date,orders,order_status from order_items where m_status='2' and m_date>='{$thisDayTime}' ORDER BY m_date ASC" ;
+
+
+
     $order_wait = array();
    
     try{

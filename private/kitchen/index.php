@@ -56,9 +56,9 @@ $siteUrl = ( new WebRoot )->url ();
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="http://www.ay-soft.com/">
+            <div class="sidebar-brand-icon ">
+                <img src="http://www.ay-soft.com/images/logo.png" class="img-fluid">
             </div>
             <div class="sidebar-brand-text mx-3"><?php echo $siteName ?></div>
         </a>
@@ -158,8 +158,9 @@ $siteUrl = ( new WebRoot )->url ();
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $username ?></span>
-                            <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60"
-                                 alt="tuna">
+                           <!-- <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60"
+                                 alt="tuna"> -->
+                            <i class="fa fa-user" aria-hidden="true"></i>
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -191,7 +192,7 @@ $siteUrl = ( new WebRoot )->url ();
                 <div class="row">
 
                     <!-- Earnings (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4" onclick="tableRender(1)">
+                    <div class="col-xl-3 col-md-6 mb-4" onclick="tableRender(1,1)">
                         <div id="table1" class="card border-left-success text-success shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
@@ -210,7 +211,7 @@ $siteUrl = ( new WebRoot )->url ();
                     </div>
 
                     <!-- Earnings (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4" onclick="tableRender(3)">
+                    <div class="col-xl-3 col-md-6 mb-4" onclick="tableRender(3,5)">
                         <div id="table3" class="card border-left-primary text-primary shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
@@ -229,7 +230,7 @@ $siteUrl = ( new WebRoot )->url ();
                     </div>
 
                     <!-- Earnings (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4" onclick="tableRender(4)">
+                    <div class="col-xl-3 col-md-6 mb-4" onclick="tableRender(4,4)">
                         <div id="table4" class="card border-left-danger text-danger shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
@@ -253,7 +254,7 @@ $siteUrl = ( new WebRoot )->url ();
                         </div>
                     </div>
                     <!-- Earnings (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4" onclick="tableRender(5)">
+                    <div class="col-xl-3 col-md-6 mb-4" onclick="tableRender(5,5)">
                         <div id='table5' class="card border-left-primary text-primary shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
@@ -378,7 +379,7 @@ $siteUrl = ( new WebRoot )->url ();
                 success: function (data) {
                     let order_detail = JSON.parse(data);
                     $("#hazirlanacak").html(order_detail.hazirlanacak);
-                    $("#hazirlanan").html(order_detail.hazirlanan);
+                    $("#hazirlanan").html(order_detail.kurye);
                     $("#iptal").html(order_detail.iptal);
                     $('#kurye').html(order_detail.kurye);
                 }
@@ -429,11 +430,12 @@ $siteUrl = ( new WebRoot )->url ();
             swal.fire('Kuryeye verilen siparisler iptal edilemez');
         }
 
-        function tableRender(val) {
-            btnBackground(val);
+        function tableRender(btnDurum , tableDurum) {
+            title_data_rename();
+            btnBackground(btnDurum);
             $.ajax({
                 type: 'GET',
-                url: globalUrl + 'private/kitchen/data/table.php?id=' + val,
+                url: globalUrl + 'private/kitchen/data/table.php?id=' + tableDurum,
                 success: function (data) {
                     $('#table_display').html(data);
                 }
@@ -543,6 +545,7 @@ $siteUrl = ( new WebRoot )->url ();
                             })
                           }
                         })
+                        orderId= '' ;
 
                     } else {
                         swal.fire(res.status);

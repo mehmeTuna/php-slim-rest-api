@@ -24,7 +24,7 @@ foreach ($res as $key){
     <thead class="thead-dark">
     <tr>
         <th scope="col"></th>
-        <th scope="col">Soyad</th>
+        <th scope="col">Ad Soyad</th>
         <th scope="col">Sec</th>
     </tr>
     </thead>

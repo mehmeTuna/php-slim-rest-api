@@ -23,7 +23,7 @@ if(!isset($_SESSION["operator"])){
     $thisDayTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  ltrim(date('d') , 0)  , ltrim(date('Y') , 0 )  );
    $waiting= "SELECT count(*) from order_items where m_status = '0' and m_date>='".$thisDayTime . "'" ;
    $red = "SELECT count(*) from order_items where m_status = '2' and m_date>='".$thisDayTime . "'" ;
-   $ok = "SELECT count(*) from order_items where m_status = '1' and m_date>='".$thisDayTime . "'" ;
+   $ok = "SELECT count(*) from order_items where m_status != '0' and m_status!='2'  and m_date>='".$thisDayTime . "'" ;
   
    try{
     $query = $details->conn->query( $waiting ,  PDO::FETCH_ASSOC);

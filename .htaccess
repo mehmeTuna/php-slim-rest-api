@@ -87,10 +87,6 @@ RewriteRule ^admin/giris$                                                   ./pr
 RewriteRule ^admin/login$                                                   ./private/Admin/Login.php
 RewriteRule ^admin/Logout$                                                  ./private/Admin/Logout.php
 RewriteRule ^admin/add/product$                                             ./private/Admin/product/product.php
-RewriteRule ^admin/siparisler$                                              ./private/Admin/pages/siparisler.php
-RewriteRule ^admin/rezervasyon$                                             ./private/Admin/pages/rezervasyon.php
-RewriteRule ^admin/ürünler/([a-z0-9_-]+)/([0-9_-]+)$                        ./private/Admin/pages/ürünler.php?categoryId=$1&page=$2
-RewriteRule ^admin/magaza-ayar$                                             ./private/Admin/pages/ayar.php
 
 
 RewriteRule ^admin/api$                                                     ./private/Admin/Data/index.php
@@ -117,6 +113,10 @@ RewriteRule ^admin/api/kurye/del/([a-z0-9_-]+)$                             ./pr
 RewriteRule ^admin/api/product/del/([a-z0-9_-]+)$                           ./private/Admin/Data/index.php?api=delproduct&id=$1
 RewriteRule ^kitchen/kurye$                                                 ./private/kitchen/data/kurye.php
 RewriteRule ^admin/api/order/month/([a-z0-9_-]+)$                           ./private/Admin/Data/index.php?api=monthproduct&date=$1
+
+
+RewriteRule ^admin/api/pdf$                                                 ./private/Admin/pdf/index.php?api=all
+RewriteRule ^admin/api/pdf/([a-z0-9_-]+)$                                   ./private/Admin/pdf/index.php?api=all
 
 
 

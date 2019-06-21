@@ -26,7 +26,7 @@ if( isset($res['orders']) && $res['orders'] != '' ){
     $content = json_decode($res['orders'] , true ) ;
     if($content != false && $content != null){
         foreach($content as $key ){
-             $orderContent .= '<tr><td>' . $key['count'] . ' x '.$key['name'].'</td></tr>';
+             $orderContent .= '<tr><td >' . $key['count'] . ' x '.$key['name'].'</td></tr>';
         }
      }
 }
@@ -44,7 +44,7 @@ if( isset($res['orders']) && $res['orders'] != '' ){
     <tbody>
         <?php  echo $orderContent ;  ?>
     <tr>
-    <td> <?php echo $note;  ?></td>
+    <td > <?php echo $note;  ?></td>
     </tr>
 
 </tbody>
