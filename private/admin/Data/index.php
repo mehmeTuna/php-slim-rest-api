@@ -168,9 +168,31 @@ switch ( $_GET[ 'api' ] ) {
         echo $api->getThisYearUser(date('Y'));
         break;
 
-    case 'monthproduct';
+    case 'monthproduct':
        echo  $api->getmonthorder ($_GET['date']);
        break;
+
+    case 'fullorder':
+       echo '';
+       break ;
+
+
+    case "newcategory":
+       echo $api->newCategory($getData);
+       break;
+
+    case "delcategory":
+        echo $api->deleteCategory ($_GET["id"]);
+    break;
+
+
+    case "newcalisan":
+      echo $api->newCalisan ($getData);
+      break;
+
+    case "delcalisan";
+      echo $api->delCalisan ($_GET["id"]);
+      break;
 
 
     default :

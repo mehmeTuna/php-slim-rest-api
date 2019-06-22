@@ -89,7 +89,9 @@ RewriteRule ^admin/Logout$                                                  ./pr
 RewriteRule ^admin/add/product$                                             ./private/Admin/product/product.php
 
 
-RewriteRule ^admin/api$                                                     ./private/Admin/Data/index.php
+RewriteRule ^admin/api/order$                                               ./private/Admin/Data/index.php?api=fullorder
+RewriteRule ^admin/api/rezervasyon$                                         ./private/Admin/Data/index.php?api=fullrezervasyon
+RewriteRule ^admin/api/kurye$                                               ./private/Admin/Data/index.php?api=fullkurye
 RewriteRule ^admin/api/thisdayorder$                                        ./private/Admin/Data/index.php?api=orderthisday
 RewriteRule ^admin/api/thismonthorder$                                      ./private/Admin/Data/index.php?api=thismonthorder
 RewriteRule ^admin/api/thisdaypayment$                                      ./private/Admin/Data/index.php?api=thisdaypayment
@@ -113,6 +115,10 @@ RewriteRule ^admin/api/kurye/del/([a-z0-9_-]+)$                             ./pr
 RewriteRule ^admin/api/product/del/([a-z0-9_-]+)$                           ./private/Admin/Data/index.php?api=delproduct&id=$1
 RewriteRule ^kitchen/kurye$                                                 ./private/kitchen/data/kurye.php
 RewriteRule ^admin/api/order/month/([a-z0-9_-]+)$                           ./private/Admin/Data/index.php?api=monthproduct&date=$1
+RewriteRule ^admin/api/newCategory$                                         ./private/Admin/Data/index.php?api=newcategory
+RewriteRule ^admin/api/delCategory/([a-z0-9_-]+)$                           ./private/Admin/Data/index.php?api=delcategory&id=$1
+RewriteRule ^admin/api/newCalisan$                                          ./private/Admin/Data/index.php?api=newcalisan
+RewriteRule ^admin/api/delCalisan/([a-z0-9_-]+)$                            ./private/Admin/Data/index.php?api=delcalisan&id=$1
 
 
 RewriteRule ^admin/api/pdf$                                                 ./private/Admin/pdf/index.php?api=all

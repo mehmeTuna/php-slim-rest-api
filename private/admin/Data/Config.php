@@ -8,4 +8,5 @@ trait Config{
     private $product = 'products';
     private $kurye = 'kurye';
     private $kuryeTakip = 'kurye_takip';
+    private $worker = "worker";
 }

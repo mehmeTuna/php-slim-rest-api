@@ -11,6 +11,7 @@ require_once __DIR__ . '/../../Ip/Ip.php';
 require_once __DIR__ . '/../../time/timestamp.php';
 
 use formattimestamp\Ttime;
+use Ip\ip ;
 
 
 //trait
@@ -823,6 +824,95 @@ class Data
         }
 
     }
+
+    public
+    function newCategory($val = []){
+        if($val == [])
+            return json_encode (["status"=>"gecerli deger giriniz"] , JSON_UNESCAPED_UNICODE) ;
+
+        $result = [
+            "id"=>rand(100,1000),
+            "name"=>strip_tags (trim ( isset($val["name"]) ? $val["name"] : "" )),
+            "img"=>strip_tags (trim (isset($val["img"]) ? $val["img"] : ""))
+        ];
+
+        $query = "insert into {$this->category} (id,name,img) values (:id,:name,:name)";
+
+        try {
+            $statement = $this->db->prepare ( $query );
+            $statement->execute ( $result );
+            return json_encode ( [ 'status' => 'ok' ] , JSON_UNESCAPED_UNICODE );
+
+        } catch ( PDOException $e ) {
+            return json_encode ( [ 'status' => 'kaydetme sorunu' ] , JSON_UNESCAPED_UNICODE );
+        }
+    }
+
+    public
+    function deleteCategory($id){
+        if ( $id == '' )
+            return json_encode ( [ 'status' => 'gecerli id giriniz' ] , JSON_UNESCAPED_UNICODE );
+
+        $sql = "delete from {$this->category} where id='" . strip_tags ( trim ( $id ) ) . "'";
+        try {
+            $statement = $this->db->prepare ( $sql );
+            $statement->execute ();
+            return json_encode ( [ 'status' => 'ok' ] , JSON_UNESCAPED_UNICODE );
+
+        } catch ( PDOException $e ) {
+            return json_encode ( [ 'status' => 'kayit silinemedi' ] , JSON_UNESCAPED_UNICODE );
+        }
+    }
+
+    public
+    function newCalisan($val = []){
+        if($val == [] || $val["name"] == "" || $val["authority"]== "" )
+            return json_encode (["status"=>"gecerli deger giriniz"] , JSON_UNESCAPED_UNICODE);
+
+        if(strlen( trim( $val["email"] ) ) > 1 && filter_var( $val["email"] , FILTER_VALIDATE_EMAIL))
+            return json_encode (["status"=>"gecerli deger giriniz"] , JSON_UNESCAPED_UNICODE);
+
+        $time = new Ttime();
+        $ip = new ip();
+
+        $result = [
+            "id"=>rand(1000,10000),
+            "email"=>$val["email"],
+            "password"=>password_hash (trim ($val["password"]) ,PASSWORD_DEFAULT),
+            "name"=>strip_tags (trim ( isset($val["name"]) ? $val["name"] : "" )),
+            "m_date"=>$time->gettime (),
+            "ip"=>$ip->getIp (),
+            "authority"=>strip_tags (trim ( $val["authority"]))
+            ];
+
+        $query = "insert into {$this->worker} (id,email,password,name,m_date,ip,authority) values (:id,:email,:password,:name,:m_date,:ip,:authority)";
+
+        try {
+            $statement = $this->db->prepare ( $query );
+            $statement->execute ( $result );
+            return json_encode ( [ 'status' => 'ok' ] , JSON_UNESCAPED_UNICODE );
+
+        } catch ( PDOException $e ) {
+            return json_encode ( [ 'status' => 'kaydetme sorunu' ] , JSON_UNESCAPED_UNICODE );
+        }
+    }
+
+    public
+    function delCalisan($id){
+            if ( $id == '' )
+                return json_encode ( [ 'status' => 'gecerli id giriniz' ] , JSON_UNESCAPED_UNICODE );
+
+            $sql = "delete from {$this->worker} where id='" . strip_tags ( trim ( $id ) ) . "'";
+            try {
+                $statement = $this->db->prepare ( $sql );
+                $statement->execute ();
+                return json_encode ( [ 'status' => 'ok' ] , JSON_UNESCAPED_UNICODE );
+
+            } catch ( PDOException $e ) {
+                return json_encode ( [ 'status' => 'kayit silinemedi' ] , JSON_UNESCAPED_UNICODE );
+            }
+    }
+
 
 
     public

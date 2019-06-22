@@ -56,7 +56,7 @@ use DATABASE\Database ;
         }
 
 
-        if( $password == $db_password ){
+        if( password_verify($password , isset($db_password) ? $db_password : "" ) ){
             $_SESSION["mutfak"] = array(
                 "id" => $val["id"] ,
                 "name"=>$name["name"],
