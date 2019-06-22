@@ -210,6 +210,10 @@ switch ( $_GET[ 'api' ] ) {
         echo $api->bringGetOrderDetay ("day");
     break;
 
+    case "getworker":
+        echo $api->getWorker();
+    break;
+
 
     default :
         echo json_encode ( ['status' => 'tanimlanmayan parametre'], JSON_UNESCAPED_UNICODE );

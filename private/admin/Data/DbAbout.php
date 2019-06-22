@@ -975,6 +975,27 @@ class Data
         }
     }
 
+    public
+    function getWorker(){
+        $add = "select id,email,name,authority from {$this->worker}";
+        $result = array ();
+
+        try {
+            $query = $this->db->query ( $add , PDO::FETCH_ASSOC );
+
+            if ( $query->rowCount () ) {
+                foreach ( $query as $key => $value ) {
+                    $result[ $key ] = $value;
+                }
+                return json_encode ( $result , JSON_UNESCAPED_UNICODE );
+            } else return json_encode ( [ 'status' => 'not found' ] , JSON_UNESCAPED_UNICODE );
+        } catch ( PDOException $e ) {
+            return array (
+                'status' => $e
+            );
+        }
+    }
+
 
 
     public
