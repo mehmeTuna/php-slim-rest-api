@@ -913,6 +913,68 @@ class Data
             }
     }
 
+    public
+    function bringGetOrderDetay($opt = "day"){
+        if($opt == "year")
+            $createMkTime = mktime ( 0 , 1 , 0 , 1, 1 , date ( 'Y' ) );
+        elseif ($opt == "month")
+            $createMkTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , 1 , date ( 'Y' ) );
+        elseif ($opt == "day")
+            $createMkTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , ltrim ( date ( 'd' ) , 0 ) , date ( 'Y' ) );
+        elseif($opt == "week"){
+            $day = ltrim ( date ( 'd' ) , 0 ) >=0 ? ltrim ( date ( 'd' ) , 0 ) : 0 ;
+            $createMkTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , $day ,date ( 'Y' ) );
+        }
+
+        $add = "select * from {$this->order} where m_status=5 and m_date >=" . $createMkTime;
+        $resultData = [];
+
+        try {
+            $query = $this->db->query ( $add , PDO::FETCH_ASSOC );
+
+            if ( $query->rowCount () ) {
+                foreach ( $query as $key => $value ) {
+                    $val = json_decode ($value["orders"] , true) ;
+                    foreach ($val as $value){
+                        //satılan urunlerın kacar adet satıldıgı hesaplanacak
+                        if( isset($resultData[$value["id"]]) )
+                            $resultData[$value["id"]] = $resultData[$value["id"]] + $value["count"] ;
+                        else
+                            $resultData[$value["id"]] = $value["count"] ;
+                    }
+                }
+                $response = [] ;
+                foreach ($resultData as $key =>$val){
+                    array_push ($response , ["name"=>$this->getProductName ($key) , "count"=>$val]) ;
+                }
+                return json_encode ( $response , JSON_UNESCAPED_UNICODE );
+            } else return json_encode ( [ 'status' => 'not found' ] , JSON_UNESCAPED_UNICODE );
+        } catch ( PDOException $e ) {
+            return array (
+                'status' => $e
+            );
+        }
+    }
+
+    private
+    function getProductName($id){
+
+        $sql = "select name from {$this->product} where id='{$id}'";
+        $status = [];
+
+        try {
+            $result = $this->db->query ( $sql , PDO::FETCH_ASSOC );
+            if ( !$result->rowCount () )
+                return json_encode ( [ 'status' => 'not found' ] , JSON_UNESCAPED_UNICODE );
+
+            foreach ( $result as $key => $value ) {
+                        return  $value[ 'name' ] ;
+            }
+        } catch ( PDOException $e ) {
+            return json_encode ( [ 'status' => 'not found' ] , JSON_UNESCAPED_UNICODE );
+        }
+    }
+
 
 
     public

@@ -194,6 +194,22 @@ switch ( $_GET[ 'api' ] ) {
       echo $api->delCalisan ($_GET["id"]);
       break;
 
+    case "orderdetayyear":
+        echo $api->bringGetOrderDetay ("year");
+    break;
+
+    case "orderdetaymonth":
+        echo $api->bringGetOrderDetay ("month");
+    break;
+
+    case "orderdetayweek":
+        echo $api->bringGetOrderDetay ("week");
+    break;
+
+    case "orderdetayday":
+        echo $api->bringGetOrderDetay ("day");
+    break;
+
 
     default :
         echo json_encode ( ['status' => 'tanimlanmayan parametre'], JSON_UNESCAPED_UNICODE );

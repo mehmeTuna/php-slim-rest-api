@@ -119,6 +119,10 @@ RewriteRule ^admin/api/newCategory$                                         ./pr
 RewriteRule ^admin/api/delCategory/([a-z0-9_-]+)$                           ./private/Admin/Data/index.php?api=delcategory&id=$1
 RewriteRule ^admin/api/newCalisan$                                          ./private/Admin/Data/index.php?api=newcalisan
 RewriteRule ^admin/api/delCalisan/([a-z0-9_-]+)$                            ./private/Admin/Data/index.php?api=delcalisan&id=$1
+RewriteRule ^admin/api/orderDetay/year$                                     ./private/Admin/Data/index.php?api=orderdetayyear
+RewriteRule ^admin/api/orderDetay/month$                                    ./private/Admin/Data/index.php?api=orderdetaymonth
+RewriteRule ^admin/api/orderDetay/week$                                     ./private/Admin/Data/index.php?api=orderdetayweek
+RewriteRule ^admin/api/orderDetay/day$                                      ./private/Admin/Data/index.php?api=orderdetayday
 
 
 RewriteRule ^admin/api/pdf$                                                 ./private/Admin/pdf/index.php?api=all
