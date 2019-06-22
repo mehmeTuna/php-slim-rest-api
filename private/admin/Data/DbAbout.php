@@ -12,6 +12,7 @@ require_once __DIR__ . '/../../time/timestamp.php';
 
 use formattimestamp\Ttime;
 
+
 //trait
 require_once __DIR__ . '/Config.php';
 
@@ -703,9 +704,7 @@ class Data
         $item = new Create();
         $item->add ( $data );
 
-        return $item->run ();
-
-
+        return json_encode ($item->run() , JSON_UNESCAPED_UNICODE);
     }
 
     public

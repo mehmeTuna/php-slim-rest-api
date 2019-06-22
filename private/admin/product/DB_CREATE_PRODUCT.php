@@ -1,8 +1,8 @@
 <?php
 namespace Admin\Product ;
 
-
 use DATABASE\Database ;
+
 use PDO ;
 
 class Add {

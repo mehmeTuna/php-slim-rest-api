@@ -1,7 +1,8 @@
 <?php
 
 namespace Admin\Product ;
-
+require_once __DIR__ . '/DB_CREATE_PRODUCT.php';
+use Admin\Product\Add ;
 use \Datetime;
 
 class Create {
