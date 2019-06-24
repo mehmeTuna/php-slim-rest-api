@@ -79,7 +79,7 @@ Gosterilecek Veri bulunmamaktadir
              
 
               $phone = isset($result[$a]['phone']) ? $result[$a]['phone'] : 'hata' ;
-              $mDate = isset($result[$a]['date']) ? date ('H:m' , $result[$a]['date'] ): 'hata' ;
+              $mDate = isset($result[$a]['date']) ? date ('H:i' , $result[$a]['date'] ): 'hata' ;
 
 
              ?>
