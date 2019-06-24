@@ -8,7 +8,8 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable />
     </execution>
@@ -27,25 +28,129 @@
     <expand />
     <select />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="htdocs" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/wordpress/wp-config-sample.php">
+        <entry file="file://$PROJECT_DIR$/private/kitchen/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="30" column="29" lean-forward="true" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+            <state relative-caret-position="204">
+              <caret line="393" column="23" selection-start-line="393" selection-start-column="23" selection-end-line="393" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/private/kitchen/data/kurye.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="445">
+              <caret line="35" column="67" selection-start-line="35" selection-start-column="67" selection-end-line="35" selection-end-column="67" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>user_id</find>
+      <find>admin/api/pd</find>
+      <find>generate</find>
+      <find>&lt;i class=&quot;fa fa-user&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</find>
+      <find>&lt;img class=&quot;img-profile roun</find>
+      <find>sidebar</find>
+      <find>ay-so</find>
+      <find>hazirlanan</find>
+      <find>newpro</find>
+      <find>update</find>
+      <find>insert</find>
+      <find>cate</find>
+      <find>new</find>
+      <find>delete</find>
+      <find>time</find>
+      <find>ip</find>
+      <find>day</find>
+      <find>order</find>
+      <find>prod</find>
+      <find>all</find>
+      <find>worker</find>
+      <find>&lt;i class=&quot;fas fa-motorcycle fa-4x &quot;&gt;&lt;/i&gt;</find>
+      <find>detail.php</find>
+      <find>order_detail/detail.php</find>
+      <find>rezervasyon_re</find>
+      <find>siparis</find>
+      <find>getbr</find>
+      <find>getShowOrder</find>
+      <find>siparisOnayla</find>
+      <find>getbringkurye</find>
+    </findStrings>
+  </component>
+  <component name="HierarchyBrowserManager">
+    <option name="SORT_ALPHABETICALLY" value="true" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.htaccess" />
         <option value="$PROJECT_DIR$/public/product/category.php" />
+        <option value="$PROJECT_DIR$/private/orders/OrdersDb.php" />
+        <option value="$PROJECT_DIR$/Config.php" />
+        <option value="$PROJECT_DIR$/private/Users/Logout.php" />
+        <option value="$PROJECT_DIR$/order_confirmation/order_detail/rezervasyon.php" />
+        <option value="$PROJECT_DIR$/order_confirmation/order_detail/rezervasyon_detail.php" />
+        <option value="$PROJECT_DIR$/order_confirmation/order_detail/order_detail_add.php" />
+        <option value="$PROJECT_DIR$/private/rezervasyon/rezervasyon.php" />
+        <option value="$PROJECT_DIR$/private/kitchen/data/DataClass.php" />
+        <option value="$PROJECT_DIR$/private/cors.php" />
+        <option value="$PROJECT_DIR$/demo.php" />
+        <option value="$PROJECT_DIR$/private/kitchen/data/table.php" />
+        <option value="$PROJECT_DIR$/private/kitchen/data/orderData.php" />
+        <option value="$PROJECT_DIR$/private/kitchen/data/index.php" />
+        <option value="$PROJECT_DIR$/private/Users/Data.php" />
+        <option value="$PROJECT_DIR$/private/Users/Orders.php" />
+        <option value="$PROJECT_DIR$/private/kitchen/pdf/pdf.php" />
+        <option value="$PROJECT_DIR$/private/admin/json/Datajson.php" />
+        <option value="$PROJECT_DIR$/private/admin/pdf/index.php" />
+        <option value="$PROJECT_DIR$/private/PDF/printjs/printjs.css" />
+        <option value="$PROJECT_DIR$/private/PDF/printjs/printjs.js" />
+        <option value="$PROJECT_DIR$/private/kitchen/data/orderDetail.php" />
+        <option value="$PROJECT_DIR$/private/kitchen/login.html" />
+        <option value="$PROJECT_DIR$/private/worker/login.html" />
+        <option value="$PROJECT_DIR$/order_confirmation/order_detail/order_user_detail.php" />
+        <option value="$PROJECT_DIR$/private/admin/product/DB_CREATE_PRODUCT.php" />
+        <option value="$PROJECT_DIR$/private/admin/product/create.php" />
+        <option value="$PROJECT_DIR$/private/Data/index.php" />
+        <option value="$PROJECT_DIR$/private/Data/insert.php" />
+        <option value="$PROJECT_DIR$/private/admin/Data/Config.php" />
+        <option value="$PROJECT_DIR$/private/worker/login.php" />
+        <option value="$PROJECT_DIR$/private/kitchen/login.php" />
+        <option value="$PROJECT_DIR$/private/admin/Data/DbAbout.php" />
+        <option value="$PROJECT_DIR$/private/admin/Data/index.php" />
+        <option value="$PROJECT_DIR$/private/PDF/index.php" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/fb87bd5d-5ace-47ce-b96e-2f84f792d1c7/console.sql" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/cd2944dc-dd59-4ccf-ac10-d0a1e33b789f/console.sql" />
+        <option value="$PROJECT_DIR$/.htaccess" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/order_confirmation/order_detail/detail.php" />
+        <option value="$PROJECT_DIR$/order_confirmation/order_detail/order_detail.php" />
+        <option value="$PROJECT_DIR$/private/demo.php" />
+        <option value="$PROJECT_DIR$/private/time/timestamp.php" />
+        <option value="$PROJECT_DIR$/private/Users/Add.php" />
+        <option value="$PROJECT_DIR$/database/connect.php" />
         <option value="$PROJECT_DIR$/order_confirmation/index.php" />
+        <option value="$PROJECT_DIR$/private/kitchen/data/kurye.php" />
+        <option value="$PROJECT_DIR$/assets/swetlaert_min.js" />
+        <option value="$PROJECT_DIR$/assets/swetalert2@js.js" />
+        <option value="$PROJECT_DIR$/private/kitchen/index.php" />
       </list>
     </option>
   </component>
@@ -54,6 +159,19 @@
     <exe-path />
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
+  </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.3">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/mpdf/mpdf" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/setasign/fpdi" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+    </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="30" />
@@ -77,7 +195,25 @@
             <path>
               <item name="htdocs" type="b2602c69:ProjectViewProjectNode" />
               <item name="htdocs" type="462c0819:PsiDirectoryNode" />
-              <item name="wordpress" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htdocs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htdocs" type="462c0819:PsiDirectoryNode" />
+              <item name="private" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htdocs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htdocs" type="462c0819:PsiDirectoryNode" />
+              <item name="private" type="462c0819:PsiDirectoryNode" />
+              <item name="kitchen" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htdocs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htdocs" type="462c0819:PsiDirectoryNode" />
+              <item name="private" type="462c0819:PsiDirectoryNode" />
+              <item name="kitchen" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -86,11 +222,17 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="DatabaseDriversLRU" value="mysql&#10;mariadb" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="database.console.LAST_STATE" value="false" />
+    <property name="js.last.introduce.type" value="LET" />
     <property name="last.edited.regexp" value="awawfaw&#10;" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/react-project" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RunDashboard">
@@ -121,80 +263,393 @@
       <workItem from="1558799889268" duration="165000" />
       <workItem from="1558867822265" duration="67000" />
       <workItem from="1559197846140" duration="28000" />
+      <workItem from="1560843963224" duration="49863000" />
+      <workItem from="1560963779283" duration="7048000" />
+      <workItem from="1561042182088" duration="9247000" />
+      <workItem from="1561096824633" duration="19994000" />
+      <workItem from="1561201436374" duration="23103000" />
+      <workItem from="1561236169507" duration="293000" />
+      <workItem from="1561271483644" duration="598000" />
+      <workItem from="1561273450227" duration="6573000" />
+      <workItem from="1561291224267" duration="179000" />
+      <workItem from="1561302000043" duration="8226000" />
+      <workItem from="1561356969026" duration="178000" />
+      <workItem from="1561357376467" duration="349000" />
+      <workItem from="1561360677536" duration="12564000" />
+      <workItem from="1561387640080" duration="3354000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2303000" />
+    <option name="totallyTimeSpent" value="143872000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16944024" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49756098" visible="true" weight="0.12884334" />
+      <window_info id="Structure" order="1" sideWeight="0.502439" side_tool="true" weight="0.14145234" />
+      <window_info id="Favorites" order="2" sideWeight="0.502439" side_tool="true" weight="0.14145234" />
+      <window_info anchor="bottom" id="Database Console" order="0" sideWeight="0.49924356" weight="0.21440262" />
+      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Find" order="2" weight="0.314376" />
+      <window_info anchor="bottom" id="Run" order="3" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="7" weight="0.25859246" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50075644" side_tool="true" weight="0.3535188" />
       <window_info anchor="bottom" id="GraphQL" order="12" />
+      <window_info anchor="bottom" id="PHP-CGI Server" order="13" />
+      <window_info anchor="bottom" id="Terminal" order="14" weight="0.19639935" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" weight="0.14901665" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24962178" />
+      <window_info anchor="right" id="Database" order="3" weight="0.16641453" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/product/category.php">
+    <entry file="file://$PROJECT_DIR$/private/admin/product/create.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="41" column="3" selection-start-line="41" selection-start-column="3" selection-end-line="41" selection-end-column="3" />
+        <state relative-caret-position="200">
+          <caret line="44" column="88" selection-start-line="44" selection-start-column="78" selection-end-line="44" selection-end-column="88" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/order_confirmation/index.php">
+    <entry file="file://$PROJECT_DIR$/private/admin/product/DB_CREATE_PRODUCT.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="639" column="18" selection-start-line="639" selection-start-column="18" selection-end-line="639" selection-end-column="18" />
+        <state relative-caret-position="100">
+          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/order_confirmation/order_detail/order_detail_add.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="42" column="46" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/private/Data/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/private/Users/DB_CREATE_USER.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/private/Users/Data.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/private/Ip/Ip.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/private/Users/Login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="65" column="12" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/private/Users/Users.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="113" column="63" lean-forward="true" selection-start-line="113" selection-start-column="30" selection-end-line="113" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/private/worker/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="58" column="12" lean-forward="true" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/private/admin/Data/DbAbout.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19480">
+          <caret line="978" column="22" selection-start-line="978" selection-start-column="13" selection-end-line="978" selection-end-column="22" />
+          <folding>
+            <element signature="e#278#304#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/private/admin/Data/Config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/private/admin/Data/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="212" column="19" selection-start-line="212" selection-start-column="10" selection-end-line="212" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/autoload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" column="72" selection-start-line="6" selection-start-column="63" selection-end-line="6" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/setasign/fpdi/src/FpdfTpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="20" column="20" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/setasign/fpdi/src/Fpdi.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2305">
+          <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/setasign/fpdi/src/FpdiTrait.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-10012">
+          <caret line="46" column="6" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/setasign/fpdi/src/TcpdfFpdi.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/setasign/fpdi/src/FpdiException.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="16" column="38" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/setasign/fpdi/src/FpdfTplTrait.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2822">
+          <caret line="18" column="18" lean-forward="true" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/setasign/fpdi/src/autoload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="18" column="5" lean-forward="true" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api_v2/index.php" />
+    <entry file="file://$PROJECT_DIR$/old_api/api/index.php" />
+    <entry file="file://$PROJECT_DIR$/old_api/api/src/routes.php" />
+    <entry file="file://$PROJECT_DIR$/vendor/mpdf/mpdf/src/Mpdf.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="9292" column="13" selection-start-line="9292" selection-start-column="13" selection-end-line="9292" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/private/PDF/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="48" selection-start-line="48" selection-end-line="70" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/3b708eb3-74c5-471b-b64c-8714710e1a69/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/fb87bd5d-5ace-47ce-b96e-2f84f792d1c7/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="20" selection-start-column="20" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/private/Data/insert.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1998">
+          <caret line="195" column="47" lean-forward="true" selection-start-line="195" selection-start-column="47" selection-end-line="195" selection-end-column="47" />
+          <folding>
+            <element signature="e#79#102#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.lock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5462" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/error/404.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/cd2944dc-dd59-4ccf-ac10-d0a1e33b789f/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="2" selection-start-column="2" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/private/kitchen/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="21" column="96" lean-forward="true" selection-start-line="21" selection-start-column="84" selection-end-line="21" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/order_confirmation/order_detail/detail.php" />
+    <entry file="file://$PROJECT_DIR$/order_confirmation/js/sb-admin-2.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="6" column="481" selection-start-line="6" selection-start-column="481" selection-end-line="6" selection-end-column="481" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="85" column="16" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="16" />
+        <state relative-caret-position="223">
+          <caret line="40" column="125" selection-start-line="40" selection-start-column="125" selection-end-line="40" selection-end-column="125" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wordpress/license.txt">
+    <entry file="file://$PROJECT_DIR$/private/time/timestamp.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="114" selection-start-line="6" selection-start-column="19" selection-end-line="114" />
+        <state relative-caret-position="80">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wordpress/readme.html">
+    <entry file="file://$PROJECT_DIR$/private/Users/Add.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-798">
-          <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+        <state relative-caret-position="100">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wordpress/wp-config-sample.php">
+    <entry file="file://$PROJECT_DIR$/database/connect.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="30" column="29" lean-forward="true" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+        <state relative-caret-position="-21">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#29#49#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/order_confirmation/order_detail/order_detail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="48" column="32" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/date/date.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1178">
+          <caret line="812" column="10" selection-start-line="812" selection-start-column="4" selection-end-line="812" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/private/demo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2" column="9" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/order_confirmation/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1584">
+          <caret line="656" column="4" selection-start-line="656" selection-start-column="4" selection-end-line="656" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/private/kitchen/data/orderDetail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="28" column="40" selection-start-line="28" selection-start-column="40" selection-end-line="28" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/private/kitchen/data/kurye.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="445">
+          <caret line="35" column="67" selection-start-line="35" selection-start-column="67" selection-end-line="35" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/swetlaert_min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="40808" selection-start-column="40808" selection-end-column="40808" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/swetalert2@js.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" column="27237" selection-start-line="1" selection-start-column="27237" selection-end-line="1" selection-end-column="27237" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/private/kitchen/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="393" column="23" selection-start-line="393" selection-start-column="23" selection-end-line="393" selection-end-column="23" />
         </state>
       </provider>
     </entry>

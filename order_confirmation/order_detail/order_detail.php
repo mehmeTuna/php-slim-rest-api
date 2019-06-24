@@ -20,17 +20,17 @@ if(!isset($_SESSION["operator"])){
 
     $details = new Database();
    
-    $thisDayTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  ltrim(date('d') , 0)  , ltrim(date('Y') , 0 )  );
-   $waiting= "SELECT count(*) from order_items where m_status = '0' and m_date>='".$thisDayTime . "'" ;
-   $red = "SELECT count(*) from order_items where m_status = '2' and m_date>='".$thisDayTime . "'" ;
-   $ok = "SELECT count(*) from order_items where m_status != '0' and m_status!='2'  and m_date>='".$thisDayTime . "'" ;
+    $thisDayTime = mktime(0,0,0 , date('n') , date('j')  , date('Y'));
+   $waiting= "SELECT count(*) as toplam from order_items where m_status = '0' and m_date>='".$thisDayTime . "'" ;
+   $red = "SELECT count(*) as toplam from order_items where m_status = '2' and m_date>='".$thisDayTime . "'" ;
+   $ok = "SELECT count(*) as toplam from order_items where m_status != '0' and m_status!='2'  and m_date>='".$thisDayTime . "'" ;
   
    try{
     $query = $details->conn->query( $waiting ,  PDO::FETCH_ASSOC);
     
     if($query->rowCount()){
         foreach ($query as $value) {
-            $waiting = $value["count(*)"] ;
+            $waiting = $value["toplam"] ;
         }
     }
 
@@ -38,7 +38,7 @@ if(!isset($_SESSION["operator"])){
     
     if($query->rowCount()){
         foreach ($query as $value) {
-            $red = $value["count(*)"] ;
+            $red = $value["toplam"] ;
         }
     }
 
@@ -46,7 +46,7 @@ if(!isset($_SESSION["operator"])){
     
     if($query->rowCount()){
         foreach ($query as $value) {
-            $ok = $value["count(*)"] ;
+            $ok = $value["toplam"] ;
         }
     }
 

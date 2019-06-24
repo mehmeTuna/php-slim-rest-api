@@ -2,9 +2,8 @@
 
 namespace formattimestamp ;
 
-use \Datetime;
-date_default_timezone_set('Europe/Istanbul');
 
+date_default_timezone_set('Europe/Istanbul');
 
 class Ttime {
   public function __construct(){
@@ -12,9 +11,11 @@ class Ttime {
   }
 
 
-  public function gettime(){
-    $date = new DateTime(date("y-m-d H:i:s")) ;
-    return $date->getTimestamp();
+    /**
+     * @return int
+     */
+    public function gettime(){
+      return time();
   }
 
 

@@ -36,7 +36,9 @@ $siteUrl = (new WebRoot)->url();
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="order_confirmation/css/sb-admin-2.min.css" rel="stylesheet">
+
+  <link href="order_confirmation/css/sb-admin-2.css" rel="stylesheet">
+
     <!-- Custom styles for this page -->
     <link href="order_confirmation/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -76,8 +78,8 @@ $siteUrl = (new WebRoot)->url();
        <!-- Nav Item - Pages Collapse Menu -->
        <li class="nav-item">
         <a class="nav-link collapsed" onclick="siparis()" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Siparişler</span>
+          <i  style='color:white' class="fas fa-fw fa-cog"></i>
+          <span style='color:white'>Siparişler</span>
         </a>
      
       </li>
@@ -85,8 +87,8 @@ $siteUrl = (new WebRoot)->url();
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" onclick="rezervasyon()" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Rezervasyon</span>
+          <i style='color:white' class="fas fa-fw fa-cog 0"></i>
+          <span style='color:white'>Rezervasyon</span>
         </a>
      
       </li>
@@ -161,7 +163,7 @@ $siteUrl = (new WebRoot)->url();
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?=$_SESSION["operator"]["name"]?></span>
+                <span class="mr-2 d-none d-lg-inline  small"><?=$_SESSION["operator"]["name"]?></span>
                   <i class="fa fa-user" aria-hidden="true"></i>
                <!-- <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60"> -->
               </a>
@@ -200,10 +202,10 @@ $siteUrl = (new WebRoot)->url();
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase mb-1" id="gelen_title">Gelen Siparişler</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="gelen_num">0</div>
+                      <div class="h5 mb-0 font-weight-bold " id="gelen_num">0</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                      <i class="fas fa-clipboard-list fa-4x "></i>
                     </div>
                   </div>
                 </div>
@@ -217,10 +219,10 @@ $siteUrl = (new WebRoot)->url();
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold  text-uppercase mb-1" id="onay_title">Onaylanan Siparişler </div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="onaylanan">0</div>
+                      <div class="h5 mb-0 font-weight-bold " id="onaylanan">0</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                      <i class="fas fa-check fa-4x "></i>
                     </div>
                   </div>
                 </div>
@@ -236,13 +238,13 @@ $siteUrl = (new WebRoot)->url();
                       <div class="text-xs font-weight-bold  text-uppercase mb-1" id="iptal_title">İptal Olan Siparişler</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="iptal_edilen">0</div>
+                          <div class="h5 mb-0 mr-3 font-weight-bold " id="iptal_edilen">0</div>
                         </div>
                         
                       </div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                      <i class="fas fa-times fa-4x "></i>
                     </div>
                   </div>
                 </div>
@@ -289,14 +291,15 @@ $siteUrl = (new WebRoot)->url();
       </div>
       <!-- End of Main Content -->
 
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
+      <!-- Footer 
+      <footer class="sticky-footer ">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
             <span>Copyright &copy; Your Website 2019</span>
           </div>
         </div>
       </footer>
+      -->
       <!-- End of Footer -->
 
     </div>
@@ -333,10 +336,10 @@ $siteUrl = (new WebRoot)->url();
   
 var durum = "siparis" ;//siparis or rezervasyon
 var siteUrl = '<?php echo $siteUrl ?>/';
-
+var firstsession = 'gelen';
 
 window.onload = function() {
-    var firstsession = 'gelen';
+
  title_rename();
  title_data_rename();
  titleTable();
@@ -354,6 +357,7 @@ window.onload = function() {
 }
 
 function btnBackground(opt){
+     firstsession = opt ;
   if(opt == 'gelen'){
       $('#onaybtn').removeClass('card bg-info text-light shadow h-100 py-2').addClass('card border-left-info text-info shadow h-100 py-2');
       $('#iptalbtn').removeClass('card bg-danger text-light shadow h-100 py-2').addClass('card border-left-danger text-danger shadow h-100 py-2');
@@ -592,6 +596,7 @@ function HMtime(timestamp){
   return timestamp ;
 }
 
+
 function edit_rezervasyon_detay(id){
  
   swal("Rezervasyon onaylama işlemi", {
@@ -620,9 +625,10 @@ function edit_rezervasyon_detay(id){
               titleTable();
 
 
-           if(control.status == "red")
-              swal("Rezervasyon Onaylanmadı !");
-           else    swal(control.status);
+           if(control.status == "red"){
+               swal("Rezervasyon Onaylanmadı !");
+               create_rezervasyon_render(firstsession);
+           } else    swal(control.status);
         }
   }) ;
       break;
@@ -639,15 +645,15 @@ function edit_rezervasyon_detay(id){
               titleTable();
          
 
-           if(control.status == "ok")
-              swal("Rezervasyon onaylandı !");
-           else      swal(control.status);
+           if(control.status == "ok"){
+               swal("Rezervasyon onaylandı !");
+               create_rezervasyon_render(firstsession);
+           } else      swal(control.status);
         }
   }) ;
       break;
   }
 });
-
 
 }
 
@@ -694,6 +700,7 @@ function edit_order_detay(id,username,tutar,tel,adres){
               title_rename();
               title_data_rename();
               titleTable();
+              create_user_render(firstsession);
 
             let control = JSON.parse(data);
         
@@ -713,6 +720,7 @@ function edit_order_detay(id,username,tutar,tel,adres){
     swal.close();
   }
 });
+        create_user_render(firstsession);
       break;
  
     case "onayla":
@@ -727,10 +735,13 @@ function edit_order_detay(id,username,tutar,tel,adres){
             console.log(data);
             let control = JSON.parse(data);
 
-           if(control.status == "ok")
-              swal("Sipariş Onaylandı");
-           else 
+           if(control.status == "ok"){
+               swal("Sipariş Onaylandı");
+               create_user_render(firstsession);
+           }else
                 swal(control.status);
+
+
         }
   }) ;
       break;
@@ -747,9 +758,10 @@ function edit_order_detay(id,username,tutar,tel,adres){
             console.log(data);
             let control = JSON.parse(data);
 
-           if(control.status == "ok")
-              swal("Sipariş İptal Edildi !");
-           else 
+           if(control.status == "ok"){
+               swal("Sipariş İptal Edildi !");
+               create_user_render(firstsession);
+           }else
                 swal(control.status);
         }
   }) ;
@@ -757,7 +769,6 @@ function edit_order_detay(id,username,tutar,tel,adres){
   }
 });
 }
-
 
 function control_gelen(){
     btnBackground('gelen');

@@ -1,95 +1,95 @@
 <?php
-?>
-
-<DOCTYPE html>
-
-<html>
-    <head>
-        <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
-        <script src="http://localhost:81/private/PDF/printjs/printjs.js" charset="utf-8"></script>
-        <link rel="stylesheet" href="http://localhost:81/private/PDF/printjs/printjs.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
-        <script>
-
-            const globalUrl = 'http://localhost:81/';
-            async function getData(uri){
-                const url = globalUrl + uri ;
-                try {
-                    const response = await axios.get(url);
-                    return response.data ;
-                } catch (error) {
-                    console.error(error);
-                }
-            }
+/*
+ * Mehmet Tuna pdf draft
+ */
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 
-            async function print() {
-                const filename  = 'ThisIsYourPDFFilename.pdf';
-                 const data = await getData('private/demo.php');
-                // document.getElementById('deneme').innerHTML = data ;
 
-                html2canvas(document.getElementById('deneme'), {
-                    onrendered: function(canvas) {
-                        let pdf = new jsPDF('p', 'mm', 'a4');
-                        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
-                        pdf.save(filename);
-                    }
-                });
+$mpdf = new \Mpdf\Mpdf([
+    'mode' => 'utf-8',
+    'format' => [100, 50],
+    "default_font_size"=>10,
+    "margin_top"=>13,
+    "margin_left"=>3,
+    "margin_right"=>3,
+    "margin_bottom"=>3,
+    'orientation' => 'L'
+]);
 
-            }
+ob_start ();
+
+echo "<style>
+.header{
+margin-left: 10mm;
+font-size:5mm;
+}
+.header-alt{
+margin-left: 14mm;
+font-size:5mm;
+}
+.siparis-title{
+font-size: 3mm;
+margin-top: 1mm;
+margin-left: 8mm;
+}
+.siparis-line{
+font-size: 1mm;
+width: 45mm;
+}
+.user-title{
+margin-top: 3mm;
+font-size: 2mm;
+}
+.date-line{
+margin-top: 1mm;
+    border: 1px solid #0e0e0e;
+    font-size: 2mm;
+    padding: 1mm;
+}
+.urun-title{
+font-size: 2mm;
+}
+</style>
+
+<div class='header'>ZEKİ USTA</div>
+<div class='header-alt'>KEBAP</div>
+<div class='siparis-title'>PAKET SİPARİŞİDİR</div>
+<div class='user-title'>Sipariş No:32525 Mehmet Tuna</div>
+<div class='date-line'>Tarih:21.06.2019  Saat:18:41  Masa No:Paket</div>
+<table class='urun-title'>
+  <tr>
+    <th>Ürünler</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+        <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th>Adet</th> 
+    <th>Tutar</th>
+  </tr>
+  <tr>
+    <td>Jill</td>
+    <td>Smith</td> 
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td> 
+    <td>94</td>
+  </tr>
+</table>
+";
 
 
-        </script>
 
-    </head>
-    <body>
-    <div id="deneme" style="max-width: 400px ; max-height: 600px">
+$html = ob_get_contents ();
+ob_clean ();
 
-        <canvas id="myChart" width="400" height="600"></canvas>
-        <script>
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
-        </script>
-    </div>
-    <button onclick="print()">Tikla</button>
+$mpdf->WriteHTML($html);
 
-
-    </body>
-</html>
+$mpdf->Output();

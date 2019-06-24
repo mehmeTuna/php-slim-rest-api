@@ -82,13 +82,15 @@ RewriteRule ^kitchen/detail/count$                                         ./pri
 RewriteRule ^kitchen/order/iptal/([a-z0-9_-]+)$                            ./private/kitchen/data/index.php?api=iptal&id=$1
 RewriteRule ^kitchen/order/onay/([a-z0-9_-]+)/([a-z0-9_-]+)$               ./private/kitchen/data/index.php?api=onay&id=$1&kuryeId=$2
 
+
+RewriteRule ^admin/home$                                                    ./web_root_admin/index.html
 RewriteRule ^admin/home$                                                    ./private/Admin/index.php
 RewriteRule ^admin/giris$                                                   ./private/Admin/Login.html
 RewriteRule ^admin/login$                                                   ./private/Admin/Login.php
 RewriteRule ^admin/Logout$                                                  ./private/Admin/Logout.php
 RewriteRule ^admin/add/product$                                             ./private/Admin/product/product.php
 
-
+RewriteRule ^admin/api/allWorker$                                           ./private/Admin/Data/index.php?api=getworker
 RewriteRule ^admin/api/order$                                               ./private/Admin/Data/index.php?api=fullorder
 RewriteRule ^admin/api/rezervasyon$                                         ./private/Admin/Data/index.php?api=fullrezervasyon
 RewriteRule ^admin/api/kurye$                                               ./private/Admin/Data/index.php?api=fullkurye

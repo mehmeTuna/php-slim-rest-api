@@ -3,15 +3,18 @@
 session_start ();
 require_once __DIR__ . '/../../Config.php';
 
-if ( !isset( $_SESSION[ "mutfak" ] ) || $_SESSION[ 'mutfak' ][ 'authority' ] == '0' ) {
-    session_destroy () ;
-    header ( "location: ../mutfak" );
-    exit;
-}
+
+    if ( !isset( $_SESSION[ "mutfak" ] ) || $_SESSION[ 'mutfak' ][ 'authority' ] == '0' ) {
+        session_destroy () ;
+        header ( "location: ../mutfak" );
+        exit;
+    }
 
 $username = ( isset( $_SESSION[ 'mutfak' ][ 'name' ] ) ) ? $_SESSION[ 'mutfak' ][ 'name' ] : '';
 $siteName = ( new WebRoot )->name ();
 $siteUrl = ( new WebRoot )->url ();
+
+$yetki = $_SESSION[ 'mutfak' ][ 'authority' ] ;
 
 
 ?>
@@ -35,15 +38,12 @@ $siteUrl = ( new WebRoot )->url ();
           rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="/../../../order_confirmation/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/../../../order_confirmation/css/sb-admin-2.css" rel="stylesheet">
     <!-- Custom styles for this page -->
     <link href="/../../../order_confirmation/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="/assets/swetlaert_min.js"></script>
+    <script src="/assets/swetalert2@js.js"></script>
 
-     <!--pdf generator file -->
-    <script src="http://localhost:81/private/pdf/new/print.js" charset="utf-8"></script>
-    <link rel="stylesheet" href="http://localhost:81/private/pdf/new/print.css">
 
 </head>
 
@@ -157,7 +157,7 @@ $siteUrl = ( new WebRoot )->url ();
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $username ?></span>
+                            <span class="mr-2 d-none d-lg-inline  small"><?= $username ?></span>
                            <!-- <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60"
                                  alt="tuna"> -->
                             <i class="fa fa-user" aria-hidden="true"></i>
@@ -200,10 +200,10 @@ $siteUrl = ( new WebRoot )->url ();
                                         <div class="text-xs font-weight-bold  text-uppercase mb-1">Hazirlanacak
                                             Siparisler
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="hazirlanacak">0</div>
+                                        <div class="h5 mb-0 font-weight-bold " id="hazirlanacak">0</div>
                                     </div>
                                     <div class="col-auto">
-                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        <i class="fas fa-spinner fa-4x "></i>
                                     </div>
                                 </div>
                             </div>
@@ -212,17 +212,17 @@ $siteUrl = ( new WebRoot )->url ();
 
                     <!-- Earnings (Monthly) Card Example -->
                     <div class="col-xl-3 col-md-6 mb-4" onclick="tableRender(3,5)">
-                        <div id="table3" class="card border-left-primary text-primary shadow h-100 py-2">
+                        <div id="table3" class="card border-left-primary text-info shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold  text-uppercase mb-1" id="onay_title">
                                             Hazirlanan Siparişler
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="hazirlanan">0</div>
+                                        <div class="h5 mb-0 font-weight-bold " id="hazirlanan">0</div>
                                     </div>
                                     <div class="col-auto">
-                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        <i class="fas fa-check fa-4x"></i>
                                     </div>
                                 </div>
                             </div>
@@ -240,14 +240,14 @@ $siteUrl = ( new WebRoot )->url ();
                                         </div>
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="iptal">0
+                                                <div class="h5 mb-0 mr-3 font-weight-bold " id="iptal">0
                                                 </div>
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="col-auto">
-                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                        <i class="fas fa-times fa-4x "></i>
                                     </div>
                                 </div>
                             </div>
@@ -262,10 +262,10 @@ $siteUrl = ( new WebRoot )->url ();
                                         <div class="text-xs font-weight-bold  text-uppercase mb-1" id="kurye_title">
                                             Kuryeye Verilen Siparişler
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="kurye">0</div>
+                                        <div class="h5 mb-0 font-weight-bold " id="kurye">0</div>
                                     </div>
                                     <div class="col-auto">
-                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        <i class="fas fa-motorcycle fa-4x "></i>
                                     </div>
                                 </div>
                             </div>
@@ -291,10 +291,30 @@ $siteUrl = ( new WebRoot )->url ();
                         <div class='col-md-4'>
                             <!-- DataTales Example -->
                             <div class="card shadow mb-4 ">
-                                <div class="card-header py-3 " id="table_info_head">
+
+                                    <?php
+                                    if($yetki == '1') {
+                                        ?>
+                                <div class="card-header py-3 " id="table_info_head" onclick='getprintfis()'>
                                     <h6 class="m-0 font-weight-bold text-primary d-inline " id="table_info">Siparis
                                         Detaylari</h6>
-                                    <i class="fa fa-pencil-alt  float-right" onclick='getShowOrder()'></i>
+                                        <button type="button" class="btn btn-primary float-right">Fis Al</button>
+                                        <!-- Kurye logosu yetkisi 2 olan da gorunecek 1 de sadece fis cikratma yetkisi olacak-->
+                                        <!-- <i class="fas fa-motorcycle fa-2x float-right"></i> -->
+
+                                        <?php
+                                    }else if($yetki == '2') {
+                                        ?>
+                                    <div class="card-header py-3 " id="table_info_head" onclick='getbringkurye()'>
+                                        <h6 class="m-0 font-weight-bold text-primary d-inline " id="table_info">Siparis
+                                            Detaylari</h6>
+
+                                        <button type="button" class="btn btn-primary float-right">Kurye Sec</button>
+                                        <?php
+                                    }
+                                    ?>
+
+
 
                                 </div>
                                 <div id="orderdetail"></div>
@@ -311,14 +331,15 @@ $siteUrl = ( new WebRoot )->url ();
             </div>
             <!-- End of Main Content -->
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+            <!-- Footer
+            <footer class="sticky-footer ">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Your Website 2019</span>
                     </div>
                 </div>
             </footer>
+             -->
             <!-- End of Footer -->
 
         </div>
@@ -357,18 +378,28 @@ $siteUrl = ( new WebRoot )->url ();
         var orderId = '';
         var kurye = '';
         var kuryeId = '';
+        var tableRenderDurum = 1 ; //butoona gore gerekli guncellemesi gereken yerler bu duruma gore guncellenecek
         window.onload = function () {
             title_data_rename();
-            tableRender(1);
+            tableRender(tableRenderDurum , 1);
             getkurye();
-            btnBackground(1);
+            btnBackground(tableRenderDurum);
         };
+
+        function  getprintfis(){
+            alert('Bu kisimda fis verm eile ilgili islemler yapilacak');
+        }
+
+        function getbringkurye(){
+            console.log('Bu kisimda kurye secilecek ve siparis onaylanacak');
+            getShowOrder();
+        }
 
         function refreshData() {
             title_data_rename();
-            tableRender(1);
+            tableRender(tableRenderDurum);
             getkurye();
-            btnBackground(1);
+            btnBackground(tableRenderDurum);
         }
 
 
@@ -404,25 +435,21 @@ $siteUrl = ( new WebRoot )->url ();
                 $('#table3').removeClass('card bg-primary text-light shadow h-100 py-2').addClass('card border-left-primary text-primary shadow h-100 py-2');
                 $('#table4').removeClass('card bg-danger text-light shadow h-100 py-2').addClass('card border-left-danger text-danger shadow h-100 py-2 ');
                 $('#table5').removeClass('card bg-primary text-light shadow h-100 py-2').addClass('card border-left-primary text-primary shadow h-100 py-2');
-                $('#table_info_head').html('<h6 class="m-0 font-weight-bold text-primary d-inline ">Siparis Detaylari</h6><i class="fa fa-pencil-alt  float-right" onclick=\'getShowOrder()\'></i>');
             } else if (opt == 3) {
                 $('#table1').removeClass('card bg-success text-light shadow h-100 py-2').addClass('card border-left-success text-success shadow h-100 py-2');
                 $('#table3').addClass('card bg-primary text-light shadow h-100 py-2');
                 $('#table4').removeClass('card bg-danger text-light shadow h-100 py-2').addClass('card border-left-danger text-danger shadow h-100 py-2 ');
                 $('#table5').removeClass('card bg-primary text-light shadow h-100 py-2').addClass('card border-left-primary text-primary shadow h-100 py-2');
-                $('#table_info_head').html('<h6 class="m-0 font-weight-bold text-primary d-inline ">Siparis Detaylari</h6><i class="fa fa-pencil-alt  float-right" onclick=\'getShowOrder()\'></i>');
             } else if (opt == 4) {
                 $('#table1').removeClass('card bg-success text-light shadow h-100 py-2').addClass('card border-left-success text-success shadow h-100 py-2');
                 $('#table3').removeClass('card bg-primary text-light shadow h-100 py-2').addClass('card border-left-primary text-primary shadow h-100 py-2');
                 $('#table4').addClass('card bg-danger text-light shadow h-100 py-2');
                 $('#table5').removeClass('card bg-primary text-light shadow h-100 py-2').addClass('card border-left-primary text-primary shadow h-100 py-2');
-                $('#table_info_head').html('<h6 class="m-0 font-weight-bold text-primary d-inline ">Siparis Detaylari</h6><i class="fa fa-pencil-alt  float-right" onclick=\'getShowOrder()\'></i>');
             } else if (opt == 5) {
                 $('#table1').removeClass('card bg-success text-light shadow h-100 py-2').addClass('card border-left-success text-success shadow h-100 py-2');
                 $('#table3').removeClass('card bg-primary text-light shadow h-100 py-2').addClass('card border-left-primary text-primary shadow h-100 py-2');
                 $('#table4').removeClass('card bg-danger text-light shadow h-100 py-2').addClass('card border-left-danger text-danger shadow h-100 py-2 ');
                 $('#table5').addClass('card bg-primary text-light shadow h-100 py-2');
-                $('#table_info_head').html('<h6 class="m-0 font-weight-bold text-primary d-inline ">Siparis Detaylari</h6><i class="fa fa-pencil-alt  float-right" onclick=\'getmessage()\'></i>');
             }
         }
 
@@ -431,6 +458,7 @@ $siteUrl = ( new WebRoot )->url ();
         }
 
         function tableRender(btnDurum , tableDurum) {
+            tableRenderDurum = tableDurum ;
             title_data_rename();
             btnBackground(btnDurum);
             $.ajax({
@@ -466,7 +494,7 @@ $siteUrl = ( new WebRoot )->url ();
 
         function getShowOrder() {
             if (orderId == '') {
-                swal.fire('Siparis detaylarini gorebilmek icin siparis secmelisiniz.');
+                swal.fire('Kuryeye verilecek bir siparis seciniz.');
                 return;
             }
 
@@ -525,26 +553,14 @@ $siteUrl = ( new WebRoot )->url ();
                         refreshData();
 
                         Swal.fire({
-                          title: 'Siparis onaylandi ve fis ciktisi verilecek',
+                          title: 'Kuryeye verildi',
                           //type: 'warning',
                           showCancelButton: false,
                           confirmButtonColor: '#3085d6',
                           cancelButtonColor: '#d33',
-                          confirmButtonText: 'Fisi al'
+                          confirmButtonText: 'Kapat'
                         }).then((result) => {
-                          if (result.value) {
-                            printJS({
-                            printable: 'orderdetail',//yazdiralacak html kismin idsi
-                            type: 'html', // html icin type:'html' olmali
-                            header: '<h3 class="custom-h3">'+orderId+' nolu siparis fisi</h3>', // header belirtir
-                            htmlStyle: '.custom-h3 { color: black;}' ,
-                            headerStyle: 'font-weight: 600;' ,//hedaer style icin kullanilir
-                            maxWidth : 50 ,//max sayfa genisligi
-                            targetStyles: ['*'] ,
-                            documentTitle: orderId+'_siparis_fis' , // kullanici dosya kaydetmek isterse bu isimle kaydedecektir
-                            })
-                          }
-                        })
+                        });
                         orderId= '' ;
 
                     } else {

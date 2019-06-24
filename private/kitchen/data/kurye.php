@@ -33,5 +33,4 @@ foreach ($res as $key){
 
     </tbody>
 </table>
-<div  class="btn btn-primary" onclick="siparisOnayla()">Siparisi Onayla ve Fis Al</div>
-<div  class="btn btn-primary ml-3" onclick="siparisIptal()">Siparisi Iptal Et</div>
+<div  class="btn btn-primary" onclick="siparisOnayla()">Kuryeye ver</div>
