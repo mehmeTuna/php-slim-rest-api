@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 19 Haz 2019, 14:23:55
--- Sunucu sürümü: 10.1.38-MariaDB
--- PHP Sürümü: 7.3.4
+-- Üretim Zamanı: 02 Tem 2019, 00:07:29
+-- Sunucu sürümü: 10.1.39-MariaDB
+-- PHP Sürümü: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -93,44 +93,6 @@ INSERT INTO `email_register` (`id`, `email`, `ip`, `m_date`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `kurye`
---
-
-CREATE TABLE `kurye` (
-  `firstname` varchar(100) COLLATE utf8_turkish_ci NOT NULL,
-  `lastname` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
-  `date` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
-  `username` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
-  `password` text COLLATE utf8_turkish_ci NOT NULL,
-  `id` varchar(10) COLLATE utf8_turkish_ci NOT NULL,
-  `data` text COLLATE utf8_turkish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
-
---
--- Tablo döküm verisi `kurye`
---
-
-INSERT INTO `kurye` (`firstname`, `lastname`, `date`, `username`, `password`, `id`, `data`) VALUES
-('Enes ', 'Budak', '235235', 'enes_budak', '235235', '2', ''),
-('adi', 'soyadi', '1560863144', 'kullanici adi', '$2y$10$5YKv6VzWtX6ICuCjoURQ6OXh9Ljp.gmvX/YRe28UScNmwFz1/L7Ti', '29604', '');
-
--- --------------------------------------------------------
-
---
--- Tablo için tablo yapısı `kurye_takip`
---
-
-CREATE TABLE `kurye_takip` (
-  `id` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
-  `order_id` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
-  `kurye_id` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
-  `start_date` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
-  `finish_date` varchar(20) COLLATE utf8_turkish_ci NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
-
--- --------------------------------------------------------
-
---
 -- Tablo için tablo yapısı `order_items`
 --
 
@@ -151,14 +113,9 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`order_id`, `user_id`, `order_amount`, `icerik`, `m_date`, `orders`, `m_status`, `order_status`, `ip`) VALUES
-(20844, 35747, 40, '', '1560025176', '[{\"id\":\"276675\",\"count\":1,\"price\":\"40\",\"name\":\"Beyti (1,5 porsiyon)\"}]', '1', '0', '::1'),
-(34278, 35747, 4, '', '1560029048', '[{\"id\":\"136207\",\"count\":1,\"price\":\"4\",\"name\":\"Coca-Cola Şekersiz (33 cl.)\"}]', '1', '0', '::1'),
-(37336, 35747, 26, 'daha hizli getirin cok yavas calisiyonuz', '1560928559', '[{\"id\":\"781750\",\"count\":1,\"price\":\"26\",\"name\":\"Kuşbaşı Kebap\"}]', '1', '2', '::1'),
-(63282, 35747, 66, '', '1560025329', '[{\"id\":\"276675\",\"count\":1,\"price\":\"40\",\"name\":\"Beyti (1,5 porsiyon)\"},{\"id\":\"232635\",\"count\":1,\"price\":\"26\",\"name\":\"Kemikli Tavuk\"}]', '1', '2', '::1'),
-(64568, 35747, 12, '', '1560853989', '[{\"id\":\"130287\",\"count\":1,\"price\":\"12\",\"name\":\"Kaymaklı Künefe\"}]', '0', '2', '::1'),
-(72850, 35747, 40, '', '1560852385', '[{\"id\":\"276675\",\"count\":1,\"price\":\"40\",\"name\":\"Beyti (1,5 porsiyon)\"}]', '1', '0', '::1'),
-(95671, 35747, 3, '', '1560720164', '[{\"id\":\"523399\",\"count\":1,\"price\":\"3\",\"name\":\"Ayran (30 cl.)\"}]', '1', '0', '::1'),
-(97902, 35747, 4, '', '1560025789', '[{\"id\":\"136207\",\"count\":1,\"price\":\"4\",\"name\":\"Coca-Cola Şekersiz (33 cl.)\"}]', '1', '0', '::1');
+(40512, 35747, 35.75, '', '1557314382', '{\"porsiyon\":\"1.5 porsiyon adana kebap\"}', '0', '0', '::1'),
+(41079, 35747, 10, '', '1557168416', '{\"porsiyon\":\"1 porsiyon\"}', '1', '0', '::1'),
+(55414, 35747, 25, '', '1557168478', '{\"porsiyon\":\"1.5 porsiyon\"}', '0', '0', '::1');
 
 -- --------------------------------------------------------
 
@@ -187,6 +144,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `price`, `name`, `date`, `numberOfProduct`, `categoryId`, `unlimited`, `live`, `card_text`, `img`, `other_img`, `stores`, `long_text`) VALUES
+(130287, 12, 'Kaymaklı Künefe', '1557250006', 100, 6, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
 (136207, 4, 'Coca-Cola Şekersiz (33 cl.)', '1557250070', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
 (151929, 24, 'Adana Dürüm', '1557249832', 100, 5, '1', 1, 'Mevsim salatası, pişmiş domates ve biber, yeşillik, limon', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', 'Mevsim salatası, pişmiş domates ve biber, yeşillik, limon'),
 (205023, 4, 'Fuse Tea (33 cl.)', '1557250115', 100, 7, '1', 1, '', '', '{\"1\":\"\",\"2\":\"\",\"3\":\"\"}', 'Adana', ''),
@@ -260,39 +218,10 @@ CREATE TABLE `rezervasyon` (
 --
 
 INSERT INTO `rezervasyon` (`id`, `time`, `name`, `e_mail`, `phone`, `kisi_sayisi`, `m_status`, `ip`, `rez_date`) VALUES
-(18553, '1557277760', 'mehmet tuna', 'mehmet_tuna_anadolu@hotmail.com', '5302145201', '2', '1', '::1', '2019-05-09'),
-(18683, '1557690369', 'mehmet tuna', 'tesasdasfdafawfwa@hotmail.com', '5302145201', '4', '2', '::1', '2019-05-02'),
+(18553, '1557277760', 'mehmet tuna', 'mehmet_tuna_anadolu@hotmail.com', '5302145201', '2', '0', '::1', '2019-05-09'),
 (30328, '1557430747', 'Enes Budak', 'enesbudak.mdbf17@iste.edu.tr', '53899774', '5', '1', '172.20.10.3', '2019-05-17'),
-(30393, '1557967454', 'mehmet tuna', 'mehmet_tuna_anadolu@hotmail.com', '5302145201', '2', '0', '::1', '2019-05-09'),
-(33576, '1557932407', 'wqrqr', 'mehmet_tuna_anadolu@hotmail.com', '5302145201', '5', '0', '::1', '2019-05-23'),
-(51563, '1557908766', 'deneme5', 'deneme@hotmail.com', '5302145201', '5', '2', '::1', '2019-05-09'),
-(56337, '1560920807', 'hamdi yarik', 'test@hotmail.com', '5302145201', '910910', '0', '::1', '2019-06-27'),
-(56802, '1557690540', 'Muhammet yurdan', 'muhammetyurdan369@gmail.com', '05347384165', '5', '2', '::1', '2019-05-14'),
-(92826, '1557690343', 'mehmet tuna', 'sadi.anan.güzel@sadi.code', '5302145201', '4', '1', '::1', '2019-05-15'),
-(99114, '1560852709', 'gunluk deneme', 'anil@demostore.com', '5302145201', '12', '0', '::1', '2019-06-06');
-
--- --------------------------------------------------------
-
---
--- Tablo için tablo yapısı `site`
---
-
-CREATE TABLE `site` (
-  `id` int(11) NOT NULL DEFAULT '1',
-  `site_name` varchar(30) COLLATE utf8_turkish_ci NOT NULL,
-  `site_description` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
-  `site_create_date` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
-  `site_url` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
-  `site_online` tinyint(1) NOT NULL DEFAULT '1',
-  `site_lisans` varchar(35) COLLATE utf8_turkish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
-
---
--- Tablo döküm verisi `site`
---
-
-INSERT INTO `site` (`id`, `site_name`, `site_description`, `site_create_date`, `site_url`, `site_online`, `site_lisans`) VALUES
-(1, 'localhost', 'site aciklama ksimi demo 2', '1559808638', 'http://localhost:81', 1, '1');
+(66993, '1558031391', 'enes budak', 'enesubdak@hotmail.com', '54352962117', '4', '0', '::1', '2019-05-03'),
+(96746, '1558031446', 'mushap budak', 'mushapbaba@hotmail.com', '5435292117', '21', '1', '::1', '2019-05-25');
 
 -- --------------------------------------------------------
 
@@ -359,7 +288,7 @@ CREATE TABLE `worker` (
 --
 
 INSERT INTO `worker` (`id`, `email`, `password`, `name`, `m_date`, `ip`, `authority`) VALUES
-(235235, 'demo@hotmail.com', '12345', 'mehmet tuna', '325235', '::1', '2');
+(235235, 'demo@hotmail.com', '12345', 'mehmet tuna', '325235', '::1', '3');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -386,18 +315,6 @@ ALTER TABLE `email_register`
   ADD UNIQUE KEY `id` (`id`,`email`);
 
 --
--- Tablo için indeksler `kurye`
---
-ALTER TABLE `kurye`
-  ADD PRIMARY KEY (`id`);
-
---
--- Tablo için indeksler `kurye_takip`
---
-ALTER TABLE `kurye_takip`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Tablo için indeksler `order_items`
 --
 ALTER TABLE `order_items`
@@ -414,12 +331,6 @@ ALTER TABLE `products`
 -- Tablo için indeksler `rezervasyon`
 --
 ALTER TABLE `rezervasyon`
-  ADD PRIMARY KEY (`id`);
-
---
--- Tablo için indeksler `site`
---
-ALTER TABLE `site`
   ADD PRIMARY KEY (`id`);
 
 --

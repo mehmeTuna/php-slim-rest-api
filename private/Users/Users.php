@@ -2,8 +2,10 @@
 
 namespace User ;
 
-if(!isset($_SESSION))
+if( !isset($_SESSION))
  session_start();
+
+
 
 include __DIR__ .'/../Ip/Ip.php';
 include __DIR__ . "/../time/timestamp.php";
@@ -44,14 +46,19 @@ class Create {
 
   /*public method is variable add*/
   public function add($val = array() ){
-    $this->id = $this->createId();
-    $this->email = $this->emailControl($val["email"]) ;
+    if($val["politics"] == false) $this->variableControl = false ;
+    if($val["password"] != $val["rePassword"] ) $this->variableControl = false ;
 
-    $this->password =  $this->passwordCrypt($val["password"]);
-    $this->firstname = $this->textControl($val["firstname"] , 50);
-    $this->lastname = $this->textControl($val["lastname"] , 50);
-    $this->phone = $this->validatePhoneNumber($val["phone"]);
-    $this->adress = $this->textControl($val["adress"] , 100);
+
+    $this->id = $this->createId();
+    $this->email = $this->emailControl( isset($val["username"]) ? $val["username"] : "" ) ;
+
+    $this->password =  $this->passwordCrypt( isset($val["password"]) ? $val["password"] : "" );
+    $this->firstname = $this->textControl( isset($val["name"]) ? $val["name"] : "" , 50);
+    $this->lastname = $this->textControl(  isset($val["surname"]) ? $val["surname"] : "" , 50);
+    $this->phone = $this->validatePhoneNumber( isset($val["phone"]) ? $val["phone"] : "" );
+    $this->adress = $this->textControl( isset($val["adress"]) ? $val["adress"] : ""  , 250);
+    $this->birthday = $this->textControl( isset($val["date"]) ? $val["date"] : "" , 20);
   }
 
     //data control return true or false
@@ -76,20 +83,22 @@ class Create {
       $this->newuser->add("phone" , $this->phone);
       $this->newuser->add("adress" , $this->adress);
       $this->newuser->add("adress_2" , $this->adress_2);
-
+      $this->newuser->add("birthday" , $this->birthday);
       $isCreatedUser = $this->newuser->run() ;
-      if( $isCreatedUser === false )
-       return false ;
-      else{
+      if( $isCreatedUser === false ){
+        return false ;
+      }else{
         $_SESSION["user"] = array(
           "username" => $this->id ,
           "firstname"=>$this->firstname,
           "lastname"=>$this->lastname,
           "email"=>$this->email ,
           "adress"=>$this->adress,
-          "product"=> array()
+          "product"=> array(),
+          "cardTotal"=>0,
+          "orderCount"=>0
       );
-        return "ok" ;
+        return ["status"=>"created"];
       }
     }
 
@@ -115,7 +124,7 @@ class Create {
       return password_hash(trim($pass) , PASSWORD_DEFAULT );
     }else{
       $this->variableControl = false ;
-      return false;
+      return "";
     }
   }
 
@@ -161,4 +170,5 @@ class Create {
     unset($adress);
     unset($adress_2);
   }
+
 } ;

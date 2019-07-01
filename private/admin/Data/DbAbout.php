@@ -255,12 +255,17 @@ class Data
 
         $add = "select * from {$this->category}";
         $result = array ();
+        $url = $_SERVER["REQUEST_SCHEME"] ."://". $_SERVER["HTTP_HOST"] ."/" ;
 
         try {
             $query = $this->db->query ( $add , PDO::FETCH_ASSOC );
 
             if ( $query->rowCount () ) {
                 foreach ( $query as $key => $value ) {
+                  
+                    if( isset( $value["img"] ))
+                     $value["img"] = $url .  $value["img"];
+        
                     $result[ $key ] = $value;
                 }
                 return json_encode ( $result , JSON_UNESCAPED_UNICODE );
@@ -836,7 +841,7 @@ class Data
             "img"=>strip_tags (trim (isset($val["img"]) ? $val["img"] : ""))
         ];
 
-        $query = "insert into {$this->category} (id,name,img) values (:id,:name,:name)";
+        $query = "insert into {$this->category} (id,name,img) values (:id,:name,:img)";
 
         try {
             $statement = $this->db->prepare ( $query );
@@ -869,7 +874,7 @@ class Data
         if($val == [] || $val["name"] == "" || $val["authority"]== "" )
             return json_encode (["status"=>"gecerli deger giriniz"] , JSON_UNESCAPED_UNICODE);
 
-        if(strlen( trim( $val["email"] ) ) > 1 && filter_var( $val["email"] , FILTER_VALIDATE_EMAIL))
+        if(  !filter_var( $val["email"] , FILTER_VALIDATE_EMAIL))
             return json_encode (["status"=>"gecerli deger giriniz"] , JSON_UNESCAPED_UNICODE);
 
         $time = new Ttime();

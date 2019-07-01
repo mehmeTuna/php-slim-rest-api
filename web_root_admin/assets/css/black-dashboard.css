@@ -104,7 +104,7 @@ section {
 
 
 
-}
+
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
@@ -14354,13 +14354,15 @@ hr {
   position: relative;
 }
 
+
 .table>tfoot>tr {
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
 }
 
+
 .table-responsive {
-  overflow: scroll;
+ 
   padding-bottom: 10px;
 }
 
@@ -15735,6 +15737,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 
 .pull-right {
   float: right;
+  font-size: 2em;
 }
 
 .card form label+.form-control {

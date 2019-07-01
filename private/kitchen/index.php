@@ -387,8 +387,28 @@ $yetki = $_SESSION[ 'mutfak' ][ 'authority' ] ;
         };
 
         function  getprintfis(){
-            alert('Bu kisimda fis verm eile ilgili islemler yapilacak');
+          console.log(this.orderId);
+          const url = 'http://localhost:81/private/PDF/index.php?id='+orderId
+
+          //  var win = window.open(url, '_self');
+            if(this.orderId == '') {
+                swal.fire("Sipariş seç");
+                
+                return ;
+            }
+            var iframe = document.createElement('iframe');
+            document.body.appendChild(iframe);
+            iframe.style.display = 'none';
+            iframe.onload = function() {
+                setTimeout(function() {
+                    iframe.focus();
+                    iframe.contentWindow.print();
+                }, 0);
+            };
+            iframe.src = url;
+        
         }
+ 
 
         function getbringkurye(){
             console.log('Bu kisimda kurye secilecek ve siparis onaylanacak');

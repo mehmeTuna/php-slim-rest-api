@@ -1,7 +1,7 @@
 <?php
 
 //id ve data geliyor ona göre sparişi onayla ve detay ekle
-//post ile content değikenşnde sipariş içerik ekleme geliyor
+//post ile content değikeninde sipariş içerik ekleme geliyor
 
 
 require __DIR__ ."/../../database/connect.php";
@@ -32,6 +32,25 @@ class Order {
      * @return false|string
      */
     public function run($id , $opt , $orderDetail = ''){
+      $user_id = null ;
+
+      if($opt == "1"){
+        $user_id = "select user_id from order_items where order_id='".$id."'";
+
+
+        $query = $this->conn->query ( $user_id , PDO::FETCH_ASSOC );
+
+        if ( $query->rowCount () ) {
+            foreach ( $query as $value ) {
+              $user_id = $value[ 'user_id' ];
+            }
+        }else exit ;
+
+
+        $firstOrder = "update users set first_order=1 where id='".$user_id."'";
+        $statement = $this->conn->prepare($firstOrder);
+        $statement->execute();
+      }
       
       if($orderDetail != '')
         $sql = "UPDATE {$this->table_name} SET m_status=? , icerik=? WHERE order_id=?";

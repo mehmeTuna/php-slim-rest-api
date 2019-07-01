@@ -2,8 +2,7 @@
 
 namespace Order\Add\Db ;
 
-if(!isset($_SESSION))
-  session_start();
+
 
 require __DIR__."/../../database/connect.php";
 require __DIR__."/../time/timestamp.php";
@@ -46,7 +45,16 @@ class Add {
         try{
           $statement = $this->db->prepare($orders);
           $statement->execute($this->data);
+
+          $_SESSION["user"]["product"] = array();
+          $_SESSION["user"]["cardTotal"] = 0;
+          $_SESSION["user"]["orderCount"] = 0;
+
+
+          
           return $this->data['order_id'];
+
+
 
         }catch(PDOException $e){
             $this->dbErr = false;

@@ -34,7 +34,7 @@ if(!isset($_SESSION["operator"])){
             
             $tip = strip_tags($_GET['order']) ;
 
-                $thisDayTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  ltrim(date('d') , 0)  , ltrim(date('Y') , 0 )  );
+                $thisDayTime = mktime(0,0,0 , date('n') , date('j')  , date('Y'));
 
                 $waiting= "SELECT order_id,user_id,order_amount,m_date,orders,order_status from order_items where order_id = '{$tip}' and m_date>='{$thisDayTime}' ORDER BY m_date ASC" ;
                 $order_wait = array();
@@ -45,7 +45,7 @@ if(!isset($_SESSION["operator"])){
                 if($query->rowCount()){
                     foreach ($query as $value) {
                         
-                        $waiting= "SELECT email,firstname,lastname,phone,adress from users where id = '{$value["user_id"]}'" ;
+                        $waiting= "SELECT email,firstname,lastname,phone,adress,first_order from users where id = '".$value["user_id"] . "'" ;
                         try{
                         $query = $details->conn->query( $waiting ,  PDO::FETCH_ASSOC);
                         
@@ -58,7 +58,8 @@ if(!isset($_SESSION["operator"])){
                                     "date"=>date('H:i', $value["m_date"]),
                                     "orders"=>$value["orders"],
                                     "adres"=>$user["adress"],
-                                    "phone"=>$user["phone"]
+                                    "phone"=>$user["phone"],
+                                    "first_order"=>$user["first_order"]
                                 ));
                             }
                         }
@@ -88,7 +89,7 @@ if(!isset($_SESSION["operator"])){
 
 
 if(isset($_GET["order"])  ){
-    $thisDayTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  ltrim(date('d') , 0)  , ltrim(date('Y') , 0 )  );
+    $thisDayTime = mktime(0,0,0 , date('n') , date('j')  , date('Y'));
 
     if($_GET["order"] == "gelen" )
         $waiting= "SELECT order_id,user_id,order_amount,m_date,orders,order_status from order_items where m_status = '0' and m_date>='{$thisDayTime}' ORDER BY m_date ASC" ;
@@ -109,7 +110,7 @@ if(isset($_GET["order"])  ){
      if($query->rowCount()){
          foreach ($query as $value) {
             
-            $waiting= "SELECT email,firstname,lastname,phone,adress from users where id = '{$value["user_id"]}'" ;
+            $waiting= "SELECT email,firstname,lastname,phone,adress,first_order from users where id = '" . $value["user_id"] . "'" ;
             try{
              $query = $details->conn->query( $waiting ,  PDO::FETCH_ASSOC);
              
@@ -122,7 +123,8 @@ if(isset($_GET["order"])  ){
                         "date"=>date('H:i', $value["m_date"]),
                         "orders"=>$value["orders"],
                         "adres"=>$user["adress"],
-                        "phone"=>$user["phone"]
+                        "phone"=>$user["phone"],
+                        "first_order"=>$user["first_order"]
                     ));
                  }
              }

@@ -1,0 +1,3 @@
+[29-Jun-2019 22:24:44 Europe/Istanbul] PHP Fatal error:  Call to a member function query() on null in /home/ciqaysof/public_html/private/worker/login.php on line 43
+[29-Jun-2019 22:26:26 Europe/Istanbul] PHP Fatal error:  Call to a member function query() on null in /home/ciqaysof/public_html/private/worker/login.php on line 43
+[29-Jun-2019 22:26:39 Europe/Istanbul] PHP Fatal error:  Call to a member function query() on null in /home/ciqaysof/public_html/private/worker/login.php on line 43

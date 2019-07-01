@@ -1,9 +1,9 @@
 <?php
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: *");
+require_once __DIR__ . "/../cors.php";
 
 session_start();
+
 
 require __DIR__.'/../orders/OrdersDb.php';
 
@@ -46,7 +46,12 @@ class Payment{
     //1= kartla kapida odeme
     //2 = kredi karti ile odeme
     public function method($method = ''){
-        if($method == 0 || $method == 1 || $method == 2 ){
+        if($method == 2){
+            exit ;
+            //bu kısımda  kredı kartı ıle odeme kısmına yonleendır ok donerse bu kısımda sıparısı onayla 
+        }else $this->control = false  ;
+
+        if($method == 0 || $method == 1 ){
              $this->method = $method ;
              return $this; 
         }else $this->control = false  ;
@@ -86,9 +91,14 @@ $newpayment = new Payment();
 
 $data = json_decode( file_get_contents('php://input' ) , true ) ;
 
+if( !isset($data['picked']) ){
+    echo "odeme tıpı belırt";
+    exit;
+}
+
 $newpayment->method($data['picked']);
 
-if($newpayment->control != true ){
+if($newpayment->control() != true ){
 echo $newpayment->control();
-}
-$rez = $newpayment->run();
+exit ;
+}else  echo $newpayment->run();

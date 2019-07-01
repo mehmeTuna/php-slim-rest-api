@@ -190,7 +190,7 @@ switch ( $_GET[ 'api' ] ) {
       echo $api->newCalisan ($getData);
       break;
 
-    case "delcalisan";
+    case "delcalisan":
       echo $api->delCalisan ($_GET["id"]);
       break;
 

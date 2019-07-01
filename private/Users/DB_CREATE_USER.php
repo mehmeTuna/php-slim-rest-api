@@ -9,8 +9,8 @@ use PDO ;
 class Add {
   /*sql query*/
   private $table_name = "users";
-  private $values = "id,email,password,firstname,lastname,email_verified,registration_date,verification_code,ip,phone,adress,adress_2";
-  private $valuesParameters = ":id,:email,:password,:firstname,:lastname,:email_verified,:registration_date,:verification_code,:ip,:phone,:adress,:adress_2";
+  private $values = "id,email,password,firstname,lastname,birthday,email_verified,registration_date,verification_code,ip,phone,adress,adress_2";
+  private $valuesParameters = ":id,:email,:password,:firstname,:lastname,:birthday,:email_verified,:registration_date,:verification_code,:ip,:phone,:adress,:adress_2";
   private $data = array();
 
   private $conn ;
@@ -32,7 +32,7 @@ class Add {
       $statement->execute($this->data);
       return true ;
     }catch(PDOException $e){
-      return $e ;
+      return false ;
     }
   }
 

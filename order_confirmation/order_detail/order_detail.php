@@ -8,7 +8,7 @@ header("Access-Control-Allow-Headers: *");
 
 require __DIR__ .'/../../database/connect.php';
 session_start();
-date_default_timezone_set('Europe/Istanbul');
+
 
 use DATABASE\Database ; 
 use PDO ;
@@ -51,15 +51,17 @@ if(!isset($_SESSION["operator"])){
     }
 
 
-    $waiting = array(
+    $result = array(
         "waiting"=>$waiting,
         "red"=>$red ,
         "ok"=>$ok
     );
+
     if($_SESSION['operator']['authority'] == 2 || $_SESSION['operator']['authority'] == 1)
-       echo json_encode($waiting , JSON_UNESCAPED_UNICODE);
+       echo json_encode($result , JSON_UNESCAPED_UNICODE);
     else echo json_encode(['status'=>'yetkisiz islem']);
       exit ;
+      
     }catch(PDOException $e){
         echo json_encode($e , JSON_UNESCAPED_UNICODE);
         exit ;

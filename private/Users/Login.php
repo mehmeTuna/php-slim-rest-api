@@ -1,9 +1,7 @@
 <?php
 //cors policy denied sorununu çözüyor
 //ayrı pcler arası iletişim sorununu çözüyor
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: *");
-
+require_once __DIR__ . "/../cors.php";
 
 session_start();
 

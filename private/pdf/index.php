@@ -5,6 +5,7 @@
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . "/../../database/connect.php";
 
+
 $orderId= isset($_GET["id"]) ? strip_tags ( trim ( $_GET["id"] ) ) : false ;
 if($orderId == false){
     echo json_encode (["status"=>"geçerli değer giriniz"] , JSON_UNESCAPED_UNICODE);
@@ -80,11 +81,11 @@ try{
 
 $mpdf = new \Mpdf\Mpdf([
     'mode' => 'utf-8',
-    'format' => [150, 50],
+    'format' => [1200, 75],
     "default_font_size"=>10,
-    "margin_top"=>13,
-    "margin_left"=>3,
-    "margin_right"=>3,
+    "margin_top"=>1,
+    "margin_left"=>1,
+    "margin_right"=>4,
     "margin_bottom"=>3,
     'orientation' => 'L'
 ]);
@@ -93,47 +94,28 @@ $orderTable = "";
 $orderDataYear = date( "d:m:Y" , $OrderDetay["m_date"]);
 $orderDataday = date( "H:i" , $OrderDetay["m_date"]);
 foreach ($OrderDetay["orders"] as $val){
-   $orderTable .="<tr><td>{$val['name']}</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td>{$val['count']}</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td>{$val['price']}</td>
+   $orderTable .="<tr><td class='table-order-name'>{$val['name']}</td>
+
+    <td style='padding-right:1mm'>{$val['count']}</td>
+
+    <td>{$val['price']}tl</td>
     </tr>";
 }
 ob_start ();
 
 echo "<style>
 .header{
-margin-left: 10mm;
+margin-left: 25mm;
 font-size:5mm;
 }
 .header-alt{
-margin-left: 14mm;
+margin-left: 29mm;
 font-size:5mm;
 }
 .siparis-title{
 font-size: 3mm;
 margin-top: 1mm;
-margin-left: 8mm;
+margin-left: 22mm;
 }
 .siparis-line{
 font-size: 1mm;
@@ -141,12 +123,15 @@ width: 45mm;
 }
 .user-title{
 margin-top: 3mm;
-font-size: 2mm;
+margin-left:4mm;
+font-size: 3mm;
 }
 .date-line{
 margin-top: 1mm;
 border: 1px solid #0e0e0e;
-font-size: 2mm;
+margin-left:2mm;
+margin-bottom:1mm;
+font-size: 3mm;
 padding: 1mm;
 }
 .urun-title{
@@ -163,10 +148,17 @@ padding: 0mm;
 margin: 0mm;
 }
 .adisyon{
-font-size: 2mm;
+font-size: 4mm;
 margin: 0mm;
 padding: 0mm;
 }
+.table-ürün-title{
+padding-right:45mm;
+}
+.table-order-name{
+    padding-right:20mm;
+}
+
 </style>
 
 <div class='header'>ZEKİ USTA</div>
@@ -176,32 +168,8 @@ padding: 0mm;
 <div class='date-line'>Tarih:{$orderDataYear}  Saat:{$orderDataday}  Masa No:Paket</div>
 <table class='urun-title'>
   <tr>
-    <th>Ürünler</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th>Adet</th> 
+    <th class='table-ürün-title' >Ürünler</th>
+    <th style='padding-right:2mm'>Adet</th> 
     <th>Tutar</th>
   </tr>
   </table>
@@ -212,41 +180,19 @@ padding: 0mm;
 <hr class='m-hr'>
    <table class='adisyon'>
      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+
         <td>Adisyon Toplam:</td>
         
-        <td>{$OrderDetay['order_amount']}</td>
+        <td>{$OrderDetay['order_amount']} TL</td>
         
      </tr>
    </table>
    
-   <div style='font-size: 3mm;margin-top: 5mm;margin-bottom: 1mm;margin-left: 2mm'> <u>Ödenecek Toplam Tutar : {$OrderDetay['order_amount']} </u></div>
-   <div style='margin-left:12mm;font-size: 2mm'><i>Teşekkür Ederiz</i></div>
+   <div style='font-size: 4mm;margin-top: 5mm;margin-bottom: 1mm;margin-left: 8mm'> <u>Ödenecek Toplam Tutar : {$OrderDetay['order_amount']} TL </u></div>
+   <div style='margin-left:25mm;font-size: 3mm'><i>Teşekkür Ederiz</i></div>
    
-   <div style='left: 3mm ; margin-top: 10mm;font-size: 3mm'> {$OrderDetay['adress']}</div>
-   <div style='font-size: 3mm;left: 3mm;margin-top: 1mm'>Arayan No: {$OrderDetay['phone']}</div>
+   <div style='left: 3mm ; margin-top: 10mm;font-size: 4mm'> {$OrderDetay['adress']}</div>
+   <div style='font-size: 4mm;left: 3mm;margin-top: 1mm'>Arayan No: {$OrderDetay['phone']}</div>
 ";
 
 
