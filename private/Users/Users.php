@@ -2,10 +2,6 @@
 
 namespace User ;
 
-if( !isset($_SESSION))
- session_start();
-
-
 
 include __DIR__ .'/../Ip/Ip.php';
 include __DIR__ . "/../time/timestamp.php";
@@ -37,10 +33,10 @@ class Create {
 
   public function __construct(){
     
-        $this->ip = ip::getIp();
+        $this->ip = (new ip)->getIp();
         //demo
         $this->email_verified = '1';
-        $this->registration_date = Ttime::gettime();
+        $this->registration_date = (new Ttime)->gettime();
         $this->newuser = new Add();
   }
 
@@ -95,6 +91,7 @@ class Create {
           "email"=>$this->email ,
           "adress"=>$this->adress,
           "product"=> array(),
+          "phone"=>$this->phone,
           "cardTotal"=>0,
           "orderCount"=>0
       );

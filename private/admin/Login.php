@@ -13,8 +13,8 @@ if ( isset( $_POST) ){
     $username = "";
     $password = "";
 
-    if(isset( $_POST["username"] ) && strlen( trim( $_POST["username"] ) ) > 1 && filter_var( trim($_POST["username"]), FILTER_VALIDATE_EMAIL)){
-        $username = strip_tags( trim($_POST["username"]) );
+    if(isset( $_POST["email"] ) && strlen( trim( $_POST["email"] ) ) > 1 && filter_var( trim($_POST["email"]), FILTER_VALIDATE_EMAIL)){
+        $username = strip_tags( trim($_POST["email"]) );
     }else{
         echo json_encode("hatalı veri kullanıcı adı" , JSON_UNESCAPED_UNICODE);
         exit;
@@ -38,7 +38,7 @@ if ( isset( $_POST) ){
                        $_SESSION["admin"] = array(
                            "username" => $val["id"] ,
                        );
-                    header("location: home");
+                    header("location: ../admin/home");
                     exit ;
                    }
                 }

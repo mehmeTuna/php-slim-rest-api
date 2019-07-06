@@ -1,9 +1,9 @@
 <?php
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: *");
-
 session_start();
+
+//require_once  __DIR__ . "/../cors.php";
+
 
 if(isset( $_SESSION["user"])){
     echo json_encode($_SESSION["user"] , JSON_UNESCAPED_UNICODE ) ;

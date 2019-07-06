@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 
 require_once __DIR__ . '/DataClass.php';
 
@@ -18,12 +18,7 @@ if( isset($_GET['search']  ) && $_GET['search'] =='ok'  )
     $result = $data->BringSearchAllOrders($id);
 else 
    $result = $data->BringAllOrders($id) ; 
-/*
 
-hazirlanacak
-hazirlanan
-iptal
-kurye*/
 
 ?>
 
@@ -53,6 +48,7 @@ Gosterilecek Veri bulunmamaktadir
                     <th>İletişim</th>
                     <th>Tarih</th>                                                           
                     <th>Sipariş Numarası</th>
+                    <th>Kurye</th>
                  </tr>
             </thead>
             <tfoot >
@@ -63,18 +59,34 @@ Gosterilecek Veri bulunmamaktadir
                     <th>İletişim</th>
                     <th>Tarih</th>                                                           
                     <th>Sipariş Numarası</th>
+                    <th>Kurye</th>
                  </tr>
             </tfoot>
             <tbody id="table_body_render">
                 <?php for ($a =  0 ; $a < count ($result) ; ) {
 
               $orderId = isset($result[$a]['orderId']) ? $result[$a]['orderId'] : 'hata' ;
+
+
+                    $kuryeData = "select firstname ,lastname  from kurye where id=(select kurye_id from kurye_takip where order_id='{$orderId}')";
+                    try{
+
+                        $kuryeName = $data->db->query( $kuryeData ,  PDO::FETCH_ASSOC);
+
+                        if($kuryeName->rowCount()){
+                            foreach ($kuryeName as $val )
+                                $kuryeName = $val["firstname"] . " " . $val["lastname"] ;
+                        }else $kuryeName = "else Kuryeye verilmedi";
+                    }catch (PDOException $e){
+                        $kuryeName = "Kuryeye verilmedi" ;
+                    };
+
              
               if(isset ($result[$a]['content']) ){
                   $content = json_decode( $result[$a]['content']  , true);
                 
                   $content = isset(  $content[0]['name'] ) ?  $content[0]['name']  : 'icerik bulunmuyor'; 
-              }else $content = 'sipris yok';
+              }else $content = 'siparis yok';
 
              
 
@@ -90,6 +102,7 @@ Gosterilecek Veri bulunmamaktadir
                 <td> <?= $phone?></td>
                 <td> <?= $mDate?></td>
                 <td> <?=$orderId ?></td>
+                <td><?=$kuryeName?></td>
                
             </tr>
                 <?php } ?>

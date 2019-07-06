@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+
+if ( !isset( $_SESSION[ "mutfak" ] ) || $_SESSION[ 'mutfak' ][ 'authority' ] != '2' ) {
+    echo json_encode (['status'=>'yetkisiz islem'] , JSON_UNESCAPED_UNICODE) ;
+    exit;
+}
 
 require_once __DIR__ . '/DataClass.php';
 

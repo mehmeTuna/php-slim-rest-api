@@ -388,7 +388,7 @@ $yetki = $_SESSION[ 'mutfak' ][ 'authority' ] ;
 
         function  getprintfis(){
           console.log(this.orderId);
-          const url = 'http://localhost:81/private/PDF/index.php?id='+orderId
+          const url = 'http://aysoftdemo.site/private/pdf/index.php?id='+orderId
 
           //  var win = window.open(url, '_self');
             if(this.orderId == '') {
@@ -561,6 +561,10 @@ $yetki = $_SESSION[ 'mutfak' ][ 'authority' ] ;
                 swal.fire('Siparis secimi yapin');
                 return;
             }
+            if(tableRenderDurum != 1 ){
+                swal.fire('Verilen siparişler tablosundaki siparişler kuryeye verilebilir.');
+                return;
+            }
             $.ajax({
                 type: 'GET',
                 url: globalUrl + 'kitchen/order/onay/' + orderId + '/' + kuryeId,
@@ -582,6 +586,7 @@ $yetki = $_SESSION[ 'mutfak' ][ 'authority' ] ;
                         }).then((result) => {
                         });
                         orderId= '' ;
+                        kuryeId = '';
 
                     } else {
                         swal.fire(res.status);

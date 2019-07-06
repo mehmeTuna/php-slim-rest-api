@@ -2,19 +2,6 @@
 
 namespace KitchenData;
 
-session_start ();
-
-if ( !isset( $_SESSION[ 'mutfak' ] ) )
-    exit;
-
-$yetki = ($_SESSION[ 'mutfak' ][ 'authority' ] == 1) ? true : ($_SESSION[ 'mutfak' ][ 'authority' ] == 2) ? true : false;
-
-
-if ( !$yetki ) {
-    echo json_encode ( ['status' => 'yetkisiz islem'] );
-    exit;
-}
-
 
 require_once __DIR__ . '/../../../database/connect.php';
 require_once __DIR__  .'/../../time/timestamp.php';
@@ -27,7 +14,7 @@ use PDOException;
 
 class Data
 {
-    private $db;
+    public $db;
     public $orderCount = array();
     private $thisDayTime = '';
 

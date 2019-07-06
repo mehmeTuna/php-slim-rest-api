@@ -3,14 +3,13 @@
 
 namespace Product ;
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: *");
+require_once __DIR__ ."/../../private/cors.php";
 
+require_once __DIR__ .'/../../database/connect.php';
+require_once __DIR__ .'/details.php';
+require_once __DIR__ .'/category.php';
+require_once __DIR__ ."/menu.php";
 
-require __DIR__ .'/../../database/connect.php';
-require __DIR__ .'/details.php';
-require __DIR__ . '/category.php';
-require __DIR__ ."/menu.php";
 
 use Product\details ;
 use Product\Category ;

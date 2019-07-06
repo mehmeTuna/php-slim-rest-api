@@ -1,7 +1,5 @@
 <?php
 
-require_once __DIR__ . "/../cors.php";
-
 session_start();
 
 
@@ -89,7 +87,9 @@ class Payment{
 
 $newpayment = new Payment();
 
-$data = json_decode( file_get_contents('php://input' ) , true ) ;
+//$data = json_decode( file_get_contents('php://input' ) , true ) ;
+
+$data = $_GET["type"] ;
 
 if( !isset($data['picked']) ){
     echo "odeme tıpı belırt";
@@ -99,6 +99,6 @@ if( !isset($data['picked']) ){
 $newpayment->method($data['picked']);
 
 if($newpayment->control() != true ){
-echo $newpayment->control();
+print_r($newpayment->control());
 exit ;
 }else  echo $newpayment->run();

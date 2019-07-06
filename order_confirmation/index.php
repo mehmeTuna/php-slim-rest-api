@@ -1,5 +1,7 @@
 <?php
+
 session_start();
+
 
 
 if(!isset($_SESSION["operator"])){
@@ -421,7 +423,7 @@ function create_user_render(option , yontem = ''){
        $.ajax({ 
         type: 'GET', 
         url: siteUrl + 'order_confirmation/order_detail/order_user_detail.php?search=ok&order='+option, 
-        success: function (data) { 
+        success: function (data) {
         
           if(data == ""){
             $('#table_body_render').html('Gösterilecek Veri Yok');
@@ -440,8 +442,8 @@ function create_user_render(option , yontem = ''){
   $.ajax({ 
         type: 'GET', 
         url: siteUrl+ 'order_confirmation/order_detail/order_user_detail.php?order='+option, 
-        success: function (data) { 
-         
+        success: function (data) {
+
           if(data == ""){
             $('#table_body_render').html('Gösterilecek Veri Yok');
           }else {
@@ -506,7 +508,7 @@ function title_data_rename(){
 function create_user(obj ){
     let order = JSON.parse( obj.orders  );
     obj.date = HMtime( obj.date );
-    firstOrder = obj.first_order == 0 ? '<i class="fas fa-check fa-2x text-info"> </i>': '<i class="fas fa-times fa-2x text-danger"> </i>' ;
+    firstOrder = obj.first_order == 1 ? '<i class="fas fa-check fa-2x text-info"> </i>': '<i class="fas fa-times fa-2x text-danger"> </i>' ;
 
   return  '<tr id="'+obj.order_id+'" >'+
           '<td onclick="edit_order_detay('+obj.order_id+',\''+obj.username+'\',\''+obj.tutar+'\',\''+obj.phone+'\',\''+obj.adres+'\')"><i class="fas fa-pencil-alt"></i></td>'+
@@ -517,6 +519,7 @@ function create_user(obj ){
           '<td>'+obj.adres+'</td>'+
           '<td>'+obj.order_id+'</td>'+ 
           '<td>'+firstOrder+'</td>'+
+          '<td>'+obj.kurye+'</td>'+
           '</tr>';
 }
 
@@ -562,7 +565,8 @@ function  titleTable(){
        '<th>Tarih</th>'+
        '<th>Adres</th>'+
        '<th>Sipariş Numarası</th>'+
-       '<th>İlk Sipariş </th>'
+       '<th>İlk Sipariş </th>'+
+       '<th>Kurye</th>'
        );
 
        $('#table_tr_foot').html(
@@ -573,7 +577,8 @@ function  titleTable(){
         '<th>Tarih</th>'+
         '<th>Adres</th>'+
         '<th>Sipariş Numarası</th>'+
-       '<th>İlk Sipariş </th>'
+        '<th>İlk Sipariş </th>'+
+        '<th>Kurye</th>'
        );
   }else {
     $('#table_tr_name').html(

@@ -6,8 +6,10 @@
 
 require __DIR__ ."/../../database/connect.php";
 
-use DATABASE\Database ;
 session_start();
+
+use DATABASE\Database ;
+
 
 if(!isset($_SESSION["operator"])){
   header("location: calisan");
@@ -47,7 +49,7 @@ class Order {
         }else exit ;
 
 
-        $firstOrder = "update users set first_order=1 where id='".$user_id."'";
+        $firstOrder = "update users set first_order='1' where id='".$user_id."'";
         $statement = $this->conn->prepare($firstOrder);
         $statement->execute();
       }
@@ -85,7 +87,7 @@ class Order {
   }
 
 
-  if(!isset($_GET) && !$_GET["id"] && !is_numeric($_GET["id"]) && strlen($_GET["id"])<=15)
+  if(!isset($_GET) && !$_GET["id"] && !is_numeric($_GET["id"]))
     exit;
 
     

@@ -2,8 +2,7 @@
 
 namespace Confirmation\detail ;
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: *");
+require_once __DIR__ . "/../../private/cors.php";
 
 
 require __DIR__ .'/../../database/connect.php';
@@ -45,10 +44,6 @@ use PDO ;
             $ok = $value["count(*)"] ;
         }
     }
-
-
-
-
 
 
 

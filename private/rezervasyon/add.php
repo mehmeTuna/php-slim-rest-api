@@ -1,8 +1,6 @@
 <?php
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: *");
-
+require_once __DIR__ . "/../cors.php";
 
 require __DIR__ .'/../../database/connect.php';
 include __DIR__ .'/DB_CREATE_REZERVASYON.php';

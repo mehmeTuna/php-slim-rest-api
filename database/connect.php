@@ -27,7 +27,9 @@ class Database
             $this->conn->setAttribute( PDOAlias::ATTR_ERRMODE, PDOAlias::ERRMODE_EXCEPTION);
             $this->conn->query("SET CHARACTER SET utf8");
         } catch (PDOException $e) {
-           return "";
+           echo  $e->getMessage();
+           exit;
+
         }
                   
     }

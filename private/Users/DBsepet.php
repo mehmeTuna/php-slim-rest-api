@@ -3,6 +3,7 @@ namespace Sepet ;
 
 use DATABASE\Database ;
 use PDO ;
+use PDOException;
 
 class sepetProduct {
     private $connect ; 

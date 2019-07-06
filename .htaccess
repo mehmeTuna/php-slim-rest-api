@@ -1,8 +1,25 @@
 Options +FollowSymLinks
 RewriteEngine On
 RewriteBase /
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule .* / [R=200,L]
 
 
+
+#dizinleri listelemesi engellenir
+Options -Indexes
+
+Header Set Access-Control-Allow-Origin *
+
+#SetEnvIf Origin "^http(s)?://(.+\.)?(1xyz\.com|2xyz\.com)$" REQUEST_ORIGIN=$0
+#Header always set Access-Control-Allow-Origin %{REQUEST_ORIGIN}e env=REQUEST_ORIGIN
+#Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+#Header always set Access-Control-Allow-Headers "x-test-header, Origin, X-Requested-With, Content-Type, Accept"
+
+# Force to request 200 for options
+#RewriteEngine On
+#RewriteCond %{REQUEST_METHOD} OPTIONS
+#RewriteRule .* / [R=200,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -19,6 +36,7 @@ RewriteRule ^profile$                                                     ./inde
 RewriteRule ^home$                                                        ./index.html
 RewriteRule ^contact$                                                     ./index.html
 RewriteRule ^checkout$                                                    ./index.html
+RewriteRule ^uyeol$                                                       ./index.html
 
 
 RewriteRule ^demo$                                                        ./private/demo.php
@@ -64,10 +82,10 @@ RewriteRule ^user/sepet$                                                   ./pri
 RewriteRule ^user/login$                                                   ./private/Users/Login.php
 RewriteRule ^user/logout$                                                  ./private/Users/Logout.php
 RewriteRule ^user/register$                                                ./private/Users/Add.php
-RewriteRule ^user/data$                                                    ./private/Users/Data.php
-RewriteRule ^user/orders$                                                   ./private/Users/Orders.php
+RewriteRule ^user/data$                                                    ./private/demo.php
+RewriteRule ^user/orders$                                                  ./private/Users/Orders.php
 RewriteRule ^user/sepetDel/([a-z0-9_-]+)$                                  ./private/Users/delete_sepet_item.php?id=$1
-RewriteRule ^payment$                                                      ./private/payment/payment.php
+RewriteRule ^payment/([a-z0-9_-]+)$                                        ./private/payment/payment.php?type=$1
 
 RewriteRule ^calisan/cikis-yap$                                            ./private/worker/logout.php
 RewriteRule ^calisan/giris$                                                ./private/worker/login.php
@@ -83,58 +101,55 @@ RewriteRule ^kitchen/order/iptal/([a-z0-9_-]+)$                            ./pri
 RewriteRule ^kitchen/order/onay/([a-z0-9_-]+)/([a-z0-9_-]+)$               ./private/kitchen/data/index.php?api=onay&id=$1&kuryeId=$2
 
 
+RewriteRule ^data/admin$                                                    ./private/admin/data.php
+RewriteRule ^admin/giris$                                                   ./private/admin/login.html
 RewriteRule ^admin/home$                                                    ./web_root_admin/index.html
-RewriteRule ^admin/home$                                                    ./private/Admin/index.php
-RewriteRule ^admin/giris$                                                   ./private/Admin/Login.html
-RewriteRule ^admin/login$                                                   ./private/Admin/Login.php
-RewriteRule ^admin/Logout$                                                  ./private/Admin/Logout.php
-RewriteRule ^admin/add/product$                                             ./private/Admin/product/product.php
+RewriteRule ^admin/login$                                                   ./private/admin/Login.php
+RewriteRule ^admin/Logout$                                                  ./private/admin/Logout.php
+RewriteRule ^admin/add/product$                                             ./private/admin/product/product.php
 
-RewriteRule ^admin/api/allWorker$                                           ./private/Admin/Data/index.php?api=getworker
-RewriteRule ^admin/api/order$                                               ./private/Admin/Data/index.php?api=fullorder
-RewriteRule ^admin/api/rezervasyon$                                         ./private/Admin/Data/index.php?api=fullrezervasyon
-RewriteRule ^admin/api/kurye$                                               ./private/Admin/Data/index.php?api=fullkurye
-RewriteRule ^admin/api/thisdayorder$                                        ./private/Admin/Data/index.php?api=orderthisday
-RewriteRule ^admin/api/thismonthorder$                                      ./private/Admin/Data/index.php?api=thismonthorder
-RewriteRule ^admin/api/thisdaypayment$                                      ./private/Admin/Data/index.php?api=thisdaypayment
-RewriteRule ^admin/api/thismonthpayment$                                    ./private/Admin/Data/index.php?api=thismonthpayment
-RewriteRule ^admin/api/iptalorder$                                          ./private/Admin/Data/index.php?api=iptalorder
-RewriteRule ^admin/api/iptalordermonth$                                     ./private/Admin/Data/index.php?api=iptalordermonth
-RewriteRule ^admin/api/thisdaymany$                                         ./private/Admin/Data/index.php?api=thisdaymany
-RewriteRule ^admin/api/thismonthmany$                                       ./private/Admin/Data/index.php?api=thismonthmany
-RewriteRule ^admin/api/allCateogry$                                         ./private/Admin/Data/index.php?api=allCateogry
-RewriteRule ^admin/api/newProduct$                                          ./private/Admin/Data/index.php?api=newProduct
-RewriteRule ^admin/api/allKurye$                                            ./private/Admin/Data/index.php?api=allKurye
-RewriteRule ^admin/api/newKurye$                                            ./private/Admin/Data/index.php?api=newKurye
-RewriteRule ^admin/api/alluser$                                             ./private/Admin/Data/index.php?api=alluser
-RewriteRule ^admin/api/userthismonth$                                       ./private/Admin/Data/index.php?api=userthismonth
-RewriteRule ^admin/api/userthisyear$                                        ./private/Admin/Data/index.php?api=userthisyear
-RewriteRule ^admin/api/allrezervasyon$                                      ./private/Admin/Data/index.php?api=allrezervasyon
-RewriteRule ^admin/api/rezervasyon/thisday$                                  ./private/Admin/Data/index.php?api=rezervasyonthisday
-RewriteRule ^admin/api/rezervasyon/thismonth$                               ./private/Admin/Data/index.php?api=rezervasyonthismonth
-RewriteRule ^admin/api/rezervasyon/thisyear$                                ./private/Admin/Data/index.php?api=rezervasyonthisyear
-RewriteRule ^admin/api/kurye/del/([a-z0-9_-]+)$                             ./private/Admin/Data/index.php?api=delkurye&email=$1
-RewriteRule ^admin/api/product/del/([a-z0-9_-]+)$                           ./private/Admin/Data/index.php?api=delproduct&id=$1
+RewriteRule ^admin/api/allWorker$                                           ./private/admin/Data/index.php?api=getworker
+RewriteRule ^admin/api/order$                                               ./private/admin/Data/index.php?api=fullorder
+RewriteRule ^admin/api/rezervasyon$                                         ./private/admin/Data/index.php?api=fullrezervasyon
+RewriteRule ^admin/api/kurye$                                               ./private/admin/Data/index.php?api=fullkurye
+RewriteRule ^admin/api/thisdayorder$                                        ./private/admin/Data/index.php?api=orderthisday
+RewriteRule ^admin/api/thismonthorder$                                      ./private/admin/Data/index.php?api=thismonthorder
+RewriteRule ^admin/api/thisdaypayment$                                      ./private/admin/Data/index.php?api=thisdaypayment
+RewriteRule ^admin/api/thismonthpayment$                                    ./private/admin/Data/index.php?api=thismonthpayment
+RewriteRule ^admin/api/iptalorder$                                          ./private/admin/Data/index.php?api=iptalorder
+RewriteRule ^admin/api/iptalordermonth$                                     ./private/admin/Data/index.php?api=iptalordermonth
+RewriteRule ^admin/api/thisdaymany$                                         ./private/admin/Data/index.php?api=thisdaymany
+RewriteRule ^admin/api/thismonthmany$                                       ./private/admin/Data/index.php?api=thismonthmany
+RewriteRule ^admin/api/allCateogry$                                         ./private/admin/Data/index.php?api=allCateogry
+RewriteRule ^admin/api/newProduct$                                          ./private/admin/Data/index.php?api=newProduct
+RewriteRule ^admin/api/allKurye$                                            ./private/admin/Data/index.php?api=allKurye
+RewriteRule ^admin/api/newKurye$                                            ./private/admin/Data/index.php?api=newKurye
+RewriteRule ^admin/api/alluser$                                             ./private/admin/Data/index.php?api=alluser
+RewriteRule ^admin/api/userthismonth$                                       ./private/admin/Data/index.php?api=userthismonth
+RewriteRule ^admin/api/userthisyear$                                        ./private/admin/Data/index.php?api=userthisyear
+RewriteRule ^admin/api/allrezervasyon$                                      ./private/admin/Data/index.php?api=allrezervasyon
+RewriteRule ^admin/api/rezervasyon/thisday$                                  ./private/admin/Data/index.php?api=rezervasyonthisday
+RewriteRule ^admin/api/rezervasyon/thismonth$                               ./private/admin/Data/index.php?api=rezervasyonthismonth
+RewriteRule ^admin/api/rezervasyon/thisyear$                                ./private/admin/Data/index.php?api=rezervasyonthisyear
+RewriteRule ^admin/api/kurye/del/([a-z0-9_-]+)$                             ./private/admin/Data/index.php?api=delkurye&email=$1
+RewriteRule ^admin/api/product/del/([a-z0-9_-]+)$                           ./private/admin/Data/index.php?api=delproduct&id=$1
 RewriteRule ^kitchen/kurye$                                                 ./private/kitchen/data/kurye.php
-RewriteRule ^admin/api/order/month/([a-z0-9_-]+)$                           ./private/Admin/Data/index.php?api=monthproduct&date=$1
-RewriteRule ^admin/api/newCategory$                                         ./private/Admin/Data/index.php?api=newcategory
-RewriteRule ^admin/api/delCategory/([a-z0-9_-]+)$                           ./private/Admin/Data/index.php?api=delcategory&id=$1
-RewriteRule ^admin/api/newCalisan$                                          ./private/Admin/Data/index.php?api=newcalisan
-RewriteRule ^admin/api/delCalisan/([a-z0-9_-]+)$                            ./private/Admin/Data/index.php?api=delcalisan&id=$1
-RewriteRule ^admin/api/orderDetay/year$                                     ./private/Admin/Data/index.php?api=orderdetayyear
-RewriteRule ^admin/api/orderDetay/month$                                    ./private/Admin/Data/index.php?api=orderdetaymonth
-RewriteRule ^admin/api/orderDetay/week$                                     ./private/Admin/Data/index.php?api=orderdetayweek
-RewriteRule ^admin/api/orderDetay/day$                                      ./private/Admin/Data/index.php?api=orderdetayday
+RewriteRule ^admin/api/order/month/([a-z0-9_-]+)$                           ./private/admin/Data/index.php?api=monthproduct&date=$1
+RewriteRule ^admin/api/newCategory$                                         ./private/admin/Data/index.php?api=newcategory
+RewriteRule ^admin/api/delCategory/([a-z0-9_-]+)$                           ./private/admin/Data/index.php?api=delcategory&id=$1
+RewriteRule ^admin/api/newCalisan$                                          ./private/admin/Data/index.php?api=newcalisan
+RewriteRule ^admin/api/delCalisan/([a-z0-9_-]+)$                            ./private/admin/Data/index.php?api=delcalisan&id=$1
+RewriteRule ^admin/api/orderDetay/year$                                     ./private/admin/Data/index.php?api=orderdetayyear
+RewriteRule ^admin/api/orderDetay/month$                                    ./private/admin/Data/index.php?api=orderdetaymonth
+RewriteRule ^admin/api/orderDetay/week$                                     ./private/admin/Data/index.php?api=orderdetayweek
+RewriteRule ^admin/api/orderDetay/day$                                      ./private/admin/Data/index.php?api=orderdetayday
 
 
-RewriteRule ^admin/api/pdf$                                                 ./private/Admin/pdf/index.php?api=all
-RewriteRule ^admin/api/pdf/([a-z0-9_-]+)$                                   ./private/Admin/pdf/index.php?api=all
-
-
-
-RewriteRule ^admin/api/allproduct$                                         ./private/Admin/Data/index.php?api=allProduct
+RewriteRule ^admin/api/pdf$                                                 ./private/admin/pdf/index.php?api=all
+RewriteRule ^admin/api/pdf/([a-z0-9_-]+)$                                   ./private/admin/pdf/index.php?api=all
 
 
 
-#dizinleri listelemesi engellenir
-Options -Indexes
+RewriteRule ^admin/api/allproduct$                                         ./private/admin/Data/index.php?api=allProduct
+
+

@@ -4,7 +4,7 @@
 namespace User ;
 
 use DATABASE\Database ;
-use PDO ;
+use PDOException;
 
 class Add {
   /*sql query*/

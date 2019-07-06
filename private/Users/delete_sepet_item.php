@@ -1,10 +1,13 @@
 <?php
 
+
+
 namespace Sepet\DELETE_ITEM ;
 
+//require_once  __DIR__ . "/../cors.php";
+
 session_start();
-//header("Access-Control-Allow-Origin: *");
-//header("Access-Control-Allow-Headers: *");
+
 if(!isset($_SESSION["user"])){
   echo json_encode( ['status'=>'login degil'], JSON_UNESCAPED_UNICODE); 
   exit;

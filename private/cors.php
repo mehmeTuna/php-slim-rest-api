@@ -1,6 +1,8 @@
 <?php
 
+
 // Allow from any origin
+
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
     // you want to allow, and if so:
@@ -21,9 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
     exit(0);
 }
+
+
 /*
  *
- * header('Access-Control-Allow-Origin: *');
+ *
+
+ header('Access-Control-Allow-Origin: *');
     header("Access-Control-Allow-Credentials: true");
     header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
     header('Access-Control-Max-Age: 1000');

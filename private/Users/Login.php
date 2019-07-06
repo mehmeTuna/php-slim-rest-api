@@ -1,18 +1,16 @@
 <?php
-//cors policy denied sorununu çözüyor
-//ayrı pcler arası iletişim sorununu çözüyor
-require_once __DIR__ . "/../cors.php";
 
 session_start();
+
 
 require __DIR__ .'/../../database/connect.php';
 
 use DATABASE\Database ;
 
-    $js_echo = "bir hata oluştu";
-    $username = "";
-    $password = "";
-    $name = array();
+$js_echo = "bir hata oluştu";
+$username = "";
+$password = "";
+$name = array();
     $dbPassword = "" ;
     $phone = "";
 
@@ -42,6 +40,7 @@ use DATABASE\Database ;
           
             if($query->rowCount()){
                 foreach($query as $val){
+                    $name["id"] = $val["id"];
                     $name["firstname"] = $val["firstname"];
                     $name["lastname"] = $val["lastname"] ;
                     $name["adress"] = $val["adress"] ;
@@ -63,7 +62,7 @@ use DATABASE\Database ;
 
         if( password_verify($password , isset($db_password) ? $db_password : "" )){
             $_SESSION["user"] = array(
-                "username" => $val["id"] ,
+                "username" => $name["id"] ,
                 "firstname"=>$name["firstname"],
                 "lastname"=>$name["lastname"],
                 "email"=>$username ,
@@ -74,7 +73,7 @@ use DATABASE\Database ;
                 "orderCount"=>0
             );
            
-            echo json_encode(array("firstname"=>$name["firstname"] , "lastname"=>$name["lastname"]) , JSON_UNESCAPED_UNICODE);
+            echo json_encode(array("firstname"=>$_SESSION["user"]["firstname"] , "lastname"=>$_SESSION["user"]["lastname"]) , JSON_UNESCAPED_UNICODE);
             exit;
         }else{
          $js_echo = array(
