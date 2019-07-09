@@ -23,6 +23,7 @@ class Create {
   private $ip='';
   private $rez_date = '';
   private $newRezervasyon ;
+  private $message  = '';
 
   
   /********/
@@ -30,11 +31,11 @@ class Create {
   private $variableControl = true ;
 
   public function __construct(){
-    
-        $this->ip = ip::getIp();
+
+        $this->ip = (new ip())->getIp();
         //demo
         $this->m_status = '0';
-        $this->time = (new Ttime)->gettime ();
+        $this->time = (new Ttime())->gettime ();
 
         $this->newRezervasyon = new  Add();
    }
@@ -48,6 +49,7 @@ class Create {
     $this->kisi_sayisi = $this->textControl(isset($val["attendents"]) ? $val["attendents"] : "" , 50);
     $this->phone = $this->validatePhoneNumber(isset($val["phone"]) ? $val["phone"] : "");
     $this->rez_date = $this->textControl(isset($val["date"]) ? $val["date"] : "" , 50);
+    $this->message = $this->textControl(isset($val["message"]) ? $val["message"] : "" , 500);
   }
 
   //data control return true or false
@@ -69,6 +71,7 @@ class Create {
       $this->newRezervasyon->add("m_status" , $this->m_status);
       $this->newRezervasyon->add("ip" , $this->ip);
       $this->newRezervasyon->add("rez_date" , $this->rez_date);
+      $this->newRezervasyon->add("message" , $this->message);
       
      
        return $this->newRezervasyon->run() ;

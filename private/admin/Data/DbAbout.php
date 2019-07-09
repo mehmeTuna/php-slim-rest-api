@@ -133,17 +133,19 @@ class Data
     function getmonthorder ( $month )
     {
         $thisyear = date ( 'Y' );
-        $thismonth = ltrim ( date ( 'm' ) , 0 );
+
 
         if ( !( $month >= 0 && $month <= 12 ) )
             return json_encode ( [ 'status' => 'gecerli parametre giriniz' ] , JSON_UNESCAPED_UNICODE );
 
-        if ( $month > $thismonth )
-            $thisyear = $thisyear - 1;
+        $createMkTime = mktime ( 0 , 0, 0 , $month , 1 , $thisyear );
 
-        $createMkTime = mktime ( 0 , 1 , 0 , $thismonth , 1 , $thisyear );
+        if($month == 12)
+          $endcreateMkTime = mktime ( 0 , 0, 0 , $month , 31 , $thisyear );
+        else
+          $endcreateMkTime = mktime ( 0 , 0, 0 , $month+1 , -1 , $thisyear );
 
-        $add = "select * from {$this->order} where m_status=5 and m_date >=" . $createMkTime;
+        $add = "select * from {$this->order} where m_status=5 and m_date >='{$createMkTime}' and m_date<='{$endcreateMkTime}'" ;
         $result = array ( 'orderAmount' => 0 , 'count' => 0 , 'status' => array ( 0 => 0 , 1 => 0 , 2 => 0 ) , 'orderStatus' => array () );
 
         try {
@@ -891,6 +893,37 @@ class Data
             ];
 
         $query = "insert into {$this->worker} (id,email,password,name,m_date,ip,authority) values (:id,:email,:password,:name,:m_date,:ip,:authority)";
+
+        try {
+            $statement = $this->db->prepare ( $query );
+            $statement->execute ( $result );
+            return json_encode ( [ 'status' => 'ok' ] , JSON_UNESCAPED_UNICODE );
+
+        } catch ( PDOException $e ) {
+            return json_encode ( [ 'status' => 'kaydetme sorunu' ] , JSON_UNESCAPED_UNICODE );
+        }
+    }
+
+    /**
+     * @param array $val
+     * @return false|string
+     */
+    public
+     function  updateCalisan($val = []){
+        $Gyetki = [0,1,2];
+
+        if($val == [] || $val["name"] == "" || $val["authority"]== "" )
+            return json_encode (["status"=>"gecerli deger giriniz"] , JSON_UNESCAPED_UNICODE);
+
+        if(!in_array(strip_tags (trim ($val["id"])) , $Gyetki))
+            return json_encode (["status"=>"gecerli yetkilendirme giriniz"] , JSON_UNESCAPED_UNICODE);
+
+        $result = [
+            "authority"=>strip_tags (trim ( $val["authority"])),
+            "id"=>strip_tags (trim ($val["id"]))
+        ];
+
+        $query = "update  {$this->worker} set authority=:authority where id=:id";
 
         try {
             $statement = $this->db->prepare ( $query );

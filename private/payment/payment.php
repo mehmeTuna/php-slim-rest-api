@@ -63,13 +63,14 @@ class Payment{
         }
     }
 
-    public function run(){
+    public function run($icerik){
 
         $response = new Add ();
          $response->Add("order_status", $this->method);
          $response->Add('user_id' , $this->userId);
          $response->Add('orders' , $this->product );
          $response->Add('order_amount' , $this->cardTotal);
+        $response->Add('icerik' , $icerik);
     
     
         if( empty( $this->control) ){
@@ -85,11 +86,21 @@ class Payment{
     }
 }
 
+
+$data = json_decode( file_get_contents("php://input") , true);
+
+//$data = $_POST ;
+
+
+
 $newpayment = new Payment();
 
-//$data = json_decode( file_get_contents('php://input' ) , true ) ;
 
-$data = $_GET["type"] ;
+if(!isset($data["content"])){
+    echo "Açıklama ekleyiniz";
+     exit;
+}
+
 
 if( !isset($data['picked']) ){
     echo "odeme tıpı belırt";
@@ -99,6 +110,6 @@ if( !isset($data['picked']) ){
 $newpayment->method($data['picked']);
 
 if($newpayment->control() != true ){
-print_r($newpayment->control());
+echo json_decode($newpayment->control() , JSON_UNESCAPED_UNICODE);
 exit ;
-}else  echo $newpayment->run();
+}else  echo $newpayment->run($data['content']);

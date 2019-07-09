@@ -525,6 +525,7 @@ function create_user(obj ){
 
 function create_rezervasyon(obj ){
     obj.date = HMtime( obj.date );
+    let message = obj.message == "" ? "Açıklama yok" : obj.message ;
 
     return '<tr id="'+obj.id+'" >'+
     '<td onclick="edit_rezervasyon_detay('+obj.id+')"><i class="fas fa-pencil-alt"></i></td>'+
@@ -533,6 +534,7 @@ function create_rezervasyon(obj ){
           '<td>'+ obj.kisi+'</td>'+
           '<td>'+ obj.date+'</td>'+
           '<td>'+obj.e_mail+'</td>'+
+          '<td>'+message+'</td>'+
           '</tr>';
 }
 
@@ -587,7 +589,8 @@ function  titleTable(){
        '<th>Telefon</th>'+
        '<th>Kişi Sayısı</th>'+
        '<th>Tarih</th>'+
-       '<th>E_mail</th>'
+       '<th>E_mail</th>'+
+       '<th>Açıklama</th>'
        );
 
        $('#table_tr_foot').html(
@@ -596,7 +599,8 @@ function  titleTable(){
         '<th>Telefon</th>'+
         '<th>Kişi Sayısı</th>'+
         '<th>Tarih</th>'+
-        '<th>E_mail</th>'
+        '<th>E_mail</th>'+
+         '<th>Açıklama</th>'
        );
   }
 }

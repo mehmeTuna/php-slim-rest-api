@@ -24,3 +24,7 @@
 [03-Jul-2019 13:41:32 Europe/Istanbul] PHP Deprecated:  Non-static method Ip\ip::getIp() should not be called statically in /home/ciqaysof/public_html/private/rezervasyon/rezervasyon.php on line 34
 [03-Jul-2019 13:57:30 Europe/Istanbul] PHP Deprecated:  Non-static method Ip\ip::getIp() should not be called statically in /home/ciqaysof/public_html/private/rezervasyon/rezervasyon.php on line 34
 [03-Jul-2019 14:25:38 Europe/Istanbul] PHP Deprecated:  Non-static method Ip\ip::getIp() should not be called statically in /home/ciqaysof/public_html/private/rezervasyon/rezervasyon.php on line 34
+[07-Jul-2019 01:31:33 Europe/Istanbul] PHP Deprecated:  Non-static method Ip\ip::getIp() should not be called statically in /home/ciqaysof/public_html/private/rezervasyon/rezervasyon.php on line 34
+[07-Jul-2019 01:31:56 Europe/Istanbul] PHP Deprecated:  Non-static method Ip\ip::getIp() should not be called statically in /home/ciqaysof/public_html/private/rezervasyon/rezervasyon.php on line 34
+[07-Jul-2019 01:32:06 Europe/Istanbul] PHP Deprecated:  Non-static method Ip\ip::getIp() should not be called statically in /home/ciqaysof/public_html/private/rezervasyon/rezervasyon.php on line 34
+[07-Jul-2019 01:32:19 Europe/Istanbul] PHP Deprecated:  Non-static method Ip\ip::getIp() should not be called statically in /home/ciqaysof/public_html/private/rezervasyon/rezervasyon.php on line 34

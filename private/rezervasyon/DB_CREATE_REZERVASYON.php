@@ -9,8 +9,8 @@ use PDO ;
 class Add {
   /*sql query*/
   private $table_name = "rezervasyon";
-  private $values = "id,time,name,e_mail,phone,kisi_sayisi,m_status,ip,rez_date";
-  private $valuesParameters = ":id,:time,:name,:e_mail,:phone,:kisi_sayisi,:m_status,:ip,:rez_date";
+  private $values = "id,time,name,e_mail,phone,kisi_sayisi,m_status,ip,rez_date,message";
+  private $valuesParameters = ":id,:time,:name,:e_mail,:phone,:kisi_sayisi,:m_status,:ip,:rez_date,:message";
   private $data = array();
 
   private $conn ;
@@ -32,7 +32,7 @@ class Add {
       $statement->execute($this->data);
       return "ok" ;
     }catch(PDOException $e){
-      return $e ;
+      return "Ekleme hatası" ;
     }
   }
 

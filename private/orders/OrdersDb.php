@@ -20,54 +20,40 @@ class Add {
     private $db  ;
 
     public function __construct()
-    {
+    { 
         $this->db = new Database();
-        $this->db = $this->db->conn ;
+        $this->db = $this->db->conn ;  
         $this->data = [
-            "ip"=>(new ip())->getIp(),
-            "m_date"=>(new Ttime())->gettime(),
-            "order_id"=>rand(10000,99999),
-            "m_status"=>"0",
+          "ip"=>(new ip())->getIp(),
+          "m_date"=>(new Ttime())->gettime(),
+          "order_id"=>rand(10000,99999),
+          "m_status"=>"0",
         ];
     }
-
+    
 
     //data and value =orders,order_status
     public function Add($data , $value){
         $this->data[$data] = $value ;
-        return $this ;
+      return $this ;
     }
 
     public function run(){
-
-        $orders = 'insert into order_items (order_id,user_id,m_date,orders,m_status,order_status,ip,order_amount) values (:order_id,:user_id,:m_date,:orders,:m_status,:order_status,:ip,:order_amount)';
+  
+        $orders = 'insert into order_items (order_id,user_id,m_date,orders,m_status,order_status,ip,order_amount,icerik) values (:order_id,:user_id,:m_date,:orders,:m_status,:order_status,:ip,:order_amount,:icerik)';
 
         try{
-            $statement = $this->db->prepare($orders);
-            $statement->execute($this->data);
+          $statement = $this->db->prepare($orders);
+          $statement->execute($this->data);
 
 
+          $_SESSION["user"]["product"] = array();
+          $_SESSION["user"]["cardTotal"] = 0;
+          $_SESSION["user"]["orderCount"] = 0;
 
 
-            try{
-                $statement = $this->db->prepare("UPDATE users SET first_order = 1  WHERE id={$_SESSION["user"]["username"]} ;");
-                $statement->execute($this->data);
-                $_SESSION["user"]["product"] = array();
-                $_SESSION["user"]["cardTotal"] = 0;
-                $_SESSION["user"]["orderCount"] = 0;
-                return $this->data['order_id'];
-            }catch(PDOException $e){
-                $this->dbErr = false;
-                return false ;
-            }
-
-            $_SESSION["user"]["product"] = array();
-            $_SESSION["user"]["cardTotal"] = 0;
-            $_SESSION["user"]["orderCount"] = 0;
-
-
-
-            return $this->data['order_id'];
+          
+          return $this->data['order_id'];
 
 
 
@@ -79,7 +65,7 @@ class Add {
 
 
     public function __destruct(){
-
+        
     }
 
 }

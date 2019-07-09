@@ -1,4 +1,4 @@
-﻿/*
+/*
 Copyright (c) 2006 Steve Webster
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of

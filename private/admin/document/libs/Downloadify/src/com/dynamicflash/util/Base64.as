@@ -1,4 +1,4 @@
-﻿/*
+/*
 Base64 - 1.1.0
 
 Copyright (c) 2006 Steve Webster

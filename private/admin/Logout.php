@@ -10,7 +10,8 @@ if(!isset($_REQUEST)){
 
 if(isset($_SESSION["admin"])){
     unset($_SESSION["admin"]);
-    echo "ok";
+    header("Location: home");
+exit;
 }else{
     echo "err";
 }

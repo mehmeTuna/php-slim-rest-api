@@ -93,3 +93,6 @@
 [04-Jul-2019 00:02:46 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
 [04-Jul-2019 00:03:48 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
 [04-Jul-2019 17:34:53 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Add.php on line 3
+[06-Jul-2019 19:14:40 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Orders.php on line 5
+[06-Jul-2019 19:16:36 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Orders.php on line 5
+[06-Jul-2019 19:17:36 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Orders.php on line 5

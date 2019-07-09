@@ -38,9 +38,9 @@ if ( isset( $_POST) ){
                        $_SESSION["admin"] = array(
                            "username" => $val["id"] ,
                        );
-                    header("location: ../admin/home");
+                    header("location: ../dashboard");
                     exit ;
-                   }
+                   }else  echo json_encode("Parola Hatalı" , JSON_UNESCAPED_UNICODE);
                 }
             }else {
                 echo json_encode("kullanıcı bulunamadı" , JSON_UNESCAPED_UNICODE);

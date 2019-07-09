@@ -65,7 +65,7 @@ Gosterilecek Veri bulunmamaktadir
             <tbody id="table_body_render">
                 <?php for ($a =  0 ; $a < count ($result) ; ) {
 
-              $orderId = isset($result[$a]['orderId']) ? $result[$a]['orderId'] : 'hata' ;
+              $orderId = isset($result[$a]['orderId']) ? $result[$a]['orderId'] : '0' ;
 
 
                     $kuryeData = "select firstname ,lastname  from kurye where id=(select kurye_id from kurye_takip where order_id='{$orderId}')";
@@ -76,7 +76,7 @@ Gosterilecek Veri bulunmamaktadir
                         if($kuryeName->rowCount()){
                             foreach ($kuryeName as $val )
                                 $kuryeName = $val["firstname"] . " " . $val["lastname"] ;
-                        }else $kuryeName = "else Kuryeye verilmedi";
+                        }else $kuryeName = "Kuryeye verilmedi";
                     }catch (PDOException $e){
                         $kuryeName = "Kuryeye verilmedi" ;
                     };
@@ -95,7 +95,7 @@ Gosterilecek Veri bulunmamaktadir
 
 
              ?>
-                <tr id='<?php $orderId ?> '>
+                <tr id='<?php echo $orderId ?> '>
                 <td onclick="orderDetayTable(<?php echo  $orderId?>)"> <i  class="fas fa-eye ml-2"></i> </td>
                  <td> <?= ++$a ?></td>
                 <td> <?= $content?></td>

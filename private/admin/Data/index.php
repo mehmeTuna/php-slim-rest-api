@@ -1,29 +1,28 @@
 <?php
 
-namespace Api ;
-session_start();
+namespace Api;
+session_start ();
 
 
-if(!isset($_SESSION["admin"])){
-    echo json_encode(array(
-        "status"=>"login değil"
-    ) , JSON_UNESCAPED_UNICODE);
-    exit ;
+if ( !isset( $_SESSION[ "admin" ] ) ) {
+    echo json_encode ( array (
+        "status" => "login değil"
+    ) , JSON_UNESCAPED_UNICODE );
+    exit;
 }
 
-require_once __DIR__ . '/DbAbout.php' ;
+require_once __DIR__ . '/DbAbout.php';
 
-use Admin\Data ;
+use Admin\Data;
 
 $api = new Data();
 
-$getData = json_decode( file_get_contents("php://input") , true );
+$getData = json_decode ( file_get_contents ( "php://input" ) , true );
 
-
-if( !isset($_GET['api'])){
-    echo json_encode( ['status' => 'only get method'], JSON_UNESCAPED_UNICODE) ;
-    exit ;
-} ;
+if ( !isset( $_GET[ 'api' ] ) ) {
+    echo json_encode ( [ 'status' => 'only get method' ] , JSON_UNESCAPED_UNICODE );
+    exit;
+};
 
 
 switch ( $_GET[ 'api' ] ) {
@@ -109,77 +108,81 @@ switch ( $_GET[ 'api' ] ) {
         break;
 
     case 'allrezervasyon':
-        echo $api->getAllRezervasyon();
+        echo $api->getAllRezervasyon ();
         break;
 
     case 'rezervasyonthisday':
-        echo $api->rezervasyonThisDay();
+        echo $api->rezervasyonThisDay ();
         break;
 
     case 'rezervasyonthismonth':
-        echo $api->rezervasyonThisMonth();
+        echo $api->rezervasyonThisMonth ();
         break;
 
     case 'rezervasyonthisyear':
-        echo $api->rezervasyonThisYear();
+        echo $api->rezervasyonThisYear ();
         break;
 
     case 'userthismonth' :
-        echo $api->getThisMontUser (ltrim(date('m') ,0));
+        echo $api->getThisMontUser ( ltrim ( date ( 'm' ) , 0 ) );
         break;
 
     case 'userthisyear':
-        echo $api->getThisYearUser(date('Y'));
+        echo $api->getThisYearUser ( date ( 'Y' ) );
         break;
 
     case 'monthproduct':
-       echo  $api->getmonthorder ($_GET['date']);
-       break;
+        echo $api->getmonthorder ( $_GET[ 'date' ] );
+        break;
 
     case 'fullorder':
-       echo '';
-       break ;
+        echo '';
+        break;
 
 
     case "newcategory":
-       echo $api->newCategory($getData);
-       break;
+        echo $api->newCategory ( $getData );
+        break;
 
     case "delcategory":
-        echo $api->deleteCategory ($_GET["id"]);
-    break;
+        echo $api->deleteCategory ( $_GET[ "id" ] );
+        break;
 
 
     case "newcalisan":
-      echo $api->newCalisan ($getData);
-      break;
+        echo $api->newCalisan ( $getData );
+        break;
+
+    case "updatecalisan":
+        echo $api->updateCalisan ( $getData );
+        break;
 
     case "delcalisan":
-      echo $api->delCalisan ($_GET["id"]);
-      break;
+        echo $api->delCalisan ( $_GET[ "id" ] );
+        break;
 
     case "orderdetayyear":
-        echo $api->bringGetOrderDetay ("year");
-    break;
+        echo $api->bringGetOrderDetay ( "year" );
+        break;
 
     case "orderdetaymonth":
-        echo $api->bringGetOrderDetay ("month");
-    break;
+        echo $api->bringGetOrderDetay ( "month" );
+        break;
 
     case "orderdetayweek":
-        echo $api->bringGetOrderDetay ("week");
-    break;
+        echo $api->bringGetOrderDetay ( "week" );
+        break;
 
     case "orderdetayday":
-        echo $api->bringGetOrderDetay ("day");
-    break;
+        echo $api->bringGetOrderDetay ( "day" );
+        break;
 
     case "getworker":
-        echo $api->getWorker();
-    break;
+        echo $api->getWorker ();
+        break;
 
 
     default :
-        echo json_encode ( ['status' => 'tanimlanmayan parametre'], JSON_UNESCAPED_UNICODE );
+        echo json_encode ( [ 'status' => 'tanimlanmayan parametre' ] , JSON_UNESCAPED_UNICODE );
         break;
 };

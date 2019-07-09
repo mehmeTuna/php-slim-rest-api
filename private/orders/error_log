@@ -1,3 +1,0 @@
-[02-Jul-2019 02:56:36 Europe/Istanbul] PHP Warning:  Missing argument 2 for Order\Add\Db\Add::Add(), called in /home/ciqaysof/public_html/private/orders/NewOrder.php on line 20 and defined in /home/ciqaysof/public_html/private/orders/OrdersDb.php on line 36
-[02-Jul-2019 02:56:36 Europe/Istanbul] PHP Warning:  Illegal offset type in /home/ciqaysof/public_html/private/orders/OrdersDb.php on line 37
-[02-Jul-2019 02:56:36 Europe/Istanbul] PHP Fatal error:  Call to a member function prepare() on null in /home/ciqaysof/public_html/private/orders/OrdersDb.php on line 46

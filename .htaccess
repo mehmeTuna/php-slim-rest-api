@@ -39,6 +39,17 @@ RewriteRule ^checkout$                                                    ./inde
 RewriteRule ^uyeol$                                                       ./index.html
 
 
+
+RewriteRule ^dashboard$                                                  ./admin/index.html
+RewriteRule ^products$                                                  ./admin/index.html
+RewriteRule ^kurye$                                                     ./admin/index.html
+RewriteRule ^categorys$                                                  ./admin/index.html
+RewriteRule ^addproduct$                                                ./admin/index.html
+RewriteRule ^rezervasyon$                                                ./admin/index.html
+RewriteRule ^adduser$                                                   ./admin/index.html
+RewriteRule ^satistakip$                                                   ./admin/index.html
+
+
 RewriteRule ^demo$                                                        ./private/demo.php
 
 
@@ -85,7 +96,7 @@ RewriteRule ^user/register$                                                ./pri
 RewriteRule ^user/data$                                                    ./private/demo.php
 RewriteRule ^user/orders$                                                  ./private/Users/Orders.php
 RewriteRule ^user/sepetDel/([a-z0-9_-]+)$                                  ./private/Users/delete_sepet_item.php?id=$1
-RewriteRule ^payment/([a-z0-9_-]+)$                                        ./private/payment/payment.php?type=$1
+RewriteRule ^user/payment$                                                 ./private/payment/payment.php
 
 RewriteRule ^calisan/cikis-yap$                                            ./private/worker/logout.php
 RewriteRule ^calisan/giris$                                                ./private/worker/login.php
@@ -143,7 +154,7 @@ RewriteRule ^admin/api/orderDetay/year$                                     ./pr
 RewriteRule ^admin/api/orderDetay/month$                                    ./private/admin/Data/index.php?api=orderdetaymonth
 RewriteRule ^admin/api/orderDetay/week$                                     ./private/admin/Data/index.php?api=orderdetayweek
 RewriteRule ^admin/api/orderDetay/day$                                      ./private/admin/Data/index.php?api=orderdetayday
-
+RewriteRule ^admin/api/updatecalisan$                                       ./private/admin/Data/index.php?api=updatecalisan
 
 RewriteRule ^admin/api/pdf$                                                 ./private/admin/pdf/index.php?api=all
 RewriteRule ^admin/api/pdf/([a-z0-9_-]+)$                                   ./private/admin/pdf/index.php?api=all

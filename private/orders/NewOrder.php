@@ -1,5 +1,4 @@
-<?php 
-//orders,m_status,order_status
+<?php
 
 namespace NewOrder ;
 
@@ -16,8 +15,7 @@ class CreateOrder {
     }
 
     public function item($val){
-
-          $this->add->Add($val);
+          $this->add->Add("icerik" , strip_tags(trim($val)));
           return $this->add->run();
     }
 

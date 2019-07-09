@@ -31,7 +31,7 @@ if(!isset($_SESSION["operator"])){
         if(isset($_GET["ord"])  ){
 
             $tip = strip_tags($_GET['ord']);
-            $waiting= "SELECT id,time,name,e_mail,phone,kisi_sayisi,rez_date from rezervasyon where phone = '{$tip}' ORDER BY time ASC" ;
+            $waiting= "SELECT id,time,name,e_mail,phone,kisi_sayisi,rez_date,message from rezervasyon where phone = '{$tip}' ORDER BY time ASC" ;
             $order_wait = array();
         
             try{
@@ -48,7 +48,8 @@ if(!isset($_SESSION["operator"])){
                         "e_mail"=>$value["e_mail"],
                         "kisi"=>$value["kisi_sayisi"],
                         "date"=>$value["rez_date"],
-                        "phone"=>$value["phone"]
+                        "phone"=>$value["phone"],
+                        "message"=>$value["message"]
                     )
                 ) ;
                 }
@@ -75,7 +76,7 @@ if(isset($_GET["ord"])  ){
 
     $thisDayTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  ltrim(date('d') , 0)  , ltrim(date('Y') , 0 )  );
 
-    $waiting= "SELECT id,time,name,e_mail,phone,kisi_sayisi,rez_date from rezervasyon where m_status = '{$tip}' and time>='{$thisDayTime}' ORDER BY time ASC" ;
+    $waiting= "SELECT id,time,name,e_mail,phone,kisi_sayisi,rez_date , message from rezervasyon where m_status = '{$tip}' and time>='{$thisDayTime}' ORDER BY time ASC" ;
     $order_wait = array();
    
     try{
@@ -92,7 +93,8 @@ if(isset($_GET["ord"])  ){
                 "e_mail"=>$value["e_mail"],
                 "kisi"=>$value["kisi_sayisi"],
                 "date"=>$value["rez_date"],
-                "phone"=>$value["phone"]
+                "phone"=>$value["phone"],
+                "message"=>$value["message"]
             )
            ) ;
         }
