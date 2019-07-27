@@ -12,9 +12,9 @@ use PDOException;
 class Database
 {
     private $servername = "localhost:3306";
-    private $username = "ciqaysof_budak";
-    private $password = "12345budak";
-    private $dbName = "ciqaysof_food_sale";
+    private $username = "root";
+    private $password = "";
+    private $dbName = "food_sale";
     public  $conn;
 
     /**

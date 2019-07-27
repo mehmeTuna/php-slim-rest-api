@@ -28,12 +28,18 @@ class menuproduct {
         
         if($query->rowCount()){
             foreach ($query as $value) {
-
                 try{
-                    $query = $this->connect->query( "select id,name,card_text,price from products where categoryId=" . $value["id"] ,  PDO::FETCH_ASSOC);
-                    
+                    $query = $this->connect->query( "select * from products where categoryId=" . $value["id"] ,  PDO::FETCH_ASSOC);
                     if($query->rowCount()){
                         foreach ($query as $menuValue) {
+                            try{
+                                $query = $this->connect->query( "select * from features where id=" . $menuValue["features"] ,  PDO::FETCH_ASSOC);
+                                if($query->rowCount()) {
+                                    foreach ($query as $productOpt){
+                                        $option=json_decode ($productOpt["content"] , true);
+                                    }
+                                }
+                            }catch (\PDOException $e){$option = ""; }
                             array_push($menuItems , 
                             array(
                                     "id"=>$menuValue["id"],
@@ -41,7 +47,9 @@ class menuproduct {
                                     "position"=>"1",
                                     "description"=>$menuValue["card_text"],
                                     "price"=>$menuValue["price"],
-                                    "category_name"=> $value["name"]
+                                    "category_name"=> $value["name"],
+                                    "quantity"=>1,
+                                    "option"=>$option
                             )
                          );
                         }

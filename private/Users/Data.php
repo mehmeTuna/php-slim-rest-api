@@ -2,8 +2,7 @@
 
 session_start();
 
-//require_once  __DIR__ . "/../cors.php";
-
+//print_r($_SESSION);
 
 if(isset( $_SESSION["user"])){
     echo json_encode($_SESSION["user"] , JSON_UNESCAPED_UNICODE ) ;
@@ -13,4 +12,4 @@ if(isset( $_SESSION["user"])){
             "status"=>"login değil"
         )
     );
-}
+};

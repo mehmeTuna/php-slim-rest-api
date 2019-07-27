@@ -9,8 +9,8 @@ use PDOException;
 class Add {
   /*sql query*/
   private $table_name = "users";
-  private $values = "id,email,password,firstname,lastname,birthday,email_verified,registration_date,verification_code,ip,phone,adress,adress_2";
-  private $valuesParameters = ":id,:email,:password,:firstname,:lastname,:birthday,:email_verified,:registration_date,:verification_code,:ip,:phone,:adress,:adress_2";
+  private $values = "id,email,password,firstname,lastname,birthday,email_verified,registration_date,verification_code,ip,phone,adress";
+  private $valuesParameters = ":id,:email,:password,:firstname,:lastname,:birthday,:email_verified,:registration_date,:verification_code,:ip,:phone,:adress";
   private $data = array();
 
   private $conn ;

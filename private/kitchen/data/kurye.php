@@ -29,7 +29,7 @@ foreach ($res as $key){
 ?>
 
 
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Kurye Seç
         </a>
 
@@ -48,5 +48,5 @@ foreach ($res as $key){
             </table>
         </div>
 
-<div  class="btn btn-primary" onclick="siparisOnayla()">Kuryeye ver</div>
+<div  class="btn btn-secondary" onclick="siparisOnayla()">Kuryeye ver</div>
 

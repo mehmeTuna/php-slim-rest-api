@@ -36,7 +36,7 @@ $name = array();
     $login = new Database();
    
           try{
-            $query = $login->conn->query( "select id,firstname,lastname,password,adress,phone from users  where email='{$username}'" ,  PDO::FETCH_ASSOC);
+            $query = $login->conn->query( "select id,firstname,lastname,password,adress,adress_2,phone from users  where email='{$username}'" ,  PDO::FETCH_ASSOC);
           
             if($query->rowCount()){
                 foreach($query as $val){

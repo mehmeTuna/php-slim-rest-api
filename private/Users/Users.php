@@ -78,7 +78,6 @@ class Create {
       $this->newuser->add("ip" , $this->ip);
       $this->newuser->add("phone" , $this->phone);
       $this->newuser->add("adress" , $this->adress);
-      $this->newuser->add("adress_2" , $this->adress_2);
       $this->newuser->add("birthday" , $this->birthday);
       $isCreatedUser = $this->newuser->run() ;
       if( $isCreatedUser === false ){
@@ -144,6 +143,8 @@ class Create {
   private function validatePhoneNumber($pNumber = '') {
     $_length = strlen( trim($pNumber) ) ;
     if( $_length > 2 && $_length <= 20  && is_numeric($pNumber) ){
+        //TODO
+        //telefon numarası düzenlenecek bu kısımda
       return strip_tags( trim($pNumber) ) ;
     }else {
       $this->variableControl = false ;

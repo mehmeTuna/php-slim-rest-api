@@ -125,7 +125,6 @@ class Data
     public
     function BringOrderdetay($id)
     {
-
         $result = array();
         $sql = 'select icerik,orders from order_items where order_id="' . $id . '"';
 
@@ -134,7 +133,57 @@ class Data
 
             foreach ( $query as $val ) {
                 $result[ 'content' ] = $val[ 'icerik' ];
-                $result[ 'orders' ] = $val[ 'orders' ];
+                $result[ 'orders' ] = json_decode ($val[ 'orders' ] , true);
+
+                $result[ 'orders' ] = array_map (function ($value) {
+                    $orderId= $value["id"];//ürün idsi
+                    $orderCount = $value["count"];//ürün adeti
+                    $orderPrice= $value["price"];//ürün fiyatı
+                    $orderName = $value["name"];//ürün adı
+                     $orderFeatures= $value["features"];//[count=> , items[0=> , 1=> ]]//ürün detayları
+                    $orderOptionCountControl= 0 ;//opsiyon ve sipariş sayılarını kontrol etme
+                    $resultOrderName= ""; //features ve siparişleri ekleme
+
+                    foreach ($value["features"] as $orderOptionCount){
+                        $orderOptionCountControl += $orderOptionCount["count"];
+                    }
+                    //sipariş detaylarındaki sayı ile toplama ürün adeti eşit değil değil ise direkt ürün opsiyonsuz say
+                    if($orderCount != $orderOptionCountControl){
+                        return array(
+                            "id"=>$orderId,
+                            "count"=>$orderCount,
+                            "price"=>$orderPrice,
+                            "name"=>$orderName
+                        );
+                    }
+                    $getDetaysql = 'select * from features where id=(select features from products where id='.$orderId.')';
+                    $itemFeatures=array ();//db opsiyonlar
+                    try{
+                        $query = $this->db->query ( $getDetaysql , PDO::FETCH_ASSOC );
+                        foreach ($query as $result)
+                            $itemFeatures= json_decode ($result["content"], true);
+                    }catch (PDOException $e){
+                    }
+                    foreach ($orderFeatures as $orderOptionFeatures) {
+                        $resultOrderName .= $orderOptionFeatures["count"] . " x " . $orderName . " ( " ;
+                               foreach ($orderOptionFeatures["items"] as $items){
+                                   for($counter= 0; $counter < count($itemFeatures); $counter++){
+                                       if($itemFeatures[$counter]["id"] == $items)
+                                         $resultOrderName .=  $itemFeatures[$counter]["content"] ." ,";
+                                   }
+                                }
+                        $resultOrderName .= ")<br>";
+                    }
+                    return $resultOrderName;
+
+                    return array(
+                        "id"=>$orderId,
+                        "count"=>$orderCount,
+                        "price"=>$orderPrice,
+                        "name"=>$orderName,
+                        "resultOrderName"=>$resultOrderName
+                    );
+                },$result[ 'orders' ]);
             }
 
             if ( $result == [] ) return array('status' => 'not found');

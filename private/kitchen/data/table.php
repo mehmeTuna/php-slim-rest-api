@@ -76,9 +76,9 @@ Gosterilecek Veri bulunmamaktadir
                         if($kuryeName->rowCount()){
                             foreach ($kuryeName as $val )
                                 $kuryeName = $val["firstname"] . " " . $val["lastname"] ;
-                        }else $kuryeName = "Kuryeye verilmedi";
+                        }else $kuryeName = "Kuryeye verilmedi veya kurye silindi";
                     }catch (PDOException $e){
-                        $kuryeName = "Kuryeye verilmedi" ;
+                        $kuryeName = "Kuryeye verilmedi veya kurye silindi" ;
                     };
 
              

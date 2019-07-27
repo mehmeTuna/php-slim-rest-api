@@ -58,12 +58,12 @@ try{
         exit ;
     }
 
-    $result = $db->query ("select firstname , lastname,adress,phone from users where id='".$userId."'");
+    $result = $db->query ("select * from users where id='".$userId."'");
 
     if($result->rowCount ()){
         foreach ($result as $val){
             $OrderDetay["username"] = $val["firstname"] . " " . $val["lastname"];
-            $OrderDetay["adress"] = $val["adress"];
+            $OrderDetay["adress"] = ($val["adress_2"] != null && $val["adress_2"] != "" ) ? $val["adress_2"] : $val["adress"];
             $OrderDetay["phone"] = $val["phone"];
         }
     }else {

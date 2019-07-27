@@ -35,7 +35,16 @@ class Cashondelivery {
          $this->userData = $this->data["userData"];
          $this->userDataValue = $this->data["userDataValue"];
          $this->deliveryTime = $this->data["deliveryTime"];
-         
+
+        $_SESSION["user"]["product"] = array_map (function ($val){
+            if(isset($val["features"])){
+                array_splice ($val["features"]);
+            }
+
+            return $val ;
+        },$_SESSION["user"]["product"]);
+
+
          $dataProduct = array(
             "orders"=>$_SESSION["user"]["product"],
             "order_amount"=>$_SESSION["user"]["cardTotal"],

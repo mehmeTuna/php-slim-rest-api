@@ -38,6 +38,8 @@ foreach($result as $val){
                    $val['m_status'] = 'Siparişiniz reddedildi' ;
                }else if ($val['m_status'] == 5){
                    $val['m_status'] = 'Siparişiniz kuryeye verildi' ;
+               }else {
+                   $val['m_status'] = 'Siparişiniz bilgisinde hata var' ;
                }
            }
            $val['orders'] = json_decode( $val['orders'] , true ) ; 

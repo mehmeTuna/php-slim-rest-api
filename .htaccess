@@ -1,9 +1,10 @@
-Options +FollowSymLinks
+﻿Options +FollowSymLinks
 RewriteEngine On
 RewriteBase /
 RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule .* / [R=200,L]
-
 
 
 #dizinleri listelemesi engellenir
@@ -21,8 +22,7 @@ Header Set Access-Control-Allow-Origin *
 #RewriteCond %{REQUEST_METHOD} OPTIONS
 #RewriteRule .* / [R=200,L]
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+
 
 
 
@@ -49,12 +49,7 @@ RewriteRule ^rezervasyon$                                                ./admin
 RewriteRule ^adduser$                                                   ./admin/index.html
 RewriteRule ^satistakip$                                                   ./admin/index.html
 
-
-RewriteRule ^demo$                                                        ./private/demo.php
-
-
-RewriteRule ^rezervasyon$                                                  ./private/rezervasyon/add.php
-
+RewriteRule ^rezervasyon/add$                                                  ./private/rezervasyon/add.php
 
 
 RewriteRule ^siparis-onay/rezervasyon-onay/([a-z0-9_-]+)$                 ./order_confirmation/order_detail/rezervasyon_onay.php?id=$1&durum=ok
@@ -89,11 +84,12 @@ RewriteRule ^emailregister$                                                ./pri
 
 
 RewriteRule ^user/sepet/item$                                              ./private/Users/sepet.php?item=ok
+RewriteRule ^user/newAdres$                                                ./private/Users/userDataUpdate.php
 RewriteRule ^user/sepet$                                                   ./private/Users/sepet.php
 RewriteRule ^user/login$                                                   ./private/Users/Login.php
 RewriteRule ^user/logout$                                                  ./private/Users/Logout.php
 RewriteRule ^user/register$                                                ./private/Users/Add.php
-RewriteRule ^user/data$                                                    ./private/demo.php
+RewriteRule ^user/data$                                                    ./private/Users/Data.php
 RewriteRule ^user/orders$                                                  ./private/Users/Orders.php
 RewriteRule ^user/sepetDel/([a-z0-9_-]+)$                                  ./private/Users/delete_sepet_item.php?id=$1
 RewriteRule ^user/payment$                                                 ./private/payment/payment.php
@@ -158,7 +154,7 @@ RewriteRule ^admin/api/updatecalisan$                                       ./pr
 
 RewriteRule ^admin/api/pdf$                                                 ./private/admin/pdf/index.php?api=all
 RewriteRule ^admin/api/pdf/([a-z0-9_-]+)$                                   ./private/admin/pdf/index.php?api=all
-
+RewriteRule ^admin/api/write/order/data$                                    ./private/admin/Data/print-product-detay-pdf.php                               
 
 
 RewriteRule ^admin/api/allproduct$                                         ./private/admin/Data/index.php?api=allProduct

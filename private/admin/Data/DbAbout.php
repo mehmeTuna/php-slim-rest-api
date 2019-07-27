@@ -792,6 +792,7 @@ class Data
             return json_encode ( [ 'status' => 'ok' ] , JSON_UNESCAPED_UNICODE );
 
         } catch ( PDOException $e ) {
+            return $e ;
             return json_encode ( [ 'status' => 'kaydetme sorunu' ] , JSON_UNESCAPED_UNICODE );
         }
 
@@ -837,10 +838,15 @@ class Data
         if($val == [])
             return json_encode (["status"=>"gecerli deger giriniz"] , JSON_UNESCAPED_UNICODE) ;
 
+        $imgUrl = $this->imgUpload (isset( $val["img"] ) ?  strip_tags (trim ( $val["img"] ) ) : "") ;
+
+        if($imgUrl == false )
+            return json_encode (["status"=>"Görsel yüklemek zorunludur"] , JSON_UNESCAPED_UNICODE) ;
+
         $result = [
             "id"=>rand(100,1000),
             "name"=>strip_tags (trim ( isset($val["name"]) ? $val["name"] : "" )),
-            "img"=>strip_tags (trim (isset($val["img"]) ? $val["img"] : ""))
+            "img"=> $imgUrl
         ];
 
         $query = "insert into {$this->category} (id,name,img) values (:id,:name,:img)";
@@ -852,6 +858,40 @@ class Data
 
         } catch ( PDOException $e ) {
             return json_encode ( [ 'status' => 'kaydetme sorunu' ] , JSON_UNESCAPED_UNICODE );
+        }
+    }
+
+    private function imgUpload($fileName){
+        //Check if the file is well uploaded
+        if($_FILES[$fileName]['error'] > 0) { return 'Error during uploading, try again'; }
+
+        //We won't use $_FILES['file']['type'] to check the file extension for security purpose
+
+        //Set up valid image extensions
+        $extsAllowed = array( 'jpg', 'jpeg', 'png', 'gif' );
+
+        //Extract extention from uploaded file
+        //substr return ".jpg"
+        //Strrchr return "jpg"
+
+        $extUpload = strtolower( substr( strrchr($_FILES[$fileName]['name'], '.') ,1) ) ;
+        //Check if the uploaded file extension is allowed
+
+        if (in_array($extUpload, $extsAllowed) ) {
+
+            //Upload the file on the server
+            $randname =  md5(time() . $_FILES[$fileName]['name']) .".".pathinfo($_FILES[$fileName]['name'], PATHINFO_EXTENSION);
+
+            $name = __DIR__ ."/../../../img/" . $randname;
+            $result = move_uploaded_file($_FILES[$fileName]['tmp_name'], $name);
+
+            if($result){
+                return $randname ;
+            }else{
+                return false;
+            }
+        } else {
+            return false;
         }
     }
 
@@ -912,7 +952,7 @@ class Data
      function  updateCalisan($val = []){
         $Gyetki = [0,1,2];
 
-        if($val == [] || $val["name"] == "" || $val["authority"]== "" )
+        if($val == [] || $val["id"] == "" || $val["authority"]== "" )
             return json_encode (["status"=>"gecerli deger giriniz"] , JSON_UNESCAPED_UNICODE);
 
         if(!in_array(strip_tags (trim ($val["id"])) , $Gyetki))
@@ -954,17 +994,15 @@ class Data
     public
     function bringGetOrderDetay($opt = "day"){
         if($opt == "year")
-            $createMkTime = mktime ( 0 , 1 , 0 , 1, 1 , date ( 'Y' ) );
+            $createMkTime = mktime ( 0 , 0 , 0 , 1, 1 , date ( 'Y' ) );
         elseif ($opt == "month")
-            $createMkTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , 1 , date ( 'Y' ) );
+            $createMkTime = mktime ( 0 , 0 , 0 , date('m') , 1 , date ( 'Y' ) );
         elseif ($opt == "day")
-            $createMkTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , ltrim ( date ( 'd' ) , 0 ) , date ( 'Y' ) );
-        elseif($opt == "week"){
-            $day = ltrim ( date ( 'd' ) , 0 ) >=0 ? ltrim ( date ( 'd' ) , 0 ) : 0 ;
-            $createMkTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , $day ,date ( 'Y' ) );
-        }
+            $createMkTime = mktime ( 0 , 0 , 0 , date ( 'm' ) , ltrim ( date ( 'd' ) , 0 ) , date ( 'Y' ) );
+        elseif($opt == "week")
+            $createMkTime = mktime ( 0 , 0 , 0 , ltrim ( date ( 'm' ) , 0 ) , date ( 'd' ,strtotime("-".date('N')." days") ) ,date ( 'Y' ) );
 
-        $add = "select * from {$this->order} where m_status=5 and m_date >=" . $createMkTime;
+        $add = "select orders from {$this->order} where m_status=5 and m_date >=" . $createMkTime . " ORDER BY m_date";
         $resultData = [];
 
         try {
@@ -983,7 +1021,7 @@ class Data
                 }
                 $response = [] ;
                 foreach ($resultData as $key =>$val){
-                    array_push ($response , ["name"=>$this->getProductName ($key) , "count"=>$val]) ;
+                    array_push ($response , ["name"=>$this->getProductName ($key) , "count"=>$val , "id"=>$key ]) ;
                 }
                 return json_encode ( $response , JSON_UNESCAPED_UNICODE );
             } else return json_encode ( [ 'status' => 'not found' ] , JSON_UNESCAPED_UNICODE );

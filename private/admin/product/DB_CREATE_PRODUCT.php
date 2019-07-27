@@ -8,8 +8,8 @@ use PDO ;
 class Add {
   /*sql query*/
   private $table_name = "products";
-  private $values = "id,price,name,date,numberOfProduct,categoryId,unlimited,live,card_text,img,other_img,stores,long_text";
-  private $valuesParameters = ":id,:price,:name,:date,:numberOfProduct,:categoryId,:unlimited,:live,:card_text,:img,:other_img,:stores,:long_text";
+  private $values = "id,price,name,date,numberOfProduct,categoryId,unlimited,live,card_text,img,other_img,stores,long_text,features";
+  private $valuesParameters = ":id,:price,:name,:date,:numberOfProduct,:categoryId,:unlimited,:live,:card_text,:img,:other_img,:stores,:long_text,:features";
   private $data = array();
 
   private $conn ;
@@ -19,6 +19,21 @@ class Add {
   }
 
   public function add($variable , $value ){
+      if($variable == "features"){
+          $id = rand(100,1000);
+          $result = $value;
+
+          $add = "insert into features (id,content) values ('{$id}','{$result}')";
+
+          try{
+              $statement = $this->conn->prepare($add);
+              $statement->execute();
+          }catch(PDOException $e){
+          }
+
+          $this->data["features"] = $id ;
+          return $this;
+      }
     $this->data[$variable] = $value ;
     return $this ;
   }

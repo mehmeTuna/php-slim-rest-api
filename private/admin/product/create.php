@@ -19,7 +19,7 @@ class Create {
     private $other_img ="null";
     private $stores = "Adana";
     private $long_text ;
-    private $dataControl = array("price"=>"", "name"=>"","numberOfProduct"=>"","categoryId"=>"","card_text"=>"","long_text"=>"");
+    private $features = "";
 
     private $newProduct ;
 
@@ -38,6 +38,17 @@ class Create {
    }
 
    public function add($val = array() ){
+     $this->features = "";
+       if( isset( $val["options"] ) ){
+           if(is_array ($val["options"])){
+               $orderFeatures = [];
+               foreach ($val["options"] as $result){
+                   $itemArr =  $this->textControl ($result , 50);
+                   array_push ($orderFeatures , ["id"=>rand(10,1000),"content"=>$itemArr]);
+               }
+               $this->features =  json_encode ($orderFeatures , JSON_UNESCAPED_UNICODE) ;
+           }else $this->features = $this->textControl( $val["options"] );
+       }
 
     $this->price =  $this->textControl(isset($val["price"]) ? $val["price"] : "" , 50 ) ; 
     $this->name =  $this->textControl(isset($val["name"]) ? $val["name"] : "" , 50 ) ; 
@@ -71,10 +82,11 @@ class Create {
     $this->newProduct->add("other_img" , $this->other_img );
     $this->newProduct->add("stores" , $this->stores);
     $this->newProduct->add("long_text" , $this->long_text);
+    $this->newProduct->add("features" , $this->features);
 
      if($this->variableControl)
       return $this->newProduct->run();
-     else return "eksik parametre" ; 
+     else return "eksik parametre" ;
    }
 
    
@@ -82,14 +94,14 @@ class Create {
   *$text variable
   *$length variable max length
   */
-  private function textControl($text = '' , $length = 50){
+  private function textControl($text = '' , $length = 75){
     $_length = strlen(trim( $text ));
 
     if($_length <= $length){
       return strip_tags( trim($text) );
     }else{
       $this->variableControl = false;
-      return false ;
+      return "" ;
     }
   }
 

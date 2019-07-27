@@ -48,9 +48,9 @@ if(isset( $_GET['search']) && $_GET['search'] == 'ok'){
             if($kuryeName->rowCount()){
                 foreach ($kuryeName as $val )
                     $kuryeName = $val["firstname"] . " " . $val["lastname"] ;
-            }else $kuryeName = "else";
+            }else $kuryeName = "Kuryeye Verilmedi";
         }catch (PDOException $e){
-            $kuryeName = "catch" ;
+            $kuryeName = "Kuryeye Verilmedi" ;
         }
 
         try{
@@ -60,19 +60,20 @@ if(isset( $_GET['search']) && $_GET['search'] == 'ok'){
             if($query->rowCount()){
                 foreach ($query as $value) {
 
-                    $waiting= "SELECT email,firstname,lastname,phone,adress,first_order from users where id = '".$value["user_id"] . "'" ;
+                    $waiting= "SELECT * from users where id = '".$value["user_id"] . "'" ;
                     try{
                         $query = $details->conn->query( $waiting ,  PDO::FETCH_ASSOC);
 
                         if($query->rowCount()){
                             foreach ($query as $user) {
                                 array_push($order_wait , array(
+                                    "orderType"=>$value["order_status"],
                                     "order_id"=>$value["order_id"],
                                     "username"=>$user["firstname"] . " " .$user["lastname"],
                                     "tutar"=>$value["order_amount"],
                                     "date"=>date('H:i', $value["m_date"]),
                                     "orders"=>$value["orders"],
-                                    "adres"=>$user["adress"],
+                                    "adres"=>($user["adress_2"] != null && $user["adress_2"] != "") ? $user["adress_2"] : $user["adress"],
                                     "phone"=>$user["phone"],
                                     "first_order"=>$user["first_order"],
                                     "kurye"=>$kuryeName
@@ -153,19 +154,20 @@ if(isset($_GET["order"])  ){
         if($query->rowCount()){
             foreach ($query as $value) {
 
-                $waiting= "SELECT email,firstname,lastname,phone,adress,first_order from users where id = '" . $value["user_id"] . "'" ;
+                $waiting= "SELECT * from users where id = '" . $value["user_id"] . "'" ;
                 try{
                     $query = $details->conn->query( $waiting ,  PDO::FETCH_ASSOC);
 
                     if($query->rowCount()){
                         foreach ($query as $user) {
                             array_push($order_wait , array(
+                                "orderType"=>$value["order_status"],
                                 "order_id"=>$value["order_id"],
                                 "username"=>$user["firstname"] . " " .$user["lastname"],
                                 "tutar"=>$value["order_amount"],
                                 "date"=>date('H:i', $value["m_date"]),
                                 "orders"=>$value["orders"],
-                                "adres"=>$user["adress"],
+                                "adres"=>($user["adress_2"] != null && $user["adress_2"] != "") ? $user["adress_2"] : $user["adress"],
                                 "phone"=>$user["phone"],
                                 "first_order"=>$user["first_order"],
                                 "kurye"=>$kuryeName

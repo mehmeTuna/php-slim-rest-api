@@ -16,34 +16,23 @@ $id = strip_tags($_GET['id']) ;
 
 $data = new Data();
 
+//BringOrderdetay fonksiyonu tam değil düzenlenmesi lazım çalışmaz şu an
 $res =   $data->BringOrderdetay($id);
 
-if( isset($res['content'])  && $res['content'] != '')
-$note  = 'Musteri Notu: '.$res['content'] ;
-else $note = '';
-
+$note = isset( $res[ 'content' ] ) && $res[ 'content' ] != '' ? 'Musteri Notu: ' . $res[ 'content' ] : '';
 
 $orderContent = '';
 if( isset($res['orders']) && $res['orders'] != '' ){
-    $content = json_decode($res['orders'] , true ) ;
-    if($content != false && $content != null){
-        foreach($content as $key ){
-             $orderContent .= '<tr><td >' . $key['count'] . ' x '.$key['name'].'</td></tr>';
+        foreach($res['orders'] as $key ){
+                $orderContent .= '<tr><td>' . $key .'    </td></tr>';
+
         }
-     }
 }
-
-
 ?>
 
+<thead></thead>
 
-
-<thead>
-
-
-    </thead>
-
-    <tbody>
+    <tbody class="table">
         <?php  echo $orderContent ;  ?>
     <tr>
     <td > <?php echo $note;  ?></td>

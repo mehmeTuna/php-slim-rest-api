@@ -374,7 +374,7 @@ $yetki = $_SESSION[ 'mutfak' ][ 'authority' ] ;
     </div>
 
     <script>
-        var globalUrl = '<?php echo $siteUrl ?>/';
+        var globalUrl = '../';
         var orderId = '';
         var kurye = '';
         var kuryeId = '';
@@ -388,7 +388,7 @@ $yetki = $_SESSION[ 'mutfak' ][ 'authority' ] ;
 
         function  getprintfis(){
           console.log(this.orderId);
-          const url = 'http://aysoftdemo.site/private/pdf/index.php?id='+orderId
+          const url = globalUrl +'/../../private/pdf/index.php?id='+orderId
 
           //  var win = window.open(url, '_self');
             if(this.orderId == '') {
@@ -450,6 +450,7 @@ $yetki = $_SESSION[ 'mutfak' ][ 'authority' ] ;
         }
 
         function btnBackground(opt) {
+            orderId = '' ;
             if (opt == 1) {
                 $('#table1').addClass('card bg-success text-light shadow h-100 py-2');
                 $('#table3').removeClass('card bg-primary text-light shadow h-100 py-2').addClass('card border-left-primary text-primary shadow h-100 py-2');
@@ -513,7 +514,8 @@ $yetki = $_SESSION[ 'mutfak' ][ 'authority' ] ;
         }
 
         function getShowOrder() {
-            if (orderId == '') {
+
+            if (orderId == '' || tableRenderDurum != 1) {
                 swal.fire('Kuryeye verilecek bir siparis seciniz.');
                 return;
             }
@@ -574,8 +576,6 @@ $yetki = $_SESSION[ 'mutfak' ][ 'authority' ] ;
                         swal.fire('Ooops biseyler ters gitti.');
                     }
                     if (res.status == 'ok') {
-                        refreshData();
-
                         Swal.fire({
                           title: 'Kuryeye verildi',
                           //type: 'warning',
@@ -587,6 +587,8 @@ $yetki = $_SESSION[ 'mutfak' ][ 'authority' ] ;
                         });
                         orderId= '' ;
                         kuryeId = '';
+                        refreshData();
+
 
                     } else {
                         swal.fire(res.status);

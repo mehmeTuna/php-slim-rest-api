@@ -2,7 +2,7 @@
 
 session_start() ;
 
-//require_once __DIR__ . "/../cors.php";
+require_once __DIR__ . "/../cors.php";
 
 require __DIR__ .'/../../database/connect.php';
 

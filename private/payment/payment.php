@@ -17,25 +17,26 @@ class Payment{
     public function __construct()
     {
 
-        if( !isset($_SESSION) && !isset($_SESSION['user']) ) $this->control['user'] = 'undefined' ;
+        if( !isset($_SESSION) && !isset($_SESSION['user']) ) $this->control = false;  ;
 
         if( isset($_SESSION['user']['username']) ){
             $this->userId = $_SESSION['user']['username'];
         }else{
-            $this->control['username'] = 'undefined' ;
+            $this->control = false;
         }
 
         if( count($_SESSION['user']['product']) > 0  ){
+
             $this->product = json_encode( $_SESSION['user']['product'] , JSON_UNESCAPED_UNICODE );
 
         }else {
-            $this->control['cart'] = 'null' ;
+            $this->control = false;
         }
 
         if( isset($_SESSION['user']['cardTotal']) ){
             $this->cardTotal = $_SESSION['user']['cardTotal'];
         }else {
-            $this->control['cardTotal'] = '0'; 
+            $this->control = false;
         }
     }
 
@@ -46,7 +47,7 @@ class Payment{
     public function method($method = ''){
         if($method == 2){
             exit ;
-            //bu kısımda  kredı kartı ıle odeme kısmına yonleendır ok donerse bu kısımda sıparısı onayla 
+            //bu kısımda  kredı kartı ıle odeme kısmına yonlendır ok donerse bu kısımda sıparısı onayla
         }else $this->control = false  ;
 
         if($method == 0 || $method == 1 ){
@@ -56,7 +57,7 @@ class Payment{
     }
 
     public function Control (){
-        if(  $this->control == array() ){
+        if(  $this->control == false ){
             return true ;
         }else{
             return $this->control ;
@@ -99,7 +100,7 @@ $newpayment = new Payment();
 if(!isset($data["content"])){
     echo "Açıklama ekleyiniz";
      exit;
-}
+}else $data["content"] = "";
 
 
 if( !isset($data['picked']) ){

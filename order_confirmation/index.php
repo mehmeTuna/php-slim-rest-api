@@ -337,7 +337,7 @@ $siteUrl = (new WebRoot)->url();
   <script>
   
 var durum = "siparis" ;//siparis or rezervasyon
-var siteUrl = '<?php echo $siteUrl ?>/';
+var siteUrl = '../';
 var firstsession = 'gelen';
 
 window.onload = function() {
@@ -506,12 +506,13 @@ function title_data_rename(){
 }
 
 function create_user(obj ){
-    let order = JSON.parse( obj.orders  );
+        let order = JSON.parse( obj.orders  );
+
     obj.date = HMtime( obj.date );
     firstOrder = obj.first_order == 1 ? '<i class="fas fa-check fa-2x text-info"> </i>': '<i class="fas fa-times fa-2x text-danger"> </i>' ;
 
   return  '<tr id="'+obj.order_id+'" >'+
-          '<td onclick="edit_order_detay('+obj.order_id+',\''+obj.username+'\',\''+obj.tutar+'\',\''+obj.phone+'\',\''+obj.adres+'\')"><i class="fas fa-pencil-alt"></i></td>'+
+          '<td onclick="edit_order_detay('+obj.order_id+',\''+obj.username+'\',\''+obj.tutar+'\',\''+obj.phone+'\',\''+obj.adres+'\',\''+obj.orderType+'\')"><i class="fas fa-pencil-alt"></i></td>'+
           '<td>'+obj.username+ '</td>'+
           '<td>'+ obj.tutar+'₺</td>'+
           '<td>'+ obj.phone+'</td>'+
@@ -670,9 +671,17 @@ function edit_rezervasyon_detay(id){
 
 }
 
-function edit_order_detay(id,username,tutar,tel,adres){
+function edit_order_detay(id,username,tutar,tel,adres , orderDetay){
+     let orderText = "";
 
- let data = "Sipariş Numarası: "+id+"\nAd Soyad: "+username+"\nTutar: "+tutar+"₺\nTelefon: "+tel+"\nAdres: "+adres ; 
+     if(orderDetay == 0 )
+         orderText = "Kapıda Ödeme";
+     else if(orderDetay == 1)
+         orderText = "Kart ile Kapıda Ödeme";
+     else if(orderDetay == 2)
+         orderText = "Kredi İle Ödeme";
+
+ let data = "Ödeme Tipi: "+orderText+"\nSipariş Numarası: "+id+"\nAd Soyad: "+username+"\nTutar: "+tutar+"₺\nTelefon: "+tel+"\nAdres: "+adres ;
   swal(data, {
   buttons: {
     reddet: {
