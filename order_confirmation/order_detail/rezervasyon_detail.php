@@ -2,15 +2,19 @@
 
 namespace Confirmation\Rezervasyon\detail ;
 
+session_start();
+
 require_once __DIR__ . "/../../private/cors.php";
 
 
 require __DIR__ .'/../../database/connect.php';
-session_start();
+require __DIR__ . "/../../private/Authority.php";
+
 
 use DATABASE\Database ; 
 use PDO ;
 use PDOException;
+use Authority;
 
 
 if(!isset($_SESSION["operator"])){
@@ -19,7 +23,7 @@ if(!isset($_SESSION["operator"])){
 }
 
 
- if($_SESSION['operator']['authority'] == 0 ){
+ if($_SESSION['operator']['authority'] == Authority::disabled ){
      echo json_encode(['status'=>'yetkisiz islem']);
      exit;
  }

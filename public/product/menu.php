@@ -5,82 +5,87 @@ namespace Menu ;
 
 use DATABASE\Database ;
 use PDO ;
+use Exception ;
 
 
-class menuproduct {
-    private $connect ; 
+class menuproduct extends Database {
+    const getAllCategorySqlQuery = "SELECT * FROM category";
 
-   public function __construct(){
-      $connect = new Database();
-      $this->connect = $connect->conn ;
-   }
+    private $getProductSpecificCategorySqlQuery= "SELECT products.id,products.name,products.unlimited AS position ,products.card_text AS description,products.price,(SELECT name FROM category WHERE id=products.categoryId ) AS category_name,products.unlimited AS quantity,feature.content AS options FROM feature INNER JOIN products ON products.features= feature.id WHERE products.categoryId=?";
+
+    public function __construct(){
+        parent::startConnect();
+    }
 
 
    public function run(){
+       $categorys = $this->allCategory();
      
-
-       $categoryData= "select * from category" ;
        $item = array();
        $menuItems = array();
-      
-       try{
-        $query = $this->connect->query( $categoryData ,  PDO::FETCH_ASSOC);
-        
-        if($query->rowCount()){
-            foreach ($query as $value) {
-                try{
-                    $query = $this->connect->query( "select * from products where categoryId=" . $value["id"] ,  PDO::FETCH_ASSOC);
-                    if($query->rowCount()){
-                        foreach ($query as $menuValue) {
-                            try{
-                                $query = $this->connect->query( "select * from features where id=" . $menuValue["features"] ,  PDO::FETCH_ASSOC);
-                                if($query->rowCount()) {
-                                    foreach ($query as $productOpt){
-                                        $option=json_decode ($productOpt["content"] , true);
-                                    }
-                                }
-                            }catch (\PDOException $e){$option = ""; }
-                            array_push($menuItems , 
-                            array(
-                                    "id"=>$menuValue["id"],
-                                    "name"=>$menuValue["name"],
-                                    "position"=>"1",
-                                    "description"=>$menuValue["card_text"],
-                                    "price"=>$menuValue["price"],
-                                    "category_name"=> $value["name"],
-                                    "quantity"=>1,
-                                    "option"=>$option
-                            )
-                         );
-                        }
-                    }
-                 }catch(PDOException $e){
-                     return $e ;
-                 }
 
-
-                 array_push($item , 
-                 array(
-                     "id"=>$value["id"],
-                     "name"=>$value["name"],
-                     "position"=>"0",
-                     "categoryImage"=>$value["img"],
-                     "menuItems"=>$menuItems
-                 )
-              );
-              $menuItems = array();
+       foreach($categorys as $result){
+           $menuItems = [];
+           $product= $this->productSpecificCategory($result["id"]);
+            foreach($product as $key => $value){
+                array_push($menuItems,[//bir ürüne ait detaylar
+                    "id"=>$value["id"],
+                    "name"=>$value["name"],
+                    "position"=>$value["position"],
+                    "price"=>$value["price"],
+                    "category_name"=>$value["category_name"],
+                    "quantity"=>$value["quantity"],
+                    "options"=>json_decode($value["options"], true),
+                    "description"=>$value["description"]
+                ]);
             }
-        }
-      return $item ;
-     }catch(PDOException $e){
-         return $e ;
-     }
+           array_push($item,[//bir menüye ait detaylar
+            "id"=>$result["id"],
+            "name"=>$result["name"],
+            "position"=>"0",
+            "categoryImage"=>$result["img"],
+            "menuItems"=>$menuItems
+           ]);
+       }
 
+    return $item ;
+    }
+
+    public function productSpecificCategory($categoryId= null) {
+       try{
+           $query = parent::connect()->prepare($this->getProductSpecificCategorySqlQuery);
+           $query->execute( [$categoryId] );
+
+           if(!$query->rowCount())
+            return [];
+
+            //id,name,position,description,price,categoryName,quantity,options(json)
+            return $query->fetchAll();
+
+       }catch(PDOException $e) {
+           throw new Exception("Sorgu hatası");
+       }
+    }
+
+
+    public function allCategory() {
+        try{
+            $query = parent::connect()->prepare( self::getAllCategorySqlQuery );
+            $query->execute();
+ 
+            if(!$query->rowCount())
+             return [];
+ 
+             return $query->fetchAll();
+ 
+        }catch(PDOException $e) {
+            throw new Exception("Sorgu hatası");
+        }
     }
  
 
    public function __destruct(){
-     
+     parent::disconnect() ;
    }
 
 }

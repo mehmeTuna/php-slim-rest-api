@@ -36,7 +36,7 @@ $name = array();
     $login = new Database();
    
           try{
-            $query = $login->conn->query( "select id,firstname,lastname,password,adress,adress_2,phone from users  where email='{$username}'" ,  PDO::FETCH_ASSOC);
+            $query = $login->conn->query( "select * from users  where email='{$username}'" ,  PDO::FETCH_ASSOC);
           
             if($query->rowCount()){
                 foreach($query as $val){
@@ -44,6 +44,7 @@ $name = array();
                     $name["firstname"] = $val["firstname"];
                     $name["lastname"] = $val["lastname"] ;
                     $name["adress"] = $val["adress"] ;
+                    $name["adress_2"] = $val["adress_2"];
                     $db_password = $val["password"];
                     $phone = $val["phone"];
 
@@ -67,6 +68,7 @@ $name = array();
                 "lastname"=>$name["lastname"],
                 "email"=>$username ,
                 "adress"=>$name["adress"],
+                "adress_2"=>$name["adress_2"],
                 "phone"=>$phone,
                 "product"=> array(),
                 "cardTotal"=>0,

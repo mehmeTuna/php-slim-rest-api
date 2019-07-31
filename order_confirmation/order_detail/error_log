@@ -1,4 +1,0 @@
-[05-Jul-2019 23:31:05 Europe/Istanbul] PHP Fatal error:  Uncaught Error: Call to a member function rowCount() on string in /home/ciqaysof/public_html/order_confirmation/order_detail/order_user_detail.php:130
-Stack trace:
-#0 {main}
-  thrown in /home/ciqaysof/public_html/order_confirmation/order_detail/order_user_detail.php on line 130

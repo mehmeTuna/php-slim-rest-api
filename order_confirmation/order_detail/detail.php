@@ -16,16 +16,16 @@ use PDO ;
     $thisDayTime = mktime(0,0,0 , date('n') , date('j')  , date('Y'));
    
     
-   $waiting= "SELECT count(*) from order_items where m_status = '0' and m_date>='".$thisDayTime . "'" ;
-   $red = "SELECT count(*) from order_items where m_status = '2' and m_date>='".$thisDayTime . "'" ;
-   $ok = "SELECT count(*) from order_items where m_status = '1' and m_date>='".$thisDayTime . "'" ;
+   $waiting= "SELECT count(*) as toplam from order_items where m_status = '0' and m_date>='".$thisDayTime . "'" ;
+   $red = "SELECT count(*) as toplam from order_items where m_status = '2' and m_date>='".$thisDayTime . "'" ;
+   $ok = "SELECT count(*) as toplam from order_items where m_status = '1' and m_date>='".$thisDayTime . "'" ;
   
    try{
     $query = $details->conn->query( $waiting ,  PDO::FETCH_ASSOC);
     
     if($query->rowCount()){
         foreach ($query as $value) {
-            $waiting = $value["count(*)"] ;
+            $waiting = $value["toplam"] ;
         }
     }
 
@@ -33,7 +33,7 @@ use PDO ;
     
     if($query->rowCount()){
         foreach ($query as $value) {
-            $red = $value["count(*)"] ;
+            $red = $value["toplam"] ;
         }
     }
 
@@ -41,7 +41,7 @@ use PDO ;
     
     if($query->rowCount()){
         foreach ($query as $value) {
-            $ok = $value["count(*)"] ;
+            $ok = $value["toplam"] ;
         }
     }
 

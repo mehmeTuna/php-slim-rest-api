@@ -2,14 +2,14 @@
 
 session_start();
 
-
+require __DIR__ ."/../private/Authority.php";
 
 if(!isset($_SESSION["operator"])){
   header("location: calisan");
   exit;
 }
 
-if($_SESSION['operator']['authority'] == '0'){
+if($_SESSION['operator']['authority'] == Authority::disabled){
    echo 'Yetki sahibi degilsiniz';
  exit ;
 }
@@ -341,7 +341,6 @@ var siteUrl = '../';
 var firstsession = 'gelen';
 
 window.onload = function() {
-
  title_rename();
  title_data_rename();
  titleTable();

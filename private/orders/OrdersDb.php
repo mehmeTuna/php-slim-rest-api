@@ -39,23 +39,17 @@ class Add {
     }
 
     public function run(){
-  
-        $orders = 'insert into order_items (order_id,user_id,m_date,orders,m_status,order_status,ip,order_amount,icerik) values (:order_id,:user_id,:m_date,:orders,:m_status,:order_status,:ip,:order_amount,:icerik)';
+        $orders = 'insert into order_items (order_id,user_id,m_date,orders,m_status,order_status,ip,order_amount,icerik,adress) values (:order_id,:user_id,:m_date,:orders,:m_status,:order_status,:ip,:order_amount,:icerik,:adress)';
 
         try{
           $statement = $this->db->prepare($orders);
           $statement->execute($this->data);
 
-
           $_SESSION["user"]["product"] = array();
           $_SESSION["user"]["cardTotal"] = 0;
           $_SESSION["user"]["orderCount"] = 0;
 
-
-          
           return $this->data['order_id'];
-
-
 
         }catch(PDOException $e){
             $this->dbErr = false;

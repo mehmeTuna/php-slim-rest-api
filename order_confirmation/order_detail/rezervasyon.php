@@ -8,9 +8,11 @@ require_once __DIR__ . "/../../private/cors.php";
 require __DIR__ .'/../../database/connect.php';
 session_start();
 
+require __DIR__ . "/../../private/Authority.php";
 
 use DATABASE\Database ; 
 use PDO ;
+use Authority;
 
 if(!isset($_SESSION["operator"])){
   header("location: calisan");
@@ -18,7 +20,7 @@ if(!isset($_SESSION["operator"])){
 }
 
 
- if($_SESSION['operator']['authority'] == 0 ){
+ if($_SESSION['operator']['authority'] == Authority::disabled ){
      echo json_encode(['status'=>'yetkisiz islem']);
      exit;
  }

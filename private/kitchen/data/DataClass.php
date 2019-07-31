@@ -11,6 +11,7 @@ use DATABASE\Database;
 use formattimestamp\Ttime ;
 use PDO;
 use PDOException;
+use Exception ;
 
 class Data
 {
@@ -122,78 +123,66 @@ class Data
         }
     }
 
+    /**
+     * @param $id
+     * @return array
+     */
     public
     function BringOrderdetay($id)
     {
+        $queryData = "";
+        $itemFeatures=array ();//db opsiyonlar
         $result = array();
-        $sql = 'select icerik,orders from order_items where order_id="' . $id . '"';
+        $resultOrderName= ""; //features ve siparişleri ekleme
+        $OrderDetailQuery = 'select icerik,orders from order_items where order_id="' . $id . '"';
 
         try {
-            $query = $this->db->query ( $sql , PDO::FETCH_ASSOC );
-
-            foreach ( $query as $val ) {
-                $result[ 'content' ] = $val[ 'icerik' ];
-                $result[ 'orders' ] = json_decode ($val[ 'orders' ] , true);
-
-                $result[ 'orders' ] = array_map (function ($value) {
-                    $orderId= $value["id"];//ürün idsi
-                    $orderCount = $value["count"];//ürün adeti
-                    $orderPrice= $value["price"];//ürün fiyatı
-                    $orderName = $value["name"];//ürün adı
-                     $orderFeatures= $value["features"];//[count=> , items[0=> , 1=> ]]//ürün detayları
-                    $orderOptionCountControl= 0 ;//opsiyon ve sipariş sayılarını kontrol etme
-                    $resultOrderName= ""; //features ve siparişleri ekleme
-
-                    foreach ($value["features"] as $orderOptionCount){
-                        $orderOptionCountControl += $orderOptionCount["count"];
-                    }
-                    //sipariş detaylarındaki sayı ile toplama ürün adeti eşit değil değil ise direkt ürün opsiyonsuz say
-                    if($orderCount != $orderOptionCountControl){
-                        return array(
-                            "id"=>$orderId,
-                            "count"=>$orderCount,
-                            "price"=>$orderPrice,
-                            "name"=>$orderName
-                        );
-                    }
-                    $getDetaysql = 'select * from features where id=(select features from products where id='.$orderId.')';
-                    $itemFeatures=array ();//db opsiyonlar
-                    try{
-                        $query = $this->db->query ( $getDetaysql , PDO::FETCH_ASSOC );
-                        foreach ($query as $result)
-                            $itemFeatures= json_decode ($result["content"], true);
-                    }catch (PDOException $e){
-                    }
-                    foreach ($orderFeatures as $orderOptionFeatures) {
-                        $resultOrderName .= $orderOptionFeatures["count"] . " x " . $orderName . " ( " ;
-                               foreach ($orderOptionFeatures["items"] as $items){
-                                   for($counter= 0; $counter < count($itemFeatures); $counter++){
-                                       if($itemFeatures[$counter]["id"] == $items)
-                                         $resultOrderName .=  $itemFeatures[$counter]["content"] ." ,";
-                                   }
-                                }
-                        $resultOrderName .= ")<br>";
-                    }
-                    return $resultOrderName;
-
-                    return array(
-                        "id"=>$orderId,
-                        "count"=>$orderCount,
-                        "price"=>$orderPrice,
-                        "name"=>$orderName,
-                        "resultOrderName"=>$resultOrderName
-                    );
-                },$result[ 'orders' ]);
-            }
-
-            if ( $result == [] ) return array('status' => 'not found');
-            else return $result;
+            $query = $this->db->prepare ( $OrderDetailQuery );
+            $query->execute();
+            $queryData = $query->fetchAll();
+            $result[ 'content' ] = $queryData[0][ 'icerik' ];
+            $result[ 'orders' ] = json_decode ($queryData[0][ 'orders' ] , true);
+            if($result[ 'orders' ] == false) throw new Exception("Sipariş hatası");            
         } catch ( PDOException $e ) {
             return array(
                 'status' => $e
             );
         }
 
+                foreach($result["orders"] as $value){
+                  
+                    $productId= $value["id"];//ürün idsi
+                    $orderCount = $value["count"];//ürün adeti
+                    $orderName = $value["name"];//ürün adı
+                    $orderFeatures= isset($value["features"]) ? $value["features"] : "";//[count=> , items[0=> , 1=> ]]//ürün detayları
+
+                    $getDataysql = 'select * from feature where id=(select features from products where id="'.$productId.'")';
+                   
+                    try{
+                        $query = $this->db->prepare( $getDataysql);
+                        $query->execute();
+                        $resultFeaturesDetay= $query->fetchAll();
+                        $itemFeatures= json_decode ($resultFeaturesDetay[0]["content"], true);
+                        if($itemFeatures == false) throw new Exception("detay kısmında hata var");
+                    }catch (PDOException $e){    }
+
+                    if(!is_array($orderFeatures) || count($orderFeatures)==0){
+                        return $orderCount." x ".$orderName;
+                    }
+                  
+                    foreach($orderFeatures as $result){
+                        $resultOrderName.=$result["count"]. " x ". $orderName." ( ";
+                        foreach($result["items"] as $items){
+                            foreach($itemFeatures as $itemResult){
+                                if($itemResult["id"] == $items)
+                                 $resultOrderName.= $itemResult["content"]." ,";
+                            }
+                        }
+                        $resultOrderName.=" ) <br>";
+                    }
+                }
+
+        return $resultOrderName;
     }
 
     public

@@ -22,11 +22,8 @@ $res =   $data->BringOrderdetay($id);
 $note = isset( $res[ 'content' ] ) && $res[ 'content' ] != '' ? 'Musteri Notu: ' . $res[ 'content' ] : '';
 
 $orderContent = '';
-if( isset($res['orders']) && $res['orders'] != '' ){
-        foreach($res['orders'] as $key ){
-                $orderContent .= '<tr><td>' . $key .'    </td></tr>';
-
-        }
+if( isset($res) ){
+                $orderContent .= '<tr><td>' . $res .'    </td></tr>';
 }
 ?>
 

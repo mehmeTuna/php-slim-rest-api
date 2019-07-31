@@ -38,32 +38,28 @@ class Create {
    }
 
    public function add($val = array() ){
-     $this->features = "";
-       if( isset( $val["options"] ) ){
-           if(is_array ($val["options"])){
-               $orderFeatures = [];
-               foreach ($val["options"] as $result){
-                   $itemArr =  $this->textControl ($result , 50);
+     $this->features= "";
+       if( isset( $val["features"] ) && is_array ($val["features"]) ){
+               $orderFeatures= [];
+               foreach ($val["features"] as $result){
+                   $itemArr=  $this->textControl ($result , 50);
                    array_push ($orderFeatures , ["id"=>rand(10,1000),"content"=>$itemArr]);
                }
-               $this->features =  json_encode ($orderFeatures , JSON_UNESCAPED_UNICODE) ;
-           }else $this->features = $this->textControl( $val["options"] );
-       }
+               $this->features=  json_encode ($orderFeatures , JSON_UNESCAPED_UNICODE) ;
+       }else $this->features= $this->textControl( $val["features"] );
 
-    $this->price =  $this->textControl(isset($val["price"]) ? $val["price"] : "" , 50 ) ; 
-    $this->name =  $this->textControl(isset($val["name"]) ? $val["name"] : "" , 50 ) ; 
-    $this->numberOfProduct =  $this->textControl(isset($val["numberOfProduct"] ) ? $val["numberOfProduct"]  : "", 50 ) ; 
-    $this->categoryId =  $this->textControl(isset($val["categoryId"]) ? $val["categoryId"] : "" , 50 ) ; 
-    $this->card_text =  $this->textControl(isset($val["card_text"]) ? $val["card_text"] : "" , 200 ) ; 
-    $this->long_text =  $this->textControl(isset($val["long_text"]) ? $val["long_text"] : "" , 500 ) ; 
-    $this->img = (isset($_FILES["img"])) ? $this->imgUpload("img") : "";
-    $this->other_img = json_encode(
-      array(
+    $this->price= $this->textControl(isset($val["price"]) ? $val["price"] : "" , 50 ) ; 
+    $this->name= $this->textControl(isset($val["name"]) ? $val["name"] : "" , 50 ) ; 
+    $this->numberOfProduct= $this->textControl(isset($val["numberOfProduct"] ) ? $val["numberOfProduct"]  : "", 50 ) ; 
+    $this->categoryId= $this->textControl(isset($val["categoryId"]) ? $val["categoryId"] : "" , 50 ) ; 
+    $this->card_text= $this->textControl(isset($val["card_text"]) ? $val["card_text"] : "" , 200 ) ; 
+    $this->long_text= $this->textControl(isset($val["long_text"]) ? $val["long_text"] : "" , 500 ) ; 
+    $this->img= isset($_FILES["img"]) ? $this->imgUpload("img") : "";
+    $this->other_img= json_encode( array(
         1=>(isset($_FILES["img_1"])) ? $this->imgUpload("img_1") : "",
         2=>(isset($_FILES["img_2"])) ? $this->imgUpload("img_2") : "",
         3=>(isset($_FILES["img_3"])) ? $this->imgUpload("img_3") : "",
-      )
-      , JSON_UNESCAPED_UNICODE) ;
+      ), JSON_UNESCAPED_UNICODE) ;
    }
 
    public function run(){
@@ -95,7 +91,7 @@ class Create {
   *$length variable max length
   */
   private function textControl($text = '' , $length = 75){
-    $_length = strlen(trim( $text ));
+    $_length= strlen(trim( $text ));
 
     if($_length <= $length){
       return strip_tags( trim($text) );
@@ -107,7 +103,7 @@ class Create {
 
   private function createId(){
     return rand(100000,999999);
-   }
+  }
 
 
   private function imgUpload($fileName){

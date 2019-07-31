@@ -2,15 +2,19 @@
 
 namespace Confirmation\detail ;
 
+session_start();
+
 require_once __DIR__ . "/../../private/cors.php";
 
 
 require __DIR__ .'/../../database/connect.php';
-session_start();
+require __DIR__ . "/../../private/Authority.php";
+
 
 
 use DATABASE\Database ; 
 use PDO ;
+use Authority;
 
 if(!isset($_SESSION["operator"])){
   header("location: calisan");
@@ -56,7 +60,7 @@ if(!isset($_SESSION["operator"])){
         "ok"=>$ok
     );
 
-    if($_SESSION['operator']['authority'] == 2 || $_SESSION['operator']['authority'] == 1)
+    if($_SESSION['operator']['authority'] == Authority::write || $_SESSION['operator']['authority'] == Authority::read)
        echo json_encode($result , JSON_UNESCAPED_UNICODE);
     else echo json_encode(['status'=>'yetkisiz islem']);
       exit ;

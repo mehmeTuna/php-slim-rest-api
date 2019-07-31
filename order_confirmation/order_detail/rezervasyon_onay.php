@@ -2,8 +2,11 @@
 //id durum ise ok ve red bu iki duruma göre işelmi onayla veya reddet
 
 require __DIR__ ."/../../database/connect.php";
+require __DIR__ . "/../../private/Authority.php";
 
 use DATABASE\Database ;
+use Authority;
+
 session_start();
 
 if(!isset($_SESSION["operator"])){
@@ -12,7 +15,7 @@ if(!isset($_SESSION["operator"])){
 }
 
 
- if($_SESSION['operator']['authority'] != 2 ){
+ if($_SESSION['operator']['authority'] != Authority::read ){
      echo json_encode(['status'=>'yetkisiz islem']);
      exit;
  }

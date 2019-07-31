@@ -9,8 +9,8 @@ use PDOException;
 class Add {
   /*sql query*/
   private $table_name = "users";
-  private $values = "id,email,password,firstname,lastname,birthday,email_verified,registration_date,verification_code,ip,phone,adress";
-  private $valuesParameters = ":id,:email,:password,:firstname,:lastname,:birthday,:email_verified,:registration_date,:verification_code,:ip,:phone,:adress";
+  private $values = "email,password,firstname,lastname,birthday,email_verified,registration_date,verification_code,ip,phone,adress";
+  private $valuesParameters = ":email,:password,:firstname,:lastname,:birthday,:email_verified,:registration_date,:verification_code,:ip,:phone,:adress";
   private $data = array();
 
   private $conn ;
@@ -30,9 +30,19 @@ class Add {
     try{
       $statement = $this->conn->prepare($add);
       $statement->execute($this->data);
-      return true ;
     }catch(PDOException $e){
       return false ;
+    }
+
+    try{
+      $query="select id from users where email=?";
+      $userId= $this->conn->prepare($query);
+      $userId->execute([$this->data["email"]]);
+      $userId= $userId->fetchAll();
+      $userId= $userId[0]["id"];
+      return $userId ;
+    }catch(PDOException $e){
+      return false;
     }
   }
 

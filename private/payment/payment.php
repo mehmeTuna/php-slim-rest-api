@@ -64,7 +64,9 @@ class Payment{
         }
     }
 
-    public function run($icerik){
+    public function run($icerik,$adress= "adress"){
+
+        $addAdress= ($adress == "adress") ? "adress" : "adress_2";
 
         $response = new Add ();
          $response->Add("order_status", $this->method);
@@ -72,6 +74,7 @@ class Payment{
          $response->Add('orders' , $this->product );
          $response->Add('order_amount' , $this->cardTotal);
         $response->Add('icerik' , $icerik);
+        $response->Add("adress",$addAdress);
     
     
         if( empty( $this->control) ){
@@ -90,18 +93,15 @@ class Payment{
 
 $data = json_decode( file_get_contents("php://input") , true);
 
-//$data = $_POST ;
-
-
-
 $newpayment = new Payment();
 
-
 if(!isset($data["content"])){
-    echo "Açıklama ekleyiniz";
-     exit;
-}else $data["content"] = "";
+    $data["content"] = "";
+}
 
+if(!isset($data["adress"])){
+    $data["adress"] = "";
+}
 
 if( !isset($data['picked']) ){
     echo "odeme tıpı belırt";
@@ -111,6 +111,6 @@ if( !isset($data['picked']) ){
 $newpayment->method($data['picked']);
 
 if($newpayment->control() != true ){
-echo json_decode($newpayment->control() , JSON_UNESCAPED_UNICODE);
-exit ;
-}else  echo $newpayment->run($data['content']);
+    echo json_decode($newpayment->control() , JSON_UNESCAPED_UNICODE);
+    exit ;
+}else  echo $newpayment->run($data['content'],$data["adress"]);

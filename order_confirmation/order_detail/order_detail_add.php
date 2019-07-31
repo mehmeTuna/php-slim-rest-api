@@ -3,12 +3,14 @@
 //id ve data geliyor ona göre sparişi onayla ve detay ekle
 //post ile content değikeninde sipariş içerik ekleme geliyor
 
-
-require __DIR__ ."/../../database/connect.php";
-
 session_start();
+require __DIR__ ."/../../database/connect.php";
+require __DIR__ . "/../../private/Authority.php";
+
+
 
 use DATABASE\Database ;
+
 
 
 if(!isset($_SESSION["operator"])){
@@ -56,8 +58,8 @@ class Order {
       
       if($orderDetail != '')
         $sql = "UPDATE {$this->table_name} SET m_status=? , icerik=? WHERE order_id=?";
-        else 
-          $sql = "UPDATE {$this->table_name} SET m_status=? WHERE order_id=?"; 
+      else
+        $sql = "UPDATE {$this->table_name} SET m_status=? WHERE order_id=?";
   
       try{
         if($orderDetail == '')
@@ -87,31 +89,28 @@ class Order {
   }
 
 
-  if(!isset($_GET) && !$_GET["id"] && !is_numeric($_GET["id"]))
+  if(!isset($_GET) && !$_GET["id"] && !is_numeric($_GET["id"]) && !isset($_GET["opt"] ))
     exit;
-
     
   $rez = new Order();
     $opt ="0";
 
-    if( isset($_GET["opt"] ) ){
-
+    
       if($_GET["opt"] == "red")
       $opt = "2";
       if($_GET["opt"] == "onay")
       $opt = "1";
 
       if(isset($_POST['content']) && $_POST['content'] != ''){
-        $orderDetail = $_POST['content'];
+        $orderDetail = strip_tags( $_POST['content'] );
         $opt = 1 ; 
-        if($_SESSION['operator']['authority'] == 2)
+        if($_SESSION['operator']['authority'] == Authority::write)
              echo $rez->run($_GET["id"] , $opt , $orderDetail) ;
         else echo json_encode(['status' => 'yetkisiz islem']);  
         exit;
       }
-    }else
-      exit;
+ 
 
-if($_SESSION['operator']['authority'] == 2)
+if($_SESSION['operator']['authority'] == Authority::write)
     echo $rez->run($_GET["id"] , $opt ) ;
 else echo json_encode(['status' => 'yetkisiz islem']);  

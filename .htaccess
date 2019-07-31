@@ -78,13 +78,14 @@ RewriteRule ^api/product/([a-z0-9_-]+)$                                    ./pub
 RewriteRule ^api/category/([a-z0-9_-]+)/([a-z0-9_-]+)$                     ./public/product/product.php?categoryName=$1&page=$2
 
 RewriteRule ^order$                                                        ./private/orders/order.php
+RewriteRule ^private/demo.php$                                             ./private/Users/Data.php
 
 
 RewriteRule ^emailregister$                                                ./private/email/email.php
 
 
 RewriteRule ^user/sepet/item$                                              ./private/Users/sepet.php?item=ok
-RewriteRule ^user/newAdres$                                                ./private/Users/userDataUpdate.php
+RewriteRule ^user/newAdress$                                                ./private/Users/userDataUpdate.php
 RewriteRule ^user/sepet$                                                   ./private/Users/sepet.php
 RewriteRule ^user/login$                                                   ./private/Users/Login.php
 RewriteRule ^user/logout$                                                  ./private/Users/Logout.php

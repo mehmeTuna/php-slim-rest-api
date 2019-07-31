@@ -15,6 +15,8 @@ use Product\details ;
 use Product\Category ;
 use Menu\menuproduct ;
 
+use Exception;
+
 
 
 if(isset($_GET["productName"]) && strlen(trim($_GET["productName"])) >=3){
@@ -42,7 +44,17 @@ if(isset($_GET["categoryName"]) && isset($_GET["page"]) ){
 
 if( isset($_GET["menu"]) && $_GET["menu"] == "ok" ){
     $details = new menuproduct();
-    $result = $details->run();
+
+        try{
+            $result = $details->run();
+        }catch(Exception $e){
+            echo json_encode([
+                "description"=>$e,
+                "result"=>[]
+            ], JSON_UNESCAPED_UNICODE);
+            exit;
+        }
+    
     echo json_encode($result , JSON_UNESCAPED_UNICODE);
     exit ;
 }

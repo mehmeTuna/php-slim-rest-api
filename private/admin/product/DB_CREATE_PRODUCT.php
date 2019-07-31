@@ -11,6 +11,7 @@ class Add {
   private $values = "id,price,name,date,numberOfProduct,categoryId,unlimited,live,card_text,img,other_img,stores,long_text,features";
   private $valuesParameters = ":id,:price,:name,:date,:numberOfProduct,:categoryId,:unlimited,:live,:card_text,:img,:other_img,:stores,:long_text,:features";
   private $data = array();
+  private $addFeatures= "";
 
   private $conn ;
   public function __construct(){
@@ -22,16 +23,11 @@ class Add {
       if($variable == "features"){
           $id = rand(100,1000);
           $result = $value;
-
-          $add = "insert into features (id,content) values ('{$id}','{$result}')";
-
-          try{
-              $statement = $this->conn->prepare($add);
-              $statement->execute();
-          }catch(PDOException $e){
-          }
-
           $this->data["features"] = $id ;
+
+          $this->addFeatures = "insert into feature (id,content) values (".$id.",'".$result."')";
+
+
           return $this;
       }
     $this->data[$variable] = $value ;
@@ -44,9 +40,15 @@ class Add {
     try{
       $statement = $this->conn->prepare($add);
       $statement->execute($this->data);
-      return ['status'=>'ok'] ;
     }catch(PDOException $e){
       return "denied" ;
+    }
+
+    try{
+      $statement = $this->conn->prepare($this->addFeatures);
+      $statement->execute();
+      return ['status'=>'ok'] ;
+    }catch(PDOException $e){
     }
   }
 

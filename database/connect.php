@@ -36,6 +36,28 @@ class Database
                   
     }
 
+    protected function startConnect() {
+        try {
+            $this->conn = new PDOAlias("mysql:host=$this->servername;dbname=$this->dbName", $this->username, $this->password);
+            // set the PDO error mode to exception
+            $this->conn->setAttribute( PDOAlias::ATTR_ERRMODE, PDOAlias::ERRMODE_EXCEPTION);
+            $this->conn->exec("set names utf8");
+        } catch (PDOException $e) {
+           echo  $e->getMessage();
+           exit;
+
+        }
+    }
+
+    protected function connect(){
+        return $this->conn;
+    }
+    
+    protected function disconnect() {
+        $this->conn= null ;
+        return true ;
+    }
+
 
     function __destruct()
     {

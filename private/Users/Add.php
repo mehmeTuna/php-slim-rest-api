@@ -18,12 +18,13 @@ if ( !empty($data) ){
     $create = new Create();
     $create->add( $data );
    if(!$create->control()){
-    echo json_encode("hatalı veri" , JSON_UNESCAPED_UNICODE);
+    echo json_encode(array("status"=>"erroneousData") , JSON_UNESCAPED_UNICODE);
     exit;
    }
-     
-    echo json_encode($create->run() , JSON_UNESCAPED_UNICODE);
-    
+     if($create->run() == false)
+       echo json_encode( array("status"=>"emailfailed"), JSON_UNESCAPED_UNICODE);
+     else
+      echo json_encode( array("status"=>"registered"), JSON_UNESCAPED_UNICODE);
 }else {
     echo "Boş veri " ;
     exit;

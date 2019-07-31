@@ -682,6 +682,14 @@ class Data
                 return json_encode ( [ 'status' => 'not found' ] , JSON_UNESCAPED_UNICODE );
 
             foreach ( $result as $key => $value ) {
+                try{
+                    $query = $this->db->query( "select * from features where id=" . $value["features"] ,  PDO::FETCH_ASSOC);
+                    if($query->rowCount()) {
+                        foreach ($query as $productOpt){
+                            $option=json_decode ($productOpt["content"] , true);
+                        }
+                    }
+                }catch (\PDOException $e){$option = ""; }
                 array_push ( $status ,
                     [
                         'id' => $value[ 'id' ] ,
@@ -691,7 +699,8 @@ class Data
                         'categoryName' => $this->getCategory ( $value[ 'categoryId' ] ) ,
                         'live' => $value[ 'live' ] ,
                         'cardText' => $value[ 'card_text' ] ,
-                        'stores' => $value[ 'stores' ]
+                        'stores' => $value[ 'stores' ],
+                        "options"=>$option
                     ]
                 );
             }

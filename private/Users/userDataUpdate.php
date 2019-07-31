@@ -21,7 +21,7 @@ $query = "update  users set adress_2=:adres where id=:id";
 try {
     $statement = $db->prepare ( $query );
     $statement->execute ( ["adres"=>$dataAdress["adress"] , "id"=>$_SESSION["user"]["username"]] );
-    $_SESSION["user"]["adress"] = $dataAdress["adress"];
+    $_SESSION["user"]["adress_2"] = $dataAdress["adress"];
 
     echo json_encode ( [ 'status' => 'ok' ] , JSON_UNESCAPED_UNICODE );
     exit;

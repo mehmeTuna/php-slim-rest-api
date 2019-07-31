@@ -20,10 +20,11 @@ $db = $db->conn ;
 $userId = "";
 $IsOrderStatus = "";
 $OrderDetay = [];
+$orderAdress = "";
 
 
 $IsHaveId = "select m_status from order_items where order_id='".$orderId."'";
-$IsOrderQuery = "select user_id , order_amount,m_date,orders from order_items where order_id='".$orderId."'";
+$IsOrderQuery = "select * from order_items where order_id='".$orderId."'";
 
 try{
     $result = $db->query ($IsHaveId);
@@ -39,6 +40,7 @@ try{
     $result = $db->query ($IsOrderQuery);
     if($result->rowCount ()){
         foreach ($result as $val){
+            $orderAdress = $val["adress"];
             if( isset($val["user_id"]) )
               $userId = $val["user_id"];
 
@@ -63,7 +65,7 @@ try{
     if($result->rowCount ()){
         foreach ($result as $val){
             $OrderDetay["username"] = $val["firstname"] . " " . $val["lastname"];
-            $OrderDetay["adress"] = ($val["adress_2"] != null && $val["adress_2"] != "" ) ? $val["adress_2"] : $val["adress"];
+            $OrderDetay["adress"] = ($orderAdress=="adress") ? $val["adress"] : ($val["adress_2"] != null && $val["adress_2"] != "" ) ? $val["adress_2"] : $val["adress"];
             $OrderDetay["phone"] = $val["phone"];
         }
     }else {
@@ -93,14 +95,42 @@ $mpdf = new \Mpdf\Mpdf([
 $orderTable = "";
 $orderDataYear = date( "d:m:Y" , $OrderDetay["m_date"]);
 $orderDataday = date( "H:i" , $OrderDetay["m_date"]);
-foreach ($OrderDetay["orders"] as $val){
-   $orderTable .="<tr><td class='table-order-name'>{$val['name']}</td>
+foreach ($OrderDetay["orders"] as $value){
+    $productId= $value["id"];//ürün idsi
+    $orderCount = $value["count"];//ürün adeti
+    $orderName = $value["name"];//ürün adı
+    $orderFeatures= isset($value["features"]) ? $value["features"] : "";//[count=> , items[0=> , 1=> ]]//ürün detayları
+    $getDataysql = 'select * from feature where id=(select features from products where id="'.$productId.'")';
+                   
+    try{
+        $query = $db->prepare( $getDataysql);
+        $query->execute();
+        $resultFeaturesDetay= $query->fetchAll();
+        $itemFeatures= json_decode ($resultFeaturesDetay[0]["content"], true);
+        if($itemFeatures == false) throw new Exception("detay kısmında hata var");
+    }catch (PDOException $e){   }
 
-    <td style='padding-right:1mm'>{$val['count']}</td>
 
-    <td>{$val['price']}tl</td>
-    </tr>";
-}
+
+    foreach($orderFeatures as $resultvalue){
+        $resultOrderName=$orderName."( ";
+        foreach($resultvalue["items"] as $items){
+            foreach($itemFeatures as $itemResult){
+                if($itemResult["id"] == $items)
+                 $resultOrderName.= $itemResult["content"]." ,";
+            }
+        }
+        $resultOrderName.=")";
+        $orderTable .="<tr><td class='table-order-name'>{$resultOrderName}</td>";
+        $orderTable.= "<td style='padding-right:1mm'>{$resultvalue["count"]}</td>
+        <td>{$value['price']}tl</td>
+        </tr>";
+
+        $resultOrderName="";
+    };
+
+};
+
 ob_start ();
 
 echo "<style>

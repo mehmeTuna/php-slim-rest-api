@@ -12,7 +12,6 @@ use formattimestamp\Ttime;
 
 class Create {
 
-  private $id ='';//int (11)
   private $email ='';//varchar(500)
   private $password ='';//varchar(500)
   private $firstname ='';//varchar(50)
@@ -45,8 +44,6 @@ class Create {
     if($val["politics"] == false) $this->variableControl = false ;
     if($val["password"] != $val["rePassword"] ) $this->variableControl = false ;
 
-
-    $this->id = $this->createId();
     $this->email = $this->emailControl( isset($val["username"]) ? $val["username"] : "" ) ;
 
     $this->password =  $this->passwordCrypt( isset($val["password"]) ? $val["password"] : "" );
@@ -54,7 +51,7 @@ class Create {
     $this->lastname = $this->textControl(  isset($val["surname"]) ? $val["surname"] : "" , 50);
     $this->phone = $this->validatePhoneNumber( isset($val["phone"]) ? $val["phone"] : "" );
     $this->adress = $this->textControl( isset($val["adress"]) ? $val["adress"] : ""  , 250);
-    $this->birthday = $this->textControl( isset($val["date"]) ? $val["date"] : "" , 20);
+    $this->birthday = $this->textControl( isset($val["date"]) ? strip_tags($val["date"]) : "" , 20);
   }
 
     //data control return true or false
@@ -67,7 +64,6 @@ class Create {
     if($this->variableControl === false )
       return false ;
 
-      $this->newuser->add("id" , $this->id);
       $this->newuser->add("email" , $this->email);
       $this->newuser->add("password" , $this->password);
       $this->newuser->add("firstname" , $this->firstname);
@@ -84,7 +80,7 @@ class Create {
         return false ;
       }else{
         $_SESSION["user"] = array(
-          "username" => $this->id ,
+          "id"=>$isCreatedUser,
           "firstname"=>$this->firstname,
           "lastname"=>$this->lastname,
           "email"=>$this->email ,
@@ -155,7 +151,6 @@ class Create {
 
 
   public function __destruct(){
-    unset($id);
     unset($email);
     unset($password);
     unset($firstname);

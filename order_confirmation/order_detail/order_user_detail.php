@@ -5,11 +5,13 @@ namespace Confirmation\Order\detail ;
 session_start();
 
 require __DIR__ .'/../../database/connect.php';
+require __DIR__ . "/../../private/Authority.php";
 
 
 use DATABASE\Database ;
 use PDO ;
 use PDOException;
+use Authority;
 
 
 
@@ -19,7 +21,7 @@ if(!isset($_SESSION["operator"])){
     exit;
 }
 
-if($_SESSION['operator']['authority'] == 0){
+if($_SESSION['operator']['authority'] == Authority::disabled){
     echo json_encode(['status'=>'yetkisiz islem']);
     exit;
 }
@@ -34,13 +36,13 @@ if(isset( $_GET['search']) && $_GET['search'] == 'ok'){
 
     if(isset($_GET["order"])  ){
 
-        $tip = strip_tags($_GET['order']) ;
+        $tip= strip_tags($_GET['order']) ;
 
-        $thisDayTime = mktime(0,0,0 , date('n') , date('j')  , date('Y'));
+        $thisDayTime= mktime(0,0,0 , date('n') , date('j')  , date('Y'));
 
-        $waiting= "SELECT order_id,user_id,order_amount,m_date,orders,order_status from order_items where order_id = '{$tip}' and m_date>='{$thisDayTime}' ORDER BY m_date ASC" ;
-        $kuryeData = "select firstname ,lastname  from kurye where id=(select kurye_id from kurye_takip where order_id='{$tip}')";
-        $order_wait = array();
+        $waiting= "SELECT * from order_items where order_id = '{$tip}' and m_date>='{$thisDayTime}' ORDER BY m_date ASC" ;
+        $kuryeData= "select firstname ,lastname  from kurye where id=(select kurye_id from kurye_takip where order_id='{$tip}')";
+        $order_wait= array();
 
         try{
             $kuryeName = $details->conn->query( $kuryeData ,  PDO::FETCH_ASSOC);
@@ -54,18 +56,18 @@ if(isset( $_GET['search']) && $_GET['search'] == 'ok'){
         }
 
         try{
-            $query = $details->conn->query( $waiting ,  PDO::FETCH_ASSOC);
+            $orderQuery = $details->conn->query( $waiting ,  PDO::FETCH_ASSOC);
 
 
-            if($query->rowCount()){
-                foreach ($query as $value) {
+            if($orderQuery->rowCount()){
+                foreach ($orderQuery as $value) {
 
                     $waiting= "SELECT * from users where id = '".$value["user_id"] . "'" ;
                     try{
-                        $query = $details->conn->query( $waiting ,  PDO::FETCH_ASSOC);
+                        $UserQuery = $details->conn->query( $waiting ,  PDO::FETCH_ASSOC);
 
-                        if($query->rowCount()){
-                            foreach ($query as $user) {
+                        if($UserQuery->rowCount()){
+                            foreach ($UserQuery as $user) {
                                 array_push($order_wait , array(
                                     "orderType"=>$value["order_status"],
                                     "order_id"=>$value["order_id"],
@@ -73,7 +75,7 @@ if(isset( $_GET['search']) && $_GET['search'] == 'ok'){
                                     "tutar"=>$value["order_amount"],
                                     "date"=>date('H:i', $value["m_date"]),
                                     "orders"=>$value["orders"],
-                                    "adres"=>($user["adress_2"] != null && $user["adress_2"] != "") ? $user["adress_2"] : $user["adress"],
+                                    "adres"=>($value["adress"] == "adress") ? $user["adress"] : $user["adress_2"] ,
                                     "phone"=>$user["phone"],
                                     "first_order"=>$user["first_order"],
                                     "kurye"=>$kuryeName
@@ -109,13 +111,13 @@ if(isset($_GET["order"])  ){
     $thisDayTime = mktime(0,0,0 , date('n') , date('j')  , date('Y'));
 
     if($_GET["order"] == "gelen" )
-        $waiting= "SELECT order_id,user_id,order_amount,m_date,orders,order_status from order_items where m_status = '0' and m_date>='{$thisDayTime}' ORDER BY m_date ASC" ;
+        $waiting= "SELECT * from order_items where m_status = '0' and m_date>='{$thisDayTime}' ORDER BY m_date ASC" ;
 
     else if($_GET["order"] == "onay" ){
-        $waiting= "SELECT order_id,user_id,order_amount,m_date,orders,order_status from order_items where m_status != '0' and m_status!='2' and m_date>='{$thisDayTime}' ORDER BY m_date ASC" ;
+        $waiting= "SELECT * from order_items where m_status != '0' and m_status!='2' and m_date>='{$thisDayTime}' ORDER BY m_date ASC" ;
     }
     else if($_GET["order"] == "iptal" )
-        $waiting= "SELECT order_id,user_id,order_amount,m_date,orders,order_status from order_items where m_status='2' and m_date>='{$thisDayTime}' ORDER BY m_date ASC" ;
+        $waiting= "SELECT * from order_items where m_status='2' and m_date>='{$thisDayTime}' ORDER BY m_date ASC" ;
 
 
 
@@ -167,7 +169,7 @@ if(isset($_GET["order"])  ){
                                 "tutar"=>$value["order_amount"],
                                 "date"=>date('H:i', $value["m_date"]),
                                 "orders"=>$value["orders"],
-                                "adres"=>($user["adress_2"] != null && $user["adress_2"] != "") ? $user["adress_2"] : $user["adress"],
+                                "adres"=>($value["adress"] == "adress") ? $user["adress"] : $user["adress_2"] ,
                                 "phone"=>$user["phone"],
                                 "first_order"=>$user["first_order"],
                                 "kurye"=>$kuryeName
