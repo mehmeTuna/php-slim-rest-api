@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 29 Tem 2019, 19:23:29
+-- Üretim Zamanı: 31 Tem 2019, 16:26:50
 -- Sunucu sürümü: 10.1.38-MariaDB
 -- PHP Sürümü: 7.3.4
 
@@ -160,6 +160,7 @@ INSERT INTO `kurye_takip` (`id`, `order_id`, `kurye_id`, `start_date`, `finish_d
 ('1303', '67916', '82771', '1563402457', '0'),
 ('2113', '49864', '2', '1563144286', '0'),
 ('2156', '54833', '2', '1562432771', '0'),
+('3379', '96786', '82771', '1564574028', '0'),
 ('3556', '85049', '82771', '1563190216', '0'),
 ('3693', '15790', '82771', '1563307843', '0'),
 ('4024', '94410', '18157', '1563145029', '0'),
@@ -168,6 +169,7 @@ INSERT INTO `kurye_takip` (`id`, `order_id`, `kurye_id`, `start_date`, `finish_d
 ('4683', '72662', '2', '1562708715', '0'),
 ('4826', '36538', '2', '1563144312', '0'),
 ('5250', '35541', '2', '1563031077', '0'),
+('5445', '52169', '82771', '1564574021', '0'),
 ('5801', '18886', '18157', '1563190420', '0'),
 ('5932', '23724', '2', '1562451821', '0'),
 ('5994', '48964', '2', '1562451771', '0'),
@@ -177,6 +179,7 @@ INSERT INTO `kurye_takip` (`id`, `order_id`, `kurye_id`, `start_date`, `finish_d
 ('6437', '19921', '18157', '1563145067', '0'),
 ('6720', '53615', '82771', '1563189365', '0'),
 ('6994', '53543', '2', '1562618103', '0'),
+('7322', '90307', '18157', '1564574042', '0'),
 ('7702', '17933', '82771', '1563402473', '0'),
 ('7982', '72010', '18157', '1563307886', '0'),
 ('8311', '63941', '82771', '1563145019', '0'),
@@ -191,6 +194,7 @@ INSERT INTO `kurye_takip` (`id`, `order_id`, `kurye_id`, `start_date`, `finish_d
 ('9332', '65307', '76235', '1563638202', '0'),
 ('9557', '58975', '18157', '1563620456', '0'),
 ('9642', '21976', '2', '1563144069', '0'),
+('9650', '90357', '82771', '1564574034', '0'),
 ('9668', '44590', '82771', '1563620427', '0');
 
 -- --------------------------------------------------------
@@ -260,6 +264,7 @@ INSERT INTO `order_items` (`order_id`, `user_id`, `adress`, `order_amount`, `ice
 (49864, 15883, 'adress', 132, '', NULL, '1563141798', '[{\"id\":\"276675\",\"count\":\"1\",\"price\":40,\"name\":\"Beyti (1,5 porsiyon)\"},{\"id\":\"781750\",\"count\":\"1\",\"price\":26,\"name\":\"Kuşbaşı Kebap\"},{\"id\":\"942504\",\"count\":\"1\",\"price\":40,\"name\":\"Patlıcan Kebap (1,5 porsiyon)\"},{\"id\":\"982211\",\"count\":\"1\",\"price\":26,\"name\":\"Adana Kebap\"}]', '5', '1', '31.223.58.246'),
 (49962, 45435, 'adress', 14, 'wwerwerw', NULL, '1562698481', '[{\"id\":\"648308\",\"count\":1,\"price\":\"14\",\"name\":\"Fıstıklı Kaymaklı Künefe\"}]', '5', '0', '5.177.130.28'),
 (51143, 56359, 'adress', 80, 'soğansız olsun', NULL, '1563631158', '[{\"id\":\"276675\",\"count\":\"2\",\"price\":80,\"name\":\"Beyti (1,5 porsiyon)\"}]', '5', '0', '37.154.75.232'),
+(52169, 45435, 'adress_2', 54, 'rftyujıo', NULL, '1564529846', '[{\"id\":\"530891\",\"count\":2,\"features\":[{\"count\":1,\"items\":[903]},{\"count\":1,\"items\":[]}],\"price\":54,\"name\":\"Adana Kebap\"}]', '5', '0', '::1'),
 (53543, 15883, 'adress', 52, 'h?zl? ya', NULL, '1562618028', '[{\"id\":\"781750\",\"count\":1,\"price\":\"26\",\"name\":\"Ku?ba?? Kebap\"},{\"id\":\"232635\",\"count\":1,\"price\":\"26\",\"name\":\"Kemikli Tavuk\"}]', '5', '1', '151.135.173.84'),
 (53615, 92930, 'adress', 980, 'Sıcak olusn lütfen', NULL, '1563189263', '[{\"id\":\"276675\",\"count\":\"1\",\"price\":40,\"name\":\"Beyti (1,5 porsiyon)\"},{\"id\":\"781750\",\"count\":\"1\",\"price\":26,\"name\":\"Kuşbaşı Kebap\"},{\"id\":\"942504\",\"count\":\"1\",\"price\":40,\"name\":\"Patlıcan Kebap (1,5 porsiyon)\"},{\"id\":\"982211\",\"count\":\"1\",\"price\":26,\"name\":\"Adana Kebap\"},{\"id\":\"232635\",\"count\":\"6\",\"price\":156,\"name\":\"Kemikli Tavuk\"},{\"id\":\"303636\",\"count\":\"1\",\"price\":26,\"name\":\"Kuzu Kaburga\"},{\"id\":\"486555\",\"count\":\"1\",\"price\":26,\"name\":\"Tavuk Pirzola\"},{\"id\":\"372212\",\"count\":\"1\",\"price\":26,\"name\":\"Çöp Şiş\"},{\"id\":\"548493\",\"count\":\"1\",\"price\":26,\"name\":\"Kemiksiz Tavuk\"},{\"id\":\"506901\",\"count\":\"1\",\"price\":40,\"name\":\"Külbastı\"},{\"id\":\"809453\",\"count\":\"1\",\"price\":40,\"name\":\"Kazbaşı\"},{\"id\":\"929658\",\"count\":\"1\",\"price\":26,\"name\":\"Kanat\"},{\"id\":\"876332\",\"count\":\"1\",\"price\":40,\"name\":\"Et Pirzola (Kemikli)\"},{\"id\":\"818052\",\"count\":\"1\",\"price\":26,\"name\":\"Ciğer  Şiş\"},{\"id\":\"463701\",\"count\":\"7\",\"price\":182,\"name\":\"AntepLahmacun (3 Adet)\"},{\"id\":\"993298\",\"count\":\"2\",\"price\":48,\"name\":\"Adana Lahmacun (5 Adet)\"},{\"id\":\"894674\",\"count\":\"1\",\"price\":15,\"name\":\"Çiğ Köfte ( 12 Sıkım )\"},{\"id\":\"374382\",\"count\":\"1\",\"price\":24,\"name\":\"KEmiksiz Kaburga Dürüm\"},{\"id\":\"365777\",\"count\":\"1\",\"price\":24,\"name\":\"Ciğer Dürüm\"},{\"id\":\"309440\",\"count\":\"1\",\"price\":24,\"name\":\"Kuşbaşı Dürüm\"},{\"id\":\"151929\",\"count\":\"1\",\"price\":24,\"name\":\"Adana Dürüm\"},{\"id\":\"621520\",\"count\":\"1\",\"price\":24,\"name\":\"Beyti Dürüm\"},{\"id\":\"930254\",\"count\":\"1\",\"price\":24,\"name\":\"Çöp Şiş Dürüm\"},{\"id\":\"648308\",\"count\":\"1\",\"price\":14,\"name\":\"Fıstıklı Kaymaklı Künefe\"},{\"id\":\"381622\",\"count\":\"1\",\"price\":13,\"name\":\"Fıstıklı Künefe\"}]', '5', '0', '5.46.5.201'),
 (54010, 37669, 'adress', 74, '', NULL, '1562793829', '[{\"id\":\"276675\",\"count\":1,\"price\":\"40\",\"name\":\"Beyti (1,5 porsiyon)\"},{\"id\":\"781750\",\"count\":1,\"price\":\"26\",\"name\":\"Kuşbaşı Kebap\"},{\"id\":\"205023\",\"count\":1,\"price\":\"4\",\"name\":\"Fuse Tea (33 cl.)\"},{\"id\":\"136207\",\"count\":1,\"price\":\"4\",\"name\":\"Coca-Cola Şekersiz (33 cl.)\"}]', '5', '0', '78.190.69.191'),
@@ -291,14 +296,19 @@ INSERT INTO `order_items` (`order_id`, `user_id`, `adress`, `order_amount`, `ice
 (78561, 79027, 'adress', 85, '', NULL, '1563815085', '[{\"id\":\"276675\",\"count\":\"1\",\"price\":40,\"name\":\"Beyti (1,5 porsiyon)\"},{\"id\":\"781750\",\"count\":\"1\",\"price\":26,\"name\":\"Kuşbaşı Kebap\"},{\"id\":\"205023\",\"count\":\"1\",\"price\":4,\"name\":\"Fuse Tea (33 cl.)\"},{\"id\":\"894674\",\"count\":\"1\",\"price\":15,\"name\":\"Çiğ Köfte ( 12 Sıkım )\"}]', '0', '1', '37.154.45.187'),
 (78873, 15883, 'adress', 306, '', NULL, '1564003288', '[{\"id\":\"150669\",\"count\":1,\"price\":0,\"name\":\"deneme ürünü 2\"},{\"id\":\"276675\",\"count\":1,\"price\":40,\"name\":\"Beyti (1,5 porsiyon)\"},{\"id\":\"781750\",\"count\":1,\"price\":26,\"name\":\"Kuşbaşı Kebap\"},{\"id\":\"942504\",\"count\":6,\"price\":240,\"name\":\"Patlıcan Kebap (1,5 porsiyon)\"}]', '1', '0', '::1'),
 (80616, 45435, 'adress', 26, 'iü??üiü??üü?ü?iüçiüğüğüüğ.işü.şüğ.şüi.üşğ.ş.', NULL, '1562618562', '[{\"id\":\"781750\",\"count\":1,\"price\":\"26\",\"name\":\"Ku?ba?? Kebap\"}]', '1', '1', '151.135.173.84'),
+(84380, 25, 'adress', 27, '', NULL, '1564574672', '[{\"id\":\"530891\",\"count\":1,\"features\":[{\"count\":1,\"items\":[903]}],\"price\":27,\"name\":\"Adana Kebap\"}]', '1', '1', '::1'),
 (84391, 15883, 'adress', 120, 'saassa', NULL, '1563144004', '[{\"id\":\"276675\",\"count\":\"3\",\"price\":120,\"name\":\"Beyti (1,5 porsiyon)\"}]', '5', '1', '31.223.58.246'),
 (85049, 15883, 'adress', 40, '', NULL, '1563147348', '[{\"id\":\"276675\",\"count\":\"1\",\"price\":40,\"name\":\"Beyti (1,5 porsiyon)\"}]', '5', '1', '31.223.58.246'),
 (87319, 15883, 'adress', 80, 'ggfgfdfd', NULL, '1563146487', '[{\"id\":\"276675\",\"count\":\"1\",\"price\":40,\"name\":\"Beyti (1,5 porsiyon)\"},{\"id\":\"942504\",\"count\":\"1\",\"price\":40,\"name\":\"Patlıcan Kebap (1,5 porsiyon)\"}]', '5', '1', '31.223.58.246'),
 (87866, 36087, 'adress', 40, 'safasfas', NULL, '1562619227', '[{\"id\":\"276675\",\"count\":1,\"price\":\"40\",\"name\":\"Beyti (1,5 porsiyon)\"}]', '1', '0', '151.135.173.84'),
+(88612, 25, 'adress', 312, '', NULL, '1564576786', '[{\"id\":\"530891\",\"count\":6,\"features\":[{\"count\":5,\"items\":[]},{\"count\":1,\"items\":[903]}],\"price\":162,\"name\":\"Adana Kebap\"},{\"id\":\"416376\",\"count\":6,\"features\":[{\"count\":1,\"items\":[]},{\"count\":5,\"items\":[331,367]}],\"price\":150,\"name\":\"Adana Dürüm\"}]', '1', '1', '::1'),
+(90307, 45435, 'adress', 624, 'aaaaaaaaaaaaaawefr awe rfwef rwe4 w4e w4e t', NULL, '1564533579', '[{\"id\":\"530891\",\"count\":12,\"features\":[{\"count\":1,\"items\":[]},{\"count\":1,\"items\":[903]},{\"count\":5,\"items\":[]},{\"count\":5,\"items\":[903]}],\"price\":324,\"name\":\"Adana Kebap\"},{\"id\":\"416376\",\"count\":12,\"features\":[{\"count\":1,\"items\":[214,367,331]},{\"count\":1,\"items\":[]},{\"count\":5,\"items\":[]},{\"count\":5,\"items\":[331,367,214]}],\"price\":300,\"name\":\"Adana Dürüm\"}]', '5', '0', '::1'),
+(90357, 45435, 'adress_2', 231, '', NULL, '1564532106', '[{\"id\":\"530891\",\"count\":3,\"features\":[{\"count\":1,\"items\":[903]},{\"count\":2,\"items\":[]}],\"price\":81,\"name\":\"Adana Kebap\"},{\"id\":\"416376\",\"count\":6,\"features\":[{\"count\":1,\"items\":[214,331]},{\"count\":5,\"items\":[367,331]}],\"price\":150,\"name\":\"Adana Dürüm\"}]', '5', '1', '::1'),
 (91719, 55065, 'adress', 40, NULL, NULL, '1562251441', '[{\"id\":\"276675\",\"count\":1,\"price\":\"40\",\"name\":\"Beyti (1,5 porsiyon)\"}]', '1', '0', '151.135.173.84'),
 (93050, 45435, 'adress_2', 12.3, 'Bu kısım telefon onay tarafından eklendi', NULL, '1564328255', '[{\"id\":\"277101\",\"count\":\"1\",\"price\":12.3,\"name\":\"deneme ürünü 5\"}]', '1', '0', '::1'),
 (94410, 15883, 'adress', 120, 'sadsadasd', NULL, '1563144959', '[{\"id\":\"942504\",\"count\":\"3\",\"price\":120,\"name\":\"Patlıcan Kebap (1,5 porsiyon)\"}]', '5', '1', '31.223.58.246'),
 (95671, 35747, 'adress', 3, '', NULL, '1560720164', '[{\"id\":\"523399\",\"count\":1,\"price\":\"3\",\"name\":\"Ayran (30 cl.)\"}]', '1', '0', '::1'),
+(96786, 45435, 'adress', 27, '', NULL, '1564529888', '[{\"id\":\"530891\",\"count\":1,\"features\":[{\"count\":1,\"items\":[]}],\"price\":27,\"name\":\"Adana Kebap\"}]', '5', '1', '::1'),
 (97758, 15883, 'adress', 106, '', NULL, '1563141257', '[{\"id\":\"276675\",\"count\":\"1\",\"price\":40,\"name\":\"Beyti (1,5 porsiyon)\"},{\"id\":\"942504\",\"count\":\"1\",\"price\":40,\"name\":\"Patlıcan Kebap (1,5 porsiyon)\"},{\"id\":\"982211\",\"count\":\"1\",\"price\":26,\"name\":\"Adana Kebap\"}]', '5', '0', '31.223.58.246'),
 (97902, 35747, 'adress', 4, '', NULL, '1560025789', '[{\"id\":\"136207\",\"count\":1,\"price\":\"4\",\"name\":\"Coca-Cola Şekersiz (33 cl.)\"}]', '1', '0', '::1');
 
@@ -431,52 +441,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `firstname`, `lastname`, `email_verified`, `first_order`, `registration_date`, `verification_code`, `ip`, `phone`, `adress`, `adress_2`, `birthday`) VALUES
-(11246, 'newdeneme@hotmail.com', '$2y$10$ZbP7n9Szb5Un6Y9Djv1fAOcTdm6EpYksrAcYKSugpD4Qs9JLtbxpq', 'deneme', 'new', 1, 1, '1562447540', '', '5.46.109.169', '5435292118', 'deneme', '', '2018-07-07'),
-(15576, 'denemeneww@hotmail.com', '$2y$10$ycbEZiAq2mMQjwh3O4gFmO4VG0gwnQpG5ANUqIPU4U3Bj4OiIm.ku', 'Deneme', 'new', 1, 0, '1562450091', '', '151.135.173.84', '5435292117', 'sadsad', '', '2019-07-07'),
-(15883, 'enes@hotmail.com', '$2y$10$mvx/Mzc0jrT6f3cNB9pXoOSxwhlggbpP8IlOx3hJVRSQ6PXg/447a', 'enes', 'tuna', 1, 1, '1557070204', '', '::1', '5307280376', 'ellek kasabası', '', ''),
-(17723, 'bbbbbbbbb@edrh.erh', '$2y$10$uTVdxOZXuNBRdd6SGe51kOqmv7a0MJaZokjCP9W19JPlNJwGSLuAe', 'bbb', 'bbb', 1, 0, '1562250893', '', '151.135.173.84', '3254235', 'weetwe', '', '2019-07-06'),
-(17821, 'tuna@hotmail.com', '$2y$10$BzPjLtAMWywPTwNu1UBpTepLPW4MiPGaVnhGrqsFykCl/Ie1hq.va', 'Mehmet', 'Tuna', 1, 0, '1563921210', '', '::1', '5201457845', 'Deneme adresi kaale alma', '', '0'),
-(21743, 'demo6@hotmail.com', '$2y$10$NqE8qT7lpN5ML8DavRazK.B/5r74WH5/3aQeVYDiOZUo90itroXgy', '123', '123', 1, 0, '1562156120', '', '5.177.141.122', '123', '123', '', '2019-07-06'),
-(22066, 'demasfdo@hotmail.com', '$2y$10$VLdxgwgDjVug1w.X6dAJzORW3.S7vbZUU6p.zW6wpinU1XIb0jX2a', 'asf', 'asf', 1, 0, '1562153390', '', '5.177.141.122', '235', 'wqerfwqer', '', '2019-07-14'),
-(24580, 'demo6@hotmail.com', '$2y$10$mE68mjxmIGeEdlx05aWyveKknJBNEfKutAnsKqX3lXu.iFfOQSgwy', '123', '123', 1, 0, '1562156128', '', '5.177.141.122', '123', '123', '', '2019-07-06'),
-(26522, 'adres@hotmail.com', '$2y$10$zeK7gcMxtA3SHrD.InLLcedXPY.iRW2Gu8NmLPfy590oXLwvmqHku', 'adres 2 denemesi', 'denme', 1, 0, '1564071035', '', '::1', '2541541254', 'adres 1', 'adres 2', '0'),
-(31411, 'budakyemlihan@ay-soft.com', '$2y$10$dj0iVEy8DvpAt3IH0e/.WOeB0R4FdlU4c2wYLS3vvhTLm1WHCHfiO', 'yemlihan', 'BUDAK', 1, 1, '1562451049', '', '78.190.77.27', '5522284800', 'BEY MAH. 1630 SOK SEYHAN ADADA', '', '1974-05-09'),
-(33316, 'tunademo3@hotmail.com', '$2y$10$bmTlj4nKEUyvBWb2ODwPP.O8mJuEaiLMbgFjLQrtj8xVvF6ZYhDaG', 'mehmet', 'tuna', 1, 0, '1562153934', '', '5.177.141.122', '2352352', 'afawfawfa', '', '2019-07-04'),
-(34142, 'budakyemlihan@gmail.com', '$2y$10$YOFemPeznMBjz1btVdW63OhUITTuI.huI38F36CZkG4YeXG3OvC8a', 'zafer', 'budak', 1, 1, '1563636187', '', '78.190.64.36', '5522284800', 'bey mah.', '', '1974-05-09'),
-(35747, 'mehmet_tuna_anadolu@hotmail.com', '$2y$10$PB8USNS58UOnesfhlHmuJu7FbOsCT2VC1SPy7V4GDoTTV1tFf9jTa', 'mehmet', 'tuna', 1, 1, '1557057734', '', '::1', '5307280376', 'ellek kasabası ygr oauıyergo ıaygrou ıareoı yaeuwrg aueryg aoueguyaeg uyar eouıa', '', ''),
-(36087, 'aefa@sgs.egs', '$2y$10$bRvOyOBqcOqMLML1hpoqF.mSWBGzskcI8BV9zHrI9RTLFcTe2Rhqa', 'qwe', 'qwe', 1, 1, '1562619212', '', '151.135.173.84', '1231235', 'qawrf awrfaw', '', '2019-07-06'),
-(37669, 'yemlihanbudak@hotmail.com', '$2y$10$PUBOV4W.cm7PTOxBJF/8Xe0tPiwl5/1wVjltZmBhgQHQPAbZ/OiRK', 'Yemlihan', 'Budak', 1, 0, '1562450452', '', '78.190.77.27', '5435292117', 'adana seyhan bey mahaleesi 16030 sokak', '', '2019-07-13'),
-(40258, 'tunademo5@hotmail.com', '$2y$10$vil7ndS3hsNPvF.8UTRER.O12ecdkHzWFQUzjX2LQ1jW3qMMSp/oy', 'Mehmet', 'tuna', 1, 0, '1562155648', '', '5.177.141.122', '435', 'rstj', '', '2019-07-05'),
-(45435, 'new@hotmail.com', '$2y$10$zMongk/LSiBCqTrljrR0UundTrc/sEwnkmZx1iQ63pD8/5Oljd4BW', 'enes', 'tuna', 1, 1, '1557167025', '', '::1', '5307280376', 'ellek kasabası şefhvsefvseoıg', 'Yeni adres postman den eklendi', ''),
-(46285, 'budakyemlihan@gmail.com', '$2y$10$NuV87PoZp9RcPsqr7eBI3usjOBF/7vTJiRFSP/IuUUgsZZFhfmXZO', 'Hasan', 'Budak', 1, 1, '1563602334', '', '78.190.69.191', '5522284800', 'Ghjjjj', '', '2019-07-20'),
-(46685, 'demo6@hotmail.com', '$2y$10$yaVJcZedgFTJDZdaKDNUaebrSoemp20Jsj3xD8/81iI/LsZT3RfCW', '123', '123', 1, 0, '1562155704', '', '5.177.141.122', '123', '123', '', '2019-07-06'),
-(48660, 'yasarbudak@hotmail.com.tr', '$2y$10$e0wT5np3ECx/giGppo38AOXaDU2W.AHcnEOnrGx66ZjFqb7JkAUg.', 'aa', 'aa', 1, 1, '1563225086', '', '31.223.58.246', '12345678', 'dasfa', '', '1986-02-11'),
-(50086, 'kimlik@hotmail.com', '$2y$10$cHbAMnoZyXpkaUf.vW2wQuEfi06PBaoSwPepdG8yGDaMThtZ/n07u', 'mahmut', 'turan cerrah', 1, 0, '1563054751', '', '5.177.190.144', '124125', 'qwr weq we ewt', '', '2019-07-05'),
-(55065, 'bbbb@werg.erhrherhe', '$2y$10$TfBEK9otTqgT/WcnTlKBRuo4A2al1gooF.aczpFpUpQ0PDifOopQ6', '123', '123', 1, 1, '1562251001', '', '151.135.173.84', '123', '123', '', '2019-07-05'),
-(55858, 'budakyemlihan@gmail.com', '$2y$10$QBriLCjCPjwtAgYmfsMFKOn9I9SYqm4zXklpPbosU6WyggTwuTNe.', 'ahmet', 'cemil', 1, 0, '1563735340', '', '78.190.69.191', '5522284800', 'bey mah. son durak no:23 seyhan ADANA', '', '1974-05-09'),
-(55914, 'karalar@hotmail.com', '$2y$10$c/aX9lZx2P5ckicK4xcmp.LfbVZAM.hjEXrGqRethRZB6j9e97kJ6', 'Adamlar', 'yokki', 1, 0, '1563054896', '', '5.177.190.144', '5435292117', 'asdasdasd', '', '2019-07-20'),
-(56359, 'info@aysoft.com', '$2y$10$wGgvR6upgLZ3lUdc11JuSeLVB89Fr7mSy0fxSwckBoQU5huuomNi6', 'ebru', 'toprak', 1, 1, '1563630859', '', '37.154.75.232', '5522284800', 'hadırlı mah. adana/seyhan', '', '1974-05-09'),
-(56554, 'wefwe@wsgwe.weg', '$2y$10$A/23qtdDdTly90sBJtJqneej3wSz4l9E8RASzgNiJ4Mz4Ff6WrQ/6', 'weg', 'weg', 1, 0, '1562438965', '', '151.135.173.84', '2323', 'qwfqwfwqef', '', '2019-07-12'),
-(63100, 'eweg@wg.weg', '$2y$10$QPp0RCXxtyGnSZt42jD32OYU1tZ1ga1pyWe8XuSlSr2tR1Is5PSke', 'wrgw', '2323rt', 1, 0, '1562450989', '', '151.135.173.84', '124', 'grgsgsegseg', '', '2019-07-13'),
-(63149, 'budakyemlihan@gmail.com', '$2y$10$bmKFH1aZLx6yiXPtipSZm.muwiQenRZk5aESEu4kAGsMhxGajIsd2', 'nermin', 'dalan', 1, 0, '1563695811', '', '78.190.69.191', '5522284800', 'mıdık hadırlı adana', '', '1974-05-09'),
-(63610, 'yemlihanbudakk@hotmail.com', '$2y$10$2ymNO0ty6hn9OUIX/LqAluhDuT3asJwqpYoHQT3tqfKF9j7.dFFFa', 'Yemlihan', ',Budak', 1, 0, '1562450816', '', '78.190.77.27', '543654987', 'asdsadsadasdas', '', '2019-07-06'),
-(64430, 'demqwrwqro@hotmail.com', '$2y$10$my21TSjoD4UOsr7rv8/W0.NOEbUQX4j9VfpHv1blBCh9.Ev26Lz/G', 'werfwerwetr', 'wetwet', 1, 0, '1562248173', '', '151.135.173.84', '123', 'wqfwqegf', '', '2019-07-03'),
-(65027, 'info@ay-soft.com', '$2y$10$kiMBu23RdMy.hiGniOsjfehtIfDD/BXRhezZ4RzAqGRHNZwoElCbO', 'metin', 'toprak', 1, 1, '1563619069', '', '95.108.225.215', '5522284800', 'akkapı adana', '', '1974-05-09'),
-(66015, 'lwnbetw@erhe.erh', '$2y$10$B/ppmm7/ypPpVSw/1q2o7OoYM6eYzGE4e32FtIW8G0ADRTvvsOiK.', '123', '12312', 1, 0, '1562447998', '', '151.135.173.84', '123', 'wrepk nerol e', '', '2019-07-04'),
-(69962, 'budakyemlihan@gmail.com', '$2y$10$5iACum5MYN8Bu0do7PURLOir4X4GTNh7XCI.KgTG5NPZVDgbgR52i', 'ahmet toprak', 'budak', 1, 0, '1563638999', '', '78.190.64.36', '5522284800', 'ghhhhhhhhhhhhhhhhhhhhhhh', '', '1974-05-09'),
-(73864, 'info@ay-soft.com', '$2y$10$S79mod1E2Pcl.IIdixyHveW6Ef3QidoCTVybhD/cxLQdbKh6TG/SK', 'ali', 'can', 1, 0, '1562645669', '', '37.154.42.169', '5522284800', 'şiiiiiiiiiiiiiiiiiiiiiiiiiiiii', '', '1974-05-09'),
-(75451, 'demotuna7@hotmial.com', '$2y$10$g5KEII4HpTZo0VO3nL9UbO0mPh6SpHFKICPwBWhfZJVQk3wdvcg8K', 'mehmet', 'tuna', 1, 0, '1562233357', '', '151.135.173.84', '1245', 'srethyurtyu', '', '2019-07-06'),
-(79027, 'budakyemlihan@gmail.com', '$2y$10$iTDu0ScvmILru65tmQgJQuXb6YdUJ6AvrsnUaZa7DOZ6dS0IogCIq', 'Yemlihan', 'Budak', 1, 0, '1563814904', '', '37.154.45.187', '5522284800', 'Bey Mah Akkapi', '', '0'),
-(81095, 'aaaaaaa@hotmail.com', '$2y$10$K73BZwL0xxzQR63dgnFJBegYoDobGWgp4eNsq3Vnjl.7OGJw.a/WK', 'aaaaa', 'aaaaa', 1, 0, '1562250358', '', '151.135.173.84', '000000000', 'segsegseg', '', '2019-07-05'),
-(83648, 'tunademo3@htomail.com', '$2y$10$JNftBgXfBISIZYmFC9g7c.Ug1eVGxuxZN2uDl93a4vrRxJXVBT4xy', 'Mehmet', 'Tuna', 1, 0, '1562153742', '', '5.177.141.122', '3465', 'wetwet', '', '2019-07-06'),
-(86227, 'mehmet_tmdmdmuna_anadolu@hotmail.com', '$2y$10$R2Z6wed4v0YCHFCJhMikA.izHzP.uzpSWI8Ryw9pBZV4vvyg3MOtq', 'Deneme', 'Sayfası', 1, 1, '1563145020', '', '5.46.5.201', '373737', 'Kdmdnsk', '', '2019-07-15'),
-(86541, 'admin@hotmail.com', '$2y$10$n4q9S5Gpiv.XIDZTFvoJk.NL2bIPMN944ucv6u4RVKPNX8Av/3ERa', 'enes', 'tuna', 1, 1, '1557076972', '', '::1', '5307280376', 'ellek kasabası', '', ''),
-(87087, 'tunademo4@htomail.com', '$2y$10$xG562FGu7c/vJ.yxTOj.Je/AXNyT62JAnBGZxgt0gBkhyoblx850K', 'mehmet', 'tuna', 1, 0, '1562154469', '', '5.177.141.122', '235', 'wqetrwet', '', '42354-03-31'),
-(89015, 'shshs@hshhsh.com', '$2y$10$.KpU5cJZeNsq6fZ44BQvO./rBurXlY9igz/AgDNybRL3rXDoHnY3m', 'Djdjdj', 'Djdjdj', 1, 0, '1563054926', '', '46.106.143.194', '312846768', 'Bsjsiwhvsusu', '', '2019-07-27'),
-(92930, 'tunam8638@gmail.com', '$2y$10$smdX6hlK9.GMV0E8oMq9key/6kXV3evAMHn.9cEFlcaDKz6lGoPGG', 'Mehmet', 'tuna', 1, 1, '1563189192', '', '5.46.5.201', '5201452014', 'OSmnaiye', '', '1999-05-23'),
-(93425, 'yetki11@hotmail.com', '$2y$10$n1fgD75Rl2HLjMcpU984ROJKUgZl0S7kJLD29aCxTYfPaWSJnEkgS', 'easdasd', 'sadasd', 1, 0, '1563799061', '', '193.140.8.26', '5435292117', 'sadasdadasd', '', '0'),
-(94193, 'thebullchaos@gmail.com', '$2y$10$jSlw54Ig8TeE74W0Kc2oRe3cxEoVMKjAvUhdbiLPli2XValKw3Bmq', 'yasar', 'budak', 1, 1, '1563107876', '', '31.223.58.246', '123456789', 'asadad', '', '2010-05-11'),
-(97779, 'tuna2demo@hotmail.com', '$2y$10$VEsuGnM5foZ8ZGyBXQSehOkp5Sw00tmwfOvGTJr8ImatHzFcvnM0e', 'Mehmet', 'tuna', 1, 0, '1562153523', '', '5.177.141.122', '2352345', 'wewetwet', '', '2019-07-06');
+(25, 'new@hotmail.com', '$2y$10$Flp4Q3HLpeVRZSKNLIRtJ.LC0V6wdPoUgHE3wrF1Cqj5inP31dANm', 'mehmet', 'tuna', 1, 1, '1564574416', '', '::1', '234233', 'wqerfwegtwet', NULL, '0');
 
 -- --------------------------------------------------------
 
@@ -580,14 +545,24 @@ ALTER TABLE `site`
 -- Tablo için indeksler `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`,`email`);
+  ADD PRIMARY KEY (`email`),
+  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Tablo için indeksler `worker`
 --
 ALTER TABLE `worker`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Dökümü yapılmış tablolar için AUTO_INCREMENT değeri
+--
+
+--
+-- Tablo için AUTO_INCREMENT değeri `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Dökümü yapılmış tablolar için kısıtlamalar
