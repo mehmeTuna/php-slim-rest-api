@@ -18,7 +18,7 @@ if(!isset($_SESSION["user"])){
  $count = 0 ;
 
  if(isset($_GET) && isset($_GET["id"]))
-  $id = $_GET["id"];
+  $id = strip_tags( htmlspecialchars(trim($_GET["id"])) );
  else {
    echo json_encode( ['status'=>'parametre haatasi'], JSON_UNESCAPED_UNICODE);
    exit;

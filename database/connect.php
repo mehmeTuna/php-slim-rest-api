@@ -11,10 +11,10 @@ use PDOException;
 
 class Database
 {
-    private $servername = "localhost:3306";
-    private $username = "root";
-    private $password = "";
-    private $dbName = "food_sale";
+    protected $servername = "localhost:3306";
+    protected $username = "root";
+    protected $password = "";
+    protected $dbName = "food_sale";
     public  $conn;
 
     /**

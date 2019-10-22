@@ -18,7 +18,7 @@ class sepetProduct {
 
     public function run($data){
         $product = array();
-        $id = strip_tags (trim ( $data["id"] )) ;
+        $id = strip_tags ( htmlspecialchars(trim ( $data["id"] )) ) ;
 
         if(isset($data["count"]))
             $count =(is_numeric (trim($data["count"]))) ? ($data["count"] > 0) ? $data["count"] : 1 : 1 ;

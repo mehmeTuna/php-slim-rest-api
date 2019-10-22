@@ -17,7 +17,8 @@ use Admin\Data;
 
 $api = new Data();
 
-$getData = json_decode ( file_get_contents ( "php://input" ) , true );
+
+$getData= json_decode ( file_get_contents ( "php://input" ) , true );
 
 
 if(isset($_GET["api"])){
@@ -75,7 +76,7 @@ if(isset($_GET["api"])){
 
         //yeni urun ekleme
         case 'newProduct' :
-            echo $api->newProduct ( $getData );
+            echo $api->newProduct ( isset($_POST["product"]) ?  json_decode($_POST["product"],true): "" );
             break;
 
         //tum kuryeleri listeleme
@@ -137,7 +138,7 @@ if(isset($_GET["api"])){
 
 
         case "newcategory":
-            echo $api->newCategory ( $getData );
+            echo $api->newCategory ( isset($_POST["category"]) ?  json_decode($_POST["category"],true): ""  );
             break;
 
         case "delcategory":
@@ -175,6 +176,10 @@ if(isset($_GET["api"])){
 
         case "getworker":
             echo $api->getWorker ();
+            break;
+
+        case 'updateProduct':
+            echo $api->updateProduct($getData);
             break;
 
 

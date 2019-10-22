@@ -95,7 +95,7 @@ class create {
     }
 }
 
-
+/*
 $deneme = new create();
 $deneme->Name('localhost');
 $deneme->Description('site aciklama ksimi demo 2 ');
@@ -108,3 +108,4 @@ $deneme->Lisans(1);
 
 echo $deneme->Control();
 print_r($deneme->Run());
+*/

@@ -62,7 +62,7 @@ if(!isset($_SESSION["operator"])){
 
     if($_SESSION['operator']['authority'] == Authority::write || $_SESSION['operator']['authority'] == Authority::read)
        echo json_encode($result , JSON_UNESCAPED_UNICODE);
-    else echo json_encode(['status'=>'yetkisiz islem']);
+    else echo json_encode(['status'=>'Yetkisiz İşlem!']);
       exit ;
       
     }catch(PDOException $e){

@@ -19,11 +19,12 @@ $data = new Data();
 //BringOrderdetay fonksiyonu tam değil düzenlenmesi lazım çalışmaz şu an
 $res =   $data->BringOrderdetay($id);
 
+
 $note = isset( $res[ 'content' ] ) && $res[ 'content' ] != '' ? 'Musteri Notu: ' . $res[ 'content' ] : '';
 
 $orderContent = '';
 if( isset($res) ){
-                $orderContent .= '<tr><td>' . $res .'    </td></tr>';
+                $orderContent .= '<tr><td>' . $res['order'] .'    </td></tr>';
 }
 ?>
 

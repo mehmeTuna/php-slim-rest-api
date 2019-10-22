@@ -65,7 +65,8 @@ try{
     if($result->rowCount ()){
         foreach ($result as $val){
             $OrderDetay["username"] = $val["firstname"] . " " . $val["lastname"];
-            $OrderDetay["adress"] = ($orderAdress=="adress") ? $val["adress"] : ($val["adress_2"] != null && $val["adress_2"] != "" ) ? $val["adress_2"] : $val["adress"];
+            $OrderDetay["adress"] =isset($val[$orderAdress]) ? json_decode($val[$orderAdress], true) : json_decode($val["adress"], true) ;
+            $OrderDetay["adress"]= $OrderDetay["adress"]["content"] ;
             $OrderDetay["phone"] = $val["phone"];
         }
     }else {
@@ -99,6 +100,8 @@ foreach ($OrderDetay["orders"] as $value){
     $productId= $value["id"];//ürün idsi
     $orderCount = $value["count"];//ürün adeti
     $orderName = $value["name"];//ürün adı
+    $orderPrice= $value["price"];
+
     $orderFeatures= isset($value["features"]) ? $value["features"] : "";//[count=> , items[0=> , 1=> ]]//ürün detayları
     $getDataysql = 'select * from feature where id=(select features from products where id="'.$productId.'")';
                    
@@ -107,20 +110,34 @@ foreach ($OrderDetay["orders"] as $value){
         $query->execute();
         $resultFeaturesDetay= $query->fetchAll();
         $itemFeatures= json_decode ($resultFeaturesDetay[0]["content"], true);
-        if($itemFeatures == false) throw new Exception("detay kısmında hata var");
+        if($itemFeatures == false){
+            $orderTable .="<tr><td class='table-order-name'>{$orderName}</td>";
+            $orderTable.= "<td style='padding-right:1mm'>{$value["count"]}</td>
+            <td>{$value['price']}tl</td>
+            </tr>";
+            continue;
+        };
     }catch (PDOException $e){   }
 
 
 
     foreach($orderFeatures as $resultvalue){
-        $resultOrderName=$orderName."( ";
+        $resultOrderName.= $orderName;
+        $itemsCounter= false;
+        $itemOption= "";
         foreach($resultvalue["items"] as $items){
             foreach($itemFeatures as $itemResult){
-                if($itemResult["id"] == $items)
-                 $resultOrderName.= $itemResult["content"]." ,";
+                if($itemResult["id"] == $items){
+                    $itemsCounter= true;
+                    $itemOption.= $itemResult["content"]." ,";
+                }
             }
         }
-        $resultOrderName.=")";
+        if($itemsCounter==true){
+            $itemOption[Strlen($itemOption)-1]= " ";
+           $resultOrderName.=" ( ".$itemOption."  ) ";
+        }
+        $value['price']= ($itemsCounter) ? round($value['price']/$resultvalue["count"], 2) : $orderPrice ;
         $orderTable .="<tr><td class='table-order-name'>{$resultOrderName}</td>";
         $orderTable.= "<td style='padding-right:1mm'>{$resultvalue["count"]}</td>
         <td>{$value['price']}tl</td>

@@ -21,7 +21,7 @@ if(!isset($_SESSION["operator"])){
 
 
  if($_SESSION['operator']['authority'] == Authority::disabled ){
-     echo json_encode(['status'=>'yetkisiz islem']);
+     echo json_encode(['status'=>'Yetkisiz İşlem!']);
      exit;
  }
 

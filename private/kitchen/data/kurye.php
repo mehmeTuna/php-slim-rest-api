@@ -3,7 +3,7 @@ session_start();
 
 
 if ( !isset( $_SESSION[ "mutfak" ] ) || $_SESSION[ 'mutfak' ][ 'authority' ] != '2' ) {
-    echo json_encode (['status'=>'yetkisiz islem'] , JSON_UNESCAPED_UNICODE) ;
+    echo json_encode (['status'=>'Yetkisiz İşlem!'] , JSON_UNESCAPED_UNICODE) ;
     exit;
 }
 

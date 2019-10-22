@@ -508,7 +508,7 @@ function create_user(obj ){
         let order = JSON.parse( obj.orders  );
 
     obj.date = HMtime( obj.date );
-    firstOrder = obj.first_order == 1 ? '<i class="fas fa-check fa-2x text-info"> </i>': '<i class="fas fa-times fa-2x text-danger"> </i>' ;
+    firstOrder = obj.first_order == 0 ? '<i class="fas fa-check fa-2x text-info"> </i>': '<i class="fas fa-times fa-2x text-danger"> </i>' ;
 
   return  '<tr id="'+obj.order_id+'" >'+
           '<td onclick="edit_order_detay('+obj.order_id+',\''+obj.username+'\',\''+obj.tutar+'\',\''+obj.phone+'\',\''+obj.adres+'\',\''+obj.orderType+'\')"><i class="fas fa-pencil-alt"></i></td>'+

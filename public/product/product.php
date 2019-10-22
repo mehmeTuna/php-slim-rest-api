@@ -20,7 +20,7 @@ use Exception;
 
 
 if(isset($_GET["productName"]) && strlen(trim($_GET["productName"])) >=3){
-  $name = $_GET["productName"] ;
+  $name = htmlspecialchars($_GET["productName"]) ;
   $details = new details();
   $result = $details->name($name)->run();
   echo json_encode($result , JSON_UNESCAPED_UNICODE);

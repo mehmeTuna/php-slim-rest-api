@@ -10,8 +10,11 @@ require_once __DIR__ . '/../product/create.php';
 require_once __DIR__ . '/../../Ip/Ip.php';
 require_once __DIR__ . '/../../time/timestamp.php';
 
+require_once __DIR__. "/img.php";
+
 use formattimestamp\Ttime;
 use Ip\ip ;
+use img\SimpleImage;
 
 
 //trait
@@ -36,6 +39,30 @@ class Data
     {
         $this->db = new Database();
         $this->db = $this->db->conn;
+    }
+
+    //return this day clock 00.00
+    //format timestamp
+    public function getTimeDayStartTime(){
+        return mktime ( 0 , 0 , 0 , ltrim ( date ( 'm' ) , 0 ) , ltrim ( date ( 'd' ) , 0 ) , date ( 'Y' ) );
+    }
+
+    //return this week clock 00.00
+    //format timestamp
+    public function getTimeWeektartTime(){
+        return mktime ( 0 , 0 , 0 , ltrim ( date ( 'm' ) , 0 ) , date ( 'd' ,strtotime("-".(date('N')-1)." days") ) ,date ( 'Y' ) );
+    }
+
+    //return this month clock 00.00
+    //format timestamp
+    public function getTimeMonthThisTime(){
+        return mktime ( 0 , 0 , 0 , ltrim ( date ( 'm' ) , 0 ) , 1 , date ( 'Y' ) );
+    }
+
+    //return this year clock 00.00
+    //format timestamp
+    public function getTimeYearThisTime(){
+        return mktime ( 0 , 0 , 0 , 1, 1 , date ( 'Y' ) );
     }
 
 
@@ -266,7 +293,7 @@ class Data
                 foreach ( $query as $key => $value ) {
                   
                     if( isset( $value["img"] ))
-                     $value["img"] = $url .  $value["img"];
+                     $value["img"] =  $value["img"];
         
                     $result[ $key ] = $value;
                 }
@@ -284,7 +311,7 @@ class Data
     public
     function getThisDayOrder ()
     {
-        $createMkTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , ltrim ( date ( 'd' ) , 0 ) , date ( 'Y' ) );
+        $createMkTime = $this->getTimeDayStartTime();
 
         $add = "select * from {$this->order} where m_status=5 and m_date >=" . $createMkTime;
         $result = array ( 'orderAmount' => 0 , 'count' => 0 , 'status' => array ( 0 => 0 , 1 => 0 , 2 => 0 ) , 'orderStatus' => array () );
@@ -316,7 +343,7 @@ class Data
     public
     function getThisMonthOrder ()
     {
-        $createMkTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , 1 , date ( 'Y' ) );
+        $createMkTime = $this->getTimeMonthThisTime();
 
         $add = "select * from {$this->order} where m_status=5 and m_date >=" . $createMkTime;
         $result = array ( 'orderAmount' => 0 , 'count' => 0 , 'status' => array ( 0 => 0 , 1 => 0 , 2 => 0 ) , 'orderStatus' => array () );
@@ -348,7 +375,7 @@ class Data
     public
     function getThisDayPayment ()
     {
-        $createMkTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , ltrim ( date ( 'd' ) , 0 ) , date ( 'Y' ) );
+        $createMkTime = $this->getTimeDayStartTime();
 
         $add = "select * from {$this->order} where m_status=5 and m_date >=" . $createMkTime;
         $result = array ( 'kapidaNakit' => 0 , 'kapidaKartla' => 0 , 'krediKarti' => 0 );
@@ -383,7 +410,7 @@ class Data
     public
     function getThisMonthPayment ()
     {
-        $createMkTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , 1 , date ( 'Y' ) );
+        $createMkTime = $this->getTimeDayStartTime();
 
         $add = "select * from {$this->order} where m_status=5 and m_date >=" . $createMkTime;
         $result = array ( 'kapidaNakit' => 0 , 'kapidaKartla' => 0 , 'krediKarti' => 0 );
@@ -419,7 +446,7 @@ class Data
     function thisDayiptalOrder ()
     {
 
-        $createMkTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , ltrim ( date ( 'd' ) , 0 ) , date ( 'Y' ) );
+        $createMkTime = $this->getTimeDayStartTime();
 
         $add = "select count(*) from {$this->order} where m_date >=" . $createMkTime . ' and  m_status=2';
         $result = array ( 'iptalCount' => 0 );
@@ -445,7 +472,7 @@ class Data
     public
     function thisMonthiptalOrder ()
     {
-        $createMkTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , 1 , date ( 'Y' ) );
+        $createMkTime = $this->getTimeMonthThisTime();
 
         $add = "select count(*) from {$this->order} where m_date >=" . $createMkTime . ' and  m_status=2';
         $result = array ( 'iptalCount' => 0 );
@@ -471,7 +498,7 @@ class Data
     public
     function thisDaymany ()
     {
-        $createMkTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , ltrim ( date ( 'd' ) , 0 ) , date ( 'Y' ) );
+        $createMkTime =  $this->getTimeDayStartTime();
 
         $add = "select sum(order_amount) as toplam from {$this->order} where m_status=5 and m_date >=" . $createMkTime;
         $result = array ( 'toplam' => 0 );
@@ -497,7 +524,7 @@ class Data
     public
     function thisMonthmany ()
     {
-        $createMkTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , 1 , date ( 'Y' ) );
+        $createMkTime =  $this->getTimeMonthThisTime();
 
         $add = "select sum(order_amount) as toplam from {$this->order} where m_status=5 and m_date >=" . $createMkTime;
         $result = array ( 'toplam' => 0 );
@@ -524,11 +551,11 @@ class Data
     function rezervasyonThisCount ( $opt )
     {
         if ( $opt == 'day' )
-            $createMkTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , ltrim ( date ( 'd' ) , 0 ) , date ( 'Y' ) );
+            $createMkTime =  $this->getTimeDayStartTime();
         if ( $opt == 'month' )
-            $createMkTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , 1 , date ( 'Y' ) );
+            $createMkTime = $this->getTimeMonthThisTime();
         if ( $opt == 'year' )
-            $createMkTime = mktime ( 0 , 1 , 0 , 1 , 1 , date ( 'Y' ) );
+            $createMkTime = $this->getTimeYearThisTime();
 
         $add = "select  count(*) as toplam   from {$this->RezervasyonTable} where time >=" . $createMkTime;
 
@@ -551,7 +578,7 @@ class Data
     function rezervasyonThisDay ()
     {
 
-        $createMkTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , ltrim ( date ( 'd' ) , 0 ) , date ( 'Y' ) );
+        $createMkTime = $this->getTimeDayStartTime();
 
         $add = "select  m_status,kisi_sayisi  from {$this->RezervasyonTable} where time >=" . $createMkTime;
         $result = array ( 'toplam' => $this->rezervasyonThisCount ( 'day' ) , 'wait' => 0 , 'ok' => 0 , 'red' => 0 , 'usercount' => 0 );
@@ -586,7 +613,7 @@ class Data
     public
     function rezervasyonThisMonth ()
     {
-        $createMkTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , 1 , date ( 'Y' ) );
+        $createMkTime = $this->getTimeMonthThisTime();
 
         $add = "select  m_status,kisi_sayisi  from {$this->RezervasyonTable} where time >=" . $createMkTime;
         $result = array ( 'toplam' => $this->rezervasyonThisCount ( 'month' ) , 'wait' => 0 , 'ok' => 0 , 'red' => 0 , 'usercount' => 0 );
@@ -619,7 +646,7 @@ class Data
     public
     function rezervasyonThisYear ()
     {
-        $createMkTime = mktime ( 0 , 1 , 0 , 1 , 1 , date ( 'Y' ) );
+        $createMkTime = $this->getTimeYearThisTime();
 
         $add = "select  m_status,kisi_sayisi  from {$this->RezervasyonTable} where time >=" . $createMkTime;
         $result = array ( 'toplam' => $this->rezervasyonThisCount ( 'year' ) , 'wait' => 0 , 'ok' => 0 , 'red' => 0 , 'usercount' => 0 );
@@ -700,7 +727,8 @@ class Data
                         'live' => $value[ 'live' ] ,
                         'cardText' => $value[ 'card_text' ] ,
                         'stores' => $value[ 'stores' ],
-                        "options"=>$option
+                        "options"=>$option,
+                        "img"=>$value["img"]
                     ]
                 );
             }
@@ -715,13 +743,41 @@ class Data
     public
     function newProduct ( $data )
     {
-        if ( $data == null )
+        if ( $data == null || $data=="" )
             return json_encode ( 'data yok' );
 
         $item = new Create();
         $item->add ( $data );
 
         return json_encode ($item->run() , JSON_UNESCAPED_UNICODE);
+    }
+
+    public
+    function updateProduct ( $data= null )
+    {
+        if ( $data == null || $data=="" )
+            return json_encode ( 'data yok' );
+
+        $price= strip_tags(trim($data["price"]));
+        $id= strip_tags(trim($data["id"]));
+
+
+        $result = [
+            "price"=>$price,
+            'id'=>$id
+        
+        ];
+
+        $updateDataQuery = "update  {$this->product} set price=:price where id=:id";
+
+        try {
+            $statement = $this->db->prepare ( $updateDataQuery );
+            $statement->execute ( $result );
+            return json_encode ( [ 'status' => 'ok' ] , JSON_UNESCAPED_UNICODE );
+
+        } catch ( PDOException $e ) {
+            return json_encode ( [ 'status' => 'kaydetme sorunu' ] , JSON_UNESCAPED_UNICODE );
+        }
     }
 
     public
@@ -781,7 +837,6 @@ class Data
     public
     function newKurye ( $data )
     {
-        $data[ 'id' ] = rand ( 1000 , 100000 );
         $data[ 'username' ] = strip_tags ( trim ( $data[ 'username' ] ) );
         $data[ 'firstname' ] = strip_tags ( trim ( $data[ 'firstname' ] ) );
         $data[ 'lastname' ] = strip_tags ( trim ( $data[ 'lastname' ] ) );
@@ -793,7 +848,7 @@ class Data
         $time = new Ttime();
 
         $data[ 'date' ] = $time->gettime ();
-        $worker = 'insert into kurye (firstname,lastname,date,username,password,id) values (:firstname,:lastname,:date,:username,:password,:id)';
+        $worker = 'insert into kurye (firstname,lastname,date,username,password) values (:firstname,:lastname,:date,:username,:password)';
 
         try {
             $statement = $this->db->prepare ( $worker );
@@ -827,13 +882,18 @@ class Data
     public
     function delproduct ( $id )
     {
+        $id= strip_tags ( trim ( $id ) );
         if ( $id == '' )
             return json_encode ( [ 'status' => 'gecerli id giriniz' ] , JSON_UNESCAPED_UNICODE );
+        $productOptionDeleteQuery= "DELETE FROM feature WHERE id=(SELECT features FROM products WHERE id=? )";
+        $productDeleteQuery="DELETE FROM products WHERE id=?";
 
-        $sql = 'delete from products where id="' . strip_tags ( trim ( $id ) ) . '"';
         try {
-            $statement = $this->db->prepare ( $sql );
-            $statement->execute ();
+            $option = $this->db->prepare ( $productOptionDeleteQuery );
+            $option->execute ([$id]);
+
+            $statement = $this->db->prepare ( $productDeleteQuery );
+            $statement->execute ([$id]);
             return json_encode ( [ 'status' => 'ok' ] , JSON_UNESCAPED_UNICODE );
 
         } catch ( PDOException $e ) {
@@ -847,18 +907,17 @@ class Data
         if($val == [])
             return json_encode (["status"=>"gecerli deger giriniz"] , JSON_UNESCAPED_UNICODE) ;
 
-        $imgUrl = $this->imgUpload (isset( $val["img"] ) ?  strip_tags (trim ( $val["img"] ) ) : "") ;
+        $imgUrl = $this->imgUpload ( );
 
         if($imgUrl == false )
             return json_encode (["status"=>"Görsel yüklemek zorunludur"] , JSON_UNESCAPED_UNICODE) ;
 
         $result = [
-            "id"=>rand(100,1000),
             "name"=>strip_tags (trim ( isset($val["name"]) ? $val["name"] : "" )),
             "img"=> $imgUrl
         ];
 
-        $query = "insert into {$this->category} (id,name,img) values (:id,:name,:img)";
+        $query = "insert into {$this->category} (name,img) values (:name,:img)";
 
         try {
             $statement = $this->db->prepare ( $query );
@@ -870,14 +929,15 @@ class Data
         }
     }
 
-    private function imgUpload($fileName){
+    private function imgUpload($fileName=""){
+        $fileName= "image";
         //Check if the file is well uploaded
         if($_FILES[$fileName]['error'] > 0) { return 'Error during uploading, try again'; }
 
         //We won't use $_FILES['file']['type'] to check the file extension for security purpose
 
         //Set up valid image extensions
-        $extsAllowed = array( 'jpg', 'jpeg', 'png', 'gif' );
+        $extsAllowed = array( 'jpg', 'jpeg', 'png' );
 
         //Extract extention from uploaded file
         //substr return ".jpg"
@@ -894,11 +954,9 @@ class Data
             $name = __DIR__ ."/../../../img/" . $randname;
             $result = move_uploaded_file($_FILES[$fileName]['tmp_name'], $name);
 
-            if($result){
-                return $randname ;
-            }else{
-                return false;
-            }
+
+                return "img/".$randname ;
+
         } else {
             return false;
         }
@@ -959,17 +1017,14 @@ class Data
      */
     public
      function  updateCalisan($val = []){
-        $Gyetki = [0,1,2];
+        $Gyetki = ["0","1","2"];
 
-        if($val == [] || $val["id"] == "" || $val["authority"]== "" )
-            return json_encode (["status"=>"gecerli deger giriniz"] , JSON_UNESCAPED_UNICODE);
-
-        if(!in_array(strip_tags (trim ($val["id"])) , $Gyetki))
-            return json_encode (["status"=>"gecerli yetkilendirme giriniz"] , JSON_UNESCAPED_UNICODE);
+        $id= strip_tags(trim($val["id"]));
+        $yetki= strip_tags(trim($val["authority"]));
 
         $result = [
-            "authority"=>strip_tags (trim ( $val["authority"])),
-            "id"=>strip_tags (trim ($val["id"]))
+            "authority"=>$yetki,
+            "id"=>$id
         ];
 
         $query = "update  {$this->worker} set authority=:authority where id=:id";
@@ -1003,13 +1058,13 @@ class Data
     public
     function bringGetOrderDetay($opt = "day"){
         if($opt == "year")
-            $createMkTime = mktime ( 0 , 0 , 0 , 1, 1 , date ( 'Y' ) );
+            $createMkTime =  $this->getTimeYearThisTime();
         elseif ($opt == "month")
-            $createMkTime = mktime ( 0 , 0 , 0 , date('m') , 1 , date ( 'Y' ) );
+            $createMkTime =  $this->getTimeMonthThisTime();
         elseif ($opt == "day")
-            $createMkTime = mktime ( 0 , 0 , 0 , date ( 'm' ) , ltrim ( date ( 'd' ) , 0 ) , date ( 'Y' ) );
+            $createMkTime = $this->getTimeDayStartTime();
         elseif($opt == "week")
-            $createMkTime = mktime ( 0 , 0 , 0 , ltrim ( date ( 'm' ) , 0 ) , date ( 'd' ,strtotime("-".date('N')." days") ) ,date ( 'Y' ) );
+            $createMkTime = $this->getTimeWeektartTime();
 
         $add = "select orders from {$this->order} where m_status=5 and m_date >=" . $createMkTime . " ORDER BY m_date";
         $resultData = [];
@@ -1084,8 +1139,8 @@ class Data
 
 
     public
-    function __destruct ()
-    {
+    function __destruct () {
+        $this->db= null;
 
     }
 }

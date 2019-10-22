@@ -9,9 +9,9 @@ use Exception ;
 
 
 class menuproduct extends Database {
-    const getAllCategorySqlQuery = "SELECT * FROM category";
+    const getAllCategorySqlQuery = "SELECT * FROM category ORDER BY id ASC";
 
-    private $getProductSpecificCategorySqlQuery= "SELECT products.id,products.name,products.unlimited AS position ,products.card_text AS description,products.price,(SELECT name FROM category WHERE id=products.categoryId ) AS category_name,products.unlimited AS quantity,feature.content AS options FROM feature INNER JOIN products ON products.features= feature.id WHERE products.categoryId=?";
+    private $getProductSpecificCategorySqlQuery= "SELECT products.id,products.name,products.img,products.unlimited AS position ,products.card_text AS description,products.price,(SELECT name FROM category WHERE id=products.categoryId ) AS category_name,products.unlimited AS quantity,feature.content AS options FROM feature INNER JOIN products ON products.features= feature.id WHERE products.categoryId=? ORDER BY id ASC";
 
     public function __construct(){
         parent::startConnect();
@@ -20,10 +20,7 @@ class menuproduct extends Database {
 
    public function run(){
        $categorys = $this->allCategory();
-     
        $item = array();
-       $menuItems = array();
-
        foreach($categorys as $result){
            $menuItems = [];
            $product= $this->productSpecificCategory($result["id"]);
@@ -36,7 +33,8 @@ class menuproduct extends Database {
                     "category_name"=>$value["category_name"],
                     "quantity"=>$value["quantity"],
                     "options"=>json_decode($value["options"], true),
-                    "description"=>$value["description"]
+                    "description"=>$value["description"],
+                    "img"=>$value["img"]
                 ]);
             }
            array_push($item,[//bir menüye ait detaylar
@@ -47,7 +45,6 @@ class menuproduct extends Database {
             "menuItems"=>$menuItems
            ]);
        }
-
     return $item ;
     }
 

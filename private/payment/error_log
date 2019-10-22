@@ -1,0 +1,7 @@
+[07-Oct-2019 23:03:20 Europe/Istanbul] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'orders' cannot be null in /home/ciqaysof/public_html/private/orders/OrdersDb.php:46
+Stack trace:
+#0 /home/ciqaysof/public_html/private/orders/OrdersDb.php(46): PDOStatement->execute(Array)
+#1 /home/ciqaysof/public_html/private/payment/payment.php(86): Order\Add\Db\Add->run()
+#2 /home/ciqaysof/public_html/private/payment/payment.php(125): Payment->run('', '')
+#3 {main}
+  thrown in /home/ciqaysof/public_html/private/orders/OrdersDb.php on line 46

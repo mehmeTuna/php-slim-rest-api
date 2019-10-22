@@ -22,7 +22,7 @@ if(!isset($_SESSION["operator"])){
 }
 
 if($_SESSION['operator']['authority'] == Authority::disabled){
-    echo json_encode(['status'=>'yetkisiz islem']);
+    echo json_encode(['status'=>'Yetkisiz İşlem!']);
     exit;
 }
 
@@ -36,7 +36,7 @@ if(isset( $_GET['search']) && $_GET['search'] == 'ok'){
 
     if(isset($_GET["order"])  ){
 
-        $tip= strip_tags($_GET['order']) ;
+        $tip= strip_tags(trim($_GET['order'])) ;
 
         $thisDayTime= mktime(0,0,0 , date('n') , date('j')  , date('Y'));
 
@@ -75,7 +75,7 @@ if(isset( $_GET['search']) && $_GET['search'] == 'ok'){
                                     "tutar"=>$value["order_amount"],
                                     "date"=>date('H:i', $value["m_date"]),
                                     "orders"=>$value["orders"],
-                                    "adres"=>($value["adress"] == "adress") ? $user["adress"] : $user["adress_2"] ,
+                                    "adres"=> isset($user[$value["adress"]]) ? $user[$value["adress"]] : $user["adress"],
                                     "phone"=>$user["phone"],
                                     "first_order"=>$user["first_order"],
                                     "kurye"=>$kuryeName
@@ -162,6 +162,7 @@ if(isset($_GET["order"])  ){
 
                     if($query->rowCount()){
                         foreach ($query as $user) {
+                            $adress= isset($user[$value["adress"]]) ? json_decode($user[$value["adress"]], true) : json_decode($user["adress"], true) ;
                             array_push($order_wait , array(
                                 "orderType"=>$value["order_status"],
                                 "order_id"=>$value["order_id"],
@@ -169,7 +170,7 @@ if(isset($_GET["order"])  ){
                                 "tutar"=>$value["order_amount"],
                                 "date"=>date('H:i', $value["m_date"]),
                                 "orders"=>$value["orders"],
-                                "adres"=>($value["adress"] == "adress") ? $user["adress"] : $user["adress_2"] ,
+                                "adres"=> $adress["content"] ,
                                 "phone"=>$user["phone"],
                                 "first_order"=>$user["first_order"],
                                 "kurye"=>$kuryeName

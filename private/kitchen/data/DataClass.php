@@ -31,6 +31,8 @@ class Data
     public
     function Bringdata($val , $name)
     {
+        $val= strip_tags(trim($val));
+        $name= strip_tags(trim($name));
         $sql = 'select count(*) from order_items where m_status="' . $val . '" and m_date >="' . $this->thisDayTime . '"';
 
         try {
@@ -48,7 +50,7 @@ class Data
     function BringAllOrders($val)
     {
         $result = array();
-        $val = strip_tags ( $val );
+        $val = strip_tags ( trim($val) );
         if ( !is_numeric ( $val ) )
             return $result;
         $sql = 'select orders,user_id,m_date,order_id from order_items where m_status="' . $val . '" and m_date >="' . $this->thisDayTime . '"' . ' order by m_date asc';
@@ -88,7 +90,7 @@ class Data
     function BringSearchAllOrders($val)
     {
         $result = array();
-        $val = strip_tags ( $val );
+        $val = strip_tags ( trim($val) );
         if ( !is_numeric ( $val ) )
             return $result;
         $sql = 'select orders,user_id,m_date,order_id from order_items where order_id=' . $val . ' order by m_date asc';
@@ -130,9 +132,11 @@ class Data
     public
     function BringOrderdetay($id)
     {
+        $id= strip_tags(trim($id));
         $queryData = "";
         $itemFeatures=array ();//db opsiyonlar
         $result = array();
+        $musteriYorum='';
         $resultOrderName= ""; //features ve siparişleri ekleme
         $OrderDetailQuery = 'select icerik,orders from order_items where order_id="' . $id . '"';
 
@@ -140,7 +144,7 @@ class Data
             $query = $this->db->prepare ( $OrderDetailQuery );
             $query->execute();
             $queryData = $query->fetchAll();
-            $result[ 'content' ] = $queryData[0][ 'icerik' ];
+            $musteriYorum = $queryData[0][ 'icerik' ];
             $result[ 'orders' ] = json_decode ($queryData[0][ 'orders' ] , true);
             if($result[ 'orders' ] == false) throw new Exception("Sipariş hatası");            
         } catch ( PDOException $e ) {
@@ -156,14 +160,19 @@ class Data
                     $orderName = $value["name"];//ürün adı
                     $orderFeatures= isset($value["features"]) ? $value["features"] : "";//[count=> , items[0=> , 1=> ]]//ürün detayları
 
-                    $getDataysql = 'select * from feature where id=(select features from products where id="'.$productId.'")';
+                    $getDataysql = 'select * from feature where id=(select features from products where id=?)';
                    
                     try{
                         $query = $this->db->prepare( $getDataysql);
-                        $query->execute();
+                        $query->execute([$productId]);
                         $resultFeaturesDetay= $query->fetchAll();
+
                         $itemFeatures= json_decode ($resultFeaturesDetay[0]["content"], true);
-                        if($itemFeatures == false) throw new Exception("detay kısmında hata var");
+                        if($itemFeatures == false){
+                            $resultOrderName.= $value["count"] ." x ". $orderName ."<br>";
+                            continue;
+
+                        };
                     }catch (PDOException $e){    }
 
                     if(!is_array($orderFeatures) || count($orderFeatures)==0){
@@ -171,18 +180,27 @@ class Data
                     }
                   
                     foreach($orderFeatures as $result){
-                        $resultOrderName.=$result["count"]. " x ". $orderName." ( ";
+                        $resultOrderName.=$result["count"]. " x ". $orderName;
+                        $itemsCounter= false;
+                        $itemOption= "";
                         foreach($result["items"] as $items){
                             foreach($itemFeatures as $itemResult){
-                                if($itemResult["id"] == $items)
-                                 $resultOrderName.= $itemResult["content"]." ,";
+                                if($itemResult["id"] == $items){
+                                    $itemsCounter= true;
+                                    $itemOption.= $itemResult["content"]." ,";
+                                }
+                                 
                             }
                         }
-                        $resultOrderName.=" ) <br>";
+                        if($itemsCounter==true){
+                            $itemOption[Strlen($itemOption)-1]= " ";
+                           $resultOrderName.=" ( ".$itemOption."  ) ";
+                        }
+
+                        $resultOrderName.="<br>";
                     }
                 }
-
-        return $resultOrderName;
+        return ['order'=>$resultOrderName,'content'=>$musteriYorum];
     }
 
     public
@@ -216,6 +234,8 @@ class Data
     public
     function orderRed($id , $opt = 4)
     {
+        $id= strip_tags(trim($id));
+        $opt= strip_tags(trim($opt));
         //4 mutfak tarafindan iptal edilen siparis
         $sql = "UPDATE order_items SET m_status=? WHERE order_id=?";
 
@@ -245,6 +265,9 @@ class Data
      */
     public function orderOnay($id = '' , $kuryeId = '' , $opt = 5)
     {
+        $id= strip_tags(trim($id));
+        $kuryeId= strip_tags(trim($kuryeId));
+        $opt= strip_tags(trim($opt));
         //4 mutfak tarafindan iptal edilen siparis
         //5 mutfak tarafindan onaylanip kuryey verilen siparis
         $order_sql = "UPDATE order_items SET m_status=? WHERE order_id=?";

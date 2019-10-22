@@ -15,7 +15,7 @@ class CreateOrder {
     }
 
     public function item($val){
-          $this->add->Add("icerik" , strip_tags(trim($val)));
+          $this->add->Add("icerik" , strip_tags( trim($val)));
           return $this->add->run();
     }
 

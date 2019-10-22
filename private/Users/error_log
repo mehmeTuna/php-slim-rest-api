@@ -1,0 +1,78 @@
+[03-Jul-2019 14:35:15 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 14:35:15 Europe/Istanbul] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/ciqaysof/public_html/private/Users/Data.php:1) in /home/ciqaysof/public_html/private/cors.php on line 9
+[03-Jul-2019 14:35:15 Europe/Istanbul] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/ciqaysof/public_html/private/Users/Data.php:1) in /home/ciqaysof/public_html/private/cors.php on line 10
+[03-Jul-2019 14:35:15 Europe/Istanbul] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/ciqaysof/public_html/private/Users/Data.php:1) in /home/ciqaysof/public_html/private/cors.php on line 11
+[03-Jul-2019 14:35:18 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 14:35:18 Europe/Istanbul] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/ciqaysof/public_html/private/Users/Data.php:1) in /home/ciqaysof/public_html/private/cors.php on line 9
+[03-Jul-2019 14:35:18 Europe/Istanbul] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/ciqaysof/public_html/private/Users/Data.php:1) in /home/ciqaysof/public_html/private/cors.php on line 10
+[03-Jul-2019 14:35:18 Europe/Istanbul] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/ciqaysof/public_html/private/Users/Data.php:1) in /home/ciqaysof/public_html/private/cors.php on line 11
+[03-Jul-2019 14:35:42 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Add.php on line 3
+[03-Jul-2019 14:35:44 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 14:35:44 Europe/Istanbul] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/ciqaysof/public_html/private/Users/Data.php:1) in /home/ciqaysof/public_html/private/cors.php on line 9
+[03-Jul-2019 14:35:44 Europe/Istanbul] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/ciqaysof/public_html/private/Users/Data.php:1) in /home/ciqaysof/public_html/private/cors.php on line 10
+[03-Jul-2019 14:35:44 Europe/Istanbul] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/ciqaysof/public_html/private/Users/Data.php:1) in /home/ciqaysof/public_html/private/cors.php on line 11
+[03-Jul-2019 14:38:10 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 14:38:22 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 14:38:26 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 14:38:54 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Add.php on line 3
+[03-Jul-2019 14:38:56 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 14:41:19 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 14:41:22 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 14:41:49 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Add.php on line 3
+[03-Jul-2019 14:41:49 Europe/Istanbul] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home/ciqaysof/public_html/private/Users/Users.php on line 7
+[03-Jul-2019 14:47:49 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Add.php on line 3
+[03-Jul-2019 14:47:49 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Users.php on line 6
+[03-Jul-2019 14:47:51 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 14:49:16 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 14:49:33 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Login.php on line 5
+[03-Jul-2019 14:49:34 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 14:49:47 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 14:52:29 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 14:54:43 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 14:55:19 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Login.php on line 5
+[03-Jul-2019 14:55:20 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 14:55:44 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 14:55:57 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Login.php on line 5
+[03-Jul-2019 14:55:57 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 15:05:29 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 15:05:33 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 15:05:59 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 15:06:03 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 15:06:28 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Add.php on line 3
+[03-Jul-2019 15:06:28 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Users.php on line 6
+[03-Jul-2019 15:06:57 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 15:07:28 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Add.php on line 3
+[03-Jul-2019 15:07:28 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Users.php on line 6
+[03-Jul-2019 15:07:30 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 15:08:07 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 15:08:09 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 15:08:24 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Add.php on line 3
+[03-Jul-2019 15:08:24 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Users.php on line 6
+[03-Jul-2019 15:08:24 Europe/Istanbul] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/ciqaysof/public_html/private/Users/Add.php:1) in /home/ciqaysof/public_html/private/Users/Add.php on line 26
+[03-Jul-2019 15:08:24 Europe/Istanbul] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/ciqaysof/public_html/private/Users/Add.php:1) in /home/ciqaysof/public_html/private/Users/Add.php on line 27
+[03-Jul-2019 15:15:20 Europe/Istanbul] PHP Warning:  ini_set(): Headers already sent. You cannot change the session module's ini settings at this time in /home/ciqaysof/public_html/private/Users/Add.php on line 3
+[03-Jul-2019 15:15:20 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Add.php on line 5
+[03-Jul-2019 15:15:20 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Users.php on line 6
+[03-Jul-2019 15:15:20 Europe/Istanbul] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/ciqaysof/public_html/private/Users/Add.php:1) in /home/ciqaysof/public_html/private/Users/Add.php on line 28
+[03-Jul-2019 15:15:20 Europe/Istanbul] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/ciqaysof/public_html/private/Users/Add.php:1) in /home/ciqaysof/public_html/private/Users/Add.php on line 29
+[03-Jul-2019 15:15:28 Europe/Istanbul] PHP Warning:  ini_set(): Headers already sent. You cannot change the session module's ini settings at this time in /home/ciqaysof/public_html/private/Users/Add.php on line 3
+[03-Jul-2019 15:15:28 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Add.php on line 5
+[03-Jul-2019 15:15:28 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Users.php on line 6
+[03-Jul-2019 15:15:29 Europe/Istanbul] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/ciqaysof/public_html/private/Users/Add.php:1) in /home/ciqaysof/public_html/private/Users/Add.php on line 28
+[03-Jul-2019 15:15:29 Europe/Istanbul] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/ciqaysof/public_html/private/Users/Add.php:1) in /home/ciqaysof/public_html/private/Users/Add.php on line 29
+[03-Jul-2019 15:15:31 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 15:15:35 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 15:15:39 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Login.php on line 5
+[03-Jul-2019 15:15:39 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 15:16:31 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 15:16:59 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Login.php on line 5
+[03-Jul-2019 15:16:59 Europe/Istanbul] PHP Warning:  ini_set(): Headers already sent. You cannot change the session module's ini settings at this time in /home/ciqaysof/public_html/database/connect.php on line 5
+[03-Jul-2019 15:16:59 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 15:17:19 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 15:17:33 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Login.php on line 5
+[03-Jul-2019 15:17:33 Europe/Istanbul] PHP Warning:  ini_set(): Headers already sent. You cannot change the session module's ini settings at this time in /home/ciqaysof/public_html/database/connect.php on line 5
+[03-Jul-2019 15:17:33 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 15:18:16 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3
+[03-Jul-2019 15:18:29 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Login.php on line 5
+[03-Jul-2019 15:18:29 Europe/Istanbul] PHP Warning:  ini_set(): Headers already sent. You cannot change the session module's ini settings at this time in /home/ciqaysof/public_html/database/connect.php on line 5
+[03-Jul-2019 15:18:30 Europe/Istanbul] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/ciqaysof/public_html/private/Users/Data.php on line 3

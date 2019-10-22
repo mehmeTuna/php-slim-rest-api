@@ -1,4 +1,4 @@
-﻿Options +FollowSymLinks
+Options +FollowSymLinks
 RewriteEngine On
 RewriteBase /
 RewriteCond %{REQUEST_METHOD} OPTIONS
@@ -27,8 +27,7 @@ Header Set Access-Control-Allow-Origin *
 
 
 
-
-RewriteRule ^product$                                                     ./index.html
+RewriteRule ^hizmetler$                                                     ./index.html
 RewriteRule ^login$                                                       ./index.html
 RewriteRule ^about$                                                       ./index.html
 RewriteRule ^booking$                                                     ./index.html
@@ -37,6 +36,7 @@ RewriteRule ^home$                                                        ./inde
 RewriteRule ^contact$                                                     ./index.html
 RewriteRule ^checkout$                                                    ./index.html
 RewriteRule ^uyeol$                                                       ./index.html
+RewriteRule ^product$                                                     ./index.html
 
 
 
@@ -45,9 +45,13 @@ RewriteRule ^products$                                                  ./admin/
 RewriteRule ^kurye$                                                     ./admin/index.html
 RewriteRule ^categorys$                                                  ./admin/index.html
 RewriteRule ^addproduct$                                                ./admin/index.html
+RewriteRule ^addcategory$                                                ./admin/index.html
+
 RewriteRule ^rezervasyon$                                                ./admin/index.html
-RewriteRule ^adduser$                                                   ./admin/index.html
+RewriteRule ^adduser$                                                    ./admin/index.html
 RewriteRule ^satistakip$                                                   ./admin/index.html
+
+
 
 RewriteRule ^rezervasyon/add$                                                  ./private/rezervasyon/add.php
 
@@ -85,7 +89,7 @@ RewriteRule ^emailregister$                                                ./pri
 
 
 RewriteRule ^user/sepet/item$                                              ./private/Users/sepet.php?item=ok
-RewriteRule ^user/newAdress$                                                ./private/Users/userDataUpdate.php
+RewriteRule ^user/update$                                                ./private/Users/userDataUpdate.php
 RewriteRule ^user/sepet$                                                   ./private/Users/sepet.php
 RewriteRule ^user/login$                                                   ./private/Users/Login.php
 RewriteRule ^user/logout$                                                  ./private/Users/Logout.php
@@ -151,13 +155,19 @@ RewriteRule ^admin/api/orderDetay/year$                                     ./pr
 RewriteRule ^admin/api/orderDetay/month$                                    ./private/admin/Data/index.php?api=orderdetaymonth
 RewriteRule ^admin/api/orderDetay/week$                                     ./private/admin/Data/index.php?api=orderdetayweek
 RewriteRule ^admin/api/orderDetay/day$                                      ./private/admin/Data/index.php?api=orderdetayday
-RewriteRule ^admin/api/updatecalisan$                                       ./private/admin/Data/index.php?api=updatecalisan
+RewriteRule ^admin/api/updatecalisan$                                       ./private/admin/Data/index.php?api=updatecalisan   
+RewriteRule ^admin/api/updateProduct$                                       ./private/admin/Data/index.php?api=updateProduct
 
 RewriteRule ^admin/api/pdf$                                                 ./private/admin/pdf/index.php?api=all
 RewriteRule ^admin/api/pdf/([a-z0-9_-]+)$                                   ./private/admin/pdf/index.php?api=all
-RewriteRule ^admin/api/write/order/data$                                    ./private/admin/Data/print-product-detay-pdf.php                               
+RewriteRule ^admin/api/write/order/data$                                    ./private/admin/Data/print-product-detay-pdf.php
 
 
 RewriteRule ^admin/api/allproduct$                                         ./private/admin/Data/index.php?api=allProduct
 
-
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php72” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php72 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

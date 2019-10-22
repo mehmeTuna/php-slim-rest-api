@@ -24,7 +24,7 @@ if(!isset($_SESSION["operator"])){
 
 
  if($_SESSION['operator']['authority'] == Authority::disabled ){
-     echo json_encode(['status'=>'yetkisiz islem']);
+     echo json_encode(['status'=>'Yetkisiz İşlem!']);
      exit;
  }
 
@@ -34,7 +34,7 @@ if(!isset($_SESSION["operator"])){
     if(isset($_GET['search']) && $_GET['search'] == 'ok'){
         if(isset($_GET["ord"])  ){
 
-            $tip = strip_tags($_GET['ord']);
+            $tip = strip_tags(trim($_GET['ord']));
             $waiting= "SELECT id,time,name,e_mail,phone,kisi_sayisi,rez_date,message from rezervasyon where phone = '{$tip}' ORDER BY time ASC" ;
             $order_wait = array();
         
@@ -71,6 +71,7 @@ if(!isset($_SESSION["operator"])){
     }
 
 if(isset($_GET["ord"])  ){
+    $tip="0";
     if($_GET["ord"] == "gelen" )
     $tip = "0";
     else if($_GET["ord"] == "onay" )

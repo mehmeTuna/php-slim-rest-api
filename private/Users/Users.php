@@ -33,8 +33,8 @@ class Create {
   public function __construct(){
     
         $this->ip = (new ip)->getIp();
-        //demo
-        $this->email_verified = '1';
+
+        $this->email_verified = '1';//auto email verified
         $this->registration_date = (new Ttime)->gettime();
         $this->newuser = new Add();
   }
@@ -73,18 +73,20 @@ class Create {
       $this->newuser->add("verification_code" , $this->verification_code);
       $this->newuser->add("ip" , $this->ip);
       $this->newuser->add("phone" , $this->phone);
-      $this->newuser->add("adress" , $this->adress);
+      $this->newuser->add("adress" , json_encode(["title"=>null,"content"=>$this->adress], JSON_UNESCAPED_UNICODE));
       $this->newuser->add("birthday" , $this->birthday);
       $isCreatedUser = $this->newuser->run() ;
       if( $isCreatedUser === false ){
         return false ;
       }else{
         $_SESSION["user"] = array(
-          "id"=>$isCreatedUser,
+          "username"=>$isCreatedUser,
           "firstname"=>$this->firstname,
           "lastname"=>$this->lastname,
           "email"=>$this->email ,
-          "adress"=>$this->adress,
+          "adress"=>json_encode(["title"=>null,"content"=>$this->adress], JSON_UNESCAPED_UNICODE),
+          "adress_2"=>null,
+          "adress_3"=>null,
           "product"=> array(),
           "phone"=>$this->phone,
           "cardTotal"=>0,
@@ -102,10 +104,10 @@ class Create {
   /*basic email control*/
   private function emailControl($email = ''){
     if(strlen( trim( $email ) ) > 1 && filter_var( $email, FILTER_VALIDATE_EMAIL)){
-      return strip_tags( trim($email) );
+      return strip_tags( htmlspecialchars(trim($email)) );
     }else{
       $this->variableControl = false ;
-      return false ;
+      return "" ;
     }
   }
 
@@ -128,7 +130,7 @@ class Create {
     $_length = strlen(trim( $text ));
 
     if($_length >=1 && $_length <= $length){
-      return strip_tags( trim($text) );
+      return strip_tags( htmlspecialchars(trim($text)) );
     }else{
       $this->variableControl = false;
       return false ;
@@ -149,19 +151,8 @@ class Create {
   }
 
 
-
   public function __destruct(){
-    unset($email);
-    unset($password);
-    unset($firstname);
-    unset($lastname);
-    unset($email_verified);
-    unset($registration_date);
-    unset($verification_code);
-    unset($ip);
-    unset($phone);
-    unset($adress);
-    unset($adress_2);
+
   }
 
 } ;

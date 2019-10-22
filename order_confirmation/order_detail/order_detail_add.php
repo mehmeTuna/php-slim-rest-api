@@ -36,6 +36,10 @@ class Order {
      * @return false|string
      */
     public function run($id , $opt , $orderDetail = ''){
+      $id= strip_tags(trim($id));
+      $opt= strip_tags(trim($opt));
+      $orderDetail= strip_tags(trim($orderDetail));
+      
       $user_id = null ;
 
       if($opt == "1"){
@@ -106,11 +110,11 @@ class Order {
         $opt = 1 ; 
         if($_SESSION['operator']['authority'] == Authority::write)
              echo $rez->run($_GET["id"] , $opt , $orderDetail) ;
-        else echo json_encode(['status' => 'yetkisiz islem']);  
+        else echo json_encode(['status' => 'Yetkisiz İşlem!m']);  
         exit;
       }
  
 
 if($_SESSION['operator']['authority'] == Authority::write)
     echo $rez->run($_GET["id"] , $opt ) ;
-else echo json_encode(['status' => 'yetkisiz islem']);  
+else echo json_encode(['status' => 'Yetkisiz İşlem!']);  

@@ -1,5 +1,6 @@
 <?php 
 //id durum ise ok ve red bu iki duruma göre işelmi onayla veya reddet
+namespace Rezervasyon\Onayla ;
 
 require __DIR__ ."/../../database/connect.php";
 require __DIR__ . "/../../private/Authority.php";
@@ -15,8 +16,8 @@ if(!isset($_SESSION["operator"])){
 }
 
 
- if($_SESSION['operator']['authority'] != Authority::read ){
-     echo json_encode(['status'=>'yetkisiz islem']);
+ if($_SESSION['operator']['authority'] == Authority::disabled ){
+     echo json_encode(['status'=>'Yetkisiz İşlem!']);
      exit;
  }
 
@@ -33,6 +34,9 @@ class Rezervasyon {
 
   
     public function run($id , $opt ){
+      $id= strip_tags(trim($id));
+      $opt= strip_tags(trim($opt));
+      
       $durum = "0";
  
       if($opt == "ok")
@@ -77,8 +81,14 @@ class Rezervasyon {
 
     $rez = new Rezervasyon();
 
-    if($_GET["durum"] == "ok")
-    echo $rez->run($_GET["id"] , "ok") ;
-    else 
-    echo $rez->run($_GET["id"] , "red");
+    if($_SESSION['operator']['authority'] == Authority::write){
+      
+          if($_GET["durum"] == "ok")
+          echo $rez->run($_GET["id"] , "ok") ;
+          else 
+          echo $rez->run($_GET["id"] , "red");
+    }else echo json_encode(["status"=>"Yetkisiz İşlem!"]);
+    exit;
+
+
 

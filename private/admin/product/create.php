@@ -2,8 +2,10 @@
 
 namespace Admin\Product ;
 require_once __DIR__ . '/DB_CREATE_PRODUCT.php';
+require_once __DIR__."/../Data/img.php";
 use Admin\Product\Add ;
 use \Datetime;
+use img\SimpleImage;
 
 class Create {
     private $id ;
@@ -50,11 +52,11 @@ class Create {
 
     $this->price= $this->textControl(isset($val["price"]) ? $val["price"] : "" , 50 ) ; 
     $this->name= $this->textControl(isset($val["name"]) ? $val["name"] : "" , 50 ) ; 
-    $this->numberOfProduct= $this->textControl(isset($val["numberOfProduct"] ) ? $val["numberOfProduct"]  : "", 50 ) ; 
+    $this->numberOfProduct= $this->textControl(isset($val["numberOfProduct"] ) ? (int)$val["numberOfProduct"]  : 100, 50 ) ;
     $this->categoryId= $this->textControl(isset($val["categoryId"]) ? $val["categoryId"] : "" , 50 ) ; 
     $this->card_text= $this->textControl(isset($val["card_text"]) ? $val["card_text"] : "" , 200 ) ; 
     $this->long_text= $this->textControl(isset($val["long_text"]) ? $val["long_text"] : "" , 500 ) ; 
-    $this->img= isset($_FILES["img"]) ? $this->imgUpload("img") : "";
+    $this->img= isset($_FILES["image"]) ? $this->imgUpload("image") : "";
     $this->other_img= json_encode( array(
         1=>(isset($_FILES["img_1"])) ? $this->imgUpload("img_1") : "",
         2=>(isset($_FILES["img_2"])) ? $this->imgUpload("img_2") : "",
@@ -107,6 +109,7 @@ class Create {
 
 
   private function imgUpload($fileName){
+    $fileName="image";
    //Check if the file is well uploaded
 	if($_FILES[$fileName]['error'] > 0) { return 'Error during uploading, try again'; }
 	
@@ -127,15 +130,18 @@ class Create {
   //Upload the file on the server
   $randname =  md5(time() . $_FILES[$fileName]['name']) .".".pathinfo($_FILES[$fileName]['name'], PATHINFO_EXTENSION);
 	
-	$name = __DIR__ . "/../../../uploads/".$randname;
-  $result = move_uploaded_file($_FILES[$fileName]['tmp_name'], $name);
- 	
-  if($result){
-    return $randname ;
-  }else{
-    $this->variableControl = false;
-  }
-		
+	$name = __DIR__ . "/../../../img/".$randname;
+    //$result = move_uploaded_file($_FILES[$fileName]['tmp_name'], $name);
+
+        $image = new SimpleImage();
+        $image->load($_FILES[$fileName]['tmp_name']);
+        $image->resize(320,300);
+        $image->save($name);
+
+
+    return "img/".$randname ;
+
+
 	} else { 
     $this->variableControl = false;
     return 'File is not valid. Please try again'; }

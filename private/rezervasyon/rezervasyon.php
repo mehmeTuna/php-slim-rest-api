@@ -85,7 +85,7 @@ class Create {
   /*basic email control*/
   private function emailControl($email = ''){
     if(strlen( trim( $email ) ) > 1 && filter_var( $email, FILTER_VALIDATE_EMAIL)){
-      return strip_tags( trim($email) );
+      return strip_tags( htmlspecialchars(trim($email)) );
     }else{
       $this->variableControl = false ;
       return false ;
@@ -101,7 +101,7 @@ class Create {
     $_length = strlen(trim( $text ));
 
     if($_length >=1 && $_length <= $length){
-      return strip_tags( trim($text) );
+      return strip_tags( htmlspecialchars(trim($text)) );
     }else{
       $this->variableControl = false;
       return false ;
@@ -122,17 +122,5 @@ class Create {
 
 
   public function __destruct(){
-    unset($id);
-    unset($email);
-    unset($password);
-    unset($firstname);
-    unset($lastname);
-    unset($email_verified);
-    unset($registration_date);
-    unset($verification_code);
-    unset($ip);
-    unset($phone);
-    unset($adress);
-    unset($adress_2);
   }
 } ;

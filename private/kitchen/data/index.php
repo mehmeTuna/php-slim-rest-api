@@ -14,17 +14,17 @@ if( !isset($_GET['api'])){
 } ;
 
 if ( !isset( $_SESSION[ "mutfak" ] ) || $_SESSION[ 'mutfak' ][ 'authority' ] != '2' ) {
-    echo json_encode (['status'=>'yetkisiz islem'] , JSON_UNESCAPED_UNICODE) ;
+    echo json_encode (['status'=>'Yetkisiz İşlem!'] , JSON_UNESCAPED_UNICODE) ;
     exit;
 }
 
 switch ($_GET['api']){
     case 'iptal':
-        echo $api->orderRed ($_GET['id']);
+        echo $api->orderRed (strip_tags(trim($_GET['id'])));
         break;
 
     case 'onay':
-        echo $api->orderOnay ($_GET['id'] , $_GET['kuryeId']);
+        echo $api->orderOnay (strip_tags(trim($_GET['id'])), strip_tags(trim($_GET['kuryeId'])));
         break;
 
     default:
