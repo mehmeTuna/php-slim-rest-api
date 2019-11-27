@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Demo- Mehmet</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+        .custom-input {
+            position: fixed;
+            background: #4299e1;
+            color: black;
+            height: 250px;
+            width: 350px;
+            top: 100px;
+            margin-left: 30%;
+            padding-top: 20px;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+
+<body class="bg-white w-full h-full">
+    <div class="custom-input" id="addItem" style="display: none;">
+        <div style="margin-top: 10px;">
+            <div>
+                Tarih Seçin
+            </div>
+            <input type="date" name="selectdate" id="selectdate">
+        </div>
+        <div>
+            <div>
+                Etkinlik girin
+            </div>
+            <input type="text" name="selecttext" id="selecttext">
+            <button id="addNewItemButton" class="border hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">
+                Ekle
+            </button>
+        </div>
+    </div>
+    <div class="block w-full h-full block">
+        <div class="h-12 w-full bg-blue-700 flex justify-center items-center text-center text-white">
+            Header
+        </div>
+        <div class="flex w-full h-16 justify-between p-4">
+            <div class="inline-block flex items-center justify-center">
+                <button id="newItem" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">
+                    Yeni Etkinlik
+                </button>
+                <button id="thisDay" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">
+                    Bugün
+                </button>
+                <div class="inline-block flex justify-center items-center">
+                    <span role="button" id="previousDate"
+                        class="rounded-full h-6 w-6 flex items-center justify-center hover:bg-gray-400 text-gray-600">
+                        < </span> <span role="button" id="nextDate"
+                            class="rounded-full h-6 w-6 flex items-center justify-center hover:bg-gray-400 text-gray-600">
+                            >
+                    </span>
+                    <span id="selectedDate">Kasım 2019
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="px-4 w-full h-full">
+            <div class="block flex flex-row justify-between w-full">
+                <div class="block flex items-center justify-between w-full">
+                    <div class="flex-1 flex items-center justify-center">
+                        <span class="inline-block ">PAZ</span>
+                    </div>
+                    <div class="flex-1 flex items-center justify-center">
+                        <span>PZT</span>
+                    </div>
+                    <div class="flex-1 flex items-center justify-center">
+                        <span>
+                            SAL
+                        </span>
+                    </div>
+                    <div class="flex-1 flex items-center justify-center">
+                        <span>ÇAR</span>
+                    </div>
+                    <div class="flex-1 flex items-center justify-center">
+                        <span>PER</span>
+                    </div>
+                    <div class="flex-1 flex items-center justify-center">
+                        <span>CUM</span>
+                    </div>
+                    <div class="flex-1 flex items-center justify-center">
+                        <span>CMT</span>
+                    </div>
+                </div>
+            </div>
+            <div id="calendarMonth" class="w-full flex flex-col">
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        window.onload = function () {
+            let selectedDate = document.getElementById('selectedDate');
+            let calendarMonth = document.getElementById('calendarMonth');
+
+            calendar = new customDate(); //created app
+            calendar.reRenderData(); //writing data
+
+            //listening click event
+            document.getElementById("previousDate").addEventListener("click", () => {
+                calendar.customCounterSetState('previous');
+                calendar.reRenderData();
+            });
+            document.getElementById("nextDate").addEventListener("click", () => {
+                calendar.customCounterSetState();
+                calendar.reRenderData();
+            });
+            document.getElementById("thisDay").addEventListener("click", () => {
+                calendar.thisDay();
+                calendar.reRenderData();
+            });
+            document.getElementById("newItem").addEventListener("click", () => {
+                calendar.addNewItem();
+            });
+            document.getElementById("addNewItemButton").addEventListener("click", () => {
+                calendar.addNewItemShow();
+                calendar.reRenderData();
+            });
+        }
+
+        class customDate {
+            constructor() {
+                this.currentDate = new Date();
+                this.customDate = this.currentDate;
+                this.currentDay = this.customDate.getDate(); //haftanın kaçıncı günü olduğu
+                this.currentMonth = this.customDate.getMonth(); //kaçıncı ay(0-11)
+                this.currentYear = this.customDate.getFullYear();
+                this.customDateCounter = 0;
+                this.customDateOptions = {
+                    year: 'numeric',
+                    month: 'long',
+                };
+            }
+
+            reRenderData() {
+                selectedDate.innerHTML = this.customDate.toLocaleDateString('tr-TR', this.customDateOptions);
+                this.calendarMonthCreate();
+            }
+
+            customCounterSetState(type = 'next') {
+                switch (type) {
+                    case 'next':
+                        this.customDateCounter++;
+                        if (this.customDateCounter > 12) {
+                            this.currentYear++;
+                            this.customDateCounter = 0;
+                        }
+                        break;
+                    case 'previous':
+                        this.customDateCounter--;
+                        if (this.customDateCounter == 1) {
+                            this.currentYear--;
+                            this.customDateCounter = 0;
+                        }
+                        break;
+                }
+
+                this.customDate = new Date(this.currentYear, this.currentMonth + this
+                    .customDateCounter, 1);
+
+                this.currentDay = this.customDate.getDate(); //haftanın kaçıncı günü olduğu
+                this.currentMonth = this.customDate.getMonth(); //kaçıncı ay(0-11)
+                this.currentYear = this.customDate.getFullYear();
+
+                console.log(this.currentYear, this.currentMonth);
+            }
+
+            thisDay() {
+                this.customDateCounter = 0;
+                this.customDate = new Date();
+            }
+
+            addNewItem() {
+                let addItemDiv = document.getElementById('addItem');
+                addItemDiv.style.display = 'block';
+            }
+
+            addNewItemShow() {
+                let addItemDiv = document.getElementById('addItem');
+                let itemDate = document.getElementById('selectdate').value;
+                let itemTitle = document.getElementById('selecttext').value;
+                let parsedDate = itemDate.split("-");
+                itemDate = parsedDate[0] + '-' + (parsedDate[1] < 10 ? parsedDate[1][1] : parsedDate[1]) + '-' + (
+                    parsedDate[2] < 10 ? parsedDate[2][1] :
+                    parsedDate[2]);
+                addItemDiv.style.display = 'none';
+                if (itemDate == '' || itemTitle == '')
+                    return;
+                localStorage.setItem(itemDate, itemTitle);
+            }
+
+            calendarMonthCreate() {
+                calendarMonth.innerHTML = '';
+                let customMonthDaysCount = new Date(this.currentYear, this.currentMonth + this
+                        .customDateCounter + 1, 0)
+                    .getDate(); //seçili olan ayın gün sayısı
+                let beforeMonthDaysCount = new Date(this.currentYear, this.currentMonth - 1,
+                        0)
+                    .getDate(); //seçili olan aydan önceki ayın gün sayısı
+                let firstDay = new Date(this.currentYear, this.currentMonth + this
+                    .customDateCounter, 1);
+
+
+                let started = beforeMonthDaysCount - firstDay.getDay() +
+                    1; //önceki aydan kaç gün kaldığını bulma
+                let thisMonthDay = 0;
+                let nextMontDay = 0;
+
+                for (let rowCounter = 1; rowCounter <= 6; rowCounter++) {
+                    let rows = document.createElement('div');
+                    rows.className = 'flex-1 flex flex-row justify-between';
+                    for (let colCounter = 1; colCounter <= 7; colCounter++) {
+                        let col = document.createElement('div');
+                        let rowEventTitle = document.createElement('span');
+                        rowEventTitle.className = 'block w-full h-6 bg-purple-800 text-white rounded';
+
+                        let rowDate = document.createElement('div');
+                        rowDate.className = 'flex-1 text-xl font-bold w-full';
+                        rowDate.innerHTML = (started > beforeMonthDaysCount) ? thisMonthDay >
+                            customMonthDaysCount ?
+                            ++nextMontDay : ++thisMonthDay : started++;
+
+
+                        let rowEvent = document.createElement('div');
+                        rowEvent.className = 'flex-1 w-full px-2';
+                        let beforeMonthDayData = localStorage.getItem(this.currentYear + '-' + (this.currentMonth +
+                                1) +
+                            '-' + started);
+                        let thisMonthData = localStorage.getItem(this.currentYear + '-' + (this.currentMonth + 1) +
+                            '-' + thisMonthDay);
+                        let nextMonthData = localStorage.getItem(this.currentYear + '-' + (this.currentMonth + 2) +
+                            '-' + nextMontDay);
+                        // console.log(thisMonthData, this.currentYear, (this.currentMonth + 1), thisMonthDay);
+
+                        if (null != thisMonthData) {
+                            rowEventTitle.innerHTML = thisMonthData;
+                            rowEvent.appendChild(rowEventTitle);
+                        } else if (null != nextMonthData) {
+                            rowEventTitle.innerHTML = nextMonthData;
+                            rowEvent.appendChild(rowEventTitle);
+                        }
+
+                        col.className =
+                            'block flex-1 overflow-hidden text-center pt-1 border h-16 flex flex-col items-center justify-center';
+                        col.appendChild(rowDate);
+                        col.appendChild(rowEvent);
+                        rows.appendChild(col);
+                    }
+                    calendarMonth.appendChild(rows);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
