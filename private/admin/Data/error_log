@@ -1,0 +1,87 @@
+[04-Dec-2019 20:20:02 Europe/Istanbul] PHP Fatal error:  Uncaught Mpdf\MpdfException: Data has already been sent to output (/home/ciqaysof/public_html/private/admin/Data/print-kurye.php at line 11), unable to output PDF file in /home/ciqaysof/public_html/vendor/mpdf/mpdf/src/Mpdf.php:9392
+Stack trace:
+#0 /home/ciqaysof/public_html/private/admin/Data/print-kurye.php(87): Mpdf\Mpdf->Output()
+#1 {main}
+  thrown in /home/ciqaysof/public_html/vendor/mpdf/mpdf/src/Mpdf.php on line 9392
+[04-Dec-2019 20:20:50 Europe/Istanbul] PHP Fatal error:  Uncaught Mpdf\MpdfException: Data has already been sent to output (/home/ciqaysof/public_html/private/admin/Data/print-kurye.php at line 11), unable to output PDF file in /home/ciqaysof/public_html/vendor/mpdf/mpdf/src/Mpdf.php:9392
+Stack trace:
+#0 /home/ciqaysof/public_html/private/admin/Data/print-kurye.php(87): Mpdf\Mpdf->Output()
+#1 {main}
+  thrown in /home/ciqaysof/public_html/vendor/mpdf/mpdf/src/Mpdf.php on line 9392
+[04-Dec-2019 20:20:53 Europe/Istanbul] PHP Fatal error:  Uncaught Mpdf\MpdfException: Data has already been sent to output (/home/ciqaysof/public_html/private/admin/Data/print-kurye.php at line 11), unable to output PDF file in /home/ciqaysof/public_html/vendor/mpdf/mpdf/src/Mpdf.php:9392
+Stack trace:
+#0 /home/ciqaysof/public_html/private/admin/Data/print-kurye.php(87): Mpdf\Mpdf->Output()
+#1 {main}
+  thrown in /home/ciqaysof/public_html/vendor/mpdf/mpdf/src/Mpdf.php on line 9392
+[04-Dec-2019 21:21:20 Europe/Istanbul] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'active' in 'where clause' in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php:1114
+Stack trace:
+#0 /home/ciqaysof/public_html/private/admin/Data/DbAbout.php(1114): PDO->query('select count(*)...', 2)
+#1 /home/ciqaysof/public_html/private/admin/Data/print-kurye.php(13): Admin\Data->bringGetKuryeDetay(1)
+#2 {main}
+  thrown in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php on line 1114
+[04-Dec-2019 21:21:25 Europe/Istanbul] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'active' in 'where clause' in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php:1114
+Stack trace:
+#0 /home/ciqaysof/public_html/private/admin/Data/DbAbout.php(1114): PDO->query('select count(*)...', 2)
+#1 /home/ciqaysof/public_html/private/admin/Data/print-kurye.php(13): Admin\Data->bringGetKuryeDetay(1)
+#2 {main}
+  thrown in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php on line 1114
+[04-Dec-2019 21:22:08 Europe/Istanbul] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'active' in 'where clause' in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php:1114
+Stack trace:
+#0 /home/ciqaysof/public_html/private/admin/Data/DbAbout.php(1114): PDO->query('select count(*)...', 2)
+#1 /home/ciqaysof/public_html/private/admin/Data/print-kurye.php(13): Admin\Data->bringGetKuryeDetay(1)
+#2 {main}
+  thrown in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php on line 1114
+[04-Dec-2019 21:25:01 Europe/Istanbul] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php:1109
+Stack trace:
+#0 /home/ciqaysof/public_html/private/admin/Data/DbAbout.php(1109): PDO->query('', 2)
+#1 /home/ciqaysof/public_html/private/admin/Data/print-kurye.php(13): Admin\Data->bringGetKuryeDetay(1)
+#2 {main}
+  thrown in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php on line 1109
+[04-Dec-2019 21:32:25 Europe/Istanbul] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php:1109
+Stack trace:
+#0 /home/ciqaysof/public_html/private/admin/Data/DbAbout.php(1109): PDO->query('', 2)
+#1 /home/ciqaysof/public_html/private/admin/Data/print-kurye.php(13): Admin\Data->bringGetKuryeDetay(1)
+#2 {main}
+  thrown in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php on line 1109
+[04-Dec-2019 21:33:06 Europe/Istanbul] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php:1109
+Stack trace:
+#0 /home/ciqaysof/public_html/private/admin/Data/DbAbout.php(1109): PDO->query('', 2)
+#1 /home/ciqaysof/public_html/private/admin/Data/print-kurye.php(13): Admin\Data->bringGetKuryeDetay(1)
+#2 {main}
+  thrown in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php on line 1109
+[04-Dec-2019 21:35:56 Europe/Istanbul] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php:1109
+Stack trace:
+#0 /home/ciqaysof/public_html/private/admin/Data/DbAbout.php(1109): PDO->query('', 2)
+#1 /home/ciqaysof/public_html/private/admin/Data/print-kurye.php(13): Admin\Data->bringGetKuryeDetay(1)
+#2 {main}
+  thrown in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php on line 1109
+[04-Dec-2019 21:42:27 Europe/Istanbul] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php:1109
+Stack trace:
+#0 /home/ciqaysof/public_html/private/admin/Data/DbAbout.php(1109): PDO->query('', 2)
+#1 /home/ciqaysof/public_html/private/admin/Data/print-kurye.php(13): Admin\Data->bringGetKuryeDetay(1)
+#2 {main}
+  thrown in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php on line 1109
+[04-Dec-2019 21:43:44 Europe/Istanbul] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php:1109
+Stack trace:
+#0 /home/ciqaysof/public_html/private/admin/Data/DbAbout.php(1109): PDO->query('', 2)
+#1 /home/ciqaysof/public_html/private/admin/Data/print-kurye.php(13): Admin\Data->bringGetKuryeDetay(1)
+#2 {main}
+  thrown in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php on line 1109
+[04-Dec-2019 21:56:30 Europe/Istanbul] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php:1109
+Stack trace:
+#0 /home/ciqaysof/public_html/private/admin/Data/DbAbout.php(1109): PDO->query('', 2)
+#1 /home/ciqaysof/public_html/private/admin/Data/print-kurye.php(13): Admin\Data->bringGetKuryeDetay(1)
+#2 {main}
+  thrown in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php on line 1109
+[04-Dec-2019 21:57:47 Europe/Istanbul] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php:1109
+Stack trace:
+#0 /home/ciqaysof/public_html/private/admin/Data/DbAbout.php(1109): PDO->query('', 2)
+#1 /home/ciqaysof/public_html/private/admin/Data/print-kurye.php(13): Admin\Data->bringGetKuryeDetay(1)
+#2 {main}
+  thrown in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php on line 1109
+[04-Dec-2019 23:05:49 Europe/Istanbul] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'active' in 'where clause' in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php:793
+Stack trace:
+#0 /home/ciqaysof/public_html/private/admin/Data/DbAbout.php(793): PDO->query('select * from k...', 2)
+#1 /home/ciqaysof/public_html/private/admin/Data/print-kurye.php(13): Admin\Data->bringGetKuryeDetay(1)
+#2 {main}
+  thrown in /home/ciqaysof/public_html/private/admin/Data/DbAbout.php on line 793

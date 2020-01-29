@@ -780,6 +780,49 @@ class Data
         }
     }
 
+    public function bringGetKuryeDetay($active=1)
+    {
+
+        $resultData= [] ;
+        $day= $this->getTimeDayStartTime();
+        $week= $this->getTimeWeektartTime();
+        $month= $this->getTimeMonthThisTime();
+        $year= $this->getTimeYearThisTime();
+
+        $allKurye = "select * from {$this->kurye} where active={$active}";
+        $result = $this->db->query ( $allKurye , PDO::FETCH_ASSOC );
+      //  $allKurye = $result->fetchAll();
+
+        foreach($result as $kurye){
+            $id= $kurye['id'];
+            $dayCount = "select count(*) as toplam from {$this->kuryeTakip} where  kurye_id='{$id}' and start_date >={$day}";
+            $weekCount = "select count(*) as toplam from {$this->kuryeTakip} where  kurye_id='{$id}' and start_date >={$week}";
+            $monthCount = "select count(*) as toplam from {$this->kuryeTakip} where  kurye_id='{$id}' and start_date >={$month}";
+            $yearCount = "select count(*) as toplam from {$this->kuryeTakip} where  kurye_id='{$id}' and start_date >={$year}";
+
+            $query = $this->db->query ( $dayCount , PDO::FETCH_ASSOC );
+            $dayCount= $query->fetchAll();
+            $query = $this->db->query ( $weekCount , PDO::FETCH_ASSOC );
+            $weekCount= $query->fetchAll();
+            $query = $this->db->query ( $monthCount , PDO::FETCH_ASSOC );
+            $monthCount= $query->fetchAll();
+            $query = $this->db->query ( $yearCount , PDO::FETCH_ASSOC );
+            $yearCount= $query->fetchAll();
+
+            array_push($resultData, [
+                'id' => $kurye['id'],
+                'name' => $kurye['firstname'] .' '. $kurye['lastname'],
+                'day' => $dayCount[0]['toplam'],
+                'week' => $weekCount[0]['toplam'],
+                'month' => $weekCount[0]['toplam'],
+                'year' => $weekCount[0]['toplam']
+            ]);
+        }
+
+        return $resultData;
+        
+    }
+
     public
     function getKuryeCount ( $id )
     {
@@ -868,7 +911,7 @@ class Data
         if ( $id == '' )
             return json_encode ( [ 'status' => 'gecerli id giriniz' ] , JSON_UNESCAPED_UNICODE );
 
-        $sql = 'delete from kurye where id="' . strip_tags ( trim ( $id ) ) . '"';
+        $sql = 'update kurye set active=0 where id="' . strip_tags ( trim ( $id ) ) . '"';
         try {
             $statement = $this->db->prepare ( $sql );
             $statement->execute ();

@@ -22,8 +22,15 @@ else
 
 ?>
 
-<div class="card-header py-3">
+<div class="card-header py-3 d-flex justify-content-between" >
     <h6 class="m-0 font-weight-bold text-primary" id="table_title">Siparişler</h6>
+    <?php 
+    if(count($result) != 0  ){
+        ?>
+    <button type="button" onclick="siparisIptal()" class="btn btn-danger float-right">Siparişi iptal et</button>
+    <?php 
+    }
+    ?>
 </div>
     <div class="card-body">
     <div class="table-responsive">
@@ -44,7 +51,7 @@ Gosterilecek Veri bulunmamaktadir
                 <tr>
                    <th>Düzenle</th>
                     <th>Sıra No</th>
-                    <th>İçerik</th>
+                    <th>Ad Soyad</th>
                     <th>İletişim</th>
                     <th>Tarih</th>                                                           
                     <th>Sipariş Numarası</th>
@@ -55,7 +62,7 @@ Gosterilecek Veri bulunmamaktadir
             <tr>
                    <th>Düzenle</th>
                     <th>Sıra No</th>
-                    <th>İçerik</th>
+                    <th>Ad Soyad</th>
                     <th>İletişim</th>
                     <th>Tarih</th>                                                           
                     <th>Sipariş Numarası</th>
@@ -82,23 +89,16 @@ Gosterilecek Veri bulunmamaktadir
                     };
 
              
-              if(isset ($result[$a]['content']) ){
-                  $content = json_decode( $result[$a]['content']  , true);
-                
-                  $content = isset(  $content[0]['name'] ) ?  $content[0]['name']  : 'icerik bulunmuyor'; 
-              }else $content = 'siparis yok';
-
-             
-
+              $userFullName= isset($result[$a]['username']) ? $result[$a]['username'] : 'hata' ;;
               $phone = isset($result[$a]['phone']) ? $result[$a]['phone'] : 'hata' ;
               $mDate = isset($result[$a]['date']) ? date ('H:i' , $result[$a]['date'] ): 'hata' ;
 
 
              ?>
                 <tr id='<?php echo $orderId ?> '>
-                <td onclick="orderDetayTable(<?php echo  $orderId?>)"> <i  class="fas fa-eye ml-2"></i> </td>
+                <td onclick="orderDetayTable(<?php echo  $orderId?>, <?= $a ?>)"> <i  class="fas fa-eye ml-2"></i> </td>
                  <td> <?= ++$a ?></td>
-                <td> <?= $content?></td>
+                <td> <?= $userFullName?></td>
                 <td> <?= $phone?></td>
                 <td> <?= $mDate?></td>
                 <td> <?=$orderId ?></td>

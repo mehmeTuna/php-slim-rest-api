@@ -23,7 +23,7 @@ $res =   $data->BringAllKurye();
 $orderContent = '';
 $sira = 1 ;
 foreach ($res as $key){
-    $orderContent .="<tr onclick=\"addkurye ( '{$key['id']}')\"><th scope=\"row\"  >{$sira}</th><th scope=\"row\"> {$key['name']}</th>  <th scope=\"row\"><button type=\"button\" class=\"btn btn-primary\">Sec</button> </th></tr>";
+    $orderContent .="<tr onclick=\"addkurye ( '{$key['id']}','{$key['name']}')\"><th scope=\"row\"  >{$sira}</th><th scope=\"row\"> {$key['name']}</th>  <th scope=\"row\"><button type=\"button\" class=\"btn btn-primary\">Sec</button> </th></tr>";
   $sira++;
 }
 ?>

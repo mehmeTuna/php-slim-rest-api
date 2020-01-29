@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="MariaDB - food_sale@localhost">
-  <database-model serializer="dbm" dbms="MARIADB" family-id="MARIADB" format-version="4.15">
+  <database-model serializer="dbm" dbms="MARIADB" family-id="MARIADB" format-version="4.16">
     <root id="1">
       <ServerVersion>10.1.38</ServerVersion>
       <DefaultEngine>InnoDB</DefaultEngine>

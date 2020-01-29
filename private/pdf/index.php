@@ -65,7 +65,7 @@ try{
     if($result->rowCount ()){
         foreach ($result as $val){
             $OrderDetay["username"] = $val["firstname"] . " " . $val["lastname"];
-            $OrderDetay["adress"] =isset($val[$orderAdress]) ? json_decode($val[$orderAdress], true) : json_decode($val["adress"], true) ;
+            $OrderDetay["adress"] =isset($val[$orderAdress]) ? json_encode($val[$orderAdress]) : json_encode($val["adress"]) ;
             $OrderDetay["adress"]= $OrderDetay["adress"]["content"] ;
             $OrderDetay["phone"] = $val["phone"];
         }

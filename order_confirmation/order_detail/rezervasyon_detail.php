@@ -79,7 +79,7 @@ if(isset($_GET["ord"])  ){
     else if($_GET["ord"] == "iptal" )
      $tip = "2";
 
-    $thisDayTime = mktime(0,1,0 , ltrim(date('m') , 0 ) ,  ltrim(date('d') , 0)  , ltrim(date('Y') , 0 )  );
+     $thisDayTime = time()- 172800;
 
     $waiting= "SELECT id,time,name,e_mail,phone,kisi_sayisi,rez_date , message from rezervasyon where m_status = '{$tip}' and time>='{$thisDayTime}' ORDER BY time ASC" ;
     $order_wait = array();

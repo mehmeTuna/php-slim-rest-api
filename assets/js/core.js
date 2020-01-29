@@ -225,7 +225,7 @@ var Core = {
     Component: {
         init: function() {  
             this.backTotop();
-            this.carousel(); 
+            
             this.cart();
             this.customControls();
             this.forms();
@@ -248,77 +248,7 @@ var Core = {
             }
 
         },
-        carousel: function() {
-
-            $('.carousel').slick();
-
-            // Section Main Carousel
-            $('#section-main-1-carousel-image').slick({
-                dots: true,
-                speed: 800,
-                arrows: false,
-                asNavFor: '#section-main-1-carousel-content'
-            });
-
-            var $sectionCarouselContent = $('#section-main-1-carousel-content');
-
-            $sectionCarouselContent.slick({
-                dots: false,
-                speed: 800,
-                arrows: false,
-                autoplay: true,
-                autoplaySpeed: 3500,
-                asNavFor: '#section-main-1-carousel-image'
-            });
-
-            var $contentNav = $sectionCarouselContent.next('.content-nav');
-
-            $contentNav.children('.next').on('click', function(){
-                $sectionCarouselContent.slick('slickNext');
-                $(this).blur();
-                return false;
-            });
-
-            $contentNav.children('.prev').on('click', function(){
-                $sectionCarouselContent.slick('slickPrev');
-                $(this).blur();
-                return false;
-            });
-
-            $('#section-main-2-slider').slick({
-                dots: true,
-                speed: 800,
-                arrows: true,
-                autoplay: true,
-                autoplaySpeed: 3500
-            });
-
-            // Gallery Carousel
-            $('.gallery-carousel','#content').slick({
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                infinite: true,
-                asNavFor: '.gallery-nav',
-            });
-
-            // Gallery Carousel
-            $('.gallery-nav','#content').slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                infinite: true,
-                centerMode: true,
-                focusOnSelect: true,
-                responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3
-                    }
-                }], 
-                asNavFor: '.gallery-carousel',
-            });
-        },
+       
         customControls: function() {
 
             var $icon = $('<svg class="icon" x="0px" y="0px" viewBox="0 0 32 32"><path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/></svg>');

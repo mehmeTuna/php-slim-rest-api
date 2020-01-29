@@ -5,7 +5,7 @@ require_once __DIR__ . '/DB_CREATE_PRODUCT.php';
 require_once __DIR__."/../Data/img.php";
 use Admin\Product\Add ;
 use \Datetime;
-use img\SimpleImage;
+use img\ResizeImage;
 
 class Create {
     private $id ;
@@ -133,7 +133,7 @@ class Create {
 	$name = __DIR__ . "/../../../img/".$randname;
     //$result = move_uploaded_file($_FILES[$fileName]['tmp_name'], $name);
 
-        $image = new SimpleImage();
+        $image = new ResizeImage();
         $image->load($_FILES[$fileName]['tmp_name']);
         $image->resize(320,300);
         $image->save($name);

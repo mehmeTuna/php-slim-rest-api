@@ -24,7 +24,7 @@ class Data
     {
         $this->db = new Database();
         $this->db = $this->db->conn;
-        $this->thisDayTime = $thisDayTime = mktime ( 0 , 1 , 0 , ltrim ( date ( 'm' ) , 0 ) , ltrim ( date ( 'd' ) , 0 ) , ltrim ( date ( 'Y' ) , 0 ) );
+        $this->thisDayTime = time()- 172800;
     }
 
 
@@ -65,11 +65,12 @@ class Data
                 $thisResult[ 'orderId' ] = $val[ 'order_id' ];
                 $thisResult[ 'phone' ] = $val[ 'user_id' ];
 
-                $query = $this->db->query ( 'select phone from users where id=' . $thisResult[ 'phone' ] , PDO::FETCH_ASSOC );
+                $query = $this->db->query ( 'select * from users where id=' . $thisResult[ 'phone' ] , PDO::FETCH_ASSOC );
 
                 foreach ( $query as $val ) {
 
                     $thisResult[ 'phone' ] = $val[ 'phone' ];
+                    $thisResult[ 'username' ] = $val[ 'firstname' ] . " " . $val["lastname"];
                 }
 
 
@@ -105,11 +106,12 @@ class Data
                 $thisResult[ 'orderId' ] = $val[ 'order_id' ];
                 $thisResult[ 'phone' ] = $val[ 'user_id' ];
 
-                $query = $this->db->query ( 'select phone from users where id=' . $thisResult[ 'phone' ] , PDO::FETCH_ASSOC );
+                $query = $this->db->query ( 'select * from users where id=' . $thisResult[ 'phone' ] , PDO::FETCH_ASSOC );
 
                 foreach ( $query as $val ) {
 
                     $thisResult[ 'phone' ] = $val[ 'phone' ];
+                    $thisResult[ 'username' ] = $val['firstname'] ." " . $val["lastname"];
                 }
 
 

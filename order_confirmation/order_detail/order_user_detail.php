@@ -38,7 +38,7 @@ if(isset( $_GET['search']) && $_GET['search'] == 'ok'){
 
         $tip= strip_tags(trim($_GET['order'])) ;
 
-        $thisDayTime= mktime(0,0,0 , date('n') , date('j')  , date('Y'));
+        $thisDayTime = time()- 172800;
 
         $waiting= "SELECT * from order_items where order_id = '{$tip}' and m_date>='{$thisDayTime}' ORDER BY m_date ASC" ;
         $kuryeData= "select firstname ,lastname  from kurye where id=(select kurye_id from kurye_takip where order_id='{$tip}')";
@@ -108,7 +108,7 @@ if(isset( $_GET['search']) && $_GET['search'] == 'ok'){
 
 
 if(isset($_GET["order"])  ){
-    $thisDayTime = mktime(0,0,0 , date('n') , date('j')  , date('Y'));
+    $thisDayTime = time()- 172800;
 
     if($_GET["order"] == "gelen" )
         $waiting= "SELECT * from order_items where m_status = '0' and m_date>='{$thisDayTime}' ORDER BY m_date ASC" ;

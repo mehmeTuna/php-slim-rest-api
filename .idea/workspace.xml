@@ -82,7 +82,7 @@
     <property name="database.console.LAST_STATE" value="false" />
     <property name="js.last.introduce.type" value="LET" />
     <property name="last.edited.regexp" value="awawfaw&#10;" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/project/deneme" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -141,6 +141,10 @@
       <workItem from="1571508180720" duration="793000" />
       <workItem from="1571663527226" duration="3735000" />
       <workItem from="1571676029908" duration="2512000" />
+      <workItem from="1575484065979" duration="1509000" />
+      <workItem from="1576066763044" duration="2809000" />
+      <workItem from="1576146888947" duration="20000" />
+      <workItem from="1576146913141" duration="1520000" />
     </task>
     <servers />
   </component>

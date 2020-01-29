@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.2e800875399d35d1b89d639e9691b887.js"
+  "/precache-manifest.346bfe97a8892b11ecbe6d1353997984.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "vuefood"});

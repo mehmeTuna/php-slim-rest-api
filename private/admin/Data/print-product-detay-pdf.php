@@ -10,18 +10,29 @@ $api = new Data();
 
 $dataAllOrder = [];
 
+$dataday = $api->bringGetOrderDetay ( "day" );
 $dataweek = $api->bringGetOrderDetay ( "week" );
 $dataMonth = $api->bringGetOrderDetay ( "month" );
 $dataYear = $api->bringGetOrderDetay ( "year" );
 
+$dataday = json_decode ($dataday , true);
 $dataweek = json_decode ($dataweek , true);
 $dataMonth = json_decode ($dataMonth , true);
 $dataYear = json_decode ($dataYear , true);
 
-$dataCount = ["year"=>0,"month"=>0,"week"=>0];
-$dataAllOrder = array_map (function ( $val ) use ($dataweek , $dataMonth , $dataCount){
+$dataCount = ["year"=>0,"month"=>0,"week"=>0, "day"=>0];
+$dataAllOrder = array_map (function ( $val ) use ( $dataday, $dataweek , $dataMonth , $dataCount){
     $resultData = array("name"=>$val["name"],"year"=>$val["count"]);
 
+
+    foreach ($dataday as $key => $dayvalue){
+        if($resultData["name"] == $dayvalue["name"] ){
+            $resultData["day"] = $dayvalue["count"];
+            break;
+        }else{
+            $resultData["day"] = "-";
+        }
+    }
 
     foreach ($dataweek as $key => $weekvalue){
         if($resultData["name"] == $weekvalue["name"] ){
@@ -54,6 +65,9 @@ foreach ($dataAllOrder as $key => $value){
     }
     if( isset( $value["month"] ) ){
         $dataCount["month"] += (int) $value["month"];
+    }
+    if( isset( $value["day"] ) ){
+        $dataCount["day"] += (int) $value["day"];
     }
 }
 
@@ -111,14 +125,16 @@ ob_start ();
 
 <!-- <div class='order-title'>Ürünler</div> -->
 <div style="border:1px solid #0a0c0d; width: 198mm ;">
-    <div style="width: 135mm; display: inline;text-align: center; float: left">Ürünler</div>
+    <div style="width: 110mm; display: inline;text-align: center; float: left">Ürünler</div>
+    <div style="width: 20mm; display: inline; float: left">Günlük</div>
     <div style="width: 20mm; display: inline; float: left">Haftalık</div>
     <div style="width: 20mm; display: inline; float: left">Aylık</div>
     <div style="width: 20mm; display: inline; float: left">Yıllık</div>
 </div>
 <?php foreach ( $dataAllOrder as $key => $value){ ?>
     <div style="border:1px solid #0a0c0d; width: 198mm ">
-        <div style="width: 130mm; display: inline; float: left; padding-left: 5mm"><?php  echo isset($value["name"]) ? $value["name"] : "-" ; ?> </div>
+        <div style="width: 110mm; display: inline; float: left; padding-left: 5mm"><?php  echo isset($value["name"]) ? $value["name"] : "-" ; ?> </div>
+        <div style="width: 14mm; display: inline; float: left; padding-left: 5mm"><?php  echo isset($value["day"]) ? $value["day"] : "-" ;?></div>
         <div style="width: 14mm; display: inline; float: left; padding-left: 5mm"><?php  echo isset($value["week"]) ? $value["week"] : "-" ;?></div>
         <div style="width: 14mm; display: inline; float: left; padding-left: 5mm"><?php  echo isset($value["month"]) ? $value["month"] : "-" ;?></div>
         <div style="width: 14mm; display: inline; float: left; padding-left: 5mm"><?php  echo isset($value["year"]) ? $value["year"] : "-" ;?></div>
@@ -126,10 +142,11 @@ ob_start ();
 <?php } ?>
 
     <div style="border:1px solid #0a0c0d; width: 198mm ;">
-        <div style="width: 20mm; display: inline;text-align: center; float: left; padding-left: 120mm">Toplam:</div>
-        <div style="width: 18mm; display: inline; float: left"><?php echo $dataCount["week"] ; ?></div>
-        <div style="width: 16mm; display: inline; float: left"><?php echo $dataCount["month"] ; ?></div>
-        <div style="width: 16mm; display: inline; float: left"><?php echo $dataCount["year"] ; ?>   adet</div>
+        <div style="width: 20mm; display: inline;text-align: center; float: left; padding-left: 100mm">Toplam:</div>
+        <div style="width: 19mm; display: inline; float: left"><?php echo $dataCount["day"] ; ?></div>
+        <div style="width: 19mm; display: inline; float: left"><?php echo $dataCount["week"] ; ?></div>
+        <div style="width: 18mm; display: inline; float: left"><?php echo $dataCount["month"] ; ?></div>
+        <div style="width: 18mm; display: inline; float: left"><?php echo $dataCount["year"] ; ?>  adet</div>
     </div>
 
 <?php

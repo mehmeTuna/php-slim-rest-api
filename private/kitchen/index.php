@@ -310,6 +310,8 @@ $yetki = $_SESSION[ 'mutfak' ][ 'authority' ] ;
                                             Detaylari</h6>
 
                                         <button type="button" class="btn btn-primary float-right">Kurye Sec</button>
+                                        
+                                        
                                         <?php
                                     }
                                     ?>
@@ -491,7 +493,20 @@ $yetki = $_SESSION[ 'mutfak' ][ 'authority' ] ;
             });
         }
 
-        function orderDetayTable(val) {
+        function orderDetayTable(val,trIndex) {
+            let tableLength= document.getElementById("table_body_render").rows.length ;
+
+            for (let index = 0; index < tableLength; index++) {
+              let orderTr = document.getElementById("table_body_render").rows[index] ;
+                if(trIndex == index){
+                    orderTr.style.backgroundColor = "#1971c2" ; 
+                    orderTr.style.color = "white" ; 
+                }else{
+                    orderTr.style.backgroundColor = "" ; 
+                    orderTr.style.color = "#858796" ; 
+                }
+                  
+            }
             orderId = val;
             $('#table_info').html(val + ' \'nolu Sipariş Detayı');
             $.ajax({
@@ -534,22 +549,28 @@ $yetki = $_SESSION[ 'mutfak' ][ 'authority' ] ;
             })
         }
 
-        function addkurye(id) {
+        function addkurye(id, name) {
+          document.getElementById("swal2-title").innerHTML= orderId.toString() + '\'li siparis ' + name + " kuryeye verilecek" ;
             kuryeId = id;
         }
 
         function siparisIptal() {
+            if (orderId == '') {
+                swal.fire('İptal edilecek siparis seciniz.');
+                return;
+            }
             $.ajax({
                 type: 'GET',
                 url: globalUrl + 'kitchen/order/iptal/' + orderId,
                 success: function (data) {
                     let res = JSON.parse(data);
                     if (res.status == 'ok') {
-                        refreshData();
+                       
                         swal.fire("Siparis Mutfak tarafindan iptal edilmistir");
                     } else {
                         swal.fire(res.status);
                     }
+                    refreshData();
                 }
             });
         }

@@ -28,15 +28,17 @@ Header Set Access-Control-Allow-Origin *
 
 
 RewriteRule ^hizmetler$                                                     ./index.html
-RewriteRule ^login$                                                       ./index.html
-RewriteRule ^about$                                                       ./index.html
-RewriteRule ^booking$                                                     ./index.html
-RewriteRule ^profile$                                                     ./index.html
-RewriteRule ^home$                                                        ./index.html
-RewriteRule ^contact$                                                     ./index.html
-RewriteRule ^checkout$                                                    ./index.html
+RewriteRule ^giris$                                                       ./index.html
+RewriteRule ^hakkımızda$                                                       ./index.html
+RewriteRule ^rezervasyon$                                                     ./index.html
+RewriteRule ^profil$                                                     ./index.html
+RewriteRule ^anasayfa$                                                        ./index.html
+RewriteRule ^iletisim$                                                     ./index.html
+RewriteRule ^alisverisitamamla$                                                    ./index.html
 RewriteRule ^uyeol$                                                       ./index.html
-RewriteRule ^product$                                                     ./index.html
+RewriteRule ^ürünler$                                                     ./index.html
+RewriteRule ^alisverisbitis$                                                     ./index.html
+RewriteRule ^resetPassword$                                                  ./private/Mail/sendMail.php
 
 
 
@@ -92,7 +94,7 @@ RewriteRule ^user/sepet/item$                                              ./pri
 RewriteRule ^user/update$                                                ./private/Users/userDataUpdate.php
 RewriteRule ^user/sepet$                                                   ./private/Users/sepet.php
 RewriteRule ^user/login$                                                   ./private/Users/Login.php
-RewriteRule ^user/logout$                                                  ./private/Users/Logout.php
+RewriteRule ^kullanici/cikis$                                                  ./private/Users/Logout.php
 RewriteRule ^user/register$                                                ./private/Users/Add.php
 RewriteRule ^user/data$                                                    ./private/Users/Data.php
 RewriteRule ^user/orders$                                                  ./private/Users/Orders.php
@@ -161,7 +163,7 @@ RewriteRule ^admin/api/updateProduct$                                       ./pr
 RewriteRule ^admin/api/pdf$                                                 ./private/admin/pdf/index.php?api=all
 RewriteRule ^admin/api/pdf/([a-z0-9_-]+)$                                   ./private/admin/pdf/index.php?api=all
 RewriteRule ^admin/api/write/order/data$                                    ./private/admin/Data/print-product-detay-pdf.php
-
+RewriteRule ^admin/api/write/kurye/data$                                    ./private/admin/Data/print-kurye.php
 
 RewriteRule ^admin/api/allproduct$                                         ./private/admin/Data/index.php?api=allProduct
 

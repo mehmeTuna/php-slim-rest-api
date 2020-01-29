@@ -13,7 +13,7 @@ use PDO ;
     $details = new Database();
 
 
-    $thisDayTime = mktime(0,0,0 , date('n') , date('j')  , date('Y'));
+    $thisDayTime = time()- 172800;
    
     
    $waiting= "SELECT count(*) as toplam from order_items where m_status = '0' and m_date>='".$thisDayTime . "'" ;
